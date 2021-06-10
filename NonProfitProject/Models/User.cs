@@ -22,5 +22,8 @@ namespace NonProfitProject.Models
         public DateTime UserLastActivity { get; set; }
         public char UserActive { get; set; }
 
+        public ICollection<PaymentInformation> payments { get; set; }
+        public ICollection<DonationRecipts> donationRecipts { get; set; }
+
     }
 }

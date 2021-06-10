@@ -17,9 +17,23 @@ namespace NonProfitProject.Models
         public DbSet<DonationRecipts> DonationRecipts { get; set; }
         public DbSet<MembershipDues> MembershipDues { get; set; }
         public DbSet<Donations> Donations { get; set; }
+        public DbSet<Employees> Employees { get; set; }
+        public DbSet<CommitteeMembers> CommitteeMembers { get; set; }
+        public DbSet<Committees> Committees { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<News> News { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<User>()
+                .HasMany(u => u.payments)
+                .WithOne(u => u.user)
+                .HasForeignKey(p => p.UserID);
+            builder.Entity<User>()
+                .HasMany(u => u.donationRecipts)
+                .WithOne(u => u.user)
+                .HasForeignKey(DonationRecipts => DonationRecipts.UserID);
+
             builder.Entity<DonationRecipts>()
                 .HasOne(dr => dr.membershipDues)
                 .WithOne(x => x.donationRecipts)
@@ -34,6 +48,10 @@ namespace NonProfitProject.Models
                 .HasMany(dr => dr.donationRecipts)
                 .WithOne(pi => pi.paymentInformation)
                 .HasForeignKey(DonationRecipts => DonationRecipts.PaymentID);
+            //need to figure out how to create a DonationID with prefix so that you can distiguish between DontationID and MemduesID
+            /*builder.Entity<Donations>()
+                .Property(d => d.DonationID)
+                .HasComputedColumnSql("'D-' + RIGHT('00000' +CAST(DonationID AS VARCHAR(10)), 10)" );*/
         }
 
         public static async Task CreateAdminUser(IServiceProvider serviceProvider)

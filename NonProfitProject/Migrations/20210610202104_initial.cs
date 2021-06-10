@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NonProfitProject.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,6 +57,21 @@ namespace NonProfitProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Committees",
+                columns: table => new
+                {
+                    CommitteesID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CommitteeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CommitteeDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CommitteeCreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Committees", x => x.CommitteesID);
                 });
 
             migrationBuilder.CreateTable(
@@ -196,6 +211,28 @@ namespace NonProfitProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Employees",
+                columns: table => new
+                {
+                    EmpID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    HireDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employees", x => x.EmpID);
+                    table.ForeignKey(
+                        name: "FK_Employees_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PaymentInformation",
                 columns: table => new
                 {
@@ -220,12 +257,87 @@ namespace NonProfitProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    EventID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CommitteeID = table.Column<int>(type: "int", nullable: false),
+                    EventStartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EventEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EventDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.EventID);
+                    table.ForeignKey(
+                        name: "FK_Events_Committees_CommitteeID",
+                        column: x => x.CommitteeID,
+                        principalTable: "Committees",
+                        principalColumn: "CommitteesID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "News",
+                columns: table => new
+                {
+                    NewsID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CommitteeID = table.Column<int>(type: "int", nullable: false),
+                    NewsTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NewsHeader = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NewsFooter = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NewsCreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NewsPublishDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NewsLastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_News", x => x.NewsID);
+                    table.ForeignKey(
+                        name: "FK_News_Committees_CommitteeID",
+                        column: x => x.CommitteeID,
+                        principalTable: "Committees",
+                        principalColumn: "CommitteesID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CommitteeMembers",
+                columns: table => new
+                {
+                    CommitteeMbrID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CommitteeID = table.Column<int>(type: "int", nullable: false),
+                    EmpID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    employeeEmpID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CommitteePosition = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CommitteeMembers", x => x.CommitteeMbrID);
+                    table.ForeignKey(
+                        name: "FK_CommitteeMembers_Committees_CommitteeID",
+                        column: x => x.CommitteeID,
+                        principalTable: "Committees",
+                        principalColumn: "CommitteesID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CommitteeMembers_Employees_employeeEmpID",
+                        column: x => x.employeeEmpID,
+                        principalTable: "Employees",
+                        principalColumn: "EmpID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DonationRecipts",
                 columns: table => new
                 {
                     DonationRecId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     PaymentID = table.Column<int>(type: "int", nullable: false),
                     ReciptDonationID = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ReciptDesc = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -233,6 +345,12 @@ namespace NonProfitProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DonationRecipts", x => x.DonationRecId);
+                    table.ForeignKey(
+                        name: "FK_DonationRecipts_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_DonationRecipts_Donations_ReciptDonationID",
                         column: x => x.ReciptDonationID,
@@ -293,6 +411,16 @@ namespace NonProfitProject.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CommitteeMembers_CommitteeID",
+                table: "CommitteeMembers",
+                column: "CommitteeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CommitteeMembers_employeeEmpID",
+                table: "CommitteeMembers",
+                column: "employeeEmpID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DonationRecipts_PaymentID",
                 table: "DonationRecipts",
                 column: "PaymentID");
@@ -303,6 +431,26 @@ namespace NonProfitProject.Migrations
                 column: "ReciptDonationID",
                 unique: true,
                 filter: "[ReciptDonationID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DonationRecipts_UserID",
+                table: "DonationRecipts",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_UserID",
+                table: "Employees",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Events_CommitteeID",
+                table: "Events",
+                column: "CommitteeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_News_CommitteeID",
+                table: "News",
+                column: "CommitteeID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PaymentInformation_UserID",
@@ -328,10 +476,22 @@ namespace NonProfitProject.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CommitteeMembers");
+
+            migrationBuilder.DropTable(
                 name: "DonationRecipts");
 
             migrationBuilder.DropTable(
+                name: "Events");
+
+            migrationBuilder.DropTable(
+                name: "News");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Donations");
@@ -341,6 +501,9 @@ namespace NonProfitProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "PaymentInformation");
+
+            migrationBuilder.DropTable(
+                name: "Committees");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

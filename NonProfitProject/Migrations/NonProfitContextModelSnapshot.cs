@@ -150,6 +150,55 @@ namespace NonProfitProject.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("NonProfitProject.Models.CommitteeMembers", b =>
+                {
+                    b.Property<int>("CommitteeMbrID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CommitteeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CommitteePosition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmpID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("employeeEmpID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CommitteeMbrID");
+
+                    b.HasIndex("CommitteeID");
+
+                    b.HasIndex("employeeEmpID");
+
+                    b.ToTable("CommitteeMembers");
+                });
+
+            modelBuilder.Entity("NonProfitProject.Models.Committees", b =>
+                {
+                    b.Property<int>("CommitteesID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CommitteeCreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CommitteeDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CommitteeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CommitteesID");
+
+                    b.ToTable("Committees");
+                });
+
             modelBuilder.Entity("NonProfitProject.Models.DonationRecipts", b =>
                 {
                     b.Property<int>("DonationRecId")
@@ -167,7 +216,7 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("DonationRecId");
 
@@ -176,6 +225,8 @@ namespace NonProfitProject.Migrations
                     b.HasIndex("ReciptDonationID")
                         .IsUnique()
                         .HasFilter("[ReciptDonationID] IS NOT NULL");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("DonationRecipts");
                 });
@@ -199,9 +250,64 @@ namespace NonProfitProject.Migrations
                     b.ToTable("Donations");
                 });
 
+            modelBuilder.Entity("NonProfitProject.Models.Employees", b =>
+                {
+                    b.Property<string>("EmpID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Department")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("HireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ReleaseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Salary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("EmpID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("NonProfitProject.Models.Event", b =>
+                {
+                    b.Property<int>("EventID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CommitteeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EventDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EventEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EventStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("EventID");
+
+                    b.HasIndex("CommitteeID");
+
+                    b.ToTable("Events");
+                });
+
             modelBuilder.Entity("NonProfitProject.Models.MembershipDues", b =>
                 {
                     b.Property<string>("MemDuesID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("MemActive")
@@ -223,6 +329,41 @@ namespace NonProfitProject.Migrations
                     b.HasKey("MemDuesID");
 
                     b.ToTable("MembershipDues");
+                });
+
+            modelBuilder.Entity("NonProfitProject.Models.News", b =>
+                {
+                    b.Property<int>("NewsID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CommitteeID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("NewsCreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NewsFooter")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewsHeader")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("NewsLastUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NewsPublishDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NewsTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NewsID");
+
+                    b.HasIndex("CommitteeID");
+
+                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("NonProfitProject.Models.PaymentInformation", b =>
@@ -413,6 +554,23 @@ namespace NonProfitProject.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NonProfitProject.Models.CommitteeMembers", b =>
+                {
+                    b.HasOne("NonProfitProject.Models.Committees", "committee")
+                        .WithMany("committeeMembers")
+                        .HasForeignKey("CommitteeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NonProfitProject.Models.Employees", "employee")
+                        .WithMany("committeeMembers")
+                        .HasForeignKey("employeeEmpID");
+
+                    b.Navigation("committee");
+
+                    b.Navigation("employee");
+                });
+
             modelBuilder.Entity("NonProfitProject.Models.DonationRecipts", b =>
                 {
                     b.HasOne("NonProfitProject.Models.PaymentInformation", "paymentInformation")
@@ -429,14 +587,20 @@ namespace NonProfitProject.Migrations
                         .WithOne("donationRecipts")
                         .HasForeignKey("NonProfitProject.Models.DonationRecipts", "ReciptDonationID");
 
+                    b.HasOne("NonProfitProject.Models.User", "user")
+                        .WithMany("donationRecipts")
+                        .HasForeignKey("UserID");
+
                     b.Navigation("donations");
 
                     b.Navigation("membershipDues");
 
                     b.Navigation("paymentInformation");
+
+                    b.Navigation("user");
                 });
 
-            modelBuilder.Entity("NonProfitProject.Models.PaymentInformation", b =>
+            modelBuilder.Entity("NonProfitProject.Models.Employees", b =>
                 {
                     b.HasOne("NonProfitProject.Models.User", "user")
                         .WithMany()
@@ -445,9 +609,54 @@ namespace NonProfitProject.Migrations
                     b.Navigation("user");
                 });
 
+            modelBuilder.Entity("NonProfitProject.Models.Event", b =>
+                {
+                    b.HasOne("NonProfitProject.Models.Committees", "committee")
+                        .WithMany("events")
+                        .HasForeignKey("CommitteeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("committee");
+                });
+
+            modelBuilder.Entity("NonProfitProject.Models.News", b =>
+                {
+                    b.HasOne("NonProfitProject.Models.Committees", "committee")
+                        .WithMany("news")
+                        .HasForeignKey("CommitteeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("committee");
+                });
+
+            modelBuilder.Entity("NonProfitProject.Models.PaymentInformation", b =>
+                {
+                    b.HasOne("NonProfitProject.Models.User", "user")
+                        .WithMany("payments")
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("NonProfitProject.Models.Committees", b =>
+                {
+                    b.Navigation("committeeMembers");
+
+                    b.Navigation("events");
+
+                    b.Navigation("news");
+                });
+
             modelBuilder.Entity("NonProfitProject.Models.Donations", b =>
                 {
                     b.Navigation("donationRecipts");
+                });
+
+            modelBuilder.Entity("NonProfitProject.Models.Employees", b =>
+                {
+                    b.Navigation("committeeMembers");
                 });
 
             modelBuilder.Entity("NonProfitProject.Models.MembershipDues", b =>
@@ -458,6 +667,13 @@ namespace NonProfitProject.Migrations
             modelBuilder.Entity("NonProfitProject.Models.PaymentInformation", b =>
                 {
                     b.Navigation("donationRecipts");
+                });
+
+            modelBuilder.Entity("NonProfitProject.Models.User", b =>
+                {
+                    b.Navigation("donationRecipts");
+
+                    b.Navigation("payments");
                 });
 #pragma warning restore 612, 618
         }
