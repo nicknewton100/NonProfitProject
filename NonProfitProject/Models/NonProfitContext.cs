@@ -33,6 +33,13 @@ namespace NonProfitProject.Models
                 .HasMany(u => u.donationRecipts)
                 .WithOne(u => u.user)
                 .HasForeignKey(DonationRecipts => DonationRecipts.UserID);
+            //sets default value for new users to the current date
+            builder.Entity<User>()
+                .Property(u => u.UserCreationDate)
+                .HasDefaultValueSql("getDate()");
+            builder.Entity<User>()
+                .Property(u => u.UserLastActivity)
+                .HasDefaultValueSql("getDate()");
 
             builder.Entity<DonationRecipts>()
                 .HasOne(dr => dr.membershipDues)
@@ -66,10 +73,10 @@ namespace NonProfitProject.Models
             }
 
             // if username doesn't exist, create it and add to role -- Creates Beau's account --
-            if (await userManager.FindByNameAsync("admin@cpt275.beausanders.org") == null)
+            if (await userManager.FindByNameAsync("BeauSanders") == null)
             {
-                User user = new User { 
-                    UserName = "admin@cpt275.beausanders.org",
+                User user = new User {
+                    UserName = "BeauSanders",
                     Email = "admin@cpt275.beausanders.org",
                     UserFirstName = "Beau",
                     UserLastName = "Sanders",
@@ -78,7 +85,10 @@ namespace NonProfitProject.Models
                     UserState = "South Carolina",
                     UserCountry = "United States Of America",
                     UserPostalCode = 29607,
-                    UserCreationDate = DateTime.Now
+                    UserGender = "Male",
+                    UserBirthDate = new DateTime(2000, 1, 1),
+                    //UserCreationDate = DateTime.Now,
+                    UserActive = 'A'
                 };
                 var result = await userManager.CreateAsync(user, "teamProjeck275");
                 if (result.Succeeded)
