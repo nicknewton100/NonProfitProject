@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NonProfitProject.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace NonProfitProject
 {
@@ -25,10 +26,31 @@ namespace NonProfitProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+
+            services.AddSession();
+
             services.AddControllersWithViews();
+
             services.AddDbContext<NonProfitContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("NonProfitContext"))
             );
+
+            //sets the password requirements
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<NonProfitContext>()
+                .AddDefaultTokenProviders();
+
+            //adds the appending trailing slash option and lowercase urls
+            services.AddRouting(options =>
+            {
+                options.AppendTrailingSlash = true;
+                options.LowercaseUrls = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +71,10 @@ namespace NonProfitProject
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
@@ -57,6 +82,7 @@ namespace NonProfitProject
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            NonProfitContext.CreateAdminUser(app.ApplicationServices).Wait();
         }
     }
 }
