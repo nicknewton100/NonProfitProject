@@ -466,9 +466,7 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UserCreationDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getDate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserFirstName")
                         .HasColumnType("nvarchar(max)");
@@ -477,9 +475,7 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UserLastActivity")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getDate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserLastName")
                         .HasColumnType("nvarchar(max)");

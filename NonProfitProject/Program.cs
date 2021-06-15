@@ -20,9 +20,7 @@ namespace NonProfitProject
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>()
-                    .UseDefaultServiceProvider(
-                        options => options.ValidateScopes = false);
+                    webBuilder.UseStartup<Startup>();
                 });
     }
 }
