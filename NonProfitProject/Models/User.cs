@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NonProfitProject.Models
 {
@@ -24,6 +26,9 @@ namespace NonProfitProject.Models
 
         public ICollection<PaymentInformation> payments { get; set; }
         public ICollection<DonationRecipts> donationRecipts { get; set; }
+
+        [NotMapped]
+        public IList<string> RoleNames { get; set; }
 
     }
 }
