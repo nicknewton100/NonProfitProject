@@ -9,7 +9,7 @@ namespace NonProfitProject.Models.ViewModels
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Please enter a username. ")]
-        [StringLength(25)]
+        [StringLength(60)]
         public string Username { get; set; }
         [Required(ErrorMessage = "Please enter a password. ")]
         [StringLength(60)]

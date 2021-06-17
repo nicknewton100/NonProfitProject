@@ -96,6 +96,28 @@ namespace NonProfitProject.Models
                     await userManager.AddToRoleAsync(user, "Admin");
                 }
             }
+            CreateRoles(serviceProvider);
+        }
+
+        public static async void CreateRoles(IServiceProvider serviceProvider)
+        {
+            UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+            RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            if(await roleManager.FindByNameAsync("User") == null)
+            {
+                await roleManager.CreateAsync(new IdentityRole("User"));
+            }
+
+            if (await roleManager.FindByNameAsync("Member") == null)
+            {
+                await roleManager.CreateAsync(new IdentityRole("Member"));
+            }
+
+            if (await roleManager.FindByNameAsync("Employee") == null)
+            {
+                await roleManager.CreateAsync(new IdentityRole("Employee"));
+            }
         }
     }
 }
