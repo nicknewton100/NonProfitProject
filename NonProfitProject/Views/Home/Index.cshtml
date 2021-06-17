@@ -1,8 +1,17 @@
-﻿@{ ViewData["Title"] = "Home Page"; }
+﻿@{ 
+    ViewData["Title"] = "Home Page";
+    Layout = "_HomePage";
+
+ }
 
 
 <!--PARALLAX EFFECTS. HEIGHT IS THE SIZE OF THE CONTAINER BOX OVERLAYING THE BACKGROUND IMAGE. BG COLOR IS THE BOX COLOR.-->
 
+
+<div class="container text-center">
+    <h1 class="display-4">Welcome to the @ViewData["Title"]</h1>
+    <p>Welcome to the index of the home page. </p>
+</div>
 
 <div class="parallax"></div>
 <div style="height:350px;background-color:white;font-size:36px" ;>

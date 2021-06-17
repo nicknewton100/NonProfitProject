@@ -11,204 +11,21 @@
     <title>@ViewData["Title"] - NonProfitProject</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-
-    
-
+    <link rel="stylesheet" href="~/css/dashboard.css" />
 
 </head>
 <body>
-    <style>
-        /*KEEP THIS IN LAYOUT FOR PARALLAX SCROLLING EFFECT*/
-        /*MIN-HEIGHT PUSHES STARTING HTML LOWER. 750px WAS JUST ENOUGH TO PUSH THE STOCKPHOTOS OFF SCREEN TO START THE EFFECT*/
-        .parallax {
-            /* The image used */
-            background-image: url("img/StockPhoto.jpeg");
-            /* Set a specific height */
-            min-height: 750px;
-            /* Create the parallax scrolling effect */
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: contain;
-        }
 
-        .parallax2 {
-            /* The image used */
-            background-image: url("img/StockPhoto2.jpeg");
-            /* Set a specific height */
-            min-height: 750px;
-            /* Create the parallax scrolling effect */
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: contain;
-        }
-
-        .sidenav {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 25px;
-        }
-
-        .sidenavMenu {
-            font-size: 30px;
-            cursor: pointer;
-            position: fixed;
-        }
-
-        .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-
-            .sidenav a:hover {
-                color: #f1f1f1;
-            }
-
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        #main {
-            transition: margin-left .5s;
-            padding: 16px;
-        }
-        
-    </style>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NonProfitProject</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <div>
-                        @if (signInManager.IsSignedIn(User))
-                        {
-                            <form method="post" asp-area="" asp-action="Logout" asp-controller="Account">
-                                <button type="submit" class="nav-link text-dark">logout</button>
-                            </form> }
-                        else
-                        {
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>}
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <!--SIDE-NAV BAR STUFF-->
-    <div id="main">
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
-            <a href="#">About Us</a>
-            <a href="#">Committee Members</a>
-            <a href="#">News</a>
-            <a href="#">Login</a>
-            <a href="#">Register</a>
-        </div>
-
-
-
+    <div class="">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
     </div>
-    <div id="main">
-        <div id="sidenavMenu" class="sidenavMenu">
-            <a onclick="openNav()">&#9776; Menu</a>
-            <div class="container">
-                <div id="calendar">
-                </div>
-            </div>
-        </div>
 
 
-
-
-
-
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-
-
-
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2021 - NonProfitProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>
-
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-
-
-        <!--SCRIPTS FOR SIDE NAV-->
-        <script>
-            var navOpen = false;
-
-            function openNav() {
-                if (navOpen == false) {
-                    document.getElementById("mySidenav").style.width = "250px";
-                    document.getElementById("main").style.marginLeft = "250px";
-                    navOpen = true;
-                }
-                else if (navOpen == true) {
-                    document.getElementById("mySidenav").style.width = "0";
-                    document.getElementById("main").style.marginLeft = "0";
-
-                }
-
-            }
-
-            function closeNav() {
-                document.getElementById("mySidenav").style.width = "0";
-                document.getElementById("main").style.marginLeft = "0";
-                navOpen = false;
-            }
-
-
-
-
-
-
-
-        </script>
-
-
-        @RenderSection("Scripts", required: false)
-    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
-    </html>
+</html>
