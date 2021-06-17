@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@section scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+
+
+
+<div class="sidenav">
+    <ul class="list-unstyled components">
+        <li classs="active nav-item" >
+            <a href="#homeSubmenu" data-toggle="collapse"  class="dropdown-toggle">Home</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Dashboard 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Dashboard 2</a>
+                </li>                       
+                <li class="nav-item">                        
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Website Home</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Employees</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Calendar Events</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Fundraiser</a>
+        </li>
+    </ul>
+</div>
+
+
+<div class="main">
+    @RenderBody()
+</div>
