@@ -47,8 +47,10 @@ namespace NonProfitProject.Controllers
                     }
                     else
                     {
-                        //redirect wherever we desire
-                        return RedirectToAction("Index", "Home");
+                        if (User.IsInRole("Admin"))
+                        {
+                            return RedirectToAction("Index","Home", new {area = "Admin" });
+                        }
                     }
                 }
                 ModelState.AddModelError("", "Invalid username/password.");
