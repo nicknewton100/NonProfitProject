@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using NonProfitProject.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using NonProfitProject.Models;
+using System.Security.Claims;
+using System.Web;
 
 namespace NonProfitProject.Controllers
 {
@@ -47,9 +49,14 @@ namespace NonProfitProject.Controllers
                     }
                     else
                     {
-                        if (User.IsInRole("Admin"))
+                        var currentUser = await userManager.FindByNameAsync(model.Username);
+                        if (await userManager.IsInRoleAsync(currentUser, "Admin"))
                         {
-                            return RedirectToAction("Index","Home", new {area = "Admin" });
+                            return RedirectToAction("Index", "Home", new { area = "Admin"});
+                        }
+                        else
+                        {
+                          return RedirectToAction("Index", "Home");
                         }
                     }
                 }
