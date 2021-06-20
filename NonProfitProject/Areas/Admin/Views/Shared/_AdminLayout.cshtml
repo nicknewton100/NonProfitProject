@@ -40,8 +40,11 @@
     <div class="sidenav">
         <ul class="list-unstyled">
             <li classs="active nav-item">
-                <a href="#homeSubmenu" data-toggle="collapse" class="dropdown-toggle">Dashboards</a>
+                <a href="#homeSubmenu" data-toggle="collapse" class="dropdown-toggle">Home</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard1">Dashboard 1</a>
                     </li>
