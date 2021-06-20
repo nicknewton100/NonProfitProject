@@ -15,13 +15,21 @@
     <div class="card-body">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form method="post" asp-action="LogIn" asp-route-returnUrl=" ">
+            <div class="row">
+                <div class="offset-sm-2 col-sm-4">
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+            </div>
             <div class="form-group row">
                 <div class="col-sm-2"><label>Email or Username: </label></div>
                 <div class="col-sm-4">
                     <input asp-for="Username" class="form-control" />
                 </div>
-                <div class="col">
-                    <span asp-validation-for="Username" class="text-danger"></span>
+                
+            </div>
+            <div class="row">
+                <div class="offset-sm-2 col-sm-4">
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
@@ -33,21 +41,20 @@
                     <input type="checkbox" name="ShowPassword" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'">
                     <label for="ShowPassword"> Show Password</label>
                 </div>
-                <div class="col">
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
             </div>
+            
             <div class="form-group row">
+                
                 <div class="offset-sm-2 col-sm-4">
                     <input type="checkbox" title="Remember Me" asp-for="RememberMe" /><label>Remember Me</label>
                 </div>
             </div>
             <div class="row">
                 <div class="offset-2 col-sm-4">
-                    <button type="submit" class="btn-primary">Login In</button>
+                    <button type="submit" class="btn btn-primary">Log In</button>
                 </div>
             </div>
-            <div class="row">
+            <div class="form-group row">
                 <div class="offset-2 col-sm-4">
                     <p>Not registered?</p>
                     <a asp-action="Register">Register as a new user</a>

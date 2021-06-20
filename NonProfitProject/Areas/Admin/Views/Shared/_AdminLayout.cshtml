@@ -1,5 +1,9 @@
 ﻿@{
     Layout = "_Layout";
+
+    @using Microsoft.AspNetCore.Identity;
+    @inject SignInManager<User> signInManager
+
 }
 
 @section scripts{
@@ -11,35 +15,63 @@
 
 
 
-<div class="sidenav">
-    <ul class="list-unstyled components">
-        <li classs="active nav-item" >
-            <a href="#homeSubmenu" data-toggle="collapse"  class="dropdown-toggle">Home</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li class="nav-item">
-                    <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Dashboard 1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Dashboard 2</a>
-                </li>                       
-                <li class="nav-item">                        
-                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Website Home</a>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Employees</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Calendar Events</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Fundraiser</a>
-        </li>
-    </ul>
-</div>
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+
+</head>
+<body>
+    <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        <div class="container">
+            <div>
+            </div>
+            <div>
+                <form method="post" asp-area="" asp-action="Logout" asp-controller="Account">
+                    <button type="submit" class="btn btn-dark">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="sidenav">
+        <ul class="list-unstyled">
+            <li classs="active nav-item">
+                <a href="#homeSubmenu" data-toggle="collapse" class="dropdown-toggle">Home</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">View Website</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Employees</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Calendar Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Fundraiser</a>
+            </li>
+        </ul>
+    </div>
 
 
-<div class="main">
-    @RenderBody()
-</div>
+    <div class="main">
+        @RenderBody()
+    </div>
+
+    <footer class="footer text-muted">
+        <div class="container text-center">
+            &copy; 2021 - BANK'D Tech Solutions - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+</body>
+</html>
