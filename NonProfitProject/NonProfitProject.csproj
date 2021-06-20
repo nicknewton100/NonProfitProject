@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>4a634865-fe27-4ef4-a23b-8c14a2347b19</UserSecretsId>
-    <AllowUntrustedCertificate>true</AllowUntrustedCertificate>
+
   </PropertyGroup>
 
   <ItemGroup>

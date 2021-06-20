@@ -13,7 +13,7 @@
 .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 15px;
     color: #818181;
     display: block;
 }
@@ -22,9 +22,17 @@
     color: #f1f1f1;
 }
 
+.sidenav ul li a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+}
+
 .main {
     margin-left: 160px; /* Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
+    font-size: 20px; /* Increased text to enable scrolling */
     padding: 0px 10px;
 }
 
@@ -33,7 +41,7 @@
         padding-top: 15px;
     }
 
-    /*.sidenav a {
+    .sidenav a {
         font-size: 18px;
-    }*/
+    }
 }

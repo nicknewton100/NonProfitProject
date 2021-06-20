@@ -40,24 +40,27 @@
     <div class="sidenav">
         <ul class="list-unstyled">
             <li classs="active nav-item">
-                <a href="#homeSubmenu" data-toggle="collapse" class="dropdown-toggle">Home</a>
+                <a href="#homeSubmenu" data-toggle="collapse" class="dropdown-toggle">Dashboards</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Dashboard</a>
+                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard1">Dashboard 1</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">View Website</a>
+                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard2">Dashboard 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard3">Dashboard 3</a>
                     </li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Employees</a>
+                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">View Website</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Calendar Events</a>
+                <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Reports</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Fundraiser</a>
+                <a class="nav-link text-light" asp-area="Admin" asp-controller="Profile" asp-action="Index">Profile</a>
             </li>
         </ul>
     </div>
