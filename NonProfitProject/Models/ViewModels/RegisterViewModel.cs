@@ -61,6 +61,7 @@ namespace NonProfitProject.Models.ViewModels
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
+        public bool recieveWeeklyNewsletter { get; set; }
         
     }
 }

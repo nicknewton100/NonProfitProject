@@ -40,6 +40,9 @@ namespace NonProfitProject.Models
             builder.Entity<User>()
                 .Property(u => u.UserLastActivity)
                 .HasDefaultValueSql("getDate()");
+            builder.Entity<User>()
+                .Property(u => u.recieveWeeklyNewsletter)
+                .HasDefaultValue(false);
 
             builder.Entity<DonationRecipts>()
                 .HasOne(dr => dr.membershipDues)
@@ -87,8 +90,8 @@ namespace NonProfitProject.Models
                     UserPostalCode = 29607,
                     UserGender = "Male",
                     UserBirthDate = new DateTime(2000, 1, 1),
-                    //UserCreationDate = DateTime.Now,
-                    UserActive = 'A'
+                    UserActive = true,
+                    recieveWeeklyNewsletter = false
                 };
                 var result = await userManager.CreateAsync(user, "teamProjeck275");
                 if (result.Succeeded)

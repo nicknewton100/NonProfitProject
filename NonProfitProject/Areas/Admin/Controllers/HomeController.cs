@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using NonProfitProject.Models;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
@@ -14,6 +15,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
+            
+            
             return View();
         }
     }

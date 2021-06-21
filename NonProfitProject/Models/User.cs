@@ -22,7 +22,8 @@ namespace NonProfitProject.Models
         public string UserGender { get; set; }
         public DateTime UserCreationDate { get; set; }
         public DateTime UserLastActivity { get; set; }
-        public char UserActive { get; set; }
+        public bool UserActive { get; set; }
+        public bool recieveWeeklyNewsletter { get; set; }
 
         public ICollection<PaymentInformation> payments { get; set; }
         public ICollection<DonationRecipts> donationRecipts { get; set; }
