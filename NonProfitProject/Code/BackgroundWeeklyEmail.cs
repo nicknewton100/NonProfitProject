@@ -30,7 +30,7 @@ namespace NonProfitProject.Code
 
         Task IHostedService.StartAsync(CancellationToken cancellationToken)
         {
-            timer = new Timer(o => SendEmail(), null, TimeSpan.Zero, TimeSpan.FromDays(3));
+            timer = new Timer(o => SendEmail(), null, TimeSpan.Zero, TimeSpan.FromDays(1));
             return Task.CompletedTask;
         }
 
