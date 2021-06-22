@@ -1,13 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Profile";
     Layout = "_AdminLayout";
+    @using Microsoft.AspNetCore.Identity;
+    @inject UserManager<User> UserManager
+    var user = await UserManager?.GetUserAsync(User);
 }
 
 <div class="container">
     <div class="card-header">
         <h1>@ViewData["Title"]</h1>
     </div>
-    <div class="card-body">
-        <p>Add form view of profile </p>
-    </div>
+    <br />
+    <a class="custom-card" asp-action="EditLogin">
+        <div class="card" style=" display: inline-block">
+            <div class="card-body">
+                <h2 class="card-title">Login Information</h2>
+                <p class="card-text">Edit email, password, username </p>
+                <p class="card-text">signup for weekly newsletter </p>
+            </div>
+        </div>
+    </a>
 </div>

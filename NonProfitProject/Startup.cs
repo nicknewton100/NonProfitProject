@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NonProfitProject.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 namespace NonProfitProject
 {
@@ -31,6 +32,7 @@ namespace NonProfitProject
             services.AddSession();
 
             services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddDbContext<NonProfitContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("NonProfitContext"))
