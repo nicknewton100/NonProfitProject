@@ -29,6 +29,8 @@ namespace NonProfitProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<BackgroundWeeklyEmail>();
+            
+            services.AddMemoryCache();
 
             services.AddSession();
 
