@@ -22,6 +22,7 @@ namespace NonProfitProject.Controllers
             this.signInManager = signInManager;
         }
 
+        //Login
         [HttpGet]
         public IActionResult LogIn(string returnURL = "")
         {
@@ -29,6 +30,7 @@ namespace NonProfitProject.Controllers
             return View();
         }
 
+        //Creates login verification feature for the user
         [HttpPost]
         public async Task<IActionResult> LogIn(LoginViewModel model)
         {
@@ -70,6 +72,7 @@ namespace NonProfitProject.Controllers
             return View();
         }
 
+        //Creates a new user
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
