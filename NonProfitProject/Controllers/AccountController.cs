@@ -88,7 +88,8 @@ namespace NonProfitProject.Controllers
                     UserCity = model.City,
                     UserState = model.State,
                     UserPostalCode = model.PostalCode,
-                    UserCountry = model.Country
+                    UserCountry = model.Country,
+                    recieveWeeklyNewsletter = model.recieveWeeklyNewsletter
                 };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
