@@ -15,8 +15,7 @@
             <!--IF USER IS NOT IN ADMIN ROLE, DISPLAY LOGO IN TOP BAR-->
             @if (!User.IsInRole("Admin"))
             {<div class="container">
-                <a href="#">
-                <img src="~/img/BankdLogoRev1.png" alt="Bank'd Tech Solutions" width="250" height="50" />
+                <a href="#"><img src="~/img/BankdLogoRev1.png" alt="Bank'd Tech Solutions" width="250" height="50" /> </a>
             </div>
 
             }
@@ -29,8 +28,9 @@
                             <li classs="active nav-item">
                             <li>
                                 <a href="#">
-                                    <img src="~/img/BankdLogoRev1.png" alt="Bank'd Tech Solutions" width="125" height="35" />
+                                    <img src="~/img/BankdLogoRev1.png" alt="Bank'd Tech Solutions" width="125" height="35" /> </a>
                             </li>
+                            <li>
                             <a href="#homeSubmenu" data-toggle="collapse" class="dropdown-toggle">Home</a>
                             <ul class="collapse list-unstyled" id="homeSubmenu">
                                 <li class="nav-item">
