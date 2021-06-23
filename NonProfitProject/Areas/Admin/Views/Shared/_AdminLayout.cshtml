@@ -26,6 +26,7 @@
 
 </head>
 <body>
+    <!--TOP NAV FOR ADMIN VIEW-->
     <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
         <div class="container">
             <div>
@@ -37,6 +38,7 @@
             </div>
         </div>
     </div>
+    <!--SIDE NAV FOR ADMIN VIEW-->
     <div class="sidenav">
         <ul class="list-unstyled">
             <li classs="active nav-item">
@@ -64,7 +66,7 @@
                 <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">View Website</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Reports</a>
+                <a class="nav-link text-light" asp-area="Admin" asp-controller="Reports" asp-action="Index">Reports</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-light" asp-area="Admin" asp-controller="Profile" asp-action="Index">Profile</a>
