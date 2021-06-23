@@ -96,7 +96,7 @@ namespace NonProfitProject.Controllers
                 };
 
                 var result = await userManager.CreateAsync(user, model.Password);
-
+                //after successfully creating account, redirect user to homepage.
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(user, "User");

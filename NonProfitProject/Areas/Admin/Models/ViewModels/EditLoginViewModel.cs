@@ -8,6 +8,7 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
 {
     public class EditLoginViewModel
     {
+        //validation for account editing
         public string userID { get; set; }
         [Required(ErrorMessage = "Please enter your Username")]
         [StringLength(25)]

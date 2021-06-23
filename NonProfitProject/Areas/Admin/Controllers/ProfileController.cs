@@ -10,11 +10,12 @@ using NonProfitProject.Areas.Admin.Models.ViewModels;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
+    //If admin, show this page
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class ProfileController : Controller
     {
-
+        
         private NonProfitContext context { get; set; }
 
         private UserManager<User> userManager;
@@ -29,16 +30,10 @@ namespace NonProfitProject.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            /*var users = context.Users.ToList();
-            foreach(User u in users)
-            {
-                context.Users.Attach(u).Property(x => x.recieveWeeklyNewsletter).IsModified = true;
-                u.recieveWeeklyNewsletter = false;
-                context.SaveChanges();
-            }*/
             return View();
         }
         
+        //Edit login for user, if admin.
         [HttpGet]
         public async Task<IActionResult> EditLogin()
         {
