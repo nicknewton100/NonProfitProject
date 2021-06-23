@@ -94,11 +94,14 @@ namespace NonProfitProject.Controllers
                     UserCountry = model.Country,
                     recieveWeeklyNewsletter = model.recieveWeeklyNewsletter
                 };
+
                 var result = await userManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(user, "User");
                     await signInManager.SignInAsync(user, isPersistent: false);
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -110,6 +113,7 @@ namespace NonProfitProject.Controllers
                     //ModelState.AddModelError("", "User already exists. Please try again.");
                 }
             }
+
             return View();
         }
 
