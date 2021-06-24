@@ -11,71 +11,22 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
         <div class="container">
+             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/BankdLogoRev1.png" alt="Bank'd Tech Solutions" width="250" height="50" /></a> 
 
-            <!--IF USER IS NOT IN ADMIN ROLE, DISPLAY LOGO IN TOP BAR-->
-            @if (!User.IsInRole("Admin"))
-            {<div class="container">
-                <a href="#"><img src="~/img/BankdLogoRev1.png" alt="Bank'd Tech Solutions" width="250" height="50" /> </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                         <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a> 
+                    </li>
+                </ul>
             </div>
-
-            }
-
-            <!--IF USER IS IN ADMIN ROLE, DISPLAY SIDE BAR AT ALL TIMES-->
-                @if (User.IsInRole("Admin"))
+            <div>
+                @if (signInManager.IsSignedIn(User))
                 {
-                    <div class="sidenav">
-                        <ul class="list-unstyled">
-                            <li classs="active nav-item">
-                            <li>
-                                <a href="#">
-                                    <img src="~/img/BankdLogoRev1.png" alt="Bank'd Tech Solutions" width="125" height="35" /> </a>
-                            </li>
-                            <li>
-                            <a href="#homeSubmenu" data-toggle="collapse" class="dropdown-toggle">Home</a>
-                            <ul class="collapse list-unstyled" id="homeSubmenu">
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Home" asp-action="Index">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard1">Dashboard 1</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard2">Dashboard 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard3">Dashboard 3</a>
-                                </li>
-                            </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Reports" asp-action="">Reports</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Profile" asp-action="Index">Profile</a>
-                            </li>
-                        </ul>
-                    </div>
-                }
-
-                <!-- BUTTON COMMENTED OUT FOR LOGO-->
-                <!-- <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BANK'D Tech Solutions</a> -->
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <!-- <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a> -->
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    @if (signInManager.IsSignedIn(User))
-                    {@*<form method="post" asp-area="" asp-action="Logout" asp-controller="Account" style="background-color:white;">
-                        <button type="submit" class="navbar-light">Logout</button>
-                    </form>*@ @*<a class="nav-link text-light" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>*@
 
                     <div class="btn-group">
                         <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
@@ -89,7 +40,7 @@
                 else
                 {
                     <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Login</a>}
-                </div>
+            </div>
         </div>
     </nav>
 
