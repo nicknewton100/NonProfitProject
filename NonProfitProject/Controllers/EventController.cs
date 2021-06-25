@@ -12,5 +12,10 @@ namespace NonProfitProject.Controllers
         {
             return View();
         }
+
+        public IActionResult Calendar()
+        {
+            return View();
+        }
     }
 }
