@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 namespace NonProfitProject.Models.ViewModels
-{
+{       //This model is used for login viewpage
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Please enter a username. ")]
