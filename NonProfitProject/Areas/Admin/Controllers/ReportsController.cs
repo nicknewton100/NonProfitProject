@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using NonProfitProject.Models;
 
 namespace NonProfitProject.Areas.Admin.Controllers
-{
+{   //If admin, shows this page
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class Reports : Controller

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace NonProfitProject.Models.ViewModels
-{
+{   //this model is used for register viewpage
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "Please enter your First Name")]
