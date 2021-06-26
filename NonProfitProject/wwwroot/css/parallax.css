@@ -5,8 +5,8 @@ MIN-HEIGHT PUSHES STARTING HTML LOWER. 750px WAS JUST ENOUGH TO PUSH THE STOCKPH
 */
 
 .parallax {
-    /*The image used*/ background-image: url("../img/nonprofit-organizations-364.jpg ");
-    /*Set a specific height*/ min-height: 350px;
+    /*The image used*/ background-image: url("../img/Non-Profit.png ");
+    /*Set a specific height*/ min-height: 550px;
     /*Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
@@ -16,17 +16,7 @@ MIN-HEIGHT PUSHES STARTING HTML LOWER. 750px WAS JUST ENOUGH TO PUSH THE STOCKPH
 
 .parallax2 {
     /*The image used */ background-image: url("../img/can_you_turn_your_business_into_a_nonprofit.jpg");
-    /* Set a specific height */ min-height: 350px;
-    /*Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-.parallax3 {
-    /*The image used */ background-image: url("../img/Non-Profit.png");
-    /* Set a specific height */ min-height: 350px;
+    /* Set a specific height */ min-height: 550px;
     /*Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
