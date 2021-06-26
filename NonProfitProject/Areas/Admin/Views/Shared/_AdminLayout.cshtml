@@ -38,45 +38,38 @@
         </div>
     </div>
     <!--SIDE NAV FOR ADMIN VIEW-->
-    <div class="sidenav">
-        <ul class="list-unstyled">
-            <li classs="active nav-item">
-            <li>
-                <a href="#">
-                    <img src="~/img/BankdLogoRev1.png" alt="Bank'd Tech Solutions" width="125" height="35" /></a>
+    <div class="text-white bg-dark" style="width: 200px; height: 100%; overflow-x: hidden; position: fixed; z-index: 1; top: 0; left: 0; ">
+        <ul class="nav nav-pills flex-column list-unstyled">
+            <li class="nav-item">
+                <a href="#" class="nav-link text-white">
+                    <img src="~/img/BankdLogoRev1.png" alt="Bank'd Tech Solutions" width="125" height="35" />
+                </a>
             </li>
-            <li>
-                <a href="#homeSubmenu" data-toggle="collapse" class="dropdown-toggle">Dashboards</a>
-
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard1">Users</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard2">Calendar Events</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard3">Edit Web Page</a>
-                    </li>
-                </ul>
-            </li>
-            
 
             <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">View Website</a>
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-area="Admin" asp-controller="Reports" asp-action="Index">Reports</a>
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard1">Users</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-area="Admin" asp-controller="Profile" asp-action="Index">Profile</a>
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard2">Calendar Events</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard3">Edit Web Page</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">View Website</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Reports" asp-action="Index">Reports</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Profile" asp-action="Index">Profile</a>
+            </li>
+
         </ul>
     </div>
-
 
     <div class="main" style="padding: 0 0 5rem 0; ">
         @RenderBody()
