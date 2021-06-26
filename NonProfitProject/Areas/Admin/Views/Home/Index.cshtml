@@ -4,10 +4,70 @@
 }
 
 <div class="container">
-    <div class="text-center">
-        <p>admin's home page</p>
+    <div class="card-header">
+        <h1> Welcome</h1>
     </div>
-    <div class="text-sm-left">
-        <p>This will be the admin's dashboard containing a list of calendar events, fundraising info, and employees list. </p>
+    <br />
+    
+    <!--ICONS TO LINK TO THE OTHER PART OF THE ADMINISTRATION DASHBOARDS-->
+    <div class="row justify-content-md-center">
+        <a class="card w-25 btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">
+            <!--WEBSITE ICON AND LINK TO THE THE HOMEPAGE WEBSITE-->
+            <h1 class="card-header fas fa-laptop-code"></h1>
+            <div class="card-body">
+                <h5 class="card-title">Websites</h5>
+                <p class="card-text">Go to Home page of the website</p>
+            </div>
+        </a>
+
+        <a class="card w-25 btn btn-outline-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard2">
+            <!--EVENTS ICON AND LINK TO THE TABLE OF THE CALENDAR EVENTS-->
+            <h1 class="card-header far fa-calendar-alt"></h1>
+            <div class="card-body">
+                <h5 class="card-title">Events</h5>
+                <p class="card-text">Go to...</p>
+            </div>
+        </a>
+
+        <a class="card w-25 btn btn-outline-dark" asp-area="Admin" asp-controller="Reports" asp-action="Index">
+            <!--REPORTS ICON AND LINK TO THE SECTION TO CREATE REPORTS-->
+            @*Reports Icon*@
+            <h1 class="card-header far fa-flag"></h1>
+            <div class="card-body">
+                <h5 class="card-title">Reports</h5>
+                <p class="card-text">Go to...</p>
+            </div>
+        </a>
+    </div>
+    <div class="row"><br /></div>
+    <div class="row justify-content-md-center">
+        <a class="card w-25 btn btn-outline-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard1">
+            <!--USERS ICOND AND LINK TO THE LIST OF USERS (DONORS, MEMBERS,AND EMPLOYEES) TO DELETE, ADD, EDIT OR UPDATE-->
+            @*Users Icon*@
+            <h1 class="card-header fas fa-users"></h1>
+            <div class="card-body">
+                <h5 class="card-title">Users</h5>
+                <p class="card-text">Go to...</p>
+            </div>
+        </a>
+        <a class="card w-25 btn btn-outline-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard3">
+            <!--COMMITTEE ICON AND LINK TO THE LIST OF COMMITTEE GROUPS TO ADD, DELETE OR UPDATE THE LIST OF USERS IN THE COMMITTTEE-->
+            <h1 class="card-header far fa-id-card"></h1>
+            <div class="card-body">
+                <h5 class="card-title">Committees</h5>
+                <p class="card-text">Go to...</p>
+            </div>
+        </a>
+    </div>
+    <div class="row"><br /></div>
+    <div class="row justify-content-md-center" >
+        <a class="card w-25 btn btn-outline-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">
+            <!--HELP DESK ICON AND LINK TO HELP SECTION WITH HELP DOCUMENTS AND CONTACT LINK TO EMAIL THE HELP-->
+            <h1 class="card-header fas fa-info-circle"></h1>
+            <div class="card-body">
+                <h5 class="card-title">Help Desk</h5>
+                <p class="card-text">Go to...</p>
+            </div>
+        </a>
     </div>
 </div>
