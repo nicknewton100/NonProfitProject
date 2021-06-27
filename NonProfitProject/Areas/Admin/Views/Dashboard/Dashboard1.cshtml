@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Dashboard Page";
     Layout = "_AdminLayout";
 }
@@ -6,36 +7,123 @@
 <div class="container">
     <div class="card-header-pills"><h1 class="fas fa-users"> Users</h1></div>
     <br />
-
-    <ul class="nav nav-tabs" id="nav-tab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="employee-tab" data-bs-toggle="tab" data-bs-target="#employee" type="button" role="tab" aria-controls="employee" aria-selected="true">
-                Employees
-            </button>
-        </li>
-
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="committee-tab" data-bs-toggle="tab" data-bs-target="#committee" type="button" role="tab" aria-controls="committee" aria-selected="false">
-                Committees
-            </button>
-        </li>
-           
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="false">
-                Users
-            </button>
-        </li>
-        
+    
+    <ul class="nav nav-tabs">
+        <!--EMPLOYEES TAB TO DISPLAY THE TABLE LIST OF EMPLOYEES-->
+        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#employees">Employees</a></li>
+        <!--COMMITTEES TAB TO DISPLAY THE TABLE LIST OF COMMITTEES-->
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#committees">Committees</a></li>
+        <!--USERS TAB TO DISPLAY THE TABLE LIST OF OTHER SITE USERS-->
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#users">Users</a></li>
     </ul>
 
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="employee" role="tabpanel" aria-labelledby="employee-tab">employee list</div>
-        <div class="tab-pane fade" id="committee" role="tabpanel" aria-labelledby="committee-tab">comittee list</div>
-        <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">other users list</div>
+    <div class="container">
+        <div class="tab-content ">
+            <!--EMPLOYEES CONTENTS WILL DISPLAY WHEN THE EMPLOYEES TAB IS SELECTED-->
+            <br />
+            <div id="employees" class="tab-pane active face">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Email Address</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">City</th>
+                            <th scope="col">State</th>
+                            <th scope="col">Zip Code</th>
+                            <th scope="col">Telephone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <th>Shawn</th>
+                            <th>Job</th>
+                            <th>shawnjob@address.com</th>
+                            <th>712 Hill Crest Rd</th>
+                            <th>Greenville</th>
+                            <th>SC</th>
+                            <th>29750</th>
+                            <th>864-569-6363</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--COMMITTEES CONTENTS WILL DISPLAY WHEN THE COMMITTEES TAB IS SELECTED-->
+            <div id="committees" class="tab-pane fade">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Email Address</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">City</th>
+                            <th scope="col">State</th>
+                            <th scope="col">Zip Code</th>
+                            <th scope="col">Telephone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <th>Shawn</th>
+                            <th>Job</th>
+                            <th>shawnjob@address.com</th>
+                            <th>712 Hill Crest Rd</th>
+                            <th>Greenville</th>
+                            <th>SC</th>
+                            <th>29750</th>
+                            <th>864-569-6363</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <th>Daniel</th>
+                            <th>Smith</th>
+                            <th>danielsmith@address.com</th>
+                            <th>880 Boone Rd</th>
+                            <th>Simppson</th>
+                            <th>SC</th>
+                            <th>29780</th>
+                            <th>864-990-4571</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--USERS CONTENTS WILL DISPLAY WHEN THE USERS TAB IS SELECTED-->
+            <div id="users" class="tab-pane fade">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Email Address</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">City</th>
+                            <th scope="col">State</th>
+                            <th scope="col">Zip Code</th>
+                            <th scope="col">Telephone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">2</th>
+                            <th>Daniel</th>
+                            <th>Smith</th>
+                            <th>danielsmith@address.com</th>
+                            <th>880 Boone Rd</th>
+                            <th>Simppson</th>
+                            <th>SC</th>
+                            <th>29780</th>
+                            <th>864-990-4571</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-
-<script type="text/javascript">
-
-
-</script>
