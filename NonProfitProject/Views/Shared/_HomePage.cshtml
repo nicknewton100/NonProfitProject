@@ -36,7 +36,7 @@
             <div>
                 @if (signInManager.IsSignedIn(User))
                  {  
-
+                    //Executes this code if user is signed in and in admin role
                     if (User.IsInRole("Admin"))
                     {
                     <div class="btn-group">
@@ -50,6 +50,7 @@
                         </div>
                     </div> 
                     }
+                    //Executes this code if user is signed in and not in admin role
                     else
                      {
                     <div class="btn-group">
@@ -62,6 +63,7 @@
                 </div>
                     }
                  }
+                // Executes this code if user is not signed in
                 else
                 {
                     <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
