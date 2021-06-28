@@ -14,6 +14,6 @@ namespace NonProfitProject.Models
         public DateTime DonationDate { get; set; }
         public string Comments { get; set; }
 
-        public DonationRecipts donationRecipts { get; set; }
+        public DonationReceipts donationReceipts { get; set; }
     }
 }

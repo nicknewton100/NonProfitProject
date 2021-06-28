@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NonProfitProject.Models
 {
-    public class DonationRecipts
+    public class DonationReceipts
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,10 +17,10 @@ namespace NonProfitProject.Models
         public User user { get; set; }
         public int PaymentID { get; set; }
         public PaymentInformation paymentInformation { get; set; }
-        public string ReciptDonationID { get; set; }
+        public string ReceiptDonationID { get; set; }
         public Donations donations { get; set; }
         public MembershipDues membershipDues { get; set; }
-        public string ReciptDesc { get; set; }
+        public string ReceiptDesc { get; set; }
         
         
         

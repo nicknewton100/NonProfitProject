@@ -23,10 +23,10 @@ namespace NonProfitProject.Models
         public DateTime UserCreationDate { get; set; }
         public DateTime UserLastActivity { get; set; }
         public bool UserActive { get; set; }
-        public bool recieveWeeklyNewsletter { get; set; }
+        public bool ReceiveWeeklyNewsletter { get; set; }
 
         public ICollection<PaymentInformation> payments { get; set; }
-        public ICollection<DonationRecipts> donationRecipts { get; set; }
+        public ICollection<DonationReceipts> donationReceipts { get; set; }
 
         [NotMapped]
         public IList<string> RoleNames { get; set; }

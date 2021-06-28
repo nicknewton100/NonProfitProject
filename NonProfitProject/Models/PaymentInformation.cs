@@ -22,6 +22,6 @@ namespace NonProfitProject.Models
         public DateTime ExpDate { get; set; }
         public int CVV { get; set; }
 
-        public ICollection<DonationRecipts> donationRecipts { get; set; }
+        public ICollection<DonationReceipts> donationRecipts { get; set; }
     }
 }

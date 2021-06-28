@@ -14,7 +14,7 @@ namespace NonProfitProject.Models
         public NonProfitContext(DbContextOptions<NonProfitContext> options) : base(options) { }
 
         public DbSet<PaymentInformation> PaymentInformation { get; set; }
-        public DbSet<DonationRecipts> DonationRecipts { get; set; }
+        public DbSet<DonationReceipts> DonationReceipts { get; set; }
         public DbSet<MembershipDues> MembershipDues { get; set; }
         public DbSet<Donations> Donations { get; set; }
         public DbSet<Employees> Employees { get; set; }
@@ -30,7 +30,7 @@ namespace NonProfitProject.Models
                 .WithOne(u => u.user)
                 .HasForeignKey(p => p.UserID);
             builder.Entity<User>()
-                .HasMany(u => u.donationRecipts)
+                .HasMany(u => u.donationReceipts)
                 .WithOne(u => u.user)
                 .HasForeignKey(DonationRecipts => DonationRecipts.UserID);
             //sets default value for new users to the current date
@@ -41,18 +41,18 @@ namespace NonProfitProject.Models
                 .Property(u => u.UserLastActivity)
                 .HasDefaultValueSql("getDate()");
             builder.Entity<User>()
-                .Property(u => u.recieveWeeklyNewsletter)
+                .Property(u => u.ReceiveWeeklyNewsletter)
                 .HasDefaultValue(false);
 
-            builder.Entity<DonationRecipts>()
+            builder.Entity<DonationReceipts>()
                 .HasOne(dr => dr.membershipDues)
-                .WithOne(x => x.donationRecipts)
-                .HasForeignKey<DonationRecipts>(dr => dr.ReciptDonationID)
+                .WithOne(x => x.DonationReceipts)
+                .HasForeignKey<DonationReceipts>(dr => dr.ReceiptDonationID)
                 .HasPrincipalKey<MembershipDues>(x => x.MemDuesID);
-            builder.Entity<DonationRecipts>()
+            builder.Entity<DonationReceipts>()
                 .HasOne(dr => dr.donations)
-                .WithOne(x => x.donationRecipts)
-                .HasForeignKey<DonationRecipts>(dr => dr.ReciptDonationID)
+                .WithOne(x => x.donationReceipts)
+                .HasForeignKey<DonationReceipts>(dr => dr.ReceiptDonationID)
                 .HasPrincipalKey<Donations>(d => d.DonationID);
             builder.Entity<PaymentInformation>()
                 .HasMany(dr => dr.donationRecipts)
@@ -91,7 +91,7 @@ namespace NonProfitProject.Models
                     UserGender = "Male",
                     UserBirthDate = new DateTime(2000, 1, 1),
                     UserActive = true,
-                    recieveWeeklyNewsletter = false
+                    ReceiveWeeklyNewsletter = false
                 };
                 var result = await userManager.CreateAsync(user, "teamProjeck275");
                 if (result.Succeeded)

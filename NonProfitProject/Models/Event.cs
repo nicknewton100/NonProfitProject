@@ -9,8 +9,6 @@ namespace NonProfitProject.Models
     public class Event
     {
         public int EventID { get; set; }
-        public int CommitteeID { get; set; }
-        public Committees committee { get; set; }
         public DateTime EventStartDate { get; set; }
         public DateTime EventEndDate { get; set; }
         public string EventDescription { get; set; }

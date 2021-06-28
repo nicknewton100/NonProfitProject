@@ -9,8 +9,6 @@ namespace NonProfitProject.Models
     public class News
     {
         public int NewsID { get; set; }
-        public int CommitteeID { get; set; }
-        public Committees committee { get; set; }
         public string NewsTitle { get; set; }
         public string NewsHeader { get; set; }
         public string NewsFooter { get; set; }

@@ -46,7 +46,7 @@ namespace NonProfitProject.Code
             List<User> users = new List<User>();
             try
             {
-                users = context.Users.Where(x => x.recieveWeeklyNewsletter == true).ToList();
+                users = context.Users.Where(x => x.ReceiveWeeklyNewsletter == true).ToList();
             }
             catch(Exception ex)
             {

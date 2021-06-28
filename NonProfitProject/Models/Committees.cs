@@ -15,9 +15,6 @@ namespace NonProfitProject.Models
         public string CommitteeName { get; set; }
         public string CommitteeDescription { get; set; }
         public DateTime CommitteeCreationDate { get; set; }
-
-        public ICollection<Event> events { get; set; }
-        public ICollection<News> news { get; set; }
         public ICollection<CommitteeMembers> committeeMembers { get; set; }
     }
 }

@@ -92,7 +92,7 @@ namespace NonProfitProject.Controllers
                     UserState = model.State,
                     UserPostalCode = model.PostalCode,
                     UserCountry = model.Country,
-                    recieveWeeklyNewsletter = model.recieveWeeklyNewsletter
+                    ReceiveWeeklyNewsletter = model.ReceiveWeeklyNewsletter
                 };
 
                 var result = await userManager.CreateAsync(user, model.Password);

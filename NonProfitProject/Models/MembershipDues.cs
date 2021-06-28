@@ -19,6 +19,6 @@ namespace NonProfitProject.Models
         public char MemActive { get; set; }
 
 
-        public DonationRecipts donationRecipts { get; set; }
+        public DonationReceipts DonationReceipts { get; set; }
     }
 }
