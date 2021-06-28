@@ -15,7 +15,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
     [Area("Admin")]
     public class ProfileController : Controller
     {
-        
+
         private NonProfitContext context { get; set; }
 
         private UserManager<User> userManager;
@@ -28,18 +28,18 @@ namespace NonProfitProject.Areas.Admin.Controllers
             this.context = context;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-        
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
         //Edit login for user, if admin.
         [HttpGet]
         public async Task<IActionResult> EditLogin()
         {
             var user = await userManager.GetUserAsync(User);
-            var EditLoginViewModel = new EditLoginViewModel { userID = user.Id,Email = user.Email, EmailConfirmed = "", Username = user.UserName, recieveWeeklyNewsletter = user.recieveWeeklyNewsletter, CurrentPassword = "", NewPassword = "", NewPasswordConfirmed = "" };
-            return View("EditLogin",EditLoginViewModel);
+            var EditLoginViewModel = new EditLoginViewModel { userID = user.Id, Email = user.Email, EmailConfirmed = "", Username = user.UserName, recieveWeeklyNewsletter = user.recieveWeeklyNewsletter, CurrentPassword = "", NewPassword = "", NewPasswordConfirmed = "" };
+            return View("EditLogin", EditLoginViewModel);
         }
         public async Task<IActionResult> EditLogin(EditLoginViewModel model)
         {
@@ -54,14 +54,14 @@ namespace NonProfitProject.Areas.Admin.Controllers
                     user.recieveWeeklyNewsletter = model.recieveWeeklyNewsletter;
                     if (model.NewPassword != null)
                     {
-                        var result = await userManager.ChangePasswordAsync(user,model.CurrentPassword, model.NewPassword);
+                        var result = await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
                         if (!result.Succeeded)
                         {
-                            foreach(IdentityError i in result.Errors)
+                            foreach (IdentityError i in result.Errors)
                             {
                                 ModelState.AddModelError("", i.Description);
                             }
-                            return View();      
+                            return View();
                         }
                     }
                     context.Users.Update(user);
@@ -72,7 +72,23 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError("", "Password is incorrect");
                 }
-                
+
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var user = await userManager.GetUserAsync(User);
+            var ProfileViewModel = new ProfileViewModel { UserID = user.Id, FirstName=user.UserFirstName, LastName=user.UserLastName, Email = user.Email, Username = user.UserName, Addr1 = user.UserAddr1, Addr2 = user.UserAddr2, City = user.UserCity, PostalCode = user.UserPostalCode, Country = user.UserCountry, State = user.UserState, BirthDate = user.UserBirthDate, Gender = user.UserGender, CreationDate=user.UserCreationDate, LastActivity=user.UserLastActivity };
+            return View("Index", ProfileViewModel);
+        }
+        public async Task<IActionResult> Index(ProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByIdAsync(model.UserID);
             }
             return View();
         }
