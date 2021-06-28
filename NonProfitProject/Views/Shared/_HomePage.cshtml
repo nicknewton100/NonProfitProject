@@ -35,8 +35,10 @@
             </div>
             <div>
                 @if (signInManager.IsSignedIn(User))
-                {
-
+                 {  
+                    //Executes this code if user is signed in and in admin role
+                    if (User.IsInRole("Admin"))
+                    {
                     <div class="btn-group">
                         <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -46,10 +48,26 @@
                                 <button type="submit" class="btn btn-dark">Logout</button>
                             </form>
                         </div>
-                    </div> }
+                    </div> 
+                    }
+                    //Executes this code if user is signed in and not in admin role
+                    else
+                     {
+                    <div class="btn-group">
+                    <a href = "#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
+                    <div class="dropdown-menu">
+                        <form class="dropdown-item" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
+                            <button type = "submit" class="btn btn-dark">Logout</button>
+                        </form>
+                    </div>
+                </div>
+                    }
+                 }
+                // Executes this code if user is not signed in
                 else
                 {
-                    <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Login</a>}
+                    <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                }
             </div>
         </div>
     </nav>
