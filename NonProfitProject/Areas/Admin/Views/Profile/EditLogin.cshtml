@@ -5,82 +5,73 @@
 
 }
 <div class="container">
-    <div class="card-header">
-        <h1>@ViewData["Title"]</h1>
-    </div>
+    <div class="card-header-pills"><h1 class="fa fa-address-card"> Edit Login Information</h1></div>
     <br />
-    <br />
+
     <h5 class="text-primary">@TempData["ChangesSaved"]?.ToString()</h5>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <form asp-action="EditLogin" method="post">
+    <form asp-action="EditLogin" method="post" style="font-size:medium">
         <input type="hidden" asp-for="userID" />
         <div class="form-group row">
-            <div class="col-sm-2"><label>Username: </label></div>
+            <div class="col-sm-2"><div class="fas fa-user-alt"></div>  <label>Username: </label></div>
             <div class="col-sm-4">
                 <input asp-for="Username" class="form-control" />
-            </div>
-            <div class="col">
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-sm-2"><label>Email Address: </label></div>
+            <div class="col-sm-2"><div class="fa fa-envelope"></div>  <label>Email Address: </label></div>
             <div class="col-sm-4">
                 <input asp-for="Email" class="form-control" />
-            </div>
-            <div class="col">
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
         </div>
+        @*<div class="form-group row">
+                <div class="col-sm-2"><label>Confirm Email Address: </label></div>
+                <div class="col-sm-4">
+                    <input asp-for="EmailConfirmed" class="form-control" />
+                </div>
+                <div class="col">
+                    <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
+                </div>
+            </div>*@
         <div class="form-group row">
-            <div class="col-sm-2"><label>Confirm Email Address: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="EmailConfirmed" class="form-control" />
-            </div>
-            <div class="col">
-                <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><label>Password: </label></div>
+            <div class="col-sm-2"><div class="fas fa-lock"></div> <label>Password: </label></div>
             <div class="col-sm-4">
                 <input id="password" asp-for="CurrentPassword" class="form-control" />
+                <span asp-validation-for="CurrentPassword" class="text-danger"></span>
             </div>
-            <div>
+            <div class="col-sm-2">
                 <input type="checkbox" name="ShowPassword" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'; document.getElementById('NewPassword').type = this.checked ? 'text' : 'password'; document.getElementById('ConfirmNewPassword').type = this.checked ? 'text' : 'password'">
                 <label for="ShowPassword"> Show Password</label>
-            </div>
-            <div class="col">
-                <span asp-validation-for="CurrentPassword" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
             <div class="col-sm-2"><label>New Password: </label></div>
             <div class="col-sm-4">
-                <input id="NewPassword" asp-for="NewPassword" class="form-control" placeholder="Optional"/>
-            </div>
-            <div class="col">
-                <span asp-validation-for="NewPassword" class="text-danger"></span>
+                <input id="NewPassword" asp-for="NewPassword" class="form-control" placeholder="Optional" />
             </div>
         </div>
         <div class="form-group row">
             <div class="col-sm-2"><label>Confirm New Password: </label></div>
             <div class="col-sm-4">
-                <input id="ConfirmNewPassword" asp-for="NewPasswordConfirmed" class="form-control" placeholder="Optional"/>
-            </div>
-            <div class="col">
+                <input id="ConfirmNewPassword" asp-for="NewPasswordConfirmed" class="form-control" placeholder="Optional" />
                 <span asp-validation-for="NewPasswordConfirmed" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-sm-2"><label>I would like to receive a weekly newsletter  </label></div>
-            <div class="col-sm-4">
+            <div class="col-5">
                 <input type="checkbox" asp-for="recieveWeeklyNewsletter" />
+                <label>I would like to receive a weekly newsletter. </label>
+
             </div>
         </div>
         <div class="row">
-            <div class="offset-2 col-sm-4">
-                <button type="submit" class="btn-primary">Save Changes</button>
+            <div class="col-2">
+                <button type="submit" class="btn-lg btn-outline-dark">Save Changes</button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn-lg btn-dark" asp-area="Admin" asp-controller="Profile" asp-action="Index">Cancel</button>
             </div>
         </div>
     </form>
