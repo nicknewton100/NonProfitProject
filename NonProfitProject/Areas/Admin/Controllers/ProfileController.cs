@@ -28,12 +28,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
             this.context = context;
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //Edit login for user, if admin.
         [HttpGet]
         public async Task<IActionResult> EditLogin()
         {
@@ -51,7 +45,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 {
                     user.Email = model.Email;
                     user.UserName = model.Username;
-                    user.ReceiveWeeklyNewsletter = model.recieveWeeklyNewsletter;
+                    user.ReceiveWeeklyNewsletter = model.receiveWeeklyNewsletter;
                     if (model.NewPassword != null)
                     {
                         var result = await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);

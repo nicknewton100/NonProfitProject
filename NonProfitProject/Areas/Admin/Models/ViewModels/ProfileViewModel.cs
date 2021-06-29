@@ -19,6 +19,9 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         public string State { get; set; }
         public int PostalCode { get; set; }
         public string Country { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime BirthDate { get; set; }
         public string Gender { get; set; }
         public DateTime CreationDate { get; set; }
