@@ -35,6 +35,6 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [StringLength(60)]
         [DataType(DataType.Password)]
         public string NewPasswordConfirmed { get; set; }
-        public bool recieveWeeklyNewsletter { get; set; }
+        public bool receiveWeeklyNewsletter { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public async Task<IActionResult> EditLogin()
         {
             var user = await userManager.GetUserAsync(User);
-            var EditLoginViewModel = new EditLoginViewModel { userID = user.Id, Email = user.Email, EmailConfirmed = "", Username = user.UserName, recieveWeeklyNewsletter = user.ReceiveWeeklyNewsletter, CurrentPassword = "", NewPassword = "", NewPasswordConfirmed = "" };
+            var EditLoginViewModel = new EditLoginViewModel { userID = user.Id, Email = user.Email, EmailConfirmed = "", Username = user.UserName, receiveWeeklyNewsletter = user.ReceiveWeeklyNewsletter, CurrentPassword = "", NewPassword = "", NewPasswordConfirmed = "" };
             return View("EditLogin", EditLoginViewModel);
         }
         public async Task<IActionResult> EditLogin(EditLoginViewModel model)
