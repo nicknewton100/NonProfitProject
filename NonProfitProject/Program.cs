@@ -27,7 +27,7 @@ namespace NonProfitProject
                         options => options.ValidateScopes = false);
                 }).ConfigureServices(services =>
                 {
-                    services.AddHostedService<BackgroundWeeklyEmail>();
+                    services.AddHostedService<BackgroundTasks>();
                 });
     }
 }

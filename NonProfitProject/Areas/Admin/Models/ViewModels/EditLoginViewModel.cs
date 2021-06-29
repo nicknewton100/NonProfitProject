@@ -16,12 +16,7 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [Required(ErrorMessage = "Please enter your Email Address")]
         [StringLength(60)]
         [DataType(DataType.EmailAddress)]
-        [Compare("EmailConfirmed")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Please confirm your Email Address")]
-        [StringLength(60)]
-        [DataType(DataType.EmailAddress)]
-        public string EmailConfirmed { get; set; }
 
         [StringLength(60)]
         [DataType(DataType.Password)]
@@ -35,6 +30,6 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [StringLength(60)]
         [DataType(DataType.Password)]
         public string NewPasswordConfirmed { get; set; }
-        public bool recieveWeeklyNewsletter { get; set; }
+        public bool ReceiveWeeklyNewsletter { get; set; }
     }
 }
