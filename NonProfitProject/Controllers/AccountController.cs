@@ -64,7 +64,7 @@ namespace NonProfitProject.Controllers
                 }
                 ModelState.AddModelError("", "Invalid username/password.");
             }
-            return View(model);
+            return View();
         }
         [HttpGet]
         public IActionResult Register()
