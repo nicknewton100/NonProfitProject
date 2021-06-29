@@ -1,4 +1,5 @@
-﻿@{
+﻿@model User
+@{
     Layout = "_Layout";
 
     @using Microsoft.AspNetCore.Identity;
@@ -35,14 +36,14 @@
             </div>
             <div>
                 @if (signInManager.IsSignedIn(User))
-                 {  
+                {
                     //Executes this code if user is signed in and in admin role
                     if (User.IsInRole("Admin"))
                     {
                     <div class="btn-group">
-                        <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                        <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @User.Identity.Name</a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Dashboard</a>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="Home" asp-action="Index"> Dashboard</a>
                             <a class="dropdown-item" asp-area="Admin" asp-controller="Profile" asp-action="Index">Profile</a>
                             <form class="dropdown-item" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
                                 <button type="submit" class="btn btn-dark">Logout</button>
@@ -54,7 +55,7 @@
                     else
                      {
                     <div class="btn-group">
-                    <a href = "#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
+                        <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @User.Identity.Name</a>
                     <div class="dropdown-menu">
                         <form class="dropdown-item" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
                             <button type = "submit" class="btn btn-dark">Logout</button>
