@@ -28,17 +28,11 @@ namespace NonProfitProject.Areas.Admin.Controllers
             this.context = context;
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //Edit login for user, if admin.
         [HttpGet]
         public async Task<IActionResult> EditLogin()
         {
             var user = await userManager.GetUserAsync(User);
-            var EditLoginViewModel = new EditLoginViewModel { userID = user.Id, Email = user.Email, EmailConfirmed = "", Username = user.UserName, recieveWeeklyNewsletter = user.ReceiveWeeklyNewsletter, CurrentPassword = "", NewPassword = "", NewPasswordConfirmed = "" };
+            var EditLoginViewModel = new EditLoginViewModel { userID = user.Id, Email = user.Email, EmailConfirmed = "", Username = user.UserName, receiveWeeklyNewsletter = user.ReceiveWeeklyNewsletter, CurrentPassword = "", NewPassword = "", NewPasswordConfirmed = "" };
             return View("EditLogin", EditLoginViewModel);
         }
         public async Task<IActionResult> EditLogin(EditLoginViewModel model)
@@ -51,7 +45,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 {
                     user.Email = model.Email;
                     user.UserName = model.Username;
-                    user.ReceiveWeeklyNewsletter = model.recieveWeeklyNewsletter;
+                    user.ReceiveWeeklyNewsletter = model.receiveWeeklyNewsletter;
                     if (model.NewPassword != null)
                     {
                         var result = await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
