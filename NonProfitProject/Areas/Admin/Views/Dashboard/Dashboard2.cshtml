@@ -46,7 +46,8 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
                             <th scope="col">Event Title</th>
                             <th scope="col">Event Information</th>
                         </tr>
@@ -55,19 +56,13 @@
                         @foreach(Event events in Model)
                             {
                         <tr>
-                            <th scope="row">1 <span hidden>@events.EventID</span></th>
+                            <th scope="row">@events.EventID </th>
                             <th>@events.EventStartDate.ToShortDateString()</th>
                             <th>@events.EventEndDate.ToShortDateString()</th>
                             <th>@events.EventName</th>
                             <th>@events.EventDescription</th>
                         </tr>
                             }
-                        <tr>
-                            <th scope="row">1</th>
-                            <th>05/25/2019</th>
-                            <th>The Walk-A-Thon</th>
-                            <th>Walking for a great cause!</th>
-                        </tr>
                     </tbody>
                 </table>
             </div>
