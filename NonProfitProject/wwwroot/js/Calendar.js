@@ -9,7 +9,8 @@ let calendar = new FullCalendar.Calendar(calendarEl, {
     },
     events: [
         {
-            //Can add events here
+            title: "Calendar Created",
+            start: "2021-06-26",
         },
     ],
 });
