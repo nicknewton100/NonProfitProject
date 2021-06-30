@@ -16,7 +16,7 @@
 
 
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3 ">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3 ">
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/BankdLogoRev1.png" alt="Bank'd Tech Solutions" width="250" height="50" /></a>
 
@@ -55,7 +55,7 @@
                     else
                      {
                     <div class="btn-group">
-                        <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @User.Identity.Name</a>
+                        <a href="#" class="btn btn-outline-light dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @User.Identity.Name</a>
                     <div class="dropdown-menu">
                         <form class="dropdown-item" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
                             <button type = "submit" class="btn btn-dark">Logout</button>
