@@ -25,6 +25,34 @@ namespace NonProfitProject.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            //creates data for Event table
+            builder.Entity<Event>().HasData(
+            new Event
+            {
+                EventID = 1,
+                EventStartDate = new DateTime(2021, 01, 05, 0, 0, 0),
+                EventEndDate = new DateTime(2021, 01, 25, 0, 0, 0),
+                EventName = "Walk-a-thon",
+                EventDescription = "Walking for a good cause."
+            },
+            new Event
+            {
+                EventID = 2,
+                EventStartDate = new DateTime(2022, 03, 01, 0, 0, 0),
+                EventEndDate = new DateTime(2022, 03, 30, 0, 0, 0),
+                EventName = "Triathon",
+                EventDescription = "Fun event coming soon!"
+            },
+            new Event
+            {
+                EventID = 3,
+                EventStartDate = new DateTime(2022, 05, 01, 0, 0, 0),
+                EventEndDate = new DateTime(2022, 05, 05, 0, 0, 0),
+                EventName = "Five days of Help",
+                EventDescription = "Fun event coming soon!"
+            }
+            );
+            //Sets relationships for User
             builder.Entity<User>()
                 .HasMany(u => u.payments)
                 .WithOne(u => u.user)
@@ -40,15 +68,17 @@ namespace NonProfitProject.Models
             builder.Entity<User>()
                 .Property(u => u.UserLastActivity)
                 .HasDefaultValueSql("getDate()");
+            //sets default value for weekly newsletter
             builder.Entity<User>()
                 .Property(u => u.ReceiveWeeklyNewsletter)
                 .HasDefaultValue(false);
-
+            //sets relationships between Donation receipts and Membership dues
             builder.Entity<DonationReceipts>()
                 .HasOne(dr => dr.membershipDues)
                 .WithOne(x => x.DonationReceipts)
                 .HasForeignKey<DonationReceipts>(dr => dr.ReceiptDonationID)
                 .HasPrincipalKey<MembershipDues>(x => x.MemDuesID);
+            //sets relationship between Donation and dontationreceipts
             builder.Entity<DonationReceipts>()
                 .HasOne(dr => dr.donations)
                 .WithOne(x => x.donationReceipts)
@@ -101,7 +131,7 @@ namespace NonProfitProject.Models
             }
             CreateRoles(serviceProvider);
         }
-
+        //creates roles if they do not exist within the database
         public static async void CreateRoles(IServiceProvider serviceProvider)
         {
             UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();

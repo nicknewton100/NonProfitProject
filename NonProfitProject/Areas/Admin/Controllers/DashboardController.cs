@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using NonProfitProject.Models;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
@@ -14,6 +15,11 @@ namespace NonProfitProject.Areas.Admin.Controllers
     [Area("Admin")]
     public class DashboardController : Controller
     {
+        private NonProfitContext context;
+        public DashboardController(NonProfitContext context)
+        {
+            this.context = context;
+        }
         //Shows Dashboard 1
         public IActionResult Dashboard1()
         {
@@ -22,7 +28,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
         //Shows Dashboard 2
         public IActionResult Dashboard2()
         {
-            return View();
+            var events = context.Events.ToList();
+            return View(events);
         }
         //Shows Dashboard 3
         public IActionResult Dashboard3()

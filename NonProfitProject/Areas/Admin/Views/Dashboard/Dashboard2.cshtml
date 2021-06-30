@@ -1,4 +1,4 @@
-﻿@model EventContext
+﻿@model List<Event>
 @{
     ViewData["Title"] = "Dashboard Page";
     Layout = "_AdminLayout";
@@ -52,12 +52,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(Event events in Model.Events)
+                        @foreach(Event events in Model)
                             {
                         <tr>
                             <th scope="row">1 <span hidden>@events.EventID</span></th>
-                            <th>@events.EventStartDate</th>
-                            <th>@events.EventEndDate</th>
+                            <th>@events.EventStartDate.ToShortDateString()</th>
+                            <th>@events.EventEndDate.ToShortDateString()</th>
                             <th>@events.EventName</th>
                             <th>@events.EventDescription</th>
                         </tr>
