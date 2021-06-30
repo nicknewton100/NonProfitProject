@@ -1,4 +1,5 @@
-﻿@{
+﻿@model EventContext
+@{
     ViewData["Title"] = "Dashboard Page";
     Layout = "_AdminLayout";
 }
@@ -51,6 +52,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach(Event events in Model.Events)
+                            {
+                        <tr>
+                            <th scope="row">1 <span hidden>@events.EventID</span></th>
+                            <th>@events.EventStartDate</th>
+                            <th>@events.EventEndDate</th>
+                            <th>@events.EventName</th>
+                            <th>@events.EventDescription</th>
+                        </tr>
+                            }
                         <tr>
                             <th scope="row">1</th>
                             <th>05/25/2019</th>
