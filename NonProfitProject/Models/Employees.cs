@@ -13,12 +13,12 @@ namespace NonProfitProject.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string EmpID { get; set; }
         public string UserID { get; set; }
-        public User user { get; set; }
+        public User User { get; set; }
         public string Department { get; set; }
         public decimal Salary { get; set; }
         public DateTime HireDate { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
 
-        public ICollection<CommitteeMembers> committeeMembers { get; set; }
+        public CommitteeMembers CommitteeMembers { get; set; }
     }
 }

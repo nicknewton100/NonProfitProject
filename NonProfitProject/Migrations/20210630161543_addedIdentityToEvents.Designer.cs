@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NonProfitProject.Models;
 
 namespace NonProfitProject.Migrations
 {
     [DbContext(typeof(NonProfitContext))]
-    partial class NonProfitContextModelSnapshot : ModelSnapshot
+    [Migration("20210630161543_addedIdentityToEvents")]
+    partial class addedIdentityToEvents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,26 +166,18 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmpID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("employeeEmpID")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CommitteeMbrID");
 
                     b.HasIndex("CommitteeID");
 
-                    b.HasIndex("EmpID")
-                        .IsUnique()
-                        .HasFilter("[EmpID] IS NOT NULL");
+                    b.HasIndex("employeeEmpID");
 
                     b.ToTable("CommitteeMembers");
-
-                    b.HasData(
-                        new
-                        {
-                            CommitteeMbrID = 1,
-                            CommitteeID = 1,
-                            CommitteePosition = "Committee Manager",
-                            EmpID = "1"
-                        });
                 });
 
             modelBuilder.Entity("NonProfitProject.Models.Committees", b =>
@@ -205,29 +199,6 @@ namespace NonProfitProject.Migrations
                     b.HasKey("CommitteesID");
 
                     b.ToTable("Committees");
-
-                    b.HasData(
-                        new
-                        {
-                            CommitteesID = 1,
-                            CommitteeCreationDate = new DateTime(2021, 7, 1, 17, 38, 23, 164, DateTimeKind.Utc).AddTicks(7349),
-                            CommitteeDescription = "Manages donations/membership dues",
-                            CommitteeName = "Fundrasing Committee"
-                        },
-                        new
-                        {
-                            CommitteesID = 2,
-                            CommitteeCreationDate = new DateTime(2021, 7, 1, 17, 38, 23, 164, DateTimeKind.Utc).AddTicks(7872),
-                            CommitteeDescription = "Manages news on the website",
-                            CommitteeName = "News Committee"
-                        },
-                        new
-                        {
-                            CommitteesID = 3,
-                            CommitteeCreationDate = new DateTime(2021, 7, 1, 17, 38, 23, 164, DateTimeKind.Utc).AddTicks(7882),
-                            CommitteeDescription = "Plans and organizes events",
-                            CommitteeName = "Event and Planning Committee"
-                        });
                 });
 
             modelBuilder.Entity("NonProfitProject.Models.DonationReceipts", b =>
@@ -293,7 +264,7 @@ namespace NonProfitProject.Migrations
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("ReleaseDate")
+                    b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Salary")
@@ -307,16 +278,6 @@ namespace NonProfitProject.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("Employees");
-
-                    b.HasData(
-                        new
-                        {
-                            EmpID = "1",
-                            Department = "Finance",
-                            HireDate = new DateTime(2020, 2, 4, 11, 14, 0, 0, DateTimeKind.Unspecified),
-                            Salary = 54000m,
-                            UserID = "6b87b89f-0f9a-4e2d-b696-235e99655521"
-                        });
                 });
 
             modelBuilder.Entity("NonProfitProject.Models.Event", b =>
@@ -341,32 +302,6 @@ namespace NonProfitProject.Migrations
                     b.HasKey("EventID");
 
                     b.ToTable("Events");
-
-                    b.HasData(
-                        new
-                        {
-                            EventID = 1,
-                            EventDescription = "Walking for a good cause.",
-                            EventEndDate = new DateTime(2021, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventName = "Walk-a-thon",
-                            EventStartDate = new DateTime(2021, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            EventID = 2,
-                            EventDescription = "Biking, Swimming, and Running",
-                            EventEndDate = new DateTime(2022, 3, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventName = "Triathon",
-                            EventStartDate = new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            EventID = 3,
-                            EventDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks!",
-                            EventEndDate = new DateTime(2022, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventName = "Movie Night",
-                            EventStartDate = new DateTime(2022, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("NonProfitProject.Models.MembershipDues", b =>
@@ -532,7 +467,7 @@ namespace NonProfitProject.Migrations
                     b.Property<DateTime>("UserCreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getUTCDate()");
+                        .HasDefaultValueSql("getDate()");
 
                     b.Property<string>("UserFirstName")
                         .HasColumnType("nvarchar(max)");
@@ -543,7 +478,7 @@ namespace NonProfitProject.Migrations
                     b.Property<DateTime>("UserLastActivity")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getUTCDate()");
+                        .HasDefaultValueSql("getDate()");
 
                     b.Property<string>("UserLastName")
                         .HasColumnType("nvarchar(max)");
@@ -631,8 +566,8 @@ namespace NonProfitProject.Migrations
                         .IsRequired();
 
                     b.HasOne("NonProfitProject.Models.Employees", "employee")
-                        .WithOne("committeeMember")
-                        .HasForeignKey("NonProfitProject.Models.CommitteeMembers", "EmpID");
+                        .WithMany("committeeMembers")
+                        .HasForeignKey("employeeEmpID");
 
                     b.Navigation("committee");
 
@@ -698,7 +633,7 @@ namespace NonProfitProject.Migrations
 
             modelBuilder.Entity("NonProfitProject.Models.Employees", b =>
                 {
-                    b.Navigation("committeeMember");
+                    b.Navigation("committeeMembers");
                 });
 
             modelBuilder.Entity("NonProfitProject.Models.MembershipDues", b =>

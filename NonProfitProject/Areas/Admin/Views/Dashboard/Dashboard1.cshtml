@@ -1,4 +1,5 @@
 ﻿
+@model List<Employees> 
 @{
     ViewData["Title"] = "Dashboard Page";
     Layout = "_AdminLayout";
@@ -38,7 +39,7 @@
     </ul>
 
     <div class="container">
-        <div class="tab-content ">
+        <div class="tab-content" style="font-size:small;">
             <!--EMPLOYEES CONTENTS WILL DISPLAY WHEN THE EMPLOYEES TAB IS SELECTED-->
             <br />
             <div id="employees" class="tab-pane active face">
@@ -49,26 +50,33 @@
                             <th scope="col">First</th>
                             <th scope="col">Last</th>
                             <th scope="col">Email Address</th>
-                            <th scope="col">Address</th>
+                            <th scope="col">Address1</th>
+                            <th scope="col">Address2</th>
                             <th scope="col">City</th>
                             <th scope="col">State</th>
                             <th scope="col">Zip Code</th>
+                            <th scope="col">Country</th>
                             <th scope="col">Telephone</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach (Employees empl in Model)
+                        {
                         <tr>
-                            <th scope="row">1</th>
-                            <th>Shawn</th>
-                            <th>Job</th>
-                            <th>shawnjob@address.com</th>
-                            <th>712 Hill Crest Rd</th>
-                            <th>Greenville</th>
-                            <th>SC</th>
-                            <th>29750</th>
-                            <th>864-569-6363</th>
+                            <th scope="row">@empl.EmpID</th>
+                            <th>@empl.User.UserFirstName</th>
+                            <th>@empl.User.UserLastName</th>
+                            <th>@empl.User.Email</th>
+                            <th>@empl.User.UserAddr1</th>
+                            <th>@empl.User.UserAddr2</th>
+                            <th>@empl.User.UserCity</th>
+                            <th>@empl.User.UserState</th>
+                            <th>@empl.User.UserPostalCode</th>
+                            <th>@empl.User.UserCountry</th>
+                            <th>@empl.User.PhoneNumber</th>
                         </tr>
-                    </tbody>
+                        }
+                        </tbody>
                 </table>
             </div>
             <!--COMMITTEES CONTENTS WILL DISPLAY WHEN THE COMMITTEES TAB IS SELECTED-->
@@ -122,25 +130,29 @@
                             <th scope="col">First</th>
                             <th scope="col">Last</th>
                             <th scope="col">Email Address</th>
-                            <th scope="col">Address</th>
+                            <th scope="col">Address1</th>
+                            <th scope="col">Address2</th>
                             <th scope="col">City</th>
                             <th scope="col">State</th>
                             <th scope="col">Zip Code</th>
+                            <th scope="col">Country</th>
                             <th scope="col">Telephone</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">2</th>
-                            <th>Daniel</th>
-                            <th>Smith</th>
-                            <th>danielsmith@address.com</th>
-                            <th>880 Boone Rd</th>
-                            <th>Simppson</th>
-                            <th>SC</th>
-                            <th>29780</th>
-                            <th>864-990-4571</th>
-                        </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <th>UserFirstName</th>
+                                <th>UserLastName</th>
+                                <th>Email</th>
+                                <th>UserAddr1</th>
+                                <th>UserAddr2</th>
+                                <th>UserCity</th>
+                                <th>UserState</th>
+                                <th>UserPostalCode</th>
+                                <th>UserCountry</th>
+                                <th>PhoneNumber</th>
+                            </tr>
                     </tbody>
                 </table>
             </div>

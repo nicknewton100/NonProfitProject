@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using NonProfitProject.Models;
 using System.Security.Claims;
 using System.Web;
+using NonProfitProject.Code;
 
 namespace NonProfitProject.Controllers
 {
@@ -15,11 +16,13 @@ namespace NonProfitProject.Controllers
     {
         private UserManager<User> userManager;
         private SignInManager<User> signInManager;
+        private NonProfitContext context;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, NonProfitContext context)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.context = context;
         }
 
         //Login
@@ -76,8 +79,13 @@ namespace NonProfitProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            if(context.Users.Any(u => u.Email == model.Email)){
+                    ModelState.AddModelError("", String.Format("The email address {0} is already in use", model.Email));
+            }
+
             if (ModelState.IsValid)
             {
+                
                 var user = new User
                 {
                     UserName = model.Username,
@@ -101,7 +109,10 @@ namespace NonProfitProject.Controllers
                 {
                     await userManager.AddToRoleAsync(user, "User");
                     await signInManager.SignInAsync(user, isPersistent: false);
-                    
+                    EmailManager emailmanager = new EmailManager(context);
+                    var emailmessage = emailmanager.CreateSimpleMessage("BankdTechSolutions Sign-up Confirmation",String.Format("Hey {0}, \n \n Thank you for signing up at BankdTechSolutions.net! We are excited to have a new member that can contribute to our Non-Profit cause. You're one step closer to becoming a saint! Have a great day!",user.UserFirstName + " " + user.UserLastName));
+                    emailmanager.SendEmail(user,emailmessage);
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -110,7 +121,6 @@ namespace NonProfitProject.Controllers
                     {
                         ModelState.AddModelError("", error.Description);
                     }
-                    //ModelState.AddModelError("", "User already exists. Please try again.");
                 }
             }
 

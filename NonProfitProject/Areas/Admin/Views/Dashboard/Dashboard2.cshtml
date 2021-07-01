@@ -1,104 +1,44 @@
-﻿@{
+﻿@model List<Event>
+@{
     ViewData["Title"] = "Dashboard Page";
     Layout = "_AdminLayout";
 }
 
 <div class="container">
     <div class="card-header-pills"><h1 class="far fa-calendar-alt"> Events & Meetings</h1></div>
-    <br />
-
-    <div class="row justify-content-md-center">
-        <div class="col-lg-2">
-            <button class="btn btn-outline-dark">
-                Add Calendar Event
-            </button>
-        </div>
-        <div class="col-lg-2">
-            <button class="btn btn-outline-dark">
-                Add Funraiser Event
-            </button>
-        </div>
-        <div class="col-lg-2">
-            <button class="btn btn-outline-dark">
-                Add Committee Event
-            </button>
-        </div>
-    </div>
-
-    <br />
-
-    <ul class="nav nav-tabs">
-        <!--CALENDAR TAB TO DISPLAY THE TABLE LIST OF CALENDAR EVENTS-->
-        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#calendar">Calendar Events</a></li>
-        <!--FUNDRAISER TAB TO DISPLAY THE TABLE LIST OF FUNDRAISER EVENTS-->
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#fundraiser">Funraiser Events</a></li>
-        <!--COMMITTEE TAB TO DISPLAY THE TABLE LIST OF COMMITTEE EVENTS & MEETINGS-->
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#committee2">Committe Events</a></li>
-    </ul>
-
-    <div class="container">
+    <div class="container" style="font-size:small;">
         <div class="tab-content">
             <br />
-            <!--CALENDAR EVENT CONTENTS WILL DISPLAY WHEN THE CALENDAR TAB IS SELECTED-->            
+            <!--CALENDAR EVENT CONTENTS WILL DISPLAY WHEN THE CALENDAR TAB IS SELECTED-->
             <div id="calendar" class="tab-pane active face">
+                <div><button class="btn btn-outline-dark">Add Event</button></div>
+                <br />
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
                             <th scope="col">Event Title</th>
                             <th scope="col">Event Information</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <th>05/25/2019</th>
-                            <th>The Walk-A-Thon</th>
-                            <th>Walking for a great cause!</th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!--FUNDRAISER EVENT CONTENTS WILL DISPLAY WHEN THE FUNDRAISER TAB IS SELECTED-->
-            <div id="fundraiser" class="tab-pane fade">
-                <table class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Event Title</th>
-                            <th scope="col">Event Information</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <th>05/25/2019</th>
-                            <th>The Walk-A-Thon</th>
-                            <th>$5 per participate</th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!--COMMITTEES EVENT CONTENTS WILL DISPLAY WHEN THE COMMITTEES TAB IS SELECTED-->
-            <div id="committee2" class="tab-pane fade">
-                <table class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Event Title</th>
-                            <th scope="col">Event Information</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <th>05/15/2019</th>
-                            <th>Fundraising Committee</th>
-                            <th>Discussing the plans</th>
-                        </tr>
+                        @foreach (Event events in Model)
+                        {
+                            <tr>
+                                <th scope="row" hidden>@events.EventID </th>
+                                <th>@events.EventStartDate.ToShortDateString()</th>
+                                <th>@events.EventEndDate.ToShortDateString()</th>
+                                <th>@events.EventName</th>
+                                <th>@events.EventDescription</th>
+                                <th>
+                                    <button class="btn btn-dark">Details</button>
+                                    <button class="btn btn-outline-dark">Edit</button>
+                                </th>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>

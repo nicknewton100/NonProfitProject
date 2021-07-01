@@ -10,6 +10,7 @@ namespace NonProfitProject.Models
 {
     public class User : IdentityUser
     {
+        
         public string UserFirstName { get; set; }
         public string UserLastName { get; set; }
         public string UserAddr1 { get; set; }
@@ -20,7 +21,6 @@ namespace NonProfitProject.Models
         public string UserCountry { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime UserBirthDate { get; set; }
         public string UserGender { get; set; }
         public DateTime UserCreationDate { get; set; }
