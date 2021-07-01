@@ -67,7 +67,8 @@ namespace NonProfitProject.Models
                 {
                     CommitteeMbrID = 1,
                     EmpID = "1",
-
+                    CommitteeID = 1,
+                    CommitteePosition = "Committee Manager"
                 }
                 );
             //creates data for Event table
@@ -135,7 +136,7 @@ namespace NonProfitProject.Models
                 .HasForeignKey(DonationRecipts => DonationRecipts.PaymentID);
             //sets relationship between employees and Committee Memebers
             builder.Entity<Employees>()
-                .HasOne(e => e.committeeMembers)
+                .HasOne(e => e.committeeMember)
                 .WithOne(cm => cm.employee)
                 .HasForeignKey<CommitteeMembers>(cm => cm.EmpID)
                 .HasPrincipalKey<Employees>(e => e.EmpID);
