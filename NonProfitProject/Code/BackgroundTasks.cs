@@ -33,7 +33,7 @@ namespace NonProfitProject.Code
         Task IHostedService.StartAsync(CancellationToken cancellationToken)
         {
             emailManager = new EmailManager(context);
-            timer = new Timer(o => emailManager.SendNewsletter(), null, TimeSpan.Zero, TimeSpan.FromDays(1));
+            // timer = new Timer(o => emailManager.SendNewsletter(), null, TimeSpan.Zero, TimeSpan.FromDays(1));
             return Task.CompletedTask;
         }
         //Cancels newsletter subscription

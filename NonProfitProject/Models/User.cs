@@ -20,7 +20,6 @@ namespace NonProfitProject.Models
         public string UserCountry { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime UserBirthDate { get; set; }
         public string UserGender { get; set; }
         public DateTime UserCreationDate { get; set; }

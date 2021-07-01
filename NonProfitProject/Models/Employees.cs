@@ -17,8 +17,8 @@ namespace NonProfitProject.Models
         public string Department { get; set; }
         public decimal Salary { get; set; }
         public DateTime HireDate { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
 
-        public ICollection<CommitteeMembers> committeeMembers { get; set; }
+        public CommitteeMembers committeeMember { get; set; }
     }
 }
