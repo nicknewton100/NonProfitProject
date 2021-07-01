@@ -23,7 +23,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
         //Shows Dashboard 1
         public IActionResult Dashboard1()
         {
-            return View();
+            var employees = context.Employees.ToList();
+            return View(employees);
         }
         //Shows Dashboard 2
         public IActionResult Dashboard2()

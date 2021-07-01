@@ -41,15 +41,15 @@ namespace NonProfitProject.Models
                 EventStartDate = new DateTime(2022, 03, 01, 0, 0, 0),
                 EventEndDate = new DateTime(2022, 03, 30, 0, 0, 0),
                 EventName = "Triathon",
-                EventDescription = "Fun event coming soon!"
+                EventDescription = "Biking, Swimming, and Running"
             },
             new Event
             {
                 EventID = 3,
                 EventStartDate = new DateTime(2022, 05, 01, 0, 0, 0),
                 EventEndDate = new DateTime(2022, 05, 05, 0, 0, 0),
-                EventName = "Five days of Help",
-                EventDescription = "Fun event coming soon!"
+                EventName = "Movie Night",
+                EventDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks!"
             }
             );
             //Sets relationships for User
