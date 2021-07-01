@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using NonProfitProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
@@ -23,7 +24,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         //Shows Dashboard 1
         public IActionResult Dashboard1()
         {
-            var employees = context.Employees.ToList();
+            var employees = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).ToList();
             return View(employees);
         }
         //Shows Dashboard 2

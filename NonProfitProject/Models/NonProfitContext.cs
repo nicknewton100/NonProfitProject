@@ -136,7 +136,7 @@ namespace NonProfitProject.Models
                 .HasForeignKey(DonationRecipts => DonationRecipts.PaymentID);
             //sets relationship between employees and Committee Memebers
             builder.Entity<Employees>()
-                .HasOne(e => e.committeeMember)
+                .HasOne(e => e.CommitteeMembers)
                 .WithOne(cm => cm.employee)
                 .HasForeignKey<CommitteeMembers>(cm => cm.EmpID)
                 .HasPrincipalKey<Employees>(e => e.EmpID);
