@@ -21,12 +21,25 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             this.context = context;
         }
-        //Shows Dashboard 1
-        public IActionResult Dashboard1()
+        //Shows Employees Table List
+        public IActionResult EmployeeTable()
         {
             var employees = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).ToList();
             return View(employees);
         }
+
+        //Shows Users Table List
+        public IActionResult UserTable()
+        {
+            return View();
+        }
+
+        //Show Committee Members Table List
+        public IActionResult CommitteeTable()
+        {
+            return View();
+        }
+
         //Shows Dashboard 2
         public IActionResult Dashboard2()
         {

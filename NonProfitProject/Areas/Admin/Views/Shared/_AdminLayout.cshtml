@@ -50,7 +50,18 @@
                 <a class="nav-link text-white" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard1">Users</a>
+                <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link text-white">Users</a>
+                <ul class="collapse list-unstyled" id="userSubmenu">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="EmployeeTable">Employees</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="UserTable">Other Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="CommitteeTable">Committees</a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard2">Calendar Events</a>
@@ -80,6 +91,5 @@
             &copy; 2021 - BANK'D Tech Solutions - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-
 </body>
 </html>
