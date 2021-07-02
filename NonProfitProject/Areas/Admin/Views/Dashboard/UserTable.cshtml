@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Users List";
+    Layout = "_AdminLayout";
+}
+
+<div class="container">
+    <div class="card-header-pills"><h1 class="fas fa-users"> Users</h1></div>
+    <div class="row justify-content-lg-center text-center">
+        <div class="nav-item">
+            <a class="nav-link col-2 fas fa-arrow-alt-circle-left text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="CommitteeTable"></a>
+        </div>
+        
+        <div class="col-6"><h3>Other Users</h3></div>
+        <div class="nav-item">
+            <a class="nav-link col-2 fas fa-arrow-alt-circle-right text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="EmployeeTable"></a>
+        </div>
+        
+    </div>
+
+    <br />
+    <div class="row justify-content-lg-center text-center">
+        <button class="btn btn-outline-dark">
+            Add User
+        </button>
+    </div>
+    <br />
+
+
+    <div class="container" style="font-size:small;">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Address1</th>
+                    <th scope="col">Address2</th>
+                    <th scope="col">City</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Zip Code</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Telephone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>#</th>
+                    <th>First</th>
+                    <th>Last</th>
+                    <th>Email Address</th>
+                    <th>Address1</th>
+                    <th>Address2</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
+                    <th>Country</th>
+                    <th>Telephone</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
