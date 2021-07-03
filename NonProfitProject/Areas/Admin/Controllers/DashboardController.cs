@@ -24,6 +24,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         //Shows Employees Table List
         public IActionResult EmployeeTable()
         {
+            //queries employee information
             var employees = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).ToList();
             return View(employees);
         }
@@ -31,7 +32,9 @@ namespace NonProfitProject.Areas.Admin.Controllers
         //Shows Users Table List
         public IActionResult UserTable()
         {
-            return View();
+            //queries users that are not in the employee table
+            var users = context.Users.Where(u => !context.Employees.Any(e => u.Id == e.UserID)).ToList();
+            return View(users);
         }
 
         //Show Committee Members Table List
@@ -43,6 +46,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         //Shows Dashboard 2
         public IActionResult Dashboard2()
         {
+            //queries event information 
             var events = context.Events.ToList();
             return View(events);
         }

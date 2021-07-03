@@ -1,6 +1,8 @@
-﻿@{
+﻿@model List<User>
+@{
     ViewData["Title"] = "Users List";
     Layout = "_AdminLayout";
+    int userCount = 1;
 }
 
 <div class="container">
@@ -44,19 +46,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>#</th>
-                    <th>First</th>
-                    <th>Last</th>
-                    <th>Email Address</th>
-                    <th>Address1</th>
-                    <th>Address2</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Zip Code</th>
-                    <th>Country</th>
-                    <th>Telephone</th>
-                </tr>
+                @foreach (User user in Model)
+                {
+                    <tr>
+                        <th scope="row">@userCount</th>
+                        <th>@user.UserFirstName</th>
+                        <th>@user.UserLastName</th>
+                        <th>@user.Email</th>
+                        <th>@user.UserAddr1</th>
+                        <th>@user.UserAddr2</th>
+                        <th>@user.UserCity</th>
+                        <th>@user.UserState</th>
+                        <th>@user.UserPostalCode</th>
+                        <th>@user.UserCountry</th>
+                        <th>@user.PhoneNumber</th>
+                    </tr>
+                    userCount += 1;
+                }
             </tbody>
         </table>
     </div>
