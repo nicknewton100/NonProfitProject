@@ -29,6 +29,11 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View(employees);
         }
 
+        public IActionResult AddUser()
+        {
+            return View();
+        }
+
         //Shows Users Table List
         public IActionResult UserTable()
         {
