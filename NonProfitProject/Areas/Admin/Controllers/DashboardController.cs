@@ -42,14 +42,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             return View();
         }
-
-        //Shows Dashboard 2
-        public IActionResult Dashboard2()
-        {
-            //queries event information 
-            var events = context.Events.ToList();
-            return View(events);
-        }
         //Shows Dashboard 3
         public IActionResult Dashboard3()
         {
