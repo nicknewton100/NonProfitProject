@@ -32,13 +32,13 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddEvent(Event model)
+        public IActionResult AddEvent(Event model)
         {
             if (ModelState.IsValid)
             {
-                var result = context.Events.Add(model);
+                context.Events.Add(model);
                 context.SaveChanges();
-                TempData["EventChanges"] = String.Format("The Event {0} has been added", model.EventName);
+                TempData["EventChanges"] = String.Format("The Event \"{0}\" has been added", model.EventName);
                 return RedirectToAction("Index");
             }
             return View();
@@ -49,7 +49,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var Event = context.Events.Find(id);
             context.Remove(Event);
             context.SaveChanges();
-            TempData["EventChanges"] = String.Format("The Event {0} has been deleted", Event.EventName);
+            TempData["EventChanges"] = String.Format("The Event \"{0}\" has been deleted", Event.EventName);
             return RedirectToAction("Index");
         }
 
