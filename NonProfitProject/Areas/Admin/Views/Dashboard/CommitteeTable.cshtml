@@ -1,63 +1,110 @@
-﻿@{
+﻿@model List<Committees> 
+@{
     ViewData["Title"] = "Committtee Members List";
     Layout = "_AdminLayout";
 }
 
 <div class="container">
-    <div class="card-header-pills"><h1 class="fas fa-users"> Users</h1></div>
-    <div class="row justify-content-lg-center text-center">
-        <div class="nav-item">
-            <a class="nav-link col-2 fas fa-arrow-alt-circle-left text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="EmployeeTable"></a>
-        </div>
-        
-        <div class="col-6"><h3>Committe Members</h3></div>
-        <div class="nav-item">
-            <a class="nav-link col-2 fas fa-arrow-alt-circle-right text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="UserTable"></a>
-        </div>
-        
-    </div>
-
-    <br />
-    <div class="row justify-content-lg-center text-center">
-        <button class="btn btn-outline-dark">
-            Add Committee Member
-        </button>
+    <div class="container">
+        <div class="card-header-pills"><h1 class="fas fa-users"> Board Committees</h1></div>
     </div>
     <br />
 
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <!--EVENTS AND PLANNING COMMITTEE-->
+            <div class="card w-25">
+                <a class="card-header fas fa-comment-dollar btn btn-outline-dark" asp-area="" asp-controller="" asp-action="#" style="font-size: xx-large; border:none"></a>
+                <div class="card-body">
+                    <h3 class="card-title text-center">Planning Committee</h3>
+                    <div style="font-size:small;">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>1</th>
+                                    <th>Danny</th>
+                                    <th>Short</th>
+                                </tr>
+                                <tr>
+                                    <th>2</th>
+                                    <th>Jane</th>
+                                    <th>Doe</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-    <div class="container" style="font-size:small;">
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Email Address</th>
-                    <th scope="col">Address1</th>
-                    <th scope="col">Address2</th>
-                    <th scope="col">City</th>
-                    <th scope="col">State</th>
-                    <th scope="col">Zip Code</th>
-                    <th scope="col">Country</th>
-                    <th scope="col">Telephone</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>#</th>
-                    <th>First</th>
-                    <th>Last</th>
-                    <th>Email Address</th>
-                    <th>Address1</th>
-                    <th>Address2</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Zip Code</th>
-                    <th>Country</th>
-                    <th>Telephone</th>
-                </tr>
-            </tbody>
-        </table>
+            <!--FUNDRAISING COMMITTEE-->
+            <div class="card w-50">
+                <a class="card-header fas fa-user-edit btn btn-outline-dark" asp-area="" asp-controller="" asp-action="#" style="font-size: xx-large; border:none"></a>
+                <div class="card-body">
+                    <h3 class="card-title text-center">Fundraising Committee</h3>
+                    <div style="font-size:small;">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>1</th>
+                                    <th>Joe</th>
+                                    <th>Young</th>
+                                </tr>
+                                <tr>
+                                    <th>2</th>
+                                    <th>Gambi</th>
+                                    <th>White</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!--NEWS COMMITTEE-->
+            <div class="card w-25">
+                <a class="card-header far fa-newspaper btn btn-outline-dark" asp-area="" asp-controller="" asp-action="#" style="font-size: xx-large; border:none"></a>
+                <div class="card-body">
+                    <h3 class="card-title text-center">News Committee</h3>
+                    <div style="font-size:small;">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>1</th>
+                                    <th>Tony</th>
+                                    <th>Stark</th>
+                                </tr>
+                                <tr>
+                                    <th>2</th>
+                                    <th>Bruce</th>
+                                    <th>Banner</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
 </div>
