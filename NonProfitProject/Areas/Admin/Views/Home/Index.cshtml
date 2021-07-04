@@ -1,4 +1,5 @@
-﻿@{
+﻿@Model
+@{
     ViewData["Title"] = "Profile";
     Layout = "_AdminLayout";
 }
@@ -11,61 +12,80 @@
     
     <!--ICONS TO LINK TO THE OTHER PART OF THE ADMINISTRATION DASHBOARDS-->
     <div class="row justify-content-md-center">
-        <a class="card w-25 btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="" asp-controller="Home" asp-action="Index">
             <!--WEBSITE ICON AND LINK TO THE THE HOMEPAGE WEBSITE-->
             <h1 class="card-header fas fa-laptop-code"></h1>
             <div class="card-body">
-                <h5 class="card-title">Websites</h5>
-                <p class="card-text">Go to Home page of the website</p>
+                <h3 class="card-title">Websites</h3>
+                <p class="card-text">View the homepage of the website</p>
             </div>
         </a>
 
-        <a class="card w-25 btn btn-outline-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard2">
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard2">
             <!--EVENTS ICON AND LINK TO THE TABLE OF THE CALENDAR EVENTS-->
             <h1 class="card-header far fa-calendar-alt"></h1>
             <div class="card-body">
-                <h5 class="card-title">Events</h5>
-                <p class="card-text">Go to...</p>
+                <h3 class="card-title">Events</h3>
+                <p class="card-text">View the list of events on the calendar</p>
             </div>
         </a>
 
-        <a class="card w-25 btn btn-outline-dark" asp-area="Admin" asp-controller="Reports" asp-action="Index">
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Admin" asp-controller="Reports" asp-action="Index">
             <!--REPORTS ICON AND LINK TO THE SECTION TO CREATE REPORTS-->
             
             <h1 class="card-header far fa-flag"></h1>
             <div class="card-body">
-                <h5 class="card-title">Reports</h5>
-                <p class="card-text">Go to...</p>
+                <h3 class="card-title">Reports</h3>
+                <p class="card-text">Create and download reports</p>
             </div>
         </a>
     </div>
     <div class="row"><br /></div>
     <div class="row justify-content-md-center">
-        <a class="card w-25 btn btn-outline-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="EmployeeTable">
-            <!--USERS ICOND AND LINK TO THE LIST OF USERS (DONORS, MEMBERS,AND EMPLOYEES) TO DELETE, ADD, EDIT OR UPDATE-->
-            
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Admin" asp-controller="Dashboard" asp-action="UserTable">
+            <!--USERS ICON AND LINK TO THE LIST OF USERS (DONORS AND MEMBERS) TO DELETE, ADD, EDIT OR UPDATE-->
+
+            <h1 class="card-header fas fa-user"></h1>
+            <div class="card-body">
+                <h3 class="card-title">Users</h3>
+                <p class="card-text">Go to...</p>
+            </div>
+        </a>
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Admin" asp-controller="Dashboard" asp-action="EmployeeTable">
+            <!--EMPLOYEES ICON AND LINK TO THE LIST OF EMPLOYEES TO DELETE, ADD, EDIT OR UPDATE-->
+
             <h1 class="card-header fas fa-users"></h1>
             <div class="card-body">
-                <h5 class="card-title">Users</h5>
+                <h3 class="card-title">Employees</h3>
                 <p class="card-text">Go to...</p>
             </div>
         </a>
-        <a class="card w-25 btn btn-outline-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard3">
-            <!--COMMITTEE ICON AND LINK TO THE LIST OF COMMITTEE GROUPS TO ADD, DELETE OR UPDATE THE LIST OF USERS IN THE COMMITTTEE-->
-            <h1 class="card-header far fa-id-card"></h1>
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Admin" asp-controller="Dashboard" asp-action="CommitteeTable">
+            <!--BOARD COMMITTEES ICON AND LINK TO THE LIST OF COMMITTEES TO DELETE, ADD, EDIT OR UPDATE-->
+
+            <h1 class="card-header fas fa-users"></h1>
             <div class="card-body">
-                <h5 class="card-title">Edit Web Pages</h5>
+                <h3 class="card-title">Board Committees</h3>
                 <p class="card-text">Go to...</p>
             </div>
         </a>
+
     </div>
     <div class="row"><br /></div>
-    <div class="row justify-content-md-center" >
-        <a class="card w-25 btn btn-outline-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">
+    <div class="row justify-content-md-center">
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard3">
+            <!--COMMITTEE ICON AND LINK TO THE LIST OF COMMITTEE GROUPS TO ADD, DELETE OR UPDATE THE LIST OF USERS IN THE COMMITTTEE-->
+            <h1 class="card-header fas fa-edit"></h1>
+            <div class="card-body">
+                <h3 class="card-title">Edit Web Pages</h3>
+                <p class="card-text">Go to...</p>
+            </div>
+        </a>
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Admin" asp-controller="Home" asp-action="Index">
             <!--HELP DESK ICON AND LINK TO HELP SECTION WITH HELP DOCUMENTS AND CONTACT LINK TO EMAIL THE HELP-->
             <h1 class="card-header fas fa-info-circle"></h1>
             <div class="card-body">
-                <h5 class="card-title">Help Desk</h5>
+                <h3 class="card-title">Help Desk</h3>
                 <p class="card-text">Go to...</p>
             </div>
         </a>

@@ -28,9 +28,8 @@
     <!--TOP NAV FOR ADMIN VIEW-->
     <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
         <div class="container">
-            <div>
-            </div>
-            <div>
+            <div></div>
+            <div class="text-right">
                 <form method="post" asp-area="" asp-action="Logout" asp-controller="Account">
                     <button type="submit" class="btn btn-dark">Logout</button>
                 </form>
@@ -45,24 +44,24 @@
                     <img src="~/img/BankdLogoRev1.png" alt="Bank'd Tech Solutions" width="125" height="35" />
                 </a>
             </li>
-
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Home</a>
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Home" asp-action="Index">Main Dashboard</a>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="UserTable">Users</a>
             </li>
             <li class="nav-item">
-                <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link text-white">Users</a>
-                <ul class="collapse list-unstyled" id="userSubmenu">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="EmployeeTable">Employees</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="UserTable">Other Users</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="CommitteeTable">Committees</a>
-                    </li>
-                </ul>
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="EmployeeTable">Employees</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="CommitteeTable">Board Committees</a>
+            </li>
+            @*<li class="nav-item">
+            <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link text-white">Employees</a>
+            <ul class="collapse list-unstyled" id="userSubmenu">
+            </ul>
+        </li>*@
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard2">Calendar Events</a>
             </li>
@@ -75,6 +74,7 @@
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Admin" asp-controller="Reports" asp-action="Index">Reports</a>
             </li>
+            <li class="dropdown-divider"></li>
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Admin" asp-controller="Profile" asp-action="Index">Profile</a>
             </li>
