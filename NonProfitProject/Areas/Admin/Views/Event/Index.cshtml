@@ -34,10 +34,17 @@
                         <th>
                             <button class="btn btn-dark">Edit</button>
                         </th>
+                        <th>
+                            <form method="post" asp-action="delete" asp-route-id="@events.EventID">
+                                <button type="submit" class="btn btn-dark">delete</button>
+                            </form>
+                        </th>
                     </tr>
                 }
             </tbody>
         </table>
+        <br />
+        <h4>@TempData["EventChanges"]?.ToString()</h4>
     </div>
 </div>
 

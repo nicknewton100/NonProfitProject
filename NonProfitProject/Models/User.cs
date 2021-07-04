@@ -21,6 +21,7 @@ namespace NonProfitProject.Models
         public string UserCountry { get; set; }
 
         [DataType(DataType.Date)]
+        [Column(TypeName = "date")]
         public DateTime UserBirthDate { get; set; }
         public string UserGender { get; set; }
         public DateTime UserCreationDate { get; set; }
