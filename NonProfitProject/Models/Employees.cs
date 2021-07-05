@@ -14,10 +14,13 @@ namespace NonProfitProject.Models
         public string EmpID { get; set; }
         public string UserID { get; set; }
         public User User { get; set; }
-        public string Department { get; set; }
+        public string Position { get; set; }
+        [DataType(DataType.Currency)]
         public decimal Salary { get; set; }
         public DateTime HireDate { get; set; }
         public DateTime? ReleaseDate { get; set; }
+        public bool FinishedAccountSetup { get; set; }
+
 
         public CommitteeMembers CommitteeMembers { get; set; }
     }

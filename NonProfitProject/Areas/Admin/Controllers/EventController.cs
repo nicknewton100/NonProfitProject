@@ -11,6 +11,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
+    [Route("[area]/[controller]s/[action]/{id?}")]
 
     public class EventController : Controller
     {
@@ -19,7 +20,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             this.context = context;
         }
-        //Shows Dashboard 2
+        //Shows Events
+        [Route("~/[area]/[controller]s")]
         public IActionResult Index()
         {
             //queries event information 

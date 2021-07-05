@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NonProfitProject.Models;
 
 namespace NonProfitProject.Migrations
 {
     [DbContext(typeof(NonProfitContext))]
-    partial class NonProfitContextModelSnapshot : ModelSnapshot
+    [Migration("20210705182953_addedAccountDisabledToUser")]
+    partial class addedAccountDisabledToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,21 +212,21 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             CommitteesID = 1,
-                            CommitteeCreationDate = new DateTime(2021, 7, 5, 19, 17, 34, 360, DateTimeKind.Utc).AddTicks(236),
+                            CommitteeCreationDate = new DateTime(2021, 7, 5, 18, 29, 52, 898, DateTimeKind.Utc).AddTicks(6417),
                             CommitteeDescription = "Manages donations/membership dues",
                             CommitteeName = "Fundrasing Committee"
                         },
                         new
                         {
                             CommitteesID = 2,
-                            CommitteeCreationDate = new DateTime(2021, 7, 5, 19, 17, 34, 360, DateTimeKind.Utc).AddTicks(759),
+                            CommitteeCreationDate = new DateTime(2021, 7, 5, 18, 29, 52, 898, DateTimeKind.Utc).AddTicks(6929),
                             CommitteeDescription = "Manages news on the website",
                             CommitteeName = "News Committee"
                         },
                         new
                         {
                             CommitteesID = 3,
-                            CommitteeCreationDate = new DateTime(2021, 7, 5, 19, 17, 34, 360, DateTimeKind.Utc).AddTicks(769),
+                            CommitteeCreationDate = new DateTime(2021, 7, 5, 18, 29, 52, 898, DateTimeKind.Utc).AddTicks(6939),
                             CommitteeDescription = "Plans and organizes events",
                             CommitteeName = "Event and Planning Committee"
                         });
@@ -291,9 +293,7 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("HireDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getUTCDate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Position")
                         .HasColumnType("nvarchar(max)");

@@ -31,7 +31,7 @@ namespace NonProfitProject.Models
                 {
                     EmpID = "1",
                     UserID = "6b87b89f-0f9a-4e2d-b696-235e99655521",
-                    Department = "Finance",
+                    Position = "Accountant",
                     Salary = 54000,
                     HireDate = new DateTime(2020, 02, 04, 11, 14, 0),
                     ReleaseDate = null
@@ -68,7 +68,7 @@ namespace NonProfitProject.Models
                     CommitteeMbrID = 1,
                     EmpID = "1",
                     CommitteeID = 1,
-                    CommitteePosition = "Committee Manager"
+                    CommitteePosition = "Committee President"
                 }
                 );
             //creates data for Event table
@@ -118,6 +118,13 @@ namespace NonProfitProject.Models
             builder.Entity<User>()
                 .Property(u => u.ReceiveWeeklyNewsletter)
                 .HasDefaultValue(false);
+            //set default value for AccountDisabled
+            builder.Entity<User>()
+                .Property(u => u.AccountDisabled)
+                .HasDefaultValue(false);
+            builder.Entity<Employees>()
+                .Property(e => e.HireDate)
+                .HasDefaultValueSql("getUTCDate()");
             //sets relationships between Donation receipts and Membership dues
             builder.Entity<DonationReceipts>()
                 .HasOne(dr => dr.membershipDues)
