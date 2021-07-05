@@ -1,4 +1,13 @@
-﻿let calendarEl = document.getElementById('calendar');
+﻿let eventsArr = [];
+
+/*for (let tr of trElems) {
+    let tdElems = tr.getElementByTagName("td");
+    let eventObj = {
+        
+    }
+}*/
+
+let calendarEl = document.getElementById('calendar');
 
 let calendar = new FullCalendar.Calendar(calendarEl, {
     initalView: 'dayGridMonth',
@@ -7,12 +16,7 @@ let calendar = new FullCalendar.Calendar(calendarEl, {
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    events: [
-        {
-            title: "Calendar Created",
-            start: "2021-06-26",
-        },
-    ],
+    events: eventsArr,
 });
 
 calendar.render();

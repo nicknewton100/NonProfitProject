@@ -16,6 +16,11 @@ namespace NonProfitProject.Controllers
 
         public IActionResult Calendar()
         {
+            ViewData["events"] = new[]
+            {
+                new Event {
+                }
+            };
             return View();
         }
     }
