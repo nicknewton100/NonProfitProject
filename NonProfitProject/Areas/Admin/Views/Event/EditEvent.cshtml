@@ -1,6 +1,6 @@
 ﻿@model Event
 @{
-    ViewData["Title"] = "Add Event";
+    ViewData["Title"] = ViewBag.Action + " Event";
     Layout = "_AdminLayout";
 }
 
@@ -10,7 +10,7 @@
             <div class="card-header"><h1>@ViewData["Title"]</h1></div>
             <div class="card-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <form method="post" asp-action="AddEvent">
+                <form method="post" asp-action="EditEvent">
                     <div class="form-group row">
                         <!--EVENT NAME-->
                         <div class="col-sm-3"><label>Event Name</label></div>
@@ -43,8 +43,9 @@
                             <textarea asp-for="EventDescription" class="form-control" rows="5"></textarea>
                         </div>
                     </div>
+                    <input type="hidden" asp-for="EventID" />
                     <button type="submit" class="btn btn-dark">Submit</button>
-                    <a asp-area="Admin" asp-controller="Event" asp-action="Index" class="btn btn-outline-dark">Cancel</a>                   
+                    <a asp-area="Admin" asp-controller="Event" asp-action="Index" class="btn btn-outline-dark">Cancel</a>
                 </form>
                 
             </div>

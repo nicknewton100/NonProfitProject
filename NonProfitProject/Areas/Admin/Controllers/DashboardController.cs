@@ -21,32 +21,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             this.context = context;
         }
-        //Shows Employees Table List
-        public IActionResult EmployeeTable()
-        {
-            //queries employee information
-            var employees = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).ToList();
-            return View(employees);
-        }
-
-        public IActionResult AddUser()
-        {
-            return View();
-        }
-
-        //Shows Users Table List
-        public IActionResult UserTable()
-        {
-            //queries users that are not in the employee table
-            var users = context.Users.Where(u => !context.Employees.Any(e => u.Id == e.UserID)).ToList();
-            return View(users);
-        }
-
-        //Show Committee Members Table List
-        public IActionResult CommitteeTable()
-        {
-            return View();
-        }
         //Shows Dashboard 3
         public IActionResult Dashboard3()
         {
