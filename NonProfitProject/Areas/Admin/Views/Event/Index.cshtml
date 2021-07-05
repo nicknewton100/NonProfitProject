@@ -25,21 +25,23 @@
             <tbody>
                 @foreach (Event events in Model)
                 {
-                    <tr>
-                        <th scope="row" hidden>@events.EventID </th>
-                        <th>@events.EventStartDate.ToShortDateString()</th>
-                        <th>@events.EventEndDate.ToShortDateString()</th>
-                        <th>@events.EventName</th>
-                        <th>@events.EventDescription</th>
-                        <th>
-                            <button class="btn btn-dark">Edit</button>
-                        </th>
-                        <th>
-                            <form method="post" asp-action="delete" asp-route-id="@events.EventID">
-                                <button type="submit" class="btn btn-dark">delete</button>
-                            </form>
-                        </th>
-                    </tr>
+                <tr>
+                    <th scope="row" hidden>@events.EventID </th>
+                    <th>@events.EventStartDate.ToShortDateString()</th>
+                    <th>@events.EventEndDate.ToShortDateString()</th>
+                    <th>@events.EventName</th>
+                    <th>@events.EventDescription</th>
+                    <th>
+                        <form method="get" asp-action="EditEvent" asp-route-id="@events.EventID">
+                            <button type="submit" class="btn btn-dark">Edit</button>
+                        </form>
+                    </th>
+                    <th>
+                        <form method="post" asp-action="delete" asp-route-id="@events.EventID">
+                            <button type="submit" class="btn btn-dark">delete</button>
+                        </form>
+                    </th>
+                </tr>
                 }
             </tbody>
         </table>
