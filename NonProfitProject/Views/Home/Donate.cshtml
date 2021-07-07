@@ -3,35 +3,45 @@
     Layout = "_HomePage";
 }
 
+<script type="text/javascript">
+    function selectBtn(IDS) {
+    var sel = document.getElementById('DIVbtns').getElementsByTagName('div');
+    for (var i = 0; i < sel.length; i++) {
+        sel[i].style.backgroundColor = "";
+    }
+        document.getElementById(IDS).style.backgroundColor = '#007bff';
+        document.getElementById(IDS).style.color = 'white';
+    }
+</script>
 
 
 <div class="container-fluid" style="padding:0 5rem">
     <div class=" container">
         <h4 class="text-center">Please select your donation amount...</h4>
-        <div class="row justify-content-center text-center">
+        <div id="DIVbtns" class="row justify-content-center text-center">
             <div class="col-sm-2">
                 <div class="card" style="margin:15px 0;">
-                    <button class="btn btn-outline-primary example" style="font-size:50px">$50</button>
+                    <button id="button1" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this.id)">$50</button>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="card" style="margin:15px 0;">
-                    <button class="btn btn-outline-primary example" style="font-size:50px">$100</button>
+                    <button id="button2" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this.id)">$100</button>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="card" style="margin:15px 0;">
-                    <button class="btn btn-outline-primary example" style="font-size:50px">$150</button>
+                    <button id="button3" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this.id)">$150</button>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="card" style="margin:15px 0;">
-                    <button class="btn btn-outline-primary example" style="font-size:50px">$500</button>
+                    <button id="button4" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this.id)">$500</button>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="card" style="margin:15px 0;">
-                    <button class="btn btn-outline-primary example" style="font-size:50px">$1000</button>
+                    <button id="button5" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this.id)">$1000</button>
                 </div>
             </div>
         </div>
