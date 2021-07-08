@@ -20,12 +20,8 @@
                     <th scope="col">First</th>
                     <th scope="col">Last</th>
                     <th scope="col">Email Address</th>
-                    <th scope="col">Address1</th>
-                    <th scope="col">Address2</th>
-                    <th scope="col">City</th>
-                    <th scope="col">State</th>
-                    <th scope="col">Zip Code</th>
-                    <th scope="col">Country</th>
+                    <th scope="col">Hire Date</th>
+                    <th scope="col">Position</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -37,13 +33,12 @@
                         <th>@empl.User.UserFirstName</th>
                         <th>@empl.User.UserLastName</th>
                         <th>@empl.User.Email</th>
-                        <th>@empl.User.UserAddr1</th>
-                        <th>@empl.User.UserAddr2</th>
-                        <th>@empl.User.UserCity</th>
-                        <th>@empl.User.UserState</th>
-                        <th>@empl.User.UserPostalCode</th>
-                        <th>@empl.User.UserCountry</th>
-                        <th><button class="btn btn-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="">Detail</button></th>
+                        <th>@empl.HireDate</th>
+                        <th>@empl.Position</th>
+                        <th>
+                            <button class="btn btn-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="">Detail</button>
+                            <button class="btn btn-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="">Delete</button>
+                        </th>
                     </tr>
                 }
             </tbody>
