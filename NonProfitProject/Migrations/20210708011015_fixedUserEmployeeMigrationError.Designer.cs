@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NonProfitProject.Models;
 
 namespace NonProfitProject.Migrations
 {
     [DbContext(typeof(NonProfitContext))]
-    partial class NonProfitContextModelSnapshot : ModelSnapshot
+    [Migration("20210708011015_fixedUserEmployeeMigrationError")]
+    partial class fixedUserEmployeeMigrationError
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
