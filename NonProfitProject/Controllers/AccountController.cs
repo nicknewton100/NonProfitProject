@@ -61,7 +61,7 @@ namespace NonProfitProject.Controllers
                         }
                         else
                         {
-                          return RedirectToAction("Index", "Home");
+                          return RedirectToAction("UserIndex", "Home");
                         }
                     }
                 }
