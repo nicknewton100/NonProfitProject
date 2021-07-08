@@ -25,6 +25,41 @@ namespace NonProfitProject.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            //creates employee for user --seeded so there isnt an error in the migration files  when updating database
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "370d9876-b6ab-4694-baa9-ecc7bc5b451c",
+                Name = "Employee",
+                NormalizedName = "EMPLOYEE"
+            });
+            var hasher = new PasswordHasher<User>();
+            builder.Entity<User>().HasData(
+                new User
+                {
+                    Id = "6b87b89f-0f9a-4e2d-b696-235e99655521",
+                    UserName = "JohnJones",
+                    Email = "JohnJones@gmail.com",
+                    UserFirstName = "John",
+                    UserLastName = "Jones",
+                    UserAddr1 = "513 S Augusta St",
+                    UserCity = "Greenville",
+                    UserState = "South Carolina",
+                    UserCountry = "United States Of America",
+                    UserPostalCode = 29607,
+                    UserGender = "Male",
+                    UserBirthDate = new DateTime(1987, 6, 13),
+                    UserActive = true,
+                    ReceiveWeeklyNewsletter = false,
+                    PasswordHash = hasher.HashPassword(null, "JohnJones123")
+                });
+            builder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "370d9876-b6ab-4694-baa9-ecc7bc5b451c",
+                    UserId = "6b87b89f-0f9a-4e2d-b696-235e99655521"
+                });
+
             //creates data for employees
             builder.Entity<Employees>().HasData(
                 new Employees
@@ -242,7 +277,7 @@ namespace NonProfitProject.Models
             UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
             RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            if (await userManager.FindByNameAsync("JohnJones") == null)
+            /*if (await userManager.FindByNameAsync("JohnJones") == null)
             {
                 User user = new User
                 {
@@ -266,7 +301,7 @@ namespace NonProfitProject.Models
                 {
                     await userManager.AddToRoleAsync(user, "Employee");
                 }
-            }
+            }*/
             if (await userManager.FindByNameAsync("KarenSmith") == null)
             {
                 User user = new User

@@ -64,12 +64,7 @@ namespace NonProfitProject.Migrations
                     { 1, new DateTime(2021, 7, 1, 17, 38, 23, 164, DateTimeKind.Utc).AddTicks(7349), "Manages donations/membership dues", "Fundrasing Committee" },
                     { 2, new DateTime(2021, 7, 1, 17, 38, 23, 164, DateTimeKind.Utc).AddTicks(7872), "Manages news on the website", "News Committee" },
                     { 3, new DateTime(2021, 7, 1, 17, 38, 23, 164, DateTimeKind.Utc).AddTicks(7882), "Plans and organizes events", "Event and Planning Committee" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Employees",
-                columns: new[] { "EmpID", "Department", "HireDate", "ReleaseDate", "Salary", "UserID" },
-                values: new object[] { "1", "Finance", new DateTime(2020, 2, 4, 11, 14, 0, 0, DateTimeKind.Unspecified), null, 54000m, "6b87b89f-0f9a-4e2d-b696-235e99655521" });
+                });         
 
             migrationBuilder.UpdateData(
                 table: "Events",
@@ -84,11 +79,6 @@ namespace NonProfitProject.Migrations
                 keyValue: 3,
                 columns: new[] { "EventDescription", "EventName" },
                 values: new object[] { "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks!", "Movie Night" });
-
-            migrationBuilder.InsertData(
-                table: "CommitteeMembers",
-                columns: new[] { "CommitteeMbrID", "CommitteeID", "CommitteePosition", "EmpID" },
-                values: new object[] { 1, 1, "Committee Manager", "1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CommitteeMembers_EmpID",
