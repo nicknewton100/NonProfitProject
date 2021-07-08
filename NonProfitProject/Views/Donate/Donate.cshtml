@@ -19,6 +19,8 @@
                     <button class="btn btn-outline-primary example" style="font-size:50px">$100</button>
                 </div>
             </div>
+        </div>
+        <div class="row justify-content-center text-center">
             <div class="col-sm-2">
                 <div class="card" style="margin:15px 0;">
                     <button class="btn btn-outline-primary example" style="font-size:50px">$150</button>
@@ -38,7 +40,7 @@
 
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-10">
+                <div class="col-5">
                     <div class="card">
                         <div class="card card-header">
                             <h3 class="fas fa-hand-holding-usd">  @ViewData["Title"]:  <span class="msg"></span></h3>
@@ -49,50 +51,21 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputFirstName">First Name</label>
-                                        <input type="text" class="form-control" id="inputFirstName" placeholder="First Name"/>
+                                        <input type="text" class="form-control" id="inputFirstName" placeholder="First Name" />
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputLastName">Last Name</label>
-                                        <input type="text" class="form-control" id="inputLastName" placeholder="Last Name"/>
+                                        <input type="text" class="form-control" id="inputLastName" placeholder="Last Name" />
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4">Email</label>
-                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email"/>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Password</label>
-                                        <input type="password" class="form-control" id="inputPassword4" placeholder="Password"/>
+                                <div class="row">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-primary" asp-action="Payment">Checkout</button>
+                                        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index">Cancel</a>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputAddress">Address</label>
-                                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputAddress2">Address 2</label>
-                                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"/>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputCity">City</label>
-                                        <input type="text" class="form-control" id="inputCity"/>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="inputState">State</label>
-                                        <input type="text" class="form-control" id="inputState" />
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="inputZip">Zip</label>
-                                        <input type="text" class="form-control" id="inputZip">
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Check Out</button>
                             </form>
                         </div>
-                        <!--Testing the payment view page-->
-                        <a class="btn btn-primary" asp-controller="Donate" asp-action="Payment">Payment</a>
                     </div>
                 </div>
             </div>
@@ -113,12 +86,6 @@
                 });
             });
         </script>
-    </div>
-
-    <div class="container">
-       
-        
-        
     </div>
 </div>
 
