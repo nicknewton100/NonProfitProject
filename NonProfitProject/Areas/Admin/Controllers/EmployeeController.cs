@@ -88,6 +88,22 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteEmployeeAsync(string id)
+        {
+            var employee = context.Employees.Include(e => e.User).FirstOrDefault(e => e.EmpID == id);
+            context.Employees.Remove(employee);
+            var result = await userManager.DeleteAsync(employee.User);
+            if (result.Succeeded)
+            {
+                context.SaveChanges();
+                TempData["EmployeeChanges"] = String.Format("{0} has been deleted", employee.User.UserFirstName + " " + employee.User.UserLastName);
+                return RedirectToAction("Index");
+            }
+            TempData["EmployeeChanges"] = String.Format("An error has occured while trying to delete {0} from the database", employee.User.UserFirstName + " " + employee.User.UserLastName);
+            return View();
+            
+        }
 
     }
 }
