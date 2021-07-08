@@ -13,15 +13,18 @@ namespace NonProfitProject.Models
     {
         public NonProfitContext(DbContextOptions<NonProfitContext> options) : base(options) { }
 
-        public DbSet<PaymentInformation> PaymentInformation { get; set; }
-        public DbSet<DonationReceipts> DonationReceipts { get; set; }
-        public DbSet<MembershipDues> MembershipDues { get; set; }
-        public DbSet<Donations> Donations { get; set; }
         public DbSet<Employees> Employees { get; set; }
         public DbSet<CommitteeMembers> CommitteeMembers { get; set; }
         public DbSet<Committees> Committees { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<News> News { get; set; }
+        public DbSet<SavedPaymentInformation> SavedPayments { get; set; }
+        public DbSet<InvoicePayment> InvoicePayments { get; set; }
+        public DbSet<Donations> Donations { get; set; }
+        public DbSet<Receipts> Receipts { get; set; }
+        public DbSet<InvoiceDonorInformation> InvoiceDonorInformation { get; set; }
+        public DbSet<MembershipDues> MembershipDues { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -134,14 +137,14 @@ namespace NonProfitProject.Models
             }
             );
             //Sets relationships for User
-            builder.Entity<User>()
+            /*builder.Entity<User>()
                 .HasMany(u => u.payments)
                 .WithOne(u => u.user)
                 .HasForeignKey(p => p.UserID);
             builder.Entity<User>()
                 .HasMany(u => u.donationReceipts)
                 .WithOne(u => u.user)
-                .HasForeignKey(DonationRecipts => DonationRecipts.UserID);
+                .HasForeignKey(DonationRecipts => DonationRecipts.UserID);*/
             //sets default value for new users to the current date
             builder.Entity<User>()
                 .Property(u => u.UserCreationDate)
@@ -160,22 +163,7 @@ namespace NonProfitProject.Models
             builder.Entity<Employees>()
                 .Property(e => e.HireDate)
                 .HasDefaultValueSql("getUTCDate()");
-            //sets relationships between Donation receipts and Membership dues
-            builder.Entity<DonationReceipts>()
-                .HasOne(dr => dr.membershipDues)
-                .WithOne(x => x.DonationReceipts)
-                .HasForeignKey<DonationReceipts>(dr => dr.ReceiptDonationID)
-                .HasPrincipalKey<MembershipDues>(x => x.MemDuesID);
-            //sets relationship between Donation and dontationreceipts
-            builder.Entity<DonationReceipts>()
-                .HasOne(dr => dr.donations)
-                .WithOne(x => x.donationReceipts)
-                .HasForeignKey<DonationReceipts>(dr => dr.ReceiptDonationID)
-                .HasPrincipalKey<Donations>(d => d.DonationID);
-            builder.Entity<PaymentInformation>()
-                .HasMany(dr => dr.donationRecipts)
-                .WithOne(pi => pi.paymentInformation)
-                .HasForeignKey(DonationRecipts => DonationRecipts.PaymentID);
+
             //sets relationship between employees and Committee Memebers
             builder.Entity<Employees>()
                 .HasOne(e => e.CommitteeMembers)
@@ -277,31 +265,6 @@ namespace NonProfitProject.Models
             UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
             RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            /*if (await userManager.FindByNameAsync("JohnJones") == null)
-            {
-                User user = new User
-                {
-                    Id = "6b87b89f-0f9a-4e2d-b696-235e99655521",
-                    UserName = "JohnJones",
-                    Email = "JohnJones@gmail.com",
-                    UserFirstName = "John",
-                    UserLastName = "Jones",
-                    UserAddr1 = "513 S Augusta St",
-                    UserCity = "Greenville",
-                    UserState = "South Carolina",
-                    UserCountry = "United States Of America",
-                    UserPostalCode = 29607,
-                    UserGender = "Male",
-                    UserBirthDate = new DateTime(1987, 6, 13),
-                    UserActive = true,
-                    ReceiveWeeklyNewsletter = false
-                };
-                var result = await userManager.CreateAsync(user, "JohnJones123");
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, "Employee");
-                }
-            }*/
             if (await userManager.FindByNameAsync("KarenSmith") == null)
             {
                 User user = new User

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using NonProfitProject.Models;
 
 namespace NonProfitProject.Models
 {
@@ -30,8 +31,10 @@ namespace NonProfitProject.Models
         public bool ReceiveWeeklyNewsletter { get; set; }
         public bool AccountDisabled { get;set; }
 
-        public ICollection<PaymentInformation> payments { get; set; }
-        public ICollection<DonationReceipts> donationReceipts { get; set; }
+        public ICollection<SavedPaymentInformation> SavedPayments { get; set; }
+        public ICollection<MembershipDues> MembershipDues { get; set; }
+        public ICollection<Donations> Donations { get; set; }
+        public ICollection<Receipts> Receipts { get; set; }
 
         [NotMapped]
         public IList<string> RoleNames { get; set; }

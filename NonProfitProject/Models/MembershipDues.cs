@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace NonProfitProject.Models
 {
@@ -11,14 +11,15 @@ namespace NonProfitProject.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string MemDuesID { get; set; }
-        public decimal MemDueAmount { get; set; }
+        public int MemDuesID { get; set; }
+        public string UserID { get; set; }
+        public User User { get; set; }
+        public int ReceiptID { get; set; }
+        public Receipts Receipt { get; set; }
+        public decimal MemAmount { get; set; }
         public DateTime MemStartDate { get; set; }
         public DateTime MemEndDate { get; set; }
         public DateTime MemRenewalDate { get; set; }
-        public char MemActive { get; set; }
-
-
-        public DonationReceipts DonationReceipts { get; set; }
+        public bool MemActive { get; set; }
     }
 }

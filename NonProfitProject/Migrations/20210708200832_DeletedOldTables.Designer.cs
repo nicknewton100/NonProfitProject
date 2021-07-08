@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NonProfitProject.Models;
 
 namespace NonProfitProject.Migrations
 {
     [DbContext(typeof(NonProfitContext))]
-    partial class NonProfitContextModelSnapshot : ModelSnapshot
+    [Migration("20210708200832_DeletedOldTables")]
+    partial class DeletedOldTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             Id = "370d9876-b6ab-4694-baa9-ecc7bc5b451c",
-                            ConcurrencyStamp = "3f80f121-13fa-4401-a1d8-14e9c7d8686e",
+                            ConcurrencyStamp = "4b7624c9-98d1-4c51-acea-f17fba081e9e",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -226,56 +228,24 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             CommitteesID = 1,
-                            CommitteeCreationDate = new DateTime(2021, 7, 8, 22, 3, 36, 939, DateTimeKind.Utc).AddTicks(8800),
+                            CommitteeCreationDate = new DateTime(2021, 7, 8, 20, 8, 31, 240, DateTimeKind.Utc).AddTicks(7034),
                             CommitteeDescription = "Manages donations/membership dues",
                             CommitteeName = "Fundrasing Committee"
                         },
                         new
                         {
                             CommitteesID = 2,
-                            CommitteeCreationDate = new DateTime(2021, 7, 8, 22, 3, 36, 939, DateTimeKind.Utc).AddTicks(9271),
+                            CommitteeCreationDate = new DateTime(2021, 7, 8, 20, 8, 31, 240, DateTimeKind.Utc).AddTicks(7502),
                             CommitteeDescription = "Manages news on the website",
                             CommitteeName = "News Committee"
                         },
                         new
                         {
                             CommitteesID = 3,
-                            CommitteeCreationDate = new DateTime(2021, 7, 8, 22, 3, 36, 939, DateTimeKind.Utc).AddTicks(9281),
+                            CommitteeCreationDate = new DateTime(2021, 7, 8, 20, 8, 31, 240, DateTimeKind.Utc).AddTicks(7512),
                             CommitteeDescription = "Plans and organizes events",
                             CommitteeName = "Event and Planning Committee"
                         });
-                });
-
-            modelBuilder.Entity("NonProfitProject.Models.Donations", b =>
-                {
-                    b.Property<int>("DonationID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("DonationAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("DonationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ReceiptID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("DonationID");
-
-                    b.HasIndex("ReceiptID")
-                        .IsUnique();
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("Donations");
                 });
 
             modelBuilder.Entity("NonProfitProject.Models.Employees", b =>
@@ -376,128 +346,6 @@ namespace NonProfitProject.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NonProfitProject.Models.InvoiceDonorInformation", b =>
-                {
-                    b.Property<int>("DonorInfoID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Addr1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Addr2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PostalCode")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReceiptID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DonorInfoID");
-
-                    b.HasIndex("ReceiptID")
-                        .IsUnique();
-
-                    b.ToTable("InvoiceDonorInformation");
-                });
-
-            modelBuilder.Entity("NonProfitProject.Models.InvoicePayment", b =>
-                {
-                    b.Property<int>("InvPaymentID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CVV")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CardNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CardType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CardholderName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ExpDate")
-                        .HasColumnType("Date");
-
-                    b.Property<int>("Last4Digits")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReceiptID")
-                        .HasColumnType("int");
-
-                    b.HasKey("InvPaymentID");
-
-                    b.HasIndex("ReceiptID")
-                        .IsUnique();
-
-                    b.ToTable("InvoicePayments");
-                });
-
-            modelBuilder.Entity("NonProfitProject.Models.MembershipDues", b =>
-                {
-                    b.Property<int>("MemDuesID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("MemActive")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("MemAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("MemEndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("MemRenewalDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("MemStartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ReceiptID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("MemDuesID");
-
-                    b.HasIndex("ReceiptID")
-                        .IsUnique();
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("MembershipDues");
-                });
-
             modelBuilder.Entity("NonProfitProject.Models.News", b =>
                 {
                     b.Property<int>("NewsID")
@@ -526,67 +374,6 @@ namespace NonProfitProject.Migrations
                     b.HasKey("NewsID");
 
                     b.ToTable("News");
-                });
-
-            modelBuilder.Entity("NonProfitProject.Models.Receipts", b =>
-                {
-                    b.Property<int>("ReceiptID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ReceiptID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("Receipts");
-                });
-
-            modelBuilder.Entity("NonProfitProject.Models.SavedPaymentInformation", b =>
-                {
-                    b.Property<int>("SavedPaymentID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CVV")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CardNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CardType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CardholderName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ExpDate")
-                        .HasColumnType("Date");
-
-                    b.Property<int>("Last4Digits")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("SavedPaymentID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("SavedPayments");
                 });
 
             modelBuilder.Entity("NonProfitProject.Models.User", b =>
@@ -712,14 +499,14 @@ namespace NonProfitProject.Migrations
                             Id = "6b87b89f-0f9a-4e2d-b696-235e99655521",
                             AccessFailedCount = 0,
                             AccountDisabled = false,
-                            ConcurrencyStamp = "14982664-8590-44de-bf48-2cda2f520118",
+                            ConcurrencyStamp = "c26c7630-920d-4764-b5c4-cc26062c1d9e",
                             Email = "JohnJones@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEPN8eGFKE3BwbIHi+xoPMGEdLwAXHzdARPl+k853Gtupe8RPKUR/d7R2X75tCUJRUw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENpqBlMuOoS1Z/stdg36Z3iox2uPqXnv8FWUWO+8LffSdbXSH6XY9NZbkhsgSx+m0Q==",
                             PhoneNumberConfirmed = false,
                             ReceiveWeeklyNewsletter = false,
-                            SecurityStamp = "58ba1345-e61d-4726-8227-04b8cddd6949",
+                            SecurityStamp = "392bdb75-a51f-4a4c-ae83-98f420fb66c8",
                             TwoFactorEnabled = false,
                             UserActive = true,
                             UserAddr1 = "513 S Augusta St",
@@ -805,84 +592,10 @@ namespace NonProfitProject.Migrations
                     b.Navigation("employee");
                 });
 
-            modelBuilder.Entity("NonProfitProject.Models.Donations", b =>
-                {
-                    b.HasOne("NonProfitProject.Models.Receipts", "Receipt")
-                        .WithOne("Donation")
-                        .HasForeignKey("NonProfitProject.Models.Donations", "ReceiptID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NonProfitProject.Models.User", "User")
-                        .WithMany("Donations")
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("Receipt");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("NonProfitProject.Models.Employees", b =>
                 {
                     b.HasOne("NonProfitProject.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("NonProfitProject.Models.InvoiceDonorInformation", b =>
-                {
-                    b.HasOne("NonProfitProject.Models.Receipts", "Receipt")
-                        .WithOne("InvoiceDonorInformation")
-                        .HasForeignKey("NonProfitProject.Models.InvoiceDonorInformation", "ReceiptID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Receipt");
-                });
-
-            modelBuilder.Entity("NonProfitProject.Models.InvoicePayment", b =>
-                {
-                    b.HasOne("NonProfitProject.Models.Receipts", "Receipt")
-                        .WithOne("InvoicePayment")
-                        .HasForeignKey("NonProfitProject.Models.InvoicePayment", "ReceiptID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Receipt");
-                });
-
-            modelBuilder.Entity("NonProfitProject.Models.MembershipDues", b =>
-                {
-                    b.HasOne("NonProfitProject.Models.Receipts", "Receipt")
-                        .WithOne("MembershipDue")
-                        .HasForeignKey("NonProfitProject.Models.MembershipDues", "ReceiptID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NonProfitProject.Models.User", "User")
-                        .WithMany("MembershipDues")
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("Receipt");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("NonProfitProject.Models.Receipts", b =>
-                {
-                    b.HasOne("NonProfitProject.Models.User", "User")
-                        .WithMany("Receipts")
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("NonProfitProject.Models.SavedPaymentInformation", b =>
-                {
-                    b.HasOne("NonProfitProject.Models.User", "User")
-                        .WithMany("SavedPayments")
                         .HasForeignKey("UserID");
 
                     b.Navigation("User");
@@ -896,28 +609,6 @@ namespace NonProfitProject.Migrations
             modelBuilder.Entity("NonProfitProject.Models.Employees", b =>
                 {
                     b.Navigation("CommitteeMembers");
-                });
-
-            modelBuilder.Entity("NonProfitProject.Models.Receipts", b =>
-                {
-                    b.Navigation("Donation");
-
-                    b.Navigation("InvoiceDonorInformation");
-
-                    b.Navigation("InvoicePayment");
-
-                    b.Navigation("MembershipDue");
-                });
-
-            modelBuilder.Entity("NonProfitProject.Models.User", b =>
-                {
-                    b.Navigation("Donations");
-
-                    b.Navigation("MembershipDues");
-
-                    b.Navigation("Receipts");
-
-                    b.Navigation("SavedPayments");
                 });
 #pragma warning restore 612, 618
         }
