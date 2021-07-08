@@ -18,7 +18,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
     {
         private NonProfitContext context;
         private UserManager<User> userManager;
-        //private SignInManager<User> SignInManager; //Not in use
+        private SignInManager<User> SignInManager;
 
         public EmployeeController(NonProfitContext context, UserManager<User> userManager)
         {

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Donation";
+    ViewData["Title"] = "Donate";
     Layout = "_HomePage";
 }
 
@@ -31,6 +31,8 @@
                     <button id="button2" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this.id)">$100</button>
                 </div>
             </div>
+        </div>
+        <div class="row justify-content-center text-center">
             <div class="col-sm-2">
                 <div class="card" style="margin:15px 0;">
                     <button id="button3" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this.id)">$150</button>
@@ -50,7 +52,7 @@
 
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-10">
+                <div class="col-5">
                     <div class="card">
                         <div class="card card-header">
                             <h3 class="fas fa-hand-holding-usd">  @ViewData["Title"]:  <span class="msg"></span></h3>
