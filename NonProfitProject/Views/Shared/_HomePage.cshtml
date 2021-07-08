@@ -38,8 +38,6 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" asp-area="" asp-controller="Donate" asp-action="Donate">Donate</a>
                     </li>
-
-
                 </ul>
             </div>
             <div>
@@ -64,36 +62,40 @@
                     {
                         <div class="btn-group">
                             <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @User.Identity.Name</a>
-                            <div class="dropdown-menu">
-                                <form class="dropdown-item bg-dark" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
-                                    <button type="submit" class="btn btn-dark">Logout</button>
-                                </form>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="UserIndex"> Dashboard</a>
+                                <div class="dropdown-menu">
+                                    <form class="dropdown-item bg-dark" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
+                                        <button type="submit" class="btn btn-dark">Logout</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     }
                     //Executes this code if user is signed in and in member role
                     else if (User.IsInRole("Member"))
                     {
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @User.Identity.Name</a>
-                            <div class="dropdown-menu">
-                                <form class="dropdown-item bg-dark" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
-                                    <button type="submit" class="btn btn-dark">Logout</button>
-                                </form>
-                            </div>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @User.Identity.Name</a>
+                        <div class="dropdown-menu">
+                            <form class="dropdown-item bg-dark" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
+                                <button type="submit" class="btn btn-dark">Logout</button>
+                            </form>
                         </div>
+                    </div>
                     }
                     //Executes this code if user is signed in and not in admin role (regular site user)
                     else
                     {
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @User.Identity.Name</a>
-                            <div class="dropdown-menu">
-                                <form class="dropdown-item bg-dark" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
-                                    <button type="submit" class="btn btn-dark">Logout</button>
-                                </form>
-                            </div>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @User.Identity.Name</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="UserIndex"> Dashboard</a>
+                            <form class="dropdown-item bg-dark" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
+                                <button type="submit" class="btn btn-dark">Logout</button>
+                            </form>
                         </div>
+                    </div>
                     }
                 }
                 // Executes this code if user is not signed in
@@ -104,7 +106,6 @@
             </div>
         </div>
     </nav>
-
 </header>
 
 <div class="container-fluid" style="padding: 0 0 5rem 0; ">
