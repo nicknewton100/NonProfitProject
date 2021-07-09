@@ -12,41 +12,43 @@
         </a>
     </div>
     <br />
-    <div class="container" style="font-size:small;">
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col" hidden>#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Email Address</th>
-                    <th scope="col">Hire Date</th>
-                    <th scope="col">Position</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Employees empl in Model)
-                {
+    <div class="container" style="font-size:medium;">
+        <div class="card">
+            <table class="table">
+                <thead class="thead-dark">
                     <tr>
-                        <th scope="row" hidden>@empl.EmpID</th>
-                        <th>@empl.User.UserFirstName</th>
-                        <th>@empl.User.UserLastName</th>
-                        <th>@empl.User.Email</th>
-                        <th>@empl.HireDate</th>
-                        <th>@empl.Position</th>
-                        <th>
-                            <div class="row">
-                                <button class="btn btn-dark mr-1" onclick="location.href = '@Url.Action("EditEmployee","Employee",new {id = empl.EmpID })'" >Detail</button>
-                                <form method="post" asp-action="DeleteEmployee" asp-route-id="@empl.EmpID">
-                                    <button type="submit" class="btn btn-dark">Delete</button>
-                                </form>
-                            </div>
-                        </th>
+                        <th scope="col" hidden>#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Hire Date</th>
+                        <th scope="col">Position</th>
+                        <th scope="col"></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (Employees empl in Model)
+                    {
+                        <tr>
+                            <th scope="row" hidden>@empl.EmpID</th>
+                            <th>@empl.User.UserFirstName</th>
+                            <th>@empl.User.UserLastName</th>
+                            <th>@empl.User.Email</th>
+                            <th>@empl.HireDate</th>
+                            <th>@empl.Position</th>
+                            <th>
+                                <div class="row">
+                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("EditEmployee","Employee",new {id = empl.EmpID })'">Detail</button>
+                                    <form method="post" asp-action="DeleteEmployee" asp-route-id="@empl.EmpID">
+                                        <button type="submit" class="btn btn-dark">Delete</button>
+                                    </form>
+                                </div>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
         <h5 class="text-primary">@TempData["EmployeeChanges"]?.ToString()</h5>
     </div>
 </div>
