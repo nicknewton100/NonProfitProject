@@ -11,42 +11,38 @@
         <a button class="btn btn-outline-dark" asp-area="Admin" asp-controller="User" asp-action="AddUser">Add User</a>
     </div>
     <br />
-    <div class="container" style="font-size:small;">
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Email Address</th>
-                    <th scope="col">Address1</th>
-                    <th scope="col">Address2</th>
-                    <th scope="col">City</th>
-                    <th scope="col">State</th>
-                    <th scope="col">Zip Code</th>
-                    <th scope="col">Country</th>
-                    <th scope="col">Telephone</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (User user in Model)
-                {
+    <div class="container" style="font-size:medium;">
+        <dvi class="card">
+            <table class="table">
+                <thead class="thead-dark">
                     <tr>
-                        <th scope="row">@userCount</th>
-                        <th>@user.UserFirstName</th>
-                        <th>@user.UserLastName</th>
-                        <th>@user.Email</th>
-                        <th>@user.UserAddr1</th>
-                        <th>@user.UserAddr2</th>
-                        <th>@user.UserCity</th>
-                        <th>@user.UserState</th>
-                        <th>@user.UserPostalCode</th>
-                        <th>@user.UserCountry</th>
-                        <th>@user.PhoneNumber</th>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col"></th>
                     </tr>
-                    userCount += 1;
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (User user in Model)
+                    {
+                        <tr>
+                            <th scope="row">@userCount</th>
+                            <th>@user.UserFirstName</th>
+                            <th>@user.UserLastName</th>
+                            <th>@user.Email</th>
+                            <th>
+                                <div class="row ">
+                                    <button class="btn btn-outline-dark mr-1">Detail</button>
+                                    <button class="btn btn-dark">Delete</button>
+
+                                </div>
+                            </th>
+                        </tr>
+                        userCount += 1;
+                    }
+                </tbody>
+            </table>
+        </dvi>
     </div>
 </div>
