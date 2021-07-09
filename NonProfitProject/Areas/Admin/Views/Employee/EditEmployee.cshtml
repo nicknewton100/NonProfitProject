@@ -1,15 +1,16 @@
 ﻿@model NonProfitProject.Areas.Admin.Models.ViewModels.EmployeeViewModel
 @{
-    ViewData["Title"] = "Add Employee";
+    ViewData["Title"] = ViewBag.Action + " Employee";
     Layout = "_AdminLayout";
 
 }
 <div class="container">
-    <div class="card-header-pills"><h1 class="fa fa-address-card">Add Employee</h1></div>
+    <div class="card-header-pills"><h1 class="fa fa-address-card">@ViewBag.Action Employee</h1></div>
     <br />
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-action="AddEmployee" method="post" style="font-size:medium">
+        <input type="hidden" asp-for="Id">
         <div class="form-group row">
             <div class="col-sm-2"><label>First Name: </label></div>
             <div class="col-sm-4">

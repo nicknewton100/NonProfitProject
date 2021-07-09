@@ -32,14 +32,39 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var employees = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).ToList();
             return View(employees);
         }
-        [HttpGet]
         public IActionResult AddEmployee()
         {
-            return View();
+            ViewBag.Action = "Add";
+            return View("EditEmployee");
+        }
+        public IActionResult EditEmployee(string id)
+        {
+            ViewBag.Action = "Edit";
+            var Employee = context.Employees.Include(e => e.User).FirstOrDefault(e => e.EmpID == id);
+            EmployeeViewModel employeeViewModel = new EmployeeViewModel
+            {
+                Id = id,
+                Firstname = Employee.User.UserFirstName,
+                Lastname = Employee.User.UserLastName,
+                Gender = Employee.User.UserGender,
+                Position = Employee.Position,
+                Salary = Employee.Salary,
+                Addr1 = Employee.User.UserAddr1,
+                Addr2 = Employee.User.UserAddr2,
+                City = Employee.User.UserCity,
+                State = Employee.User.UserState,
+                PostalCode = Employee.User.UserPostalCode,
+                Country = Employee.User.UserCountry,
+                BirthDate = Employee.User.UserBirthDate,
+                PhoneNumber = Employee.User.PhoneNumber,
+                Username = Employee.User.UserName,
+                Email = Employee.User.Email
+            };
+            return View(employeeViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> AddEmployee(EmployeeViewModel model)
-        {
+        public async Task<IActionResult> EditEmployee(EmployeeViewModel model)
+        {         
             if (context.Users.Any(u => u.Email == model.Email))
             {
                 ModelState.AddModelError("", String.Format("The email address {0} is already in use", model.Email));
@@ -61,29 +86,40 @@ namespace NonProfitProject.Areas.Admin.Controllers
                     UserPostalCode = model.PostalCode,
                     UserCountry = model.Country,
                     PhoneNumber = model.PhoneNumber
-
                 };
-                var result = await userManager.CreateAsync(user, model.TemporaryPassword);
-                if (result.Succeeded)
+                var employee = new Employees
                 {
-                    await userManager.AddToRoleAsync(user, "Employee");
-                    var employee = new Employees
+                    UserID = await userManager.GetUserIdAsync(user),
+                    Position = model.Position,
+                    Salary = model.Salary
+                };
+
+                if(model.Id == "" || model.Id == null)
+                {
+                    var result = await userManager.CreateAsync(user, model.TemporaryPassword);
+                    if (result.Succeeded)
                     {
-                        UserID = await userManager.GetUserIdAsync(user),
-                        Position = model.Position,
-                        Salary = model.Salary
-                    };
-                    context.Employees.Add(employee);
-                    context.SaveChanges();
-                    TempData["EmployeeChanges"] = String.Format("{0} has been added as an employee", model.Firstname + " " + model.Lastname);
-                    return RedirectToAction("Index");
+                        await userManager.AddToRoleAsync(user, "Employee");
+                        context.Employees.Add(employee);
+                        context.SaveChanges();
+                        TempData["EmployeeChanges"] = String.Format("{0} has been added as an employee", model.Firstname + " " + model.Lastname);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                    }
                 }
                 else
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
+                    context.Employees.Update(employee);
+                    var hasher = userManager.PasswordHasher;
+                    user.PasswordHash = hasher.HashPassword(user, model.TemporaryPassword);
+                    await userManager.UpdateAsync(user);
+                    context.SaveChanges();
                 }
             }
             return View();

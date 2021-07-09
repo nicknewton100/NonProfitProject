@@ -8,6 +8,8 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
 {
     public class EmployeeViewModel
     {
+        public string Id { get; set; }
+        
         [Required(ErrorMessage = "Please enter employee's First Name")]
         [StringLength(60)]
         public string Firstname { get; set; }
