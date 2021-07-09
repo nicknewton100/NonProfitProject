@@ -9,145 +9,163 @@
     <br />
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <form asp-action="AddEmployee" method="post" style="font-size:medium">
-        <input type="hidden" asp-for="Id">
-        <div class="form-group row">
-            <div class="col-sm-2"><label>First Name: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="Firstname" class="form-control" />
-                <span asp-validation-for="Firstname" class="text-danger"></span>
+    <div>
+        <form asp-action="AddEmployee" method="post" style="font-size:medium">
+            <input type="hidden" asp-for="Id">
+            <div class="row justify-content-md-center">
+                <div class="card w-auto" style="margin:0.5rem;">
+                    <h4 class="card-header">Personal Information</h4>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-5"><label>First Name: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="Firstname" class="form-control" />
+                                <span asp-validation-for="Firstname" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-5"><label>Last Name: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="Lastname" class="form-control" />
+                                <span asp-validation-for="Lastname" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-5"><label>Birth Date: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="BirthDate" class="form-control" />
+                                <span asp-validation-for="BirthDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-5"><label>Gender: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="Gender" class="form-control" />
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card w-auto" style="margin:0.5rem;">
+                    <h4 class="card-header">Address Information</h4>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-auto"><label>Address 1: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="Addr1" class="form-control" />
+                                <span asp-validation-for="Addr1" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-auto"><label>Address 2: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="Addr2" class="form-control" />
+                                <span asp-validation-for="Addr2" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-auto"><label>City: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="City" class="form-control" />
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-auto"><label>State: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="State" class="form-control" />
+                                <span asp-validation-for="State" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-auto"><label>Postal Code: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="PostalCode" class="form-control" />
+                                <span asp-validation-for="PostalCode" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-auto"><label>Country: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="Country" class="form-control" />
+                                <span asp-validation-for="Country" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card w-auto" style="margin:0.5rem;">
+                    <h4 class="card-header">Job Information</h4>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-5"><label>Position: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="Position" class="form-control" />
+                                <span asp-validation-for="Position" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-5"><label>Salary: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="Salary" class="form-control" oninput="CheckDecimal(this)" />
+                                <span asp-validation-for="Salary" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card w-100" style="margin:0.5rem;">
+                    <h4 class="card-header">Login Information</h4>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-auto"><div class="fas fa-user-alt"></div>  <label>Username: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="Username" class="form-control" />
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-auto"><div class="fa fa-envelope"></div>  <label>Email Address: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="Email" class="form-control" /> 
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-auto"><div class="fa fa-envelope"></div>  <label>Confirm Email Address: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="EmailConfirmed" class="form-control" />
+                                <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-auto"><div class="fas fa-lock"></div> <label>Temporary Password: </label></div>
+                            <div class="col-auto">
+                                <input id="TemporaryPassword" asp-for="TemporaryPassword" class="form-control" />
+                                <span asp-validation-for="TemporaryPassword" class="text-danger"></span>
+                            </div>
+                            <div class="col-auto">
+                                <input type="checkbox" name="ShowPassword" onchange="document.getElementById('TemporaryPassword').type = this.checked ? 'text' : 'password'; document.getElementById('TemporaryPasswordConfirmed').type = this.checked ? 'text' : 'password';">
+                                <label for="ShowPassword"> Show Password</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-auto"><label>Confirm Temporary Password: </label></div>
+                            <div class="col-auto">
+                                <input id="TemporaryPasswordConfirmed" asp-for="TemporaryPasswordConfirmed" class="form-control" />
+                                <span asp-validation-for="TemporaryPasswordConfirmed" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <button type="submit" class="btn-lg btn-outline-dark">Save Changes</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn-lg btn-dark" onclick="location.href = '@Url.Action("Index","Employee")'">Cancel</button>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><label>Last Name: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="Lastname" class="form-control" />
-                <span asp-validation-for="Lastname" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><label>Birth Date: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="BirthDate" class="form-control" />
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><label>Gender: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="Gender" class="form-control" />
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><label>Position: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="Position" class="form-control" />
-                <span asp-validation-for="Position" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><label>Salary: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="Salary" class="form-control" oninput="CheckDecimal(this)" />
-                <span asp-validation-for="Salary" class="text-danger"></span>
-            </div>
-        </div>
-        <br />
-        <br />
-        <div class="form-group row">
-            <div class="col-sm-2"><label>Address 1: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="Addr1" class="form-control" />
-                <span asp-validation-for="Addr1" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><label>Address 2: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="Addr2" class="form-control" />
-                <span asp-validation-for="Addr2" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><label>City: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><label>State: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="State" class="form-control" />
-                <span asp-validation-for="State" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><label>Postal Code: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="PostalCode" class="form-control" />
-                <span asp-validation-for="PostalCode" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><label>Country: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="Country" class="form-control" />
-                <span asp-validation-for="Country" class="text-danger"></span>
-            </div>
-        </div>
-        <!--Have some sort of barrier between user personal information and login information-->
-        <br />
-        <br />
-        <div class="form-group row">
-            <div class="col-sm-2"><div class="fas fa-user-alt"></div>  <label>Username: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><div class="fa fa-envelope"></div>  <label>Email Address: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><div class="fa fa-envelope"></div>  <label>Confirm Email Address: </label></div>
-            <div class="col-sm-4">
-                <input asp-for="EmailConfirmed" class="form-control" />
-                <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><div class="fas fa-lock"></div> <label>Temporary Password: </label></div>
-            <div class="col-sm-4">
-                <input id="TemporaryPassword" asp-for="TemporaryPassword" class="form-control" />
-                <span asp-validation-for="TemporaryPassword" class="text-danger"></span>
-            </div>
-            <div class="col-sm-2">
-                <input type="checkbox" name="ShowPassword" onchange="document.getElementById('TemporaryPassword').type = this.checked ? 'text' : 'password'; document.getElementById('TemporaryPasswordConfirmed').type = this.checked ? 'text' : 'password';">
-                <label for="ShowPassword"> Show Password</label>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"><label>Confirm Temporary Password: </label></div>
-            <div class="col-sm-4">
-                <input id="TemporaryPasswordConfirmed" asp-for="TemporaryPasswordConfirmed" class="form-control" />
-                <span asp-validation-for="TemporaryPasswordConfirmed" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-2">
-                <button type="submit" class="btn-lg btn-outline-dark">Save Changes</button>
-            </div>
-            <div class="col">
-                <button type="button" class="btn-lg btn-dark" onclick="location.href = '@Url.Action("Index","Employee")'">Cancel</button>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
     <script>
         //checks to make sure the decimal doesnt go over 2 decimal places 
         //credit : https://stackoverflow.com/questions/46321683/javascript-restrict-input-once-2-decimal-places-have-been-reached
