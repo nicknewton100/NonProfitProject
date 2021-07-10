@@ -1,16 +1,16 @@
 ﻿@model NonProfitProject.Areas.Admin.Models.ViewModels.EmployeeViewModel
 @{
-    ViewData["Title"] = ViewBag.Action + " Employee";
+    ViewData["Title"] = TempData["Action"].ToString() + " Employee";
     Layout = "_AdminLayout";
-
+    TempData.Keep("Action");
 }
 <div class="container">
-    <div class="card-header-pills"><h1 class="fa fa-address-card">  @ViewBag.Action Employee</h1></div>
+    <div class="card-header-pills"><h1 class="fa fa-address-card">  @TempData["Action"].ToString() Employee</h1></div>
     <br />
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div>
-        <form asp-action="AddEmployee" method="post" style="font-size:medium">
+        <form asp-action="EditEmployee" method="post" style="font-size:medium">
             <input type="hidden" asp-for="Id">
             <div class="row justify-content-md-center">
                 <div class="card w-auto" style="margin:0.5rem;">
@@ -19,28 +19,28 @@
                         <div class="form-group row">
                             <div class="col-5"><label>First Name: </label></div>
                             <div class="col-auto">
-                                <input asp-for="Firstname" class="form-control" />
+                                <input asp-for="Firstname" class="form-control" data-val="false" />
                                 <span asp-validation-for="Firstname" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-5"><label>Last Name: </label></div>
                             <div class="col-auto">
-                                <input asp-for="Lastname" class="form-control" />
+                                <input asp-for="Lastname" class="form-control" data-val="false" />
                                 <span asp-validation-for="Lastname" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-5"><label>Birth Date: </label></div>
                             <div class="col-auto">
-                                <input asp-for="BirthDate" class="form-control" />
+                                <input asp-for="BirthDate" class="form-control" data-val="false" />
                                 <span asp-validation-for="BirthDate" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-5"><label>Gender: </label></div>
                             <div class="col-auto">
-                                <input asp-for="Gender" class="form-control" />
+                                <input asp-for="Gender" class="form-control" data-val="false" />
                                 <span asp-validation-for="Gender" class="text-danger"></span>
                             </div>
                         </div>
@@ -52,42 +52,42 @@
                         <div class="form-group row">
                             <div class="col-auto"><label>Address 1: </label></div>
                             <div class="col-auto">
-                                <input asp-for="Addr1" class="form-control" />
+                                <input asp-for="Addr1" class="form-control" data-val="false" />
                                 <span asp-validation-for="Addr1" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-auto"><label>Address 2: </label></div>
                             <div class="col-auto">
-                                <input asp-for="Addr2" class="form-control" />
+                                <input asp-for="Addr2" class="form-control" data-val="false" />
                                 <span asp-validation-for="Addr2" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-auto"><label>City: </label></div>
                             <div class="col-auto">
-                                <input asp-for="City" class="form-control" />
+                                <input asp-for="City" class="form-control" data-val="false" />
                                 <span asp-validation-for="City" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-auto"><label>State: </label></div>
                             <div class="col-auto">
-                                <input asp-for="State" class="form-control" />
+                                <input asp-for="State" class="form-control" data-val="false" />
                                 <span asp-validation-for="State" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-auto"><label>Postal Code: </label></div>
                             <div class="col-auto">
-                                <input asp-for="PostalCode" class="form-control" />
+                                <input asp-for="PostalCode" class="form-control" data-val="false" />
                                 <span asp-validation-for="PostalCode" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-auto"><label>Country: </label></div>
                             <div class="col-auto">
-                                <input asp-for="Country" class="form-control" />
+                                <input asp-for="Country" class="form-control" data-val="false" />
                                 <span asp-validation-for="Country" class="text-danger"></span>
                             </div>
                         </div>
@@ -99,47 +99,47 @@
                         <div class="form-group row">
                             <div class="col-5"><label>Position: </label></div>
                             <div class="col-auto">
-                                <input asp-for="Position" class="form-control" />
+                                <input asp-for="Position" class="form-control" data-val="false" />
                                 <span asp-validation-for="Position" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-5"><label>Salary: </label></div>
                             <div class="col-auto">
-                                <input asp-for="Salary" class="form-control" oninput="CheckDecimal(this)" />
+                                <input asp-for="Salary" class="form-control" oninput="CheckDecimal(this)" data-val="false" />
                                 <span asp-validation-for="Salary" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card w-100" style="margin:0.5rem;">
+                <div class="card w-100" style="margin:0.5rem;" id="LoginInformation">
                     <h4 class="card-header">Login Information</h4>
                     <div class="card-body">
                         <div class="form-group row">
                             <div class="col-auto"><div class="fas fa-user-alt"></div>  <label>Username: </label></div>
                             <div class="col-auto">
-                                <input asp-for="Username" class="form-control" />
+                                <input asp-for="Username" class="form-control" id="Username" data-val="false" />
                                 <span asp-validation-for="Username" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-auto"><div class="fa fa-envelope"></div>  <label>Email Address: </label></div>
                             <div class="col-auto">
-                                <input asp-for="Email" class="form-control" /> 
+                                <input asp-for="Email" class="form-control" id="Email" data-val="false" />
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-auto"><div class="fa fa-envelope"></div>  <label>Confirm Email Address: </label></div>
                             <div class="col-auto">
-                                <input asp-for="EmailConfirmed" class="form-control" />
+                                <input asp-for="EmailConfirmed" class="form-control" id="EmailConfirmed" data-val="false" />
                                 <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-auto"><div class="fas fa-lock"></div> <label>Temporary Password: </label></div>
                             <div class="col-auto">
-                                <input id="TemporaryPassword" asp-for="TemporaryPassword" class="form-control" />
+                                <input id="TemporaryPassword" asp-for="TemporaryPassword" class="form-control" data-val="false" />
                                 <span asp-validation-for="TemporaryPassword" class="text-danger"></span>
                             </div>
                             <div class="col-auto">
@@ -150,13 +150,40 @@
                         <div class="form-group row">
                             <div class="col-auto"><label>Confirm Temporary Password: </label></div>
                             <div class="col-auto">
-                                <input id="TemporaryPasswordConfirmed" asp-for="TemporaryPasswordConfirmed" class="form-control" />
+                                <input id="TemporaryPasswordConfirmed" asp-for="TemporaryPasswordConfirmed" class="form-control" data-val="false" />
                                 <span asp-validation-for="TemporaryPasswordConfirmed" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                @{
+                    if (TempData["Action"].ToString().Equals("Edit"))
+                    {
+                        <div class="row">
+                            <input type="checkbox" id="ChangeLoginInformation" onchange="changeLoginInformation()" asp-for="IsChangingLogininformation"/>
+                            <label>Change Login Information</label>
+                        </div>
+                        <script>
+                            document.getElementById("TemporaryPassword").placeholder = "optional";
+                            document.getElementById("TemporaryPasswordConfirmed").placeholder = "optional";
+                            var initialUsername = document.getElementById("Username").value;
+                            var initialEmail = document.getElementById("Email").value;
+                            function changeLoginInformation() {
+                                let x = document.getElementById("ChangeLoginInformation");
+                                if (x.checked) {
+                                    document.getElementById("LoginInformation").style.display = "initial";
+                                }
+                                else {
+                                    document.getElementById("LoginInformation").style.display = "none";
+                                    document.getElementById("Email").value = initialEmail;
+                                    document.getElementById("EmailConfirmed").value = initialEmail;
+                                    document.getElementById("Username").value = initialUsername;
+                                }
+                            }
+                            window.onload(changeLoginInformation());
+                        </script>
+                    }
+                }
                 <div class="col-auto">
                     <button type="submit" class="btn-lg btn-outline-dark">Save Changes</button>
                 </div>
@@ -164,6 +191,7 @@
                     <button type="button" class="btn-lg btn-dark" onclick="location.href = '@Url.Action("Index","Employee")'">Cancel</button>
                 </div>
             </div>
+            <input type="hidden" asp-for="UserID" />
         </form>
     </div>
     <script>

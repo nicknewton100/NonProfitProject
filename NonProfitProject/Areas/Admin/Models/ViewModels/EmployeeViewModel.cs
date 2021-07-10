@@ -23,9 +23,8 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [StringLength(60)]
         public string Position { get; set; }
         [Required(ErrorMessage = "Please estimate employee's Salary")]
-        [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
-        public decimal Salary { get; set; }
+        public decimal? Salary { get; set; }
         [Required(ErrorMessage = "Please enter employee's Address")]
         [StringLength(255)]
         public string Addr1 { get; set; }
@@ -39,13 +38,13 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         public string State { get; set; }
         [Required(ErrorMessage = "Please enter employee's Postal Code")]
         [DataType(DataType.PostalCode)]
-        public int PostalCode { get; set; }
+        public int? PostalCode { get; set; }
         [Required(ErrorMessage = "Please enter employee's Country")]
         [StringLength(60)]
         public string Country { get; set; }
         [Required(ErrorMessage = "Please enter employee's BirthDate")]
         [DataType(DataType.Date)]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
         
@@ -55,7 +54,7 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [Required(ErrorMessage = "Please enter employee's Email Address")]
         [StringLength(60)]
         [DataType(DataType.EmailAddress)]
-        [Compare("EmailConfirmed")]
+        [Compare("EmailConfirmed", ErrorMessage = "Employee's email does not match")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Please confirm employee's Email Address")]
         [StringLength(60)]
@@ -64,12 +63,16 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [Required(ErrorMessage = "Please enter employee's Temporary Password")]
         [StringLength(60)]
         [DataType(DataType.Password)]
-        [Compare("TemporaryPasswordConfirmed")]
+        [Compare("TemporaryPasswordConfirmed", ErrorMessage = "Employee's password does not match")]
         public string TemporaryPassword { get; set; }
         [Required(ErrorMessage = "Please confirm employee's Temporary Password")]
         [StringLength(60)]
         [DataType(DataType.Password)]
         public string TemporaryPasswordConfirmed { get; set; }
 
+
+        public bool IsChangingLogininformation { get; set; }
+
+        public string UserID { get; set; }
     }
 }
