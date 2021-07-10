@@ -63,7 +63,7 @@
                         <div class="btn-group">
                             <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @User.Identity.Name</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="UserIndex"> Dashboard</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Home" asp-action="EmplIndex"> Dashboard</a>
                                 <div class="dropdown-menu">
                                     <form class="dropdown-item bg-dark" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
                                         <button type="submit" class="btn btn-dark">Logout</button>

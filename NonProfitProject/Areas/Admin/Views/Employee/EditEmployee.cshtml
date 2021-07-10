@@ -1,13 +1,11 @@
 ﻿@model NonProfitProject.Areas.Admin.Models.ViewModels.EmployeeViewModel
 @{
-    ViewData["Title"] = TempData["Action"].ToString() + " Employee";
-    Layout = "_AdminLayout";
-    TempData.Keep("Action");
+        ViewData["Title"] = TempData["Action"].ToString() + " Employee";
+        Layout = "_AdminLayout";
+        TempData.Keep("Action");
 }
 <div class="container">
     <div class="card-header-pills"><h1 class="fa fa-address-card">  @TempData["Action"].ToString() Employee</h1></div>
-    <br />
-
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div>
         <form asp-action="EditEmployee" method="post" style="font-size:medium">
@@ -156,46 +154,54 @@
                         </div>
                     </div>
                 </div>
-                @{
-                    if (TempData["Action"].ToString().Equals("Edit"))
-                    {
-                        <div class="row">
-                            <input type="checkbox" id="ChangeLoginInformation" onchange="changeLoginInformation()" asp-for="IsChangingLogininformation"/>
-                            <label>Change Login Information</label>
-                        </div>
-                        <script>
-                            document.getElementById("TemporaryPassword").placeholder = "optional";
-                            document.getElementById("TemporaryPasswordConfirmed").placeholder = "optional";
-                            var initialUsername = document.getElementById("Username").value;
-                            var initialEmail = document.getElementById("Email").value;
-                            function changeLoginInformation() {
-                                let x = document.getElementById("ChangeLoginInformation");
-                                if (x.checked) {
-                                    document.getElementById("LoginInformation").style.display = "initial";
+                <div class="col-12">
+                    @{
+                        if (TempData["Action"].ToString().Equals("Edit"))
+                        {
+                            <div class="row">
+                                <div class="col-auto" style="margin-left:1rem;">
+                                    <input type="checkbox" id="ChangeLoginInformation" onchange="changeLoginInformation()" asp-for="IsChangingLogininformation" />
+                                    <label>  Change Login Information</label>
+                                </div>
+                            </div>
+                            <script>
+                                document.getElementById("TemporaryPassword").placeholder = "optional";
+                                document.getElementById("TemporaryPasswordConfirmed").placeholder = "optional";
+                                var initialUsername = document.getElementById("Username").value;
+                                var initialEmail = document.getElementById("Email").value;
+                                function changeLoginInformation() {
+                                    let x = document.getElementById("ChangeLoginInformation");
+                                    if (x.checked) {
+                                        document.getElementById("LoginInformation").style.display = "initial";
+                                    }
+                                    else {
+                                        document.getElementById("LoginInformation").style.display = "none";
+                                        document.getElementById("Email").value = initialEmail;
+                                        document.getElementById("EmailConfirmed").value = initialEmail;
+                                        document.getElementById("Username").value = initialUsername;
+                                    }
                                 }
-                                else {
-                                    document.getElementById("LoginInformation").style.display = "none";
-                                    document.getElementById("Email").value = initialEmail;
-                                    document.getElementById("EmailConfirmed").value = initialEmail;
-                                    document.getElementById("Username").value = initialUsername;
-                                }
-                            }
-                            window.onload(changeLoginInformation());
-                        </script>
+                                window.onload(changeLoginInformation());
+                            </script>
+                        }
                     }
-                }
+                </div>
+
                 <div class="col-auto">
+                    <br />
                     <button type="submit" class="btn-lg btn-outline-dark">Save Changes</button>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn-lg btn-dark" onclick="location.href = '@Url.Action("Index","Employee")'">Cancel</button>
+                    <br />
+                    <button type="button" class="btn-lg btn-dark " onclick="location.href = '@Url.Action("Index","Employee")'">Cancel</button>
                 </div>
             </div>
             <input type="hidden" asp-for="UserID" />
         </form>
-    </div>
+    </div>   
+    
     <script>
-        //checks to make sure the decimal doesnt go over 2 decimal places 
+        //checks to make sure the decimal doesn't go over 2 decimal places 
         //credit : https://stackoverflow.com/questions/46321683/javascript-restrict-input-once-2-decimal-places-have-been-reached
         var CheckDecimal = function (e) {
             var t = e.value;
