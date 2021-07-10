@@ -10,13 +10,19 @@ using NonProfitProject.Models;
 namespace NonProfitProject.Areas.Admin.Controllers
 {
     //If admin, show this page.
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Employee")]
     [Area("Admin")]
     public class HomeController : Controller
     {
         //Admin home page view
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {   
+            return View();
+        }
+        [Authorize(Roles = "Employee")]
+        public IActionResult EmpIndex()
+        {
             return View();
         }
     }
