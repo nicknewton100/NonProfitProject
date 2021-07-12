@@ -1,6 +1,4 @@
-﻿let eventsArr = [];
-
-let calendarEl = document.getElementById('calendar');
+﻿let calendarEl = document.getElementById('calendar');
 
 let calendar = new FullCalendar.Calendar(calendarEl, {
     initalView: 'dayGridMonth',
@@ -9,7 +7,13 @@ let calendar = new FullCalendar.Calendar(calendarEl, {
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    events: eventsArr,
+    events: [
+        {
+            title: '10k Run for Cancer!',
+            start: '2021-07-24',    
+            end: '2021-07-31'
+        }
+    ]
 });
 
 calendar.render();
