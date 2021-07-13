@@ -107,7 +107,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 else
                 {
                     user = new User();
-                    employee = new Employees();
+                    employee = new NonProfitProject.Models.Employees();
                 }
                 user.UserName = model.Username;
                 user.Email = model.Email;

@@ -10,7 +10,7 @@ using NonProfitProject.Models;
 namespace NonProfitProject.Areas.Admin.Controllers
 {
     //If admin, show this page.
-    [Authorize(Roles = "Admin, Employee")]
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class HomeController : Controller
     {

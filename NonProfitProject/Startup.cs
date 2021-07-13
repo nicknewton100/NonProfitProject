@@ -88,7 +88,17 @@ namespace NonProfitProject
                     areaName: "Admin",
                     pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
 
-            
+                endpoints.MapAreaControllerRoute(
+                    name: "users",
+                    areaName: "Users",
+                    pattern: "User/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                    name: "employee",
+                    areaName: "Employee",
+                    pattern: "Employee/{controller=Home}/{action=Index}/{id?}");
+
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

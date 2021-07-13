@@ -1,23 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using NonProfitProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using NonProfitProject.Models;
-using NonProfitProject.Areas.Admin.Models.ViewModels;
-using NonProfitProject.Areas.Users.Controllers;
 
-namespace NonProfitProject.Areas.Admin.Controllers
+namespace NonProfitProject.Areas.Users.Controllers
 {
     //If its not admin, dont allow use of the controller
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = "User")]
+    [Area("Users")]
     public class ProfileController : DefaultProfileController
     {
         public ProfileController(UserManager<User> userManager, SignInManager<User> signInManager, NonProfitContext context)
-        {            
+        {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.context = context;

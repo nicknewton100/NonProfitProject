@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NonProfitProject.Areas.Admin.Models.ViewModels
+namespace NonProfitProject.Areas.Users.Models.ViewModels
 {
     public class ProfileViewModel
     {

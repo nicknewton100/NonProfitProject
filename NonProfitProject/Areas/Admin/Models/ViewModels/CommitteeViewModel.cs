@@ -9,6 +9,6 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
     public class CommitteeViewModel
     {
         //not completed yet
-        List<Employees> employees { get; set; }
+        public List<Employees> employee;
     }
 }
