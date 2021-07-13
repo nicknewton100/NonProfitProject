@@ -9,7 +9,7 @@
         <div class="card w-75">
             <div class="card-header"><h1>@ViewData["Title"]</h1></div>
             <div class="card-body">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="All" class="text-danger"></div>
                 <form method="post" asp-action="EditEvent">
                     <div class="form-group row">
                         <!--EVENT NAME-->
@@ -24,7 +24,7 @@
                         <div class="col-sm-3"><label>Start Date</label></div>
                         <div class="col">
                             <span asp-validation-for="EventStartDate" class="text-danger"></span>
-                            <input asp-for="EventStartDate" class="form-control" />
+                            <input asp-for="EventStartDate" class="form-control" value=""/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -32,7 +32,7 @@
                         <div class="col-sm-3"><label>End Date</label></div>
                         <div class="col">
                             <span asp-validation-for="EventEndDate" class="text-danger"></span>
-                            <input asp-for="EventEndDate" class="form-control" />
+                            <input asp-for="EventEndDate" class="form-control" value=""/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -46,8 +46,7 @@
                     <input type="hidden" asp-for="EventID" />
                     <button type="submit" class="btn btn-dark">Submit</button>
                     <a asp-area="Admin" asp-controller="Event" asp-action="Index" class="btn btn-outline-dark">Cancel</a>
-                </form>
-                
+                </form>                
             </div>
         </div>
     </div>

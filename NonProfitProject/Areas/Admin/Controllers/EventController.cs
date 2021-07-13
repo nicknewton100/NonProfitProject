@@ -31,7 +31,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public IActionResult AddEvent()
         {
             ViewBag.Action = "Add";
-            return View("EditEvent");
+            return View("EditEvent", new Event());
         }
         [HttpGet]
         public IActionResult EditEvent(int id)
@@ -62,7 +62,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             else
-            {
+            { 
+                
                 ViewBag.Action = (model.EventID == 0) ? "Add" : "Edit";
                 return View(model);
             }

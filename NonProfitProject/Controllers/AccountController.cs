@@ -57,11 +57,15 @@ namespace NonProfitProject.Controllers
                         var currentUser = await userManager.FindByNameAsync(model.Username);
                         if (await userManager.IsInRoleAsync(currentUser, "Admin"))
                         {
-                            return RedirectToAction("Index", "Home", new { area = "Admin"});
+                            return RedirectToAction("Index", "Home", new { area = "Admin" });
                         }
-                        else
+                        else if (await userManager.IsInRoleAsync(currentUser, "Employee"))
                         {
-                          return RedirectToAction("UserIndex", "Home");
+                            return RedirectToAction("Index", "Home", new { area = "Employee" });
+                        }
+                        else if (await userManager.IsInRoleAsync(currentUser, "User"))
+                        {
+                            return RedirectToAction("Index", "Home", new { area = "Users" });
                         }
                     }
                 }

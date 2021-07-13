@@ -9,11 +9,11 @@ using NonProfitProject.Models;
 using NonProfitProject.Areas.Admin.Models.ViewModels;
 using NonProfitProject.Areas.Users.Controllers;
 
-namespace NonProfitProject.Areas.Admin.Controllers
+namespace NonProfitProject.Areas.Employee.Controllers
 {
     //If its not admin, dont allow use of the controller
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = "Employee")]
+    [Area("Employee")]
     public class ProfileController : DefaultProfileController
     {
         public ProfileController(UserManager<User> userManager, SignInManager<User> signInManager, NonProfitContext context)

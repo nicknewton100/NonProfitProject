@@ -2,7 +2,6 @@
     Layout = "_Layout";
 
     @using Microsoft.AspNetCore.Identity;
-    @inject SignInManager<User> signInManager
 
 }
 
@@ -45,7 +44,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="UserIndex">Main Dashboard</a>
+                <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Main Dashboard</a>
             </li>
             <li class="dropdown-divider"></li>
             <li class="nav-item">
@@ -65,7 +64,7 @@
             </li>
             <li class="dropdown-divider"></li>
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Admin" asp-controller="Profile" asp-action="Index">Profile</a>
+                <a class="nav-link text-white" asp-controller="Profile" asp-action="Index">Profile</a>
             </li>
 
         </ul>
