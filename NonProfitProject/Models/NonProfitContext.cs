@@ -134,35 +134,7 @@ namespace NonProfitProject.Models
                 EventEndDate = new DateTime(2022, 05, 05, 0, 0, 0),
                 EventName = "Movie Night",
                 EventDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks!"
-            }
-            );
-            //Sets relationships for User
-            /*builder.Entity<User>()
-                .HasMany(u => u.payments)
-                .WithOne(u => u.user)
-                .HasForeignKey(p => p.UserID);
-            builder.Entity<User>()
-                .HasMany(u => u.donationReceipts)
-                .WithOne(u => u.user)
-                .HasForeignKey(DonationRecipts => DonationRecipts.UserID);*/
-            //sets default value for new users to the current date
-            builder.Entity<User>()
-                .Property(u => u.UserCreationDate)
-                .HasDefaultValueSql("getUTCDate()");
-            builder.Entity<User>()
-                .Property(u => u.UserLastActivity)
-                .HasDefaultValueSql("getUTCDate()");
-            //sets default value for weekly newsletter
-            builder.Entity<User>()
-                .Property(u => u.ReceiveWeeklyNewsletter)
-                .HasDefaultValue(false);
-            //set default value for AccountDisabled
-            builder.Entity<User>()
-                .Property(u => u.AccountDisabled)
-                .HasDefaultValue(false);
-            builder.Entity<Employees>()
-                .Property(e => e.HireDate)
-                .HasDefaultValueSql("getUTCDate()");
+            });
 
             //sets relationship between employees and Committee Memebers
             builder.Entity<Employees>()
@@ -170,10 +142,6 @@ namespace NonProfitProject.Models
                 .WithOne(cm => cm.employee)
                 .HasForeignKey<CommitteeMembers>(cm => cm.EmpID)
                 .HasPrincipalKey<Employees>(e => e.EmpID);
-            //need to figure out how to create a DonationID with prefix so that you can distiguish between DontationID and MemduesID
-            /*builder.Entity<Donations>()
-                .Property(d => d.DonationID)
-                .HasComputedColumnSql("'D-' + RIGHT('00000' +CAST(DonationID AS VARCHAR(10)), 10)" );*/
         }
 
         public static async Task CreateAdminUser(IServiceProvider serviceProvider)

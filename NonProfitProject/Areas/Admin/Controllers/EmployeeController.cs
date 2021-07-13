@@ -68,6 +68,35 @@ namespace NonProfitProject.Areas.Admin.Controllers
             };
             return View(employeeViewModel);
         }
+        public IActionResult Details(string id)
+        {
+            TempData["Action"] = "Details";
+            var Employee = context.Employees.Include(e => e.User).FirstOrDefault(e => e.EmpID == id);
+            EmployeeViewModel employeeViewModel = new EmployeeViewModel
+            {
+                Id = id,
+                Firstname = Employee.User.UserFirstName,
+                Lastname = Employee.User.UserLastName,
+                Gender = Employee.User.UserGender,
+                Position = Employee.Position,
+                Salary = Employee.Salary,
+                Addr1 = Employee.User.UserAddr1,
+                Addr2 = Employee.User.UserAddr2,
+                City = Employee.User.UserCity,
+                State = Employee.User.UserState,
+                PostalCode = Employee.User.UserPostalCode,
+                Country = Employee.User.UserCountry,
+                BirthDate = Employee.User.UserBirthDate,
+                PhoneNumber = Employee.User.PhoneNumber,
+                Username = Employee.User.UserName,
+                Email = Employee.User.Email,
+                EmailConfirmed = Employee.User.Email,
+                UserID = Employee.User.Id,
+                HireDate = Employee.HireDate,
+                ReleaseDate = Employee.ReleaseDate
+            };
+            return View("EditEmployee",employeeViewModel);
+        }
 
         [HttpPost]
         public async Task<IActionResult> AddEmployee(EmployeeViewModel model)
@@ -83,7 +112,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-                User user = new User 
+                User user = new User
                 {
                     UserName = model.Username,
                     Email = model.Email,
@@ -97,13 +126,19 @@ namespace NonProfitProject.Areas.Admin.Controllers
                     UserState = model.State,
                     UserPostalCode = (int)model.PostalCode,
                     UserCountry = model.Country,
-                    PhoneNumber = model.PhoneNumber
+                    PhoneNumber = model.PhoneNumber,
+                    UserCreationDate = DateTime.UtcNow,
+                    UserLastActivity = DateTime.UtcNow,
+                    ReceiveWeeklyNewsletter = false,
+                    AccountDisabled = false  
                 };
                 Employees employee = new Employees 
                 {
                     UserID = await userManager.GetUserIdAsync(user),
                     Position = model.Position,
-                    Salary = (decimal)model.Salary
+                    Salary = (decimal)model.Salary,
+                    HireDate = DateTime.UtcNow,
+                    ReleaseDate = null
                 };
 
                 var result = await userManager.CreateAsync(user, model.TemporaryPassword);
@@ -170,6 +205,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 user.UserPostalCode = (int)model.PostalCode;
                 user.UserCountry = model.Country;
                 user.PhoneNumber = model.PhoneNumber;
+                user.UserLastActivity = DateTime.UtcNow;
 
                 employee.UserID = await userManager.GetUserIdAsync(user);
                 employee.Position = model.Position;
@@ -207,14 +243,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return View("EditEmployee");
         }
-
-
-
-
-
-
-
-
         [HttpPost]
         public async Task<IActionResult> DeleteEmployeeAsync(string id)
         {

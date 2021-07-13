@@ -1,11 +1,17 @@
 ﻿@model NonProfitProject.Areas.Admin.Models.ViewModels.EmployeeViewModel
-@{
+@{    
+    if (TempData["Action"].ToString().Equals("Details"))
+    {
+        ViewData["Title"] = "Employee" + TempData["Action"].ToString();
+    }
+    else
         ViewData["Title"] = TempData["Action"].ToString() + " Employee";
-        Layout = "_AdminLayout";
-        TempData.Keep("Action");
+
+    Layout = "_AdminLayout";
+    TempData.Keep("Action");
 }
 <div class="container">
-    <div class="card-header-pills"><h1 class="fa fa-address-card">  @TempData["Action"].ToString() Employee</h1></div>
+    <div class="card-header-pills"><h1 class="fa fa-address-card">  @ViewData["Title"]</h1></div>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div>
         <form asp-action="AddEmployee" method="post" style="font-size:medium">
@@ -108,6 +114,21 @@
                                 <span asp-validation-for="Salary" class="text-danger"></span>
                             </div>
                         </div>
+                        @if (TempData["Action"].ToString().Equals("Details"))
+                        {
+                            <div class="form-group row">
+                                <div class="col-5"><label>Hire Date: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" data-val="false" value="@Model.HireDate.ToString("MM/dd/yyyy")"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-5"><label>Release Date: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" data-val="false" value="@Model.ReleaseDate?.ToString("MM/dd/yyyy")"/>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div class="card w-100" style="margin:0.5rem;" id="LoginInformation">
@@ -127,14 +148,14 @@
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row DetailsDisable">
                             <div class="col-auto"><div class="fa fa-envelope"></div>  <label>Confirm Email Address: </label></div>
                             <div class="col-auto">
                                 <input asp-for="EmailConfirmed" class="form-control" id="EmailConfirmed" data-val="false" />
                                 <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row DetailsDisable">
                             <div class="col-auto"><div class="fas fa-lock"></div> <label>Temporary Password: </label></div>
                             <div class="col-auto">
                                 <input id="TemporaryPassword" asp-for="TemporaryPassword" class="form-control" data-val="false" />
@@ -145,7 +166,7 @@
                                 <label for="ShowPassword"> Show Password</label>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row DetailsDisable">
                             <div class="col-auto"><label>Confirm Temporary Password: </label></div>
                             <div class="col-auto">
                                 <input id="TemporaryPasswordConfirmed" asp-for="TemporaryPasswordConfirmed" class="form-control" data-val="false" />
@@ -189,12 +210,39 @@
                                 window.onload(changeLoginInformation());
                             </script>
                         }
+                        else if (TempData["Action"].ToString().Equals("Details"))
+                        {
+                            <script>
+                                var inputs, index;
+                                inputs = document.getElementsByTagName('input');
+                                for (var index = 0; index < inputs.length; ++index) {
+                                    inputs[index].disabled = true;
+                                }
+                                passwordElements = document.getElementsByClassName("DetailsDisable");
+                                passwordElements[0].style.display = "none";
+                                passwordElements[1].style.display = "none";
+                                passwordElements[2].style.display = "none";
+                            </script>
+                        }
                     }
                 </div>
 
                 <div class="col-auto">
                     <br />
-                    <button type="submit" class="btn-lg btn-outline-dark">Save Changes</button>
+                    @{
+                        if (TempData["Action"].ToString().Equals("Add"))
+                        {
+                            <button type="submit" class="btn-lg btn-outline-dark">Add Employee</button>
+                        }
+                        else if (TempData["Action"].ToString().Equals("Details"))
+                        {
+                            <button type="button" class="btn-lg btn-outline-dark" onclick="location.href = '@Url.Action("EditEmployee","Employee",new {id = Model.Id })'">Edit Employee</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn-lg btn-outline-dark">Save Changes</button>
+                        }
+                    }
                 </div>
                 <div class="col">
                     <br />

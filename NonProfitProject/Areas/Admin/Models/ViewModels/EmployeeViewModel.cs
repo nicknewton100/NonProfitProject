@@ -74,5 +74,8 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         public bool IsChangingLogininformation { get; set; }
 
         public string UserID { get; set; }
+
+        public DateTime HireDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
     }
 }

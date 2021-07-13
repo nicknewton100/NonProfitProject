@@ -38,7 +38,7 @@
                             <th>@empl.Position</th>
                             <th>
                                 <div class="row">
-                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("EditEmployee","Employee",new {id = empl.EmpID })'">Edit</button>
+                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","Employee",new {id = empl.EmpID })'">Details</button>
                                     <form method="post" asp-action="DeleteEmployee" asp-route-id="@empl.EmpID">
                                         <button type="submit" class="btn btn-dark deleteEmp">Delete</button>
                                     </form>
