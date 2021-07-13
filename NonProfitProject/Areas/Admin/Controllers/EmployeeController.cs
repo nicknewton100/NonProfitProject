@@ -19,7 +19,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
     {
         private NonProfitContext context;
         private UserManager<User> userManager;
-        private SignInManager<User> SignInManager;
 
         public EmployeeController(NonProfitContext context, UserManager<User> userManager)
         {
@@ -42,6 +41,10 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             TempData["Action"] = "Edit";
             var Employee = context.Employees.Include(e => e.User).FirstOrDefault(e => e.EmpID == id);
+            if(Employee == null)
+            {
+                return RedirectToAction("Index");
+            }
             EmployeeViewModel employeeViewModel = new EmployeeViewModel
             {
                 Id = id,
@@ -66,51 +69,96 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View(employeeViewModel);
         }
 
-        //allows the user to add or edit employee depending on if the employee has an ID or not. 
-        //It allows the option to choose if the admin wants to change the password or not and uses the editemployee view for both adding and editing
         [HttpPost]
-        public async Task<IActionResult> EditEmployee(EmployeeViewModel model)
+        public async Task<IActionResult> AddEmployee(EmployeeViewModel model)
         {
-            /////////This method is very unorganized but it works. I(Nick) will go back and reorganize it once ive distanced myself from this for a while
-            if (TempData["Action"].ToString().Equals("Edit"))
+            if (TempData["Action"].ToString().Equals("Edit") && model.Id != null && model.UserID != null)
             {
-                var Employee = context.Employees.Include(e => e.User).AsNoTracking().FirstOrDefault(e => e.EmpID == model.Id);
-                
-                if (!model.IsChangingLogininformation)
-                {
-                    model.TemporaryPassword = Employee.User.PasswordHash;
-                }
-                if(model.TemporaryPassword == null)
-                {
-                    ModelState.Remove("TemporaryPassword");
-                    ModelState.Remove("TemporaryPasswordConfirmed");
-                }
-                
-                context.Entry(Employee).State = EntityState.Detached;
+                return await EditEmployee(model);
             }
-            else
+
+            if (context.Users.Any(u => u.Email == model.Email))
             {
-                if (context.Users.Any(u => u.Email == model.Email))
-                {
-                    ModelState.AddModelError("", String.Format("The email address {0} is already in use", model.Email));
-                }
+                ModelState.AddModelError("", String.Format("The email address {0} is already in use", model.Email));
             }
             if (ModelState.IsValid)
             {
-                User user;
-                Employees employee;
-                if (model.UserID != null)
+                User user = new User 
                 {
-                    user = await userManager.FindByIdAsync(model.UserID);
-                    employee = context.Employees.FirstOrDefault(e => e.EmpID == model.Id);
+                    UserName = model.Username,
+                    Email = model.Email,
+                    UserFirstName = model.Firstname,
+                    UserLastName = model.Lastname,
+                    UserGender = model.Gender,
+                    UserBirthDate = (DateTime)model.BirthDate,
+                    UserAddr1 = model.Addr1,
+                    UserAddr2 = model.Addr2,
+                    UserCity = model.City,
+                    UserState = model.State,
+                    UserPostalCode = (int)model.PostalCode,
+                    UserCountry = model.Country,
+                    PhoneNumber = model.PhoneNumber
+                };
+                Employees employee = new Employees 
+                {
+                    UserID = await userManager.GetUserIdAsync(user),
+                    Position = model.Position,
+                    Salary = (decimal)model.Salary
+                };
+
+                var result = await userManager.CreateAsync(user, model.TemporaryPassword);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "Employee");
+                    context.Employees.Add(employee);
+                    context.SaveChanges();
+                    TempData["EmployeeChanges"] = String.Format("{0} has been added as an employee", model.Firstname + " " + model.Lastname);
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    user = new User();
-                    employee = new NonProfitProject.Models.Employees();
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
                 }
-                user.UserName = model.Username;
-                user.Email = model.Email;
+            }
+            return View("EditEmployee");
+        }
+
+        //allows the admin to edit employee information and if the admin chooses to check the "change login information" check box, the Admin will change the login information
+        //if he doesnt, it will use the information that was already saved before hand
+        [HttpPost]
+        public async Task<IActionResult> EditEmployee(EmployeeViewModel model)
+        {
+            User user;
+            Employees employee;
+            //this try catch makes sure that the user and employee exists before trying to chnage them. If tehy dont, it sends it back to add employee
+            //this was done because the data on the website could potentially be altered which could cause an error or the id sent through the url could be altered as well
+            try
+            {
+                user = await userManager.FindByIdAsync(model.UserID);
+                employee = context.Employees.FirstOrDefault(e => e.EmpID == model.Id);
+            }
+            catch (Exception e)
+            {
+                model.UserID = null;
+                model.Id = null;
+                return await AddEmployee(model);
+            }
+            if (model.TemporaryPassword == null || !model.IsChangingLogininformation)
+            {
+                ModelState.Remove("TemporaryPassword");
+                ModelState.Remove("TemporaryPasswordConfirmed");
+            }
+
+            if (ModelState.IsValid)
+            {
+                if (model.IsChangingLogininformation)
+                {
+                    user.UserName = model.Username;
+                    user.Email = model.Email;
+                }
                 user.UserFirstName = model.Firstname;
                 user.UserLastName = model.Lastname;
                 user.UserGender = model.Gender;
@@ -126,55 +174,47 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 employee.UserID = await userManager.GetUserIdAsync(user);
                 employee.Position = model.Position;
                 employee.Salary = (decimal)model.Salary;
+                context.Employees.Update(employee);
 
-                if(model.Id == null)
+                if(model.TemporaryPassword != null && model.IsChangingLogininformation)
                 {
-                    var result = await userManager.CreateAsync(user, model.TemporaryPassword);
-                    if (result.Succeeded)
+                    var resetToken = await userManager.GeneratePasswordResetTokenAsync(user);
+                    var passwordChange = await userManager.ResetPasswordAsync(user, resetToken, model.TemporaryPassword);
+                    if (!passwordChange.Succeeded)
                     {
-                        await userManager.AddToRoleAsync(user, "Employee");
-                        context.Employees.Add(employee);
-                        context.SaveChanges();
-                        TempData["EmployeeChanges"] = String.Format("{0} has been added as an employee", model.Firstname + " " + model.Lastname);
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        foreach (var error in result.Errors)
+                        foreach (IdentityError i in passwordChange.Errors)
                         {
-                            ModelState.AddModelError("", error.Description);
+                            ModelState.AddModelError("TemporaryPassword", i.Description);
                         }
+                        return View();
                     }
+                    employee.FinishedAccountSetup = false;
                 }
-                else
+                var updateUser = await userManager.UpdateAsync(user);
+                if (updateUser.Succeeded)
                 {
-                    context.Employees.Update(employee);
-                    if (model.TemporaryPassword == null || model.IsChangingLogininformation == false)
-                    {
-                        user.PasswordHash = model.TemporaryPassword;
-                    }
-                    else
-                    {
-                        var token = await userManager.GeneratePasswordResetTokenAsync(user);
-                        var passwordChange = await userManager.ResetPasswordAsync(user, token, model.TemporaryPassword);
-                        if (!passwordChange.Succeeded)
-                        {
-                            foreach (IdentityError i in passwordChange.Errors)
-                            {
-                                ModelState.AddModelError("TemporaryPassword", i.Description);
-                            }
-                            return View();
-                        }
-                        employee.FinishedAccountSetup = false;
-                    }
-                    var result = await userManager.UpdateAsync(user);
                     context.SaveChanges();
                     TempData["EmployeeChanges"] = String.Format("{0} has been updated", model.Firstname + " " + model.Lastname);
                     return RedirectToAction("Index");
                 }
+                else
+                {
+                    foreach (var error in updateUser.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
             }
-            return View();
+            return View("EditEmployee");
         }
+
+
+
+
+
+
+
+
         [HttpPost]
         public async Task<IActionResult> DeleteEmployeeAsync(string id)
         {

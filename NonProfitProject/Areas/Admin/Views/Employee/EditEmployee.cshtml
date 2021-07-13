@@ -8,7 +8,7 @@
     <div class="card-header-pills"><h1 class="fa fa-address-card">  @TempData["Action"].ToString() Employee</h1></div>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div>
-        <form asp-action="EditEmployee" method="post" style="font-size:medium">
+        <form asp-action="AddEmployee" method="post" style="font-size:medium">
             <input type="hidden" asp-for="Id">
             <div class="row justify-content-md-center">
                 <div class="card w-auto" style="margin:0.5rem;">
@@ -165,10 +165,13 @@
                                 </div>
                             </div>
                             <script>
-                                document.getElementById("TemporaryPassword").placeholder = "optional";
-                                document.getElementById("TemporaryPasswordConfirmed").placeholder = "optional";
+                                var tempPassword = document.getElementById("TemporaryPassword");
+                                tempPassword.placeholder = "optional"
+                                var tempPasswordConfirmed = document.getElementById("TemporaryPasswordConfirmed");
+                                tempPasswordConfirmed.placeholder = "optional";
                                 var initialUsername = document.getElementById("Username").value;
                                 var initialEmail = document.getElementById("Email").value;
+
                                 function changeLoginInformation() {
                                     let x = document.getElementById("ChangeLoginInformation");
                                     if (x.checked) {
@@ -179,6 +182,8 @@
                                         document.getElementById("Email").value = initialEmail;
                                         document.getElementById("EmailConfirmed").value = initialEmail;
                                         document.getElementById("Username").value = initialUsername;
+                                        tempPassword.value = "";
+                                        tempPasswordConfirmed.value = "";
                                     }
                                 }
                                 window.onload(changeLoginInformation());
