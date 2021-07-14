@@ -13,6 +13,8 @@ using NonProfitProject.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using NonProfitProject.Code;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace NonProfitProject
 {
@@ -27,7 +29,8 @@ namespace NonProfitProject
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        { 
+
             services.AddTransient<BackgroundTasks>();
             
             services.AddMemoryCache();
@@ -35,6 +38,14 @@ namespace NonProfitProject
             services.AddSession();
 
             services.AddControllersWithViews();
+
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.AreaViewLocationFormats.Add("/Views/Shared/Employee/{1}/{0}" + RazorViewEngine.ViewExtension);
+                options.AreaViewLocationFormats.Add("/Views/Shared/Member/{1}/{0}" + RazorViewEngine.ViewExtension);
+                options.AreaViewLocationFormats.Add("/Views/Shared/Users/{1}/{0}" + RazorViewEngine.ViewExtension);
+            });
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddDbContext<NonProfitContext>(options =>
@@ -49,13 +60,13 @@ namespace NonProfitProject
                 options.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<NonProfitContext>()
                 .AddDefaultTokenProviders();
-
             //adds the appending trailing slash option and lowercase urls
             services.AddRouting(options =>
             {
                 options.AppendTrailingSlash = true;
                 options.LowercaseUrls = true;
             });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -97,6 +108,11 @@ namespace NonProfitProject
                     name: "employee",
                     areaName: "Employee",
                     pattern: "Employee/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                    name: "member",
+                    areaName: "Member",
+                    pattern: "Member/{controller=Home}/{action=Index}/{id?}");
 
 
                 endpoints.MapControllerRoute(

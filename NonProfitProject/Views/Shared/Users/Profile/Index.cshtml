@@ -1,7 +1,7 @@
-﻿@model NonProfitProject.Areas.Users.Models.ViewModels.ProfileViewModel
+﻿@model NonProfitProject.Models.ViewModels.Shared.Users.ProfileViewModel
 @{
     ViewData["Title"] = "Profile";
-    Layout = "_EmployeeLayout";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
 }
 
 
@@ -10,6 +10,9 @@
     <br />
     <div class="justify-content-center">
         <a class="btn-lg btn-dark text-decoration-none" asp-action="EditLogin">Edit Login Information</a>
+    </div>
+    <div class="justify-content-center">
+        <a class="btn-lg btn-dark text-decoration-none" asp-action="EditPayment">Manage Payment Information</a>
     </div>
     <br />
     <form style="font-size:medium">
@@ -58,7 +61,7 @@
             <div class="col-sm-3">
                 <input readonly asp-for="Addr1" class="form-control" />
             </div>
-            
+
 
             <!--CITY-->
             <div class="col-sm-1 text-right"><label>City: </label></div>

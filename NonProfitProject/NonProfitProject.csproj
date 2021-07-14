@@ -28,18 +28,17 @@
     <Folder Include="Areas\Member\Data\" />
     <Folder Include="Areas\Member\Models\ViewModels\" />
     <Folder Include="Areas\Users\Data\" />
+    <Folder Include="Areas\Users\Models\ViewModels\" />
+    <Folder Include="Controllers\Shared\Member\" />
+    <Folder Include="Controllers\Shared\Employee\" />
+    <Folder Include="Models\ViewModels\Shared\Employee\" />
+    <Folder Include="Models\ViewModels\Shared\Member\" />
+    <Folder Include="Views\Shared\Employee\" />
+    <Folder Include="Views\Shared\Member\" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="Areas\Member\Views\Home\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\Member\Views\Profile\EditLogin.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\Member\Views\Profile\Index.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

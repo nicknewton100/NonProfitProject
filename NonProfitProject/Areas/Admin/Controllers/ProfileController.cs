@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using NonProfitProject.Models;
-using NonProfitProject.Areas.Admin.Models.ViewModels;
-using NonProfitProject.Areas.Users.Controllers;
+using NonProfitProject.Controllers.Shared.Users;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {

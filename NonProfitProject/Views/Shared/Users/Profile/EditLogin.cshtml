@@ -1,7 +1,7 @@
-﻿@model NonProfitProject.Areas.Users.Models.ViewModels.EditLoginViewModel
+﻿@model NonProfitProject.Models.ViewModels.Shared.Users.EditLoginViewModel
 @{
     ViewData["Title"] = "Edit Login Information";
-    Layout = "_MemberLayout";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
 
 }
 <div class="container">

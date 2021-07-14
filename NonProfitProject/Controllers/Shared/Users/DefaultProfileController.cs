@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using NonProfitProject.Models;
-using NonProfitProject.Areas.Users.Models.ViewModels;
+using NonProfitProject.Models.ViewModels.Shared.Users;
 
-namespace NonProfitProject.Areas.Users.Controllers
+namespace NonProfitProject.Controllers.Shared.Users
 {
     public class DefaultProfileController : Controller
     {
@@ -66,7 +66,7 @@ namespace NonProfitProject.Areas.Users.Controllers
         {
             var user = await userManager.GetUserAsync(User);
             var ProfileViewModel = new ProfileViewModel { UserID = user.Id, FirstName=user.UserFirstName, LastName=user.UserLastName, Email = user.Email, Username = user.UserName, Addr1 = user.UserAddr1, Addr2 = user.UserAddr2, City = user.UserCity, PostalCode = user.UserPostalCode, Country = user.UserCountry, State = user.UserState, BirthDate = user.UserBirthDate, Gender = user.UserGender, CreationDate=user.UserCreationDate, LastActivity=user.UserLastActivity };
-            return View("Index", ProfileViewModel);
+            return View(ProfileViewModel);
         }
         public async Task<IActionResult> Index(ProfileViewModel model)
         {
@@ -74,6 +74,10 @@ namespace NonProfitProject.Areas.Users.Controllers
             {
                 var user = await userManager.FindByIdAsync(model.UserID);
             }
+            return View();
+        }
+        public IActionResult Payments()
+        {
             return View();
         }
     }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NonProfitProject.Areas.Users.Controllers;
+using NonProfitProject.Controllers.Shared.Users;
 using NonProfitProject.Models;
 using System;
 using System.Collections.Generic;
