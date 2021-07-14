@@ -29,6 +29,10 @@ namespace NonProfitProject.Areas.Admin.Controllers
             ViewBag.Action = "Add";
             return View("EditCommittee");
         }
+        public IActionResult DetailCommittee()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult EditCommittee(int id)
         {
@@ -37,7 +41,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View(Committee);
         }
         [HttpPost]
-        public IActionResult EditEvent(Committees model)
+        public IActionResult EditCommittee(Committees model)
         {
             if (ModelState.IsValid)
             {
