@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="card-header">
-        <h1> Welcome Employee</h1>
+        <h1> Welcome</h1>
     </div>
     <br />
 
@@ -16,7 +16,7 @@
             <!--WEBSITE ICON AND LINK TO THE THE HOMEPAGE WEBSITE-->
             <h1 class="card-header fas fa-laptop-code"></h1>
             <div class="card-body">
-                <h3 class="card-title">Websites</h3>
+                <h3 class="card-title">Website</h3>
                 <p class="card-text">View the homepage of the website</p>
             </div>
         </a>
@@ -32,29 +32,27 @@
     </div>
     <div class="row"><br /></div>
     <div class="row justify-content-md-center">
-        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Admin" asp-controller="Employee" asp-action="Index">
-            <!--EMPLOYEES ICON AND LINK TO THE LIST OF EMPLOYEES (CO-WORKERS) TO CONTACT-->
-
-            <h1 class="card-header fas fa-users"></h1>
-            <div class="card-body">
-                <h3 class="card-title">Employees</h3>
-                <p class="card-text">Go to...</p>
-            </div>
-        </a>
-        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Admin" asp-controller="Committee" asp-action="Index">
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Employees" asp-controller="Committee" asp-action="Index">
             <!--BOARD COMMITTEES ICON AND LINK TO THE COMMITTEE GROUP THAT THE EMPLOYEE IS PART OF.-->
 
             <h1 class="card-header fas fa-users"></h1>
             <div class="card-body">
-                <h3 class="card-title">Board Committees</h3>
+                <h3 class="card-title">My Committee</h3>
                 <p class="card-text">Go to...</p>
             </div>
         </a>
-
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Employees" asp-controller="Home" asp-action="Index">
+            <!--HELP DESK ICON AND LINK TO HELP SECTION WITH HELP DOCUMENTS AND CONTACT LINK TO EMAIL THE HELP-->
+            <h1 class="card-header far fa-folder-open"></h1>
+            <div class="card-body">
+                <h3 class="card-title">Resources</h3>
+                <p class="card-text">Documents and Reports</p>
+            </div>
+        </a>
     </div>
     <div class="row"><br /></div>
     <div class="row justify-content-md-center">
-        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Admin" asp-controller="Home" asp-action="Index">
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Employees" asp-controller="Home" asp-action="Index">
             <!--HELP DESK ICON AND LINK TO HELP SECTION WITH HELP DOCUMENTS AND CONTACT LINK TO EMAIL THE HELP-->
             <h1 class="card-header fas fa-info-circle"></h1>
             <div class="card-body">

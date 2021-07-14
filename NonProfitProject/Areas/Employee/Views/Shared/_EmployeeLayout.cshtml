@@ -24,7 +24,7 @@
 
 </head>
 <body>
-    <!--TOP NAV FOR USERE VIEW-->
+    <!--TOP NAV FOR EMPLOYEE VIEW-->
     <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
         <div class="container">
             <div></div>
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <!--SIDE NAV FOR USERE VIEW-->
+    <!--SIDE NAV FOR EMPLOYEE VIEW-->
     <div class="text-white bg-dark" style="width: 200px; height: 100%; overflow-x: hidden; position: fixed; z-index: 1; top: 0; left: 0; ">
         <ul class="nav nav-pills flex-column list-unstyled">
             <li class="nav-item">
@@ -44,23 +44,21 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Main Dashboard</a>
+                <a class="nav-link text-white" asp-area="Employee" asp-controller="Home" asp-action="Index">Main Dashboard</a>
             </li>
+
             <li class="dropdown-divider"></li>
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Employee" asp-action="Index">Employees</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Event" asp-action="Index">Calendar Events</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="Event" asp-action="Calendar">Events</a>
+                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">View Website</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="NewsPage">News</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="Donate" asp-action="Donate">Donate</a>
+                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Resources</a>
             </li>
             <li class="dropdown-divider"></li>
             <li class="nav-item">
