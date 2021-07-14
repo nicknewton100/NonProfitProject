@@ -1,12 +1,13 @@
 ﻿@model NonProfitProject.Models.ViewModels.Shared.Users.PaymentViewModel
 @{
-    ViewData["Title"] = "Payment";
+    ViewData["Title"] = "Edit Payment Information";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
 
 }
 
 
-<div class="container" style="margin:1rem 5rem;">
-    <h1>Checkout</h1>
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
 
     <form class="align-items-center justify-content-center">
         <div class="row">
@@ -179,10 +180,8 @@
                             <input type="text" class="form-control" id="cvv">
                         </div>
                     </div>
-                    <div class="row" style="margin: 0 3rem;">
-                        <button type="submit" class="btn btn-primary" style="margin: 0 0.5rem;">Submit</button>
-                        <a class="btn btn-danger" style="margin: 0 0.5rem;" asp-controller="Home" asp-action="Index">Cancel</a>
-                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index">Cancel</a>
                 </div>
 
             </div>

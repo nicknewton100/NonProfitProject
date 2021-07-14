@@ -1,4 +1,4 @@
-﻿@model List<Committees> 
+﻿
 @{
     ViewData["Title"] = "Committtee Members List";
     Layout = "_AdminLayout";
@@ -14,7 +14,7 @@
         <div class="row justify-content-md-center">
             <!--EVENTS AND PLANNING COMMITTEE-->
             <div class="card w-25">
-                <a class="card-header fas fa-comment-dollar btn btn-outline-dark" asp-area="" asp-controller="" asp-action="#" style="font-size: xx-large; border:none"></a>
+                <a class="card-header fas fa-comment-dollar btn btn-outline-dark" asp-area="Admin" asp-controller="Committee" asp-action="DetailCommittee" style="font-size: xx-large; border:none"></a>
                 <div class="card-body">
                     <h3 class="card-title text-center">Planning Committee</h3>
                     <div style="font-size:small;">
@@ -45,7 +45,7 @@
 
             <!--FUNDRAISING COMMITTEE-->
             <div class="card w-50">
-                <a class="card-header fas fa-user-edit btn btn-outline-dark" asp-area="" asp-controller="" asp-action="#" style="font-size: xx-large; border:none"></a>
+                <a class="card-header fas fa-user-edit btn btn-outline-dark" sp-area="Admin" asp-controller="Committee" asp-action="DetailCommittee" style="font-size: xx-large; border:none"></a>
                 <div class="card-body">
                     <h3 class="card-title text-center">Fundraising Committee</h3>
                     <div style="font-size:small;">
@@ -76,7 +76,7 @@
 
             <!--NEWS COMMITTEE-->
             <div class="card w-25">
-                <a class="card-header far fa-newspaper btn btn-outline-dark" asp-area="" asp-controller="" asp-action="#" style="font-size: xx-large; border:none"></a>
+                <a class="card-header far fa-newspaper btn btn-outline-dark" sp-area="Admin" asp-controller="Committee" asp-action="DetailCommittee" style="font-size: xx-large; border:none"></a>
                 <div class="card-body">
                     <h3 class="card-title text-center">News Committee</h3>
                     <div style="font-size:small;">

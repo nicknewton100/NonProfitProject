@@ -76,7 +76,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             }
             return View();
         }
-        public IActionResult Payments()
+        public IActionResult EditPayment()
         {
             return View();
         }
