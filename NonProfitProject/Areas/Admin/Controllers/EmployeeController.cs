@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using NonProfitProject.Areas.Admin.Models.ViewModels;
@@ -35,12 +36,12 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public IActionResult AddEmployee()
         {
             TempData["Action"] = "Add";
-            return View("EditEmployee");
+            return View("EditEmployee", new EmployeeViewModel { BirthDate = null, AllCommittees = new SelectList(context.Committees.Select(c => c.CommitteeName).ToList(), "CommitteeName") });
         }
         public IActionResult EditEmployee(string id)
         {
             TempData["Action"] = "Edit";
-            var Employee = context.Employees.Include(e => e.User).FirstOrDefault(e => e.EmpID == id);
+            var Employee = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).FirstOrDefault(e => e.EmpID == id);
             if(Employee == null)
             {
                 return RedirectToAction("Index");
@@ -64,14 +65,16 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 Username = Employee.User.UserName,
                 Email = Employee.User.Email,
                 EmailConfirmed = Employee.User.Email,
-                UserID = Employee.User.Id
+                //CommitteeName = context.Committees?.Where(c => c.CommitteesID == Employee.CommitteeMembers.CommitteeID).Select(c => c.CommitteeName).FirstOrDefault() ?? "",
+                CommitteePosition = Employee.CommitteeMembers?.CommitteePosition ?? "",
+                AllCommittees = new SelectList(context.Committees.Select(c => c.CommitteeName).ToList(), "CommitteeName")
             };
             return View(employeeViewModel);
         }
         public IActionResult Details(string id)
         {
             TempData["Action"] = "Details";
-            var Employee = context.Employees.Include(e => e.User).FirstOrDefault(e => e.EmpID == id);
+            var Employee = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).FirstOrDefault(e => e.EmpID == id);
             EmployeeViewModel employeeViewModel = new EmployeeViewModel
             {
                 Id = id,
@@ -91,9 +94,11 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 Username = Employee.User.UserName,
                 Email = Employee.User.Email,
                 EmailConfirmed = Employee.User.Email,
-                UserID = Employee.User.Id,
                 HireDate = Employee.HireDate,
-                ReleaseDate = Employee.ReleaseDate
+                ReleaseDate = Employee.ReleaseDate,
+                //CommitteeName = context.Committees?.Where(predicate: c => c.CommitteesID == Employee.CommitteeMembers?.CommitteeID).Select(c => c.CommitteeName).FirstOrDefault() ?? "",
+                CommitteePosition = Employee.CommitteeMembers?.CommitteePosition ?? "",
+                AllCommittees = new SelectList(context.Committees.Select(c => c.CommitteeName).ToList(), "CommitteeName") 
             };
             return View("EditEmployee",employeeViewModel);
         }
@@ -101,7 +106,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEmployee(EmployeeViewModel model)
         {
-            if (TempData["Action"].ToString().Equals("Edit") && model.Id != null && model.UserID != null)
+            model.AllCommittees = new SelectList(context.Committees.Select(c => c.CommitteeName).ToList(), "CommitteeName");
+            if (TempData["Action"].ToString().Equals("Edit") && model.Id != null)
             {
                 return await EditEmployee(model);
             }
@@ -147,6 +153,10 @@ namespace NonProfitProject.Areas.Admin.Controllers
                     await userManager.AddToRoleAsync(user, "Employee");
                     context.Employees.Add(employee);
                     context.SaveChanges();
+                    if (!model.CommitteeName.Equals("None"))
+                    {
+                        //add to committee method
+                    }
                     TempData["EmployeeChanges"] = String.Format("{0} has been added as an employee", model.Firstname + " " + model.Lastname);
                     return RedirectToAction("Index");
                 }
@@ -158,7 +168,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                     }
                 }
             }
-            return View("EditEmployee");
+            return View("EditEmployee",model);
         }
 
         //allows the admin to edit employee information and if the admin chooses to check the "change login information" check box, the Admin will change the login information
@@ -172,12 +182,11 @@ namespace NonProfitProject.Areas.Admin.Controllers
             //this was done because the data on the website could potentially be altered which could cause an error or the id sent through the url could be altered as well
             try
             {
-                user = await userManager.FindByIdAsync(model.UserID);
-                employee = context.Employees.FirstOrDefault(e => e.EmpID == model.Id);
+                employee = context.Employees.Include(e => e.User).FirstOrDefault(e => e.EmpID == model.Id);
+                user = employee.User;
             }
             catch (Exception e)
             {
-                model.UserID = null;
                 model.Id = null;
                 return await AddEmployee(model);
             }
@@ -241,7 +250,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                     }
                 }
             }
-            return View("EditEmployee");
+            return View("EditEmployee", model);
         }
         [HttpPost]
         public async Task<IActionResult> DeleteEmployeeAsync(string id)
@@ -260,5 +269,9 @@ namespace NonProfitProject.Areas.Admin.Controllers
             
         }
 
+        public IActionResult AddToCommittee()
+        {
+            return View();
+        }
     }
 }

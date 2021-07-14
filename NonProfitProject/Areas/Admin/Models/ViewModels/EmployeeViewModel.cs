@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,6 +26,9 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [Required(ErrorMessage = "Please estimate employee's Salary")]
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal? Salary { get; set; }
+
+        public DateTime HireDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
         [Required(ErrorMessage = "Please enter employee's Address")]
         [StringLength(255)]
         public string Addr1 { get; set; }
@@ -70,12 +74,13 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [DataType(DataType.Password)]
         public string TemporaryPasswordConfirmed { get; set; }
 
-
+        //is used to check if the admin is change the employee information or not
         public bool IsChangingLogininformation { get; set; }
 
-        public string UserID { get; set; }
-
-        public DateTime HireDate { get; set; }
-        public DateTime? ReleaseDate { get; set; }
+        //this set of code holds committee member information
+        public string CommitteeName { get; set; }
+        public string CommitteePosition { get; set; }
+        //this holds the committiee names
+        public SelectList AllCommittees { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 @{    
     if (TempData["Action"].ToString().Equals("Details"))
     {
-        ViewData["Title"] = "Employee" + TempData["Action"].ToString();
+        ViewData["Title"] = "Employee " + TempData["Action"].ToString();
     }
     else
         ViewData["Title"] = TempData["Action"].ToString() + " Employee";
@@ -119,16 +119,32 @@
                             <div class="form-group row">
                                 <div class="col-5"><label>Hire Date: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" value="@Model.HireDate.ToString("MM/dd/yyyy")"/>
+                                    <input class="form-control" data-val="false" value="@Model.HireDate" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-5"><label>Release Date: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" value="@Model.ReleaseDate?.ToString("MM/dd/yyyy")"/>
+                                    <input class="form-control" data-val="false" value="@Model.ReleaseDate" />
                                 </div>
                             </div>
                         }
+                        <div class="form-group row">
+                            <div class="col-5"><label>Committee: </label></div>
+                            <div class="col-auto">
+                                <select id="SelectCommittee" asp-for="CommitteeName" class="form-control" data-val="false" onchange="AddingToCommittee()" asp-items="Model.AllCommittees">
+                                    <option value="None">N/A</option>
+                                </select>
+                                <span asp-validation-for="AllCommittees" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row" id="CommitteePosition">
+                            <div class="col-5"><label>Committee Position: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="CommitteePosition" class="form-control" data-val="false" />
+                                <span asp-validation-for="CommitteePosition" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card w-100" style="margin:0.5rem;" id="LoginInformation">
@@ -222,6 +238,7 @@
                                 passwordElements[0].style.display = "none";
                                 passwordElements[1].style.display = "none";
                                 passwordElements[2].style.display = "none";
+                                document.getElementById("SelectCommittee").disabled = true;
                             </script>
                         }
                     }
@@ -249,7 +266,6 @@
                     <button type="button" class="btn-lg btn-dark " onclick="location.href = '@Url.Action("Index","Employee")'">Cancel</button>
                 </div>
             </div>
-            <input type="hidden" asp-for="UserID" />
         </form>
     </div>   
     
@@ -260,5 +276,13 @@
             var t = e.value;
             e.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
         }
+        function AddingToCommittee() {
+            var selectCommittee = document.getElementById("SelectCommittee");
+            if (selectCommittee.value == "None")
+                document.getElementById("CommitteePosition").style.display = "none";
+            else
+                document.getElementById("CommitteePosition").style.display = "initial";
+        }
+        window.onload(AddingToCommittee());
     </script>
 </div>
