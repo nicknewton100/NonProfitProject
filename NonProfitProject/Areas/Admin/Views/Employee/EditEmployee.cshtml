@@ -44,7 +44,13 @@
                         <div class="form-group row">
                             <div class="col-5"><label>Gender: </label></div>
                             <div class="col-auto">
-                                <input asp-for="Gender" class="form-control" data-val="false" />
+                                <select class="form-control" asp-for="Gender" name="Gender" id="Gender" data-val="false">
+                                    <option value="#" disabled selected>...</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Prefer Not to Say">Prefer Not to Say</option>
+                                </select>
+                               
                                 <span asp-validation-for="Gender" class="text-danger"></span>
                             </div>
                         </div>
@@ -229,10 +235,14 @@
                         else if (TempData["Action"].ToString().Equals("Details"))
                         {
                             <script>
-                                var inputs, index;
+                                var inputs, index, selects;
                                 inputs = document.getElementsByTagName('input');
+                                selects = document.getElementsByTagName('select');
                                 for (var index = 0; index < inputs.length; ++index) {
                                     inputs[index].disabled = true;
+                                }
+                                for (var index = 0; index < selects.length; ++index) {
+                                    selects[index].disabled = true;
                                 }
                                 passwordElements = document.getElementsByClassName("DetailsDisable");
                                 passwordElements[0].style.display = "none";
