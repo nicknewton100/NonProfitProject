@@ -65,7 +65,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 Username = Employee.User.UserName,
                 Email = Employee.User.Email,
                 EmailConfirmed = Employee.User.Email,
-                //CommitteeName = context.Committees?.Where(c => c.CommitteesID == Employee.CommitteeMembers.CommitteeID).Select(c => c.CommitteeName).FirstOrDefault() ?? "",
+                CommitteeName = context.Committees?.Where(c => c.CommitteesID == (Employee.CommitteeMembers == null ? 0 : (Employee.CommitteeMembers.CommitteeID))).Select(c => c.CommitteeName).FirstOrDefault() ?? "",
                 CommitteePosition = Employee.CommitteeMembers?.CommitteePosition ?? "",
                 AllCommittees = new SelectList(context.Committees.Select(c => c.CommitteeName).ToList(), "CommitteeName")
             };
@@ -96,7 +96,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 EmailConfirmed = Employee.User.Email,
                 HireDate = Employee.HireDate,
                 ReleaseDate = Employee.ReleaseDate,
-                //CommitteeName = context.Committees?.Where(predicate: c => c.CommitteesID == Employee.CommitteeMembers?.CommitteeID).Select(c => c.CommitteeName).FirstOrDefault() ?? "",
+                CommitteeName = context.Committees?.Where(c => c.CommitteesID == (Employee.CommitteeMembers == null ? 0 : (Employee.CommitteeMembers.CommitteeID))).Select(c => c.CommitteeName).FirstOrDefault() ?? "",
                 CommitteePosition = Employee.CommitteeMembers?.CommitteePosition ?? "",
                 AllCommittees = new SelectList(context.Committees.Select(c => c.CommitteeName).ToList(), "CommitteeName") 
             };
@@ -107,6 +107,18 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public async Task<IActionResult> AddEmployee(EmployeeViewModel model)
         {
             model.AllCommittees = new SelectList(context.Committees.Select(c => c.CommitteeName).ToList(), "CommitteeName");
+            var committiees = context.Committees.Select(c => c.CommitteeName).ToList();
+            foreach (string C in committiees)
+            {
+                if (!C.Equals(model.CommitteeName) && committiees.Last().Equals(C))
+                {
+                    ModelState.AddModelError("AllCommittees", String.Format("The Committee {0} does not exist", model.CommitteeName));
+                }
+                else if(C.Equals(model.CommitteeName))
+                {
+                    break;
+                }
+            }
             if (TempData["Action"].ToString().Equals("Edit") && model.Id != null)
             {
                 return await EditEmployee(model);
@@ -155,7 +167,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                     context.SaveChanges();
                     if (!model.CommitteeName.Equals("None"))
                     {
-                        //add to committee method
+                        AddToCommittee(model);
                     }
                     TempData["EmployeeChanges"] = String.Format("{0} has been added as an employee", model.Firstname + " " + model.Lastname);
                     return RedirectToAction("Index");
@@ -239,6 +251,10 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 if (updateUser.Succeeded)
                 {
                     context.SaveChanges();
+                    if (!model.CommitteeName.Equals("None"))
+                    {
+                        AddToCommittee(model);
+                    }
                     TempData["EmployeeChanges"] = String.Format("{0} has been updated", model.Firstname + " " + model.Lastname);
                     return RedirectToAction("Index");
                 }
@@ -269,9 +285,26 @@ namespace NonProfitProject.Areas.Admin.Controllers
             
         }
 
-        public IActionResult AddToCommittee()
-        {
-            return View();
+        public void AddToCommittee(EmployeeViewModel model)
+        {        
+            CommitteeMembers committeeMember = context.CommitteeMembers?.Where(cm => cm.EmpID == model.Id).FirstOrDefault()  ?? null;
+            if (committeeMember == null)
+            {
+                committeeMember = new CommitteeMembers()
+                {
+                    CommitteeID = context.Committees.Where(c => c.CommitteeName == model.CommitteeName).Select(c => c.CommitteesID).FirstOrDefault(),
+                    EmpID = context.Employees.Where(e => e.User.UserName == model.Username).Select(e => e.EmpID).FirstOrDefault(),
+                    CommitteePosition = model.CommitteePosition
+                };
+                context.CommitteeMembers.Add(committeeMember);
+            }
+            else
+            {
+                committeeMember.CommitteeID = context.Committees.Where(c => c.CommitteeName == model.CommitteeName).Select(c => c.CommitteesID).FirstOrDefault();
+                committeeMember.CommitteePosition = model.CommitteePosition;
+                context.CommitteeMembers.Update(committeeMember);
+            }
+            context.SaveChanges();
         }
     }
 }
