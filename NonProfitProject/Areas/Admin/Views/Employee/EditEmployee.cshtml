@@ -23,6 +23,7 @@
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="form-group">
+                                <!--FIRST NAME-->
                                 <div class="col-auto"><label>First Name: </label></div>
                                 <div class="col-auto">
                                     <input asp-for="Firstname" class="form-control" data-val="false" />
@@ -30,6 +31,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <!--LAST NAME-->
                                 <div class="col-auto"><label>Last Name: </label></div>
                                 <div class="col-auto">
                                     <input asp-for="Lastname" class="form-control" data-val="false" />
@@ -37,6 +39,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <!--BIRTH DATE-->
                                 <div class="col-auto"><label>Birth Date: </label></div>
                                 <div class="col-auto">
                                     <input asp-for="BirthDate" class="form-control" type="date" data-val="false" />
@@ -44,6 +47,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <!--GENDER-->
                                 <div class="col-auto"><label>Gender: </label></div>
                                 <div class="col-auto">
                                     <select class="form-control" asp-for="Gender" name="Gender" id="Gender" data-val="false">
@@ -62,6 +66,7 @@
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="form-group w-50">
+                                <!--ADDRESS 1-->
                                 <div class="col-auto"><label>Address 1: </label></div>
                                 <div class="col-auto">
                                     <input asp-for="Addr1" class="form-control" data-val="false" />
@@ -69,6 +74,7 @@
                                 </div>
                             </div>
                             <div class="form-group w-50">
+                                <!--ADDRESS 2-->
                                 <div class="col-auto"><label>Address 2: </label></div>
                                 <div class="col-auto">
                                     <input asp-for="Addr2" class="form-control" data-val="false" />
@@ -78,6 +84,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                <!--CITY-->
                                 <div class="col-auto"><label>City: </label></div>
                                 <div class="col-auto">
                                     <input asp-for="City" class="form-control" data-val="false" />
@@ -85,6 +92,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <!--STATE-->
                                 <div class="col-auto"><label>State: </label></div>
                                 <div class="col-auto">
                                     <input asp-for="State" class="form-control" data-val="false" />
@@ -99,6 +107,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <!--COUNTRY-->
                                 <div class="col-auto"><label>Country: </label></div>
                                 <div class="col-auto">
                                     <input asp-for="Country" class="form-control" data-val="false" />
@@ -111,6 +120,7 @@
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="form-group">
+                                <!--POSITION-->
                                 <div class="col-auto"><label>Position: </label></div>
                                 <div class="col-auto">
                                     <input asp-for="Position" class="form-control" data-val="false" />
@@ -118,6 +128,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <!--SALARY-->
                                 <div class="col-auto"><label>Salary: </label></div>
                                 <div class="col-auto">
                                     <input asp-for="Salary" class="form-control" oninput="CheckDecimal(this)" data-val="false" />
@@ -127,12 +138,14 @@
                             @if (TempData["Action"].ToString().Equals("Details"))
                             {
                                 <div class="form-group">
+                                    <!--HIRE DATE-->
                                     <div class="col-auto"><label>Hire Date: </label></div>
                                     <div class="col-auto">
                                         <input class="form-control" data-val="false" value="@Model.HireDate" />
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <!--RELEASE DATE-->
                                     <div class="col-auto"><label>Release Date: </label></div>
                                     <div class="col-auto">
                                         <input class="form-control" data-val="false" value="@Model.ReleaseDate" />
@@ -143,6 +156,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                <!--COMMITTEE-->
                                 <div class="col-auto"><label>Committee: </label></div>
                                 <div class="col-auto">
                                     <select id="SelectCommittee" asp-for="CommitteeName" class="form-control" data-val="false" onchange="AddingToCommittee()" asp-items="Model.AllCommittees">
@@ -152,6 +166,7 @@
                                 </div>
                             </div>
                             <div class="form-group" id="CommitteePosition">
+                                <!--COMMITTEE POSITION-->
                                 <div class="col-auto"><label>Committee Position: </label></div>
                                 <div class="col-auto">
                                     <input asp-for="CommitteePosition" class="form-control" data-val="false" />
@@ -165,6 +180,7 @@
                         <div id="LoginInformation">
                             <div class="row">
                                 <div class="form-group">
+                                    <!--USERNAME-->
                                     <div class="col-auto"><label>Username: </label></div>
                                     <div class="col-auto">
                                         <input asp-for="Username" class="form-control" id="Username" data-val="false" />
@@ -174,6 +190,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group w-50">
+                                    <!--EMAIL ADDRESS-->
                                     <div class="col-auto"><label>Email Address: </label></div>
                                     <div class="col-auto">
                                         <input asp-for="Email" class="form-control" id="Email" data-val="false" />
@@ -181,6 +198,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group DetailsDisable w-50">
+                                    <!--CONFIRM EMAIL ADDRESS-->
                                     <div class="col-auto"><label>Confirm Email Address: </label></div>
                                     <div class="col-auto">
                                         <input asp-for="EmailConfirmed" class="form-control" id="EmailConfirmed" data-val="false" />
@@ -191,6 +209,7 @@
                             <div class="row">
                                 
                                 <div class="form-group DetailsDisable w-50">
+                                    <!--TEMPORARY PASSWORD-->
                                     <div class="col-auto"><label>Temporary Password: </label></div>
                                     <div class="col-auto">
                                         <input id="TemporaryPassword" asp-for="TemporaryPassword" class="form-control" data-val="false" />
@@ -202,6 +221,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group DetailsDisable w-50">
+                                    <!--CONFIRM TEMPORARY PASSWORD-->
                                     <div class="col-auto"><label>Confirm Temporary Password: </label></div>
                                     <div class="col-auto">
                                         <input id="TemporaryPasswordConfirmed" asp-for="TemporaryPasswordConfirmed" class="form-control" data-val="false" />
