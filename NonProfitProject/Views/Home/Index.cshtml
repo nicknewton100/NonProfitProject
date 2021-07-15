@@ -1,14 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Home";
     Layout = "_HomePage";
-
+    ViewData["Organization"] = "Animal Resuce";
+    ViewData["Non-Profit"] = "Non-Paw-Fit";
 }
 
 
 <!--PARALLAX EFFECTS. HEIGHT IS THE SIZE OF THE CONTAINER BOX OVERLAYING THE BACKGROUND IMAGE. BG COLOR IS THE BOX COLOR.-->
 
-<div class="container"id="Welcome">
-    <h1 class="display-1 text-center" >Welcome</h1>
+<div class="container" id="Welcome">
+    <h1 class="display-1 text-center">Welcome</h1>
     <h4>
         ABC Animal Rescue is dedicated to bringing change to the world. One rescue at a time. And you can help us
         make that change! Join us today, and help bring change to an animal who needs it. An animal who deserves it.
@@ -16,95 +17,123 @@
 
     </h4>
 </div>
-<div class="parallax" style="background-color:transparent;"></div>
+<div class="parallax"></div>
 <div class="container">
-    <div class="container">
-        <div class="row">
-            <div class="col" style="margin:0.25rem;">
-                <h2 class="card-header bg-dark text-light" style="text-align:left;">
-                    About Us
-                    <a class="btn btn-dark" style="text-align:center;"asp-area="" asp-controller="Home" asp-action="AboutUs">Click Here To Learn More!</a>
-                </h2>
-                <div class="card-body">
-
-                    <p>ABC Animal Rescue is a charity that, you guessed it, helps to rescue animals! With your support, we can rescue and relocate animals whos lives have been disrupted.
-                    
-                    
-                    </p>
-                    <p> </p>
-                    <!--<a class="btn btn-outline-dark" style="text-align:center; margin-top:30px; margin-bottom:30px;" asp-area="" asp-controller="Home" asp-action="AboutUs">Learn More</a>-->
-                    
-                </div>
+    <div class="row">
+        <div class="col" style="margin:0 0.1rem;">
+            <h2 class="card-header bg-dark text-light" style="text-align:left;">
+                About Us
+            </h2>
+            <div class="card-body" style="height: 175px;">
+                <p>ABC Animal Rescue is a charity that, you guessed it, helps to rescue animals! With your support, we can rescue and relocate animals whos lives have been disrupted.</p>
             </div>
+            <div class="card-footer bg-white">
+                <p><a class="card-link" style="text-align:center;" asp-area="" asp-controller="Home" asp-action="AboutUs">Learn More</a></p>
+            </div>
+        </div>
 
-            <div class="col" style="margin: 0.25rem;">
-                <h2 class="card-header bg-dark text-light" style="text-align:left;">
-                    Calendar Events
-                    <a class="btn btn-dark" style="text-align:center;" asp-area="" asp-controller="Event" asp-action="Calendar">Click Here To Learn More!</a>
-                </h2>
-                <div class="card-body">
-                    <p>
-                        We also hold many events to raise awareness and money to put towards the cause! Every penny counts towards helping our animal friends.
+        <div class="col" style="margin:0 0.1rem;">
+            <h2 class="card-header bg-dark text-light" style="text-align:left;">
+                Calendar Events
+            </h2>
+            <div class="card-body" style="height: 175px;">
+                <p>We also hold many events to raise awareness and money to put towards the cause! Every penny counts towards helping our animal friends. </p>
+            </div>
+            <div class="card-footer bg-white">
+                <p><a class="card-link" style="text-align:center;" asp-area="" asp-controller="Event" asp-action="Calendar">See More</a></p>
+            </div>
+        </div>
 
+        <div class="col" style="margin:0 0.1rem;">
+            <h2 class="card-header bg-dark text-light">
+                News
+            </h2>
+            <div class="card-body" style="height: 175px;">
+                <p>Care to see updates from Animal Rescue? Well now you can check out the latest updates below!</p>
+            </div>
+            <div class="card-footer bg-white">
+                <p> <a class="card-link" style="text-align:center; margin-top:30px; margin-bottom:30px;" asp-area=" " asp-controller="Home" asp-action="NewsPage">Click Here</a></p>
+            </div>
+        </div>
 
-                    </p>
-                    <p> </p>
-                    <!--<a class="btn btn-primary" style="text-align:center; margin-top:30px; margin-bottom:30px;" asp-area="" asp-controller="Event" asp-action="Calendar">Learn More</a>-->
-                    </div>
-                </div>
+        <div class="col" style="margin:0 0.1rem;">
+            <h2 class="card-header bg-dark text-light">
+                Donate
+            </h2>
+            <div class="card-body" style="height: 175px;">
+                <p>All donations go towards rescuing distressed animals. Every penny counts, and every penny is used.</p>
+            </div>
+            <div class="card-footer bg-white">
+                <p> <a class="card-link" style="text-align:center;" asp-area="" asp-controller="Donate" asp-action="Donate">Donate Here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <div class="col" style="margin: 0.25rem;">
-                    <h2 class="card-header bg-dark text-light">
-                        News
-                        <a class="btn btn-dark" style="text-align:center;" asp-area=" " asp-controller="Home" asp-action="NewsPage">Click Here To Read More!</a>
-                    </h2>
+<div class="parallax2"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-auto" style="margin: 0.25rem;">
+            <h1>News Articles</h1>
+            <div class="row">
+                <div class="card w-auto" style="margin:0.5rem;">
+                    <!--Add the News Article Id here (hidden)-->
+                    <h5 class="card-header">News Header Here</h5>
                     <div class="card-body">
-                        <p>
-                            Care to see updates from Animal Rescue? Well now you can check out the latest updates below!
-
-
-                        </p>
-                        <p> </p>
-                        <!-- <a class="btn btn-primary" style="text-align:center; margin-top:30px; margin-bottom:30px;"asp-area=" " asp-controller="Home" asp-action="NewsPage">Read More</a>-->
+                        <p>Date Here</p>
+                        <p>News Information??</p>
                     </div>
+                    <div class="card-footer">News Footer Here</div>
                 </div>
-
-                <div class="col" style="margin: 0.25rem;">
-                    <h2 class="card-header bg-dark text-light">
-                        Donate
-                        <a class="btn btn-dark" style="text-align:center;" asp-area="" asp-controller="Donate" asp-action="Donate">Click Here To Donate!</a>
-                    </h2>
-                    <div class="card-body ">
-                        <p>
-                            All donations go towards rescuing distressed animals. Every penny counts, and every penny is used.
-
-
-                        </p>
-
-                        <!-- <a class="btn btn-primary" style="text-align:center; margin-top:30px; margin-bottom:30px;" asp-area="" asp-controller="Donate" asp-action="Donate">Donate Here</a>-->
+                <div class="card w-auto" style="margin:0.5rem;">
+                    <!--Add the News Article Id here (hidden)-->
+                    <h5 class="card-header">News Header Here</h5>
+                    <div class="card-body">
+                        <p>Date Here</p>
+                        <p>News Information??</p>
                     </div>
+                    <div class="card-footer">News Footer Here</div>
                 </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="parallax2"></div>
-    <div class="bg-white">
-        <div class="container">
-            <div class="row justify-content-end">
-                <a href="#Welcome" class="fas fa-chevron-up text-dark" style="text-decoration-line:none; font-size:2rem"></a>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col-auto" style="margin:1rem;">
-                    <h1>Join Us Today!</h1>
+                <div class="card w-auto" style="margin:0.5rem;">
+                    <!--Add the News Article Id here (hidden)-->
+                    <h5 class="card-header">News Header Here</h5>
+                    <div class="card-body">
+                        <p>Date Here</p>
+                        <p>News Information??</p>
+                    </div>
+                    <div class="card-footer">News Footer Here</div>
                 </div>
-            </div>
-            <div class="row justify-content-md-center">
-
-                <div class="col-auto" style="margin:1rem;">
-                    <a class="btn btn-primary" style="font-size:2rem; " asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                <div class="card w-auto" style="margin:0.5rem;">
+                    <!--Add the News Article Id here (hidden)-->
+                    <h5 class="card-header">News Header Here</h5>
+                    <div class="card-body">
+                        <p>Date Here</p>
+                        <p>News Information??</p>
+                    </div>
+                    <div class="card-footer">News Footer Here</div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="parallax3"></div>
+<div class="container">
+    <div class="row justify-content-end">
+        <a href="#Welcome" class="fas fa-chevron-up text-dark" style="text-decoration-line:none; font-size:2rem"></a>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-auto" style="margin:1rem;">
+            <h1>Join Us Today!</h1>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+
+        <div class="col-auto" style="margin:1rem;">
+            <a class="btn btn-primary" style="font-size:2rem; " asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </div>
+    </div>
+</div>
+
+
 
