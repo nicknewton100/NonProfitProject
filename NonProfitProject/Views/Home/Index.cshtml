@@ -1,8 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Home";
-    Layout = "_HomePage";
     ViewData["Organization"] = "Animal Rescue";
     ViewData["Non-Profit"] = "Non-Paw-Fit";
+
+    Layout = "_HomePage";
 }
 
 
@@ -11,7 +12,7 @@
 <div class="container" id="Welcome">
     <h1 class="display-1 text-center">Welcome</h1>
     <h4>
-        ABC Animal Rescue is dedicated to bringing change to the world. One rescue at a time. And you can help us
+        @ViewData["Non-Profit"] @ViewData["Organization"] is dedicated to bringing change to the world. One rescue at a time. And you can help us
         make that change! Join us today, and help bring change to an animal who needs it. An animal who deserves it.
         Be the change you want to see.
 
@@ -121,24 +122,21 @@
 <div class="parallax3"></div>
 <div class="container">
     <h1 class="display-1 text-center">Thank You</h1>
-    <h4>
-        Thank you for taking the time to raise your awareness, and considering a donation to Non-Pawfit Animal Rescue!
-
-    </h4>
+    <h4>Thank you for taking the time to raise your awareness, and considering a donation to Non-Pawfit Animal Rescue!</h4>
 </div>
 <div class="container" style="margin-top:10rem;">
     <div class="row justify-content-end">
         <a href="#Welcome" class="fas fa-chevron-up text-dark" style="text-decoration-line:none; font-size:2rem"></a>
     </div>
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-md-center text-center">
         <div class="col-auto" style="margin:1rem;">
-            <h1>Join Us Today!</h1>
-        </div>
-    </div>
-    <div class="row justify-content-md-center">
-
-        <div class="col-auto" style="margin:1rem;">
-            <a class="btn btn-primary" style="font-size:2rem; " asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+            <div class="card" style="padding:5rem;">
+                <div class="card-body bg-white">
+                    <h1>Join Us Today!</h1>
+                    <br />
+                    <h1> <a class="btn btn-primary" style="font-size:2rem;" asp-area="" asp-controller="Account" asp-action="Register">Register</a></h1>
+                </div>
+            </div>
         </div>
     </div>
 </div>
