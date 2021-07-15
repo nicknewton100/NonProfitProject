@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NonProfitProject.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
@@ -50,7 +51,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 string addOrEdit;
-                if (model.EventID == 0 || context.Events.Find(model.EventID) == null)
+                if (model.EventID == 0 || context.Events.AsNoTracking().Where(e => e.EventID == model.EventID).FirstOrDefault() == null)
                 {
                     context.Events.Add(model);
                     addOrEdit = "added";

@@ -24,7 +24,7 @@
                         <div class="col-sm-3"><label>Start Date</label></div>
                         <div class="col">
                             <span asp-validation-for="EventStartDate" class="text-danger"></span>
-                            <input asp-for="EventStartDate" class="form-control" value=""/>
+                            <input asp-for="EventStartDate" class="form-control date"/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -32,7 +32,7 @@
                         <div class="col-sm-3"><label>End Date</label></div>
                         <div class="col">
                             <span asp-validation-for="EventEndDate" class="text-danger"></span>
-                            <input asp-for="EventEndDate" class="form-control" value=""/>
+                            <input asp-for="EventEndDate" class="form-control date"/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -50,4 +50,14 @@
             </div>
         </div>
     </div>
+    @if (ViewBag.Action.Equals("Add"))
+    {
+        <script>
+            var dateInput = document.getElementsByClassName("date");
+            for (var i = 0; i < dateInput.length; i++) {
+                dateInput[i].setAttribute("value", "");
+            }
+        </script>
+    }
+    
 </div>
