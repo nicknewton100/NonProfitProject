@@ -93,7 +93,12 @@
             <!--GENDER-->
             <div class="col-sm-1"><label>Gender: </label></div>
             <div class="col-sm-2">
-                <input readonly asp-for="Gender" class="form-control" />
+                <select class="form-control" asp-for="Gender" disabled>
+                    <option value="#" disabled selected>...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Prefer Not to Say">Prefer Not to Say</option>
+                </select>
             </div>
 
         </div>
