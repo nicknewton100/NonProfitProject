@@ -17,9 +17,7 @@ namespace NonProfitProject.Models
         public string CardholderName { get; set; }
         public string CardType { get; set;}
         public string CardNumber { get; set; }
-        [Column(TypeName = "Date")]
-        [DataType(DataType.Date)]
-        public DateTime ExpDate { get; set; }
+        public string ExpDate { get; set; }
         public string CVV { get; set; }
         public int Last4Digits { get; set; }
     }

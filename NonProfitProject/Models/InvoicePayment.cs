@@ -9,6 +9,7 @@ namespace NonProfitProject.Models
 {
     public class InvoicePayment
     {
+        //all sensitive data will be stored as encrypted values with datatype of string
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int InvPaymentID { get; set; }
@@ -16,11 +17,9 @@ namespace NonProfitProject.Models
         public Receipts Receipt { get; set; }
         public string CardholderName { get; set; }
         public string CardType { get; set;}
-        public int CardNumber { get; set; }
-        [Column(TypeName = "Date")]
-        [DataType(DataType.Date)]
-        public DateTime ExpDate { get; set; }
-        public int CVV { get; set; }
+        public string CardNumber { get; set; }
+        public string ExpDate { get; set; }
+        public string CVV { get; set; }
         public int Last4Digits { get; set; }
     }
 }
