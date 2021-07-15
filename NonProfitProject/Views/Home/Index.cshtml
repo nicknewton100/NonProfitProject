@@ -21,68 +21,90 @@
     <div class="container">
         <div class="row">
             <div class="col" style="margin:0.25rem;">
-                <h2 class="card-header bg-dark text-light">
+                <h2 class="card-header bg-dark text-light" style="text-align:left;">
                     About Us
+                    <a class="btn btn-dark" style="text-align:center;"asp-area="" asp-controller="Home" asp-action="AboutUs">Click Here To Learn More!</a>
                 </h2>
                 <div class="card-body">
 
-                    <p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...."</p>
-                    <a class="btn btn-primary" style="text-decoration: none;" asp-area="" asp-controller="Home" asp-action="AboutUs">Learn More</a>
-
+                    <p>ABC Animal Rescue is a charity that, you guessed it, helps to rescue animals! With your support, we can rescue and relocate animals whos lives have been disrupted.
+                    
+                    
+                    </p>
+                    <p> </p>
+                    <!--<a class="btn btn-outline-dark" style="text-align:center; margin-top:30px; margin-bottom:30px;" asp-area="" asp-controller="Home" asp-action="AboutUs">Learn More</a>-->
+                    
                 </div>
             </div>
 
             <div class="col" style="margin: 0.25rem;">
-                <h2 class="card-header bg-dark text-light">
+                <h2 class="card-header bg-dark text-light" style="text-align:left;">
                     Calendar Events
-
+                    <a class="btn btn-dark" style="text-align:center;" asp-area="" asp-controller="Event" asp-action="Calendar">Click Here To Learn More!</a>
                 </h2>
                 <div class="card-body">
-                    <p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...."</p>
-                    <a class="btn btn-primary" style="text-decoration: none;" asp-area="" asp-controller="Event" asp-action="Calendar">Learn More</a>
+                    <p>
+                        We also hold many events to raise awareness and money to put towards the cause! Every penny counts towards helping our animal friends.
+
+
+                    </p>
+                    <p> </p>
+                    <!--<a class="btn btn-primary" style="text-align:center; margin-top:30px; margin-bottom:30px;" asp-area="" asp-controller="Event" asp-action="Calendar">Learn More</a>-->
+                    </div>
+                </div>
+
+                <div class="col" style="margin: 0.25rem;">
+                    <h2 class="card-header bg-dark text-light">
+                        News
+                        <a class="btn btn-dark" style="text-align:center;" asp-area=" " asp-controller="Home" asp-action="NewsPage">Click Here To Read More!</a>
+                    </h2>
+                    <div class="card-body">
+                        <p>
+                            Care to see updates from Animal Rescue? Well now you can check out the latest updates below!
+
+
+                        </p>
+                        <p> </p>
+                        <!-- <a class="btn btn-primary" style="text-align:center; margin-top:30px; margin-bottom:30px;"asp-area=" " asp-controller="Home" asp-action="NewsPage">Read More</a>-->
+                    </div>
+                </div>
+
+                <div class="col" style="margin: 0.25rem;">
+                    <h2 class="card-header bg-dark text-light">
+                        Donate
+                        <a class="btn btn-dark" style="text-align:center;" asp-area="" asp-controller="Donate" asp-action="Donate">Click Here To Donate!</a>
+                    </h2>
+                    <div class="card-body ">
+                        <p>
+                            All donations go towards rescuing distressed animals. Every penny counts, and every penny is used.
+
+
+                        </p>
+
+                        <!-- <a class="btn btn-primary" style="text-align:center; margin-top:30px; margin-bottom:30px;" asp-area="" asp-controller="Donate" asp-action="Donate">Donate Here</a>-->
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col" style="margin: 0.25rem;">
-                <h2 class="card-header bg-dark text-light">
-                    News
-                </h2>
-                <div class="card-body">
-                    <p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...."</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="NewsPage">Read More</a>
+    </div>
+    <div class="parallax2"></div>
+    <div class="bg-white">
+        <div class="container">
+            <div class="row justify-content-end">
+                <a href="#Welcome" class="fas fa-chevron-up text-dark" style="text-decoration-line:none; font-size:2rem"></a>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-auto" style="margin:1rem;">
+                    <h1>Join Us Today!</h1>
                 </div>
             </div>
+            <div class="row justify-content-md-center">
 
-            <div class="col" style="margin: 0.25rem;">
-                <h2 class="card-header bg-dark text-light">
-                    Donate
-                </h2>
-                <div class="card-body ">
-                    <p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...."</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Donate" asp-action="Donate">Donate Here</a>
+                <div class="col-auto" style="margin:1rem;">
+                    <a class="btn btn-primary" style="font-size:2rem; " asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                 </div>
             </div>
         </div>
     </div>
-    
-</div>
-<div class="parallax2"></div>
-<div class="bg-white">
-    <div class="container">
-        <div class="row justify-content-end">
-            <a href="#Welcome" class="fas fa-chevron-up text-dark" style="text-decoration-line:none; font-size:2rem"></a>
-        </div>
-        <div class="row justify-content-md-center">
-            <div class="col-auto" style="margin:1rem;">
-                <h1>Join Us Today!</h1>
-            </div>
-        </div>
-        <div class="row justify-content-md-center">
-            
-            <div class="col-auto" style="margin:1rem;">
-                <a class="btn btn-primary" style="font-size:2rem; " asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-            </div>
-        </div>
-    </div>
-</div>
 
