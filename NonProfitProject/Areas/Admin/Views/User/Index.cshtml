@@ -16,7 +16,7 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col" hidden>#</th>
                         <th scope="col">First</th>
                         <th scope="col">Last</th>
                         <th scope="col">Email Address</th>
@@ -27,7 +27,7 @@
                     @foreach (User user in Model)
                     {
                         <tr>
-                            <th scope="row">@userCount</th>
+                            <th scope="row" hidden>@userCount</th>
                             <th>@user.UserFirstName</th>
                             <th>@user.UserLastName</th>
                             <th>@user.Email</th>
