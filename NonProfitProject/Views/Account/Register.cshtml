@@ -85,7 +85,12 @@
             <div class="form-group row">
                 <div class="col-sm-2"><label>Gender: </label></div>
                 <div class="col-sm-4">
-                    <input asp-for="Gender" class="form-control" />
+                    <select asp-for="Gender" class="form-control">
+                        <option value="#" disabled selected>...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Prefer Not to Say">Prefer Not to Say</option>
+                    </select>
                 </div>
                 <div class="col">
                     <span asp-validation-for="Gender" class="text-danger"></span>
@@ -94,7 +99,7 @@
             <div class="form-group row">
                 <div class="col-sm-2"><label>Birth Date: </label></div>
                 <div class="col-sm-4">
-                    <input asp-for="BirthDate" class="form-control" />
+                    <input asp-for="BirthDate" class="form-control" type="date" />
                 </div>
                 <div class="col">
                     <span asp-validation-for="BirthDate" class="text-danger"></span>

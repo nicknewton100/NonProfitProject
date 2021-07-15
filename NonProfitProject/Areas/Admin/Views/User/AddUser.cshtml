@@ -1,45 +1,138 @@
-﻿@model User
-@{
+﻿@{
     ViewData["Title"] = "Add User";
     Layout = "_AdminLayout";
 }
 
 <div class="container">
-    <form>
-        <div class="row justify-content-md-center">
-            <div class="card w-50">
-                <div class="card-header"><h1>User Contact Information</h1></div>
-                <div class="card-body">
-                    <div class="form-group row">
-                        <label class="col-3">First Name</label>
-                        <div class="col"><input class="form-control"/></div>
-                    </div>
+    <div class="card-header-pills"><h1 class="fas fa-user-edit">  @ViewData["Title"]</h1></div>
+    <div>
+        <form method="post" style="font-size:medium">
+            <div class="row">
+                <div class="card w-auto" style="margin:0.5rem;padding:0.25rem;">
+                    <div class="card-body">
+                        <h4>Personal Information</h4>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-auto"><label>First Name: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" data-val="false" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-auto"><label>Last Name: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" data-val="false" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-auto"><label>Birth Date: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" type="date" data-val="false" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-auto"><label for="gender">Gender: </label></div>
+                                <div class="col-auto">
+                                    <select class="form-control" name="gender" id="gender">
+                                        <option value="#" disabled selected>...</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Prefer Not to Say">Prefer Not to Say</option>
+                                    </select>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <h4>Address Information</h4>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="form-group w-50">
+                                <div class="col-auto"><label>Address 1: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" data-val="false" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group w-50">
+                                <div class="col-auto"><label>Address 2: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" data-val="false" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-auto"><label>City: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" data-val="false" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-auto"><label>State: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" data-val="false" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-auto"><label>Postal Code: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" data-val="false" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-auto"><label>Country: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" data-val="false" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <h4>Other: </h4>
+                        <div class="dropdown-divider"></div>
+                        <div class="form-check row">
+                            <div class="col-auto">
+                                <input class="form-check-input" type="checkbox" value="" id="vip">
+                                <label class="form-check-label" for="vip">
+                                    Becoming a VIP Member?
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-check row">
+                            <div class="col-auto">
+                                <input class="form-check-input" type="checkbox" value="" id="emp">
+                                <label class="form-check-label" for="empl">
+                                    Joining the Team?
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-check row">
+                            <div class="col-auto">
+                                <input class="form-check-input" type="checkbox" value="" id="news">
+                                <label class="form-check-label" for="news">
+                                    Receiving Newsletters?
+                                </label>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="row">
+                            <div class="col-auto">
+                                <button class="btn btn-primary">Add User</button>
+                                <a class="btn btn-danger" asp-area="Admin" asp-controller="User" asp-action="Index">Cancel</a>
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
             </div>
-        </div>
-
-        <div class="row justify-content-md-center">
-            <div class="card w-50">
-                <div class="card-header"><h1>User Role</h1></div>
-                <div class="card-body">
-                    <div class="form-group row">
-                        <label class="col-3">First Name</label>
-                        <div class="col"><input class="form-control" /></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row justify-content-md-center">
-            <div class="card w-50">
-                <div class="card-header"><h1>Committee</h1></div>
-                <div class="card-body">
-                    <div class="form-group row">
-                        <label class="col-3">First Name</label>
-                        <div class="col"><input class="form-control" /></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
