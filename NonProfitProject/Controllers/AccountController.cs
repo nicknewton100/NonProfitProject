@@ -103,7 +103,6 @@ namespace NonProfitProject.Controllers
                     UserCity = model.City,
                     UserState = model.State,
                     UserPostalCode = model.PostalCode,
-                    UserCountry = model.Country,
                     ReceiveWeeklyNewsletter = model.ReceiveWeeklyNewsletter,
                     UserCreationDate = DateTime.UtcNow,
                     UserLastActivity = DateTime.UtcNow,

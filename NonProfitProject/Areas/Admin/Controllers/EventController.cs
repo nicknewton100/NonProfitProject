@@ -38,6 +38,10 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             ViewBag.Action = "Edit";
             var Event = context.Events.Find(id);
+            if (Event == null)
+            {
+                return RedirectToAction("Index");
+            }
             return View(Event);
         }
         [HttpPost]
@@ -46,7 +50,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 string addOrEdit;
-                if (model.EventID == 0)
+                if (model.EventID == 0 || context.Events.Find(model.EventID) == null)
                 {
                     context.Events.Add(model);
                     addOrEdit = "added";
@@ -72,9 +76,17 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public IActionResult Delete(int id)
         {
             var Event = context.Events.Find(id);
-            context.Remove(Event);
-            context.SaveChanges();
-            TempData["EventChanges"] = String.Format("The Event \"{0}\" has been deleted", Event.EventName);
+            if(Event == null)
+            {
+                TempData["EventChanges"] = String.Format("The Event with EventID \"{0}\" does not exist", id);
+            }
+            else
+            {
+                context.Remove(Event);
+                context.SaveChanges();
+                TempData["EventChanges"] = String.Format("The Event \"{0}\" has been deleted", Event.EventName);
+            }
+            
             return RedirectToAction("Index");
         }
     }

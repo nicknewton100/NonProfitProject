@@ -18,7 +18,6 @@ namespace NonProfitProject.Models.ViewModels.Shared.Users
         public string City { get; set; }
         public string State { get; set; }
         public int PostalCode { get; set; }
-        public string Country { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }

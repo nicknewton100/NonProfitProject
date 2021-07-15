@@ -43,9 +43,6 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [Required(ErrorMessage = "Please enter employee's Postal Code")]
         [DataType(DataType.PostalCode)]
         public int? PostalCode { get; set; }
-        [Required(ErrorMessage = "Please enter employee's Country")]
-        [StringLength(60)]
-        public string Country { get; set; }
         [Required(ErrorMessage = "Please enter employee's BirthDate")]
         [DataType(DataType.Date)]
         public DateTime? BirthDate { get; set; }

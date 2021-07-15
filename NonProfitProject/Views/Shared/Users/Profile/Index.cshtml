@@ -25,10 +25,10 @@
                 <input readonly asp-for="FirstName" class="form-control" />
             </div>
 
-            <!--USERNAME-->
-            <div class="col-sm-2"><div class="fas fa-user-alt"></div>  <label>Username: </label></div>
+            <!--LAST NAME-->
+            <div class="col-sm-2"><label>Last Name: </label></div>
             <div class="col-sm-2">
-                <input readonly asp-for="Username" class="form-control" />
+                <input readonly asp-for="LastName" class="form-control" />
             </div>
 
             <!--BIRTHDAY-->
@@ -41,10 +41,10 @@
 
         <div class="form-group row">
 
-            <!--LAST NAME-->
-            <div class="col-sm-2"><label>Last Name: </label></div>
+            <!--USERNAME-->
+            <div class="col-sm-2"><div class="fas fa-user-alt"></div>  <label>Username: </label></div>
             <div class="col-sm-2">
-                <input readonly asp-for="LastName" class="form-control" />
+                <input readonly asp-for="Username" class="form-control" />
             </div>
 
             <!--EMAIL ADDRESS-->
@@ -84,16 +84,10 @@
                 <input readonly asp-for="PostalCode" class="form-control" />
             </div>
 
-            <!--COUNTRY-->
-            <div class="col-sm-1"><label>Country: </label></div>
-            <div class="col-sm-3">
-                <input readonly asp-for="Country" class="form-control" />
-            </div>
-
             <!--GENDER-->
             <div class="col-sm-1"><label>Gender: </label></div>
             <div class="col-sm-2">
-                <select class="form-control" asp-for="Gender" disabled>
+                <select readonly class="form-control" asp-for="Gender" disabled>
                     <option value="#" disabled selected>...</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>

@@ -59,7 +59,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 City = Employee.User.UserCity,
                 State = Employee.User.UserState,
                 PostalCode = Employee.User.UserPostalCode,
-                Country = Employee.User.UserCountry,
                 BirthDate = Employee.User.UserBirthDate,
                 PhoneNumber = Employee.User.PhoneNumber,
                 Username = Employee.User.UserName,
@@ -88,7 +87,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 City = Employee.User.UserCity,
                 State = Employee.User.UserState,
                 PostalCode = Employee.User.UserPostalCode,
-                Country = Employee.User.UserCountry,
                 BirthDate = Employee.User.UserBirthDate,
                 PhoneNumber = Employee.User.PhoneNumber,
                 Username = Employee.User.UserName,
@@ -143,7 +141,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
                     UserCity = model.City,
                     UserState = model.State,
                     UserPostalCode = (int)model.PostalCode,
-                    UserCountry = model.Country,
                     PhoneNumber = model.PhoneNumber,
                     UserCreationDate = DateTime.UtcNow,
                     UserLastActivity = DateTime.UtcNow,
@@ -188,20 +185,16 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> EditEmployee(EmployeeViewModel model)
         {
-            User user;
-            Employees employee;
-            //this try catch makes sure that the user and employee exists before trying to chnage them. If tehy dont, it sends it back to add employee
+            Employees employee = context.Employees?.Include(e => e.User).FirstOrDefault(e => e.EmpID == model.Id) ?? null;
+            //makes sure that the user and employee exists before trying to change them. If they dont, it sends it back to add employee
             //this was done because the data on the website could potentially be altered which could cause an error or the id sent through the url could be altered as well
-            try
-            {
-                employee = context.Employees.Include(e => e.User).FirstOrDefault(e => e.EmpID == model.Id);
-                user = employee.User;
-            }
-            catch (Exception e)
+            if (employee == null)
             {
                 model.Id = null;
                 return await AddEmployee(model);
             }
+            User user = employee.User;
+            
             if (model.TemporaryPassword == null || !model.IsChangingLogininformation)
             {
                 ModelState.Remove("TemporaryPassword");
@@ -224,7 +217,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 user.UserCity = model.City;
                 user.UserState = model.State;
                 user.UserPostalCode = (int)model.PostalCode;
-                user.UserCountry = model.Country;
                 user.PhoneNumber = model.PhoneNumber;
                 user.UserLastActivity = DateTime.UtcNow;
 

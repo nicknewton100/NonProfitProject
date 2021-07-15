@@ -16,11 +16,11 @@ namespace NonProfitProject.Models
         public User User { get; set; }
         public string CardholderName { get; set; }
         public string CardType { get; set;}
-        public int CardNumber { get; set; }
+        public string CardNumber { get; set; }
         [Column(TypeName = "Date")]
         [DataType(DataType.Date)]
         public DateTime ExpDate { get; set; }
-        public int CVV { get; set; }
+        public string CVV { get; set; }
         public int Last4Digits { get; set; }
     }
 }

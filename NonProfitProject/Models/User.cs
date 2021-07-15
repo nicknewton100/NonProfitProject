@@ -19,7 +19,6 @@ namespace NonProfitProject.Models
         public string UserCity { get; set; }
         public string UserState { get; set; }
         public int UserPostalCode { get; set; }
-        public string UserCountry { get; set; }
 
         [DataType(DataType.Date)]
         [Column(TypeName = "date")]
