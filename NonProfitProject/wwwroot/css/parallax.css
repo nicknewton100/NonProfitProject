@@ -1,4 +1,4 @@
-﻿
+
 /*KEEP THIS IN LAYOUT FOR PARALLAX SCROLLING EFFECT
 MIN-HEIGHT PUSHES STARTING HTML LOWER. 750px WAS JUST ENOUGH TO PUSH THE STOCKPHOTOS OFF SCREEN TO START THE EFFECT
 
@@ -23,10 +23,8 @@ MIN-HEIGHT PUSHES STARTING HTML LOWER. 750px WAS JUST ENOUGH TO PUSH THE STOCKPH
     background-repeat: no-repeat;
     background-size: contain;
 }
-
-
 .parallax3 {
-    /*The image used */ background-image: url("../img/can_you_turn_your_business_into_a_nonprofit.jpg");
+    /*The image used */ background-image: url("../img/myPupper.jpg");
     /* Set a specific height */ min-height: 550px;
     /*Create the parallax scrolling effect */
     background-attachment: fixed;
