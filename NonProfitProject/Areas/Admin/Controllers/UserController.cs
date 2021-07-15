@@ -31,5 +31,28 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             return View();
         }
+
+        //////////////////////////////////////////////////////////////////////
+        //Edit 2 pieces of code below to appropriate where to return view from
+        [HttpGet]
+        public IActionResult EditUser(int userID)
+        {
+            ViewBag.Action = "Edit";
+            var User = context.Users.Find(userID);
+            return View(User);
+        }
+
+        [HttpPost]
+        public IActionResult EditUser(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(user);
+            }
+        }
     }
 }
