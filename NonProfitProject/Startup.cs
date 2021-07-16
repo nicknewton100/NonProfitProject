@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using NonProfitProject.Code;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using NonProfitProject.Code.Security;
 
 namespace NonProfitProject
 {
