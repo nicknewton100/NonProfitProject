@@ -61,7 +61,30 @@ namespace NonProfitProject.Models
                     RoleId = "370d9876-b6ab-4694-baa9-ecc7bc5b451c",
                     UserId = "6b87b89f-0f9a-4e2d-b696-235e99655521"
                 });
-
+            //Create News
+            builder.Entity<News>().HasData(
+                new News
+                {
+                    NewsID = 1,
+                    NewsTitle = "10k Run for Cancer!",
+                    NewsHeader = "Come Join Us!",
+                    NewsFooter = "News Comittee",
+                    NewsCreationDate = new DateTime(2021, 7, 15),
+                    NewsPublishDate = new DateTime(2021, 7, 15),
+                    NewsLastUpdated = new DateTime(2021, 7, 15),
+                    NewsDescription = "Run for a whole week straight for cancer at the end of July. 15 Dollar Admission Fee. Event runs from July 24-31!"
+                },
+                new News
+                {
+                    NewsID = 2,
+                    NewsTitle = "Movie Night",
+                    NewsHeader = "Movie Time!",
+                    NewsFooter = "News Comittee",
+                    NewsCreationDate = new DateTime(2021, 7, 15),
+                    NewsPublishDate = new DateTime(2021, 7, 15),
+                    NewsLastUpdated = new DateTime(2021, 7, 15),
+                    NewsDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks! Snacks: Popcorn. Event runs on July 26!"
+                });
             //creates data for employees
             builder.Entity<Employees>().HasData(
                 new Employees

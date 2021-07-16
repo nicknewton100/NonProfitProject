@@ -7,17 +7,16 @@ using NonProfitProject.Models;
 
 namespace NonProfitProject.Controllers
 {
-    public class EventController : Controller
+    public class NewsController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult Calendar()
+        public IActionResult NewsPage()
         {
             return View();
         }
+
     }
 }
-
