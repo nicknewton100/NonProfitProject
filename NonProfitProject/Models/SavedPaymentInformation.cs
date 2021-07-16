@@ -9,6 +9,7 @@ namespace NonProfitProject.Models
 {
     public class SavedPaymentInformation
     {
+        //all sensitive data will be stored as encrypted values with datatype of string
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SavedPaymentID { get; set; }
@@ -20,5 +21,12 @@ namespace NonProfitProject.Models
         public string ExpDate { get; set; }
         public string CVV { get; set; }
         public int Last4Digits { get; set; }
+
+        //this is used for billing address information
+        public string BillingAddr1 { get; set; }
+        public string BillingAddr2 { get; set; }
+        public string BillingCity { get; set; }
+        public string BillingState { get; set; }
+        public int BillingPostalCode { get; set; }
     }
 }

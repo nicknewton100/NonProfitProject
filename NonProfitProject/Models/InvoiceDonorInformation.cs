@@ -23,6 +23,5 @@ namespace NonProfitProject.Models
         public string City { get; set; }
         public string State { get; set; }
         public int PostalCode { get; set; }
-        public string Country { get; set; }
     }
 }

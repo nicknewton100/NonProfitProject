@@ -9,11 +9,9 @@ namespace NonProfitProject.Code.Security
 {
     public class AesEncryption
     {
-        //keys should typically not be stored in the source code, however, I was unable to 
-        
-        
-        
-        //used to create the key adn IV
+        ///////////This code was not created by me. Credit goes to: https://damienbod.com/2020/08/19/symmetric-and-asymmetric-encryption-in-net-core/
+
+        //used to create the key and IV
         public (string Key, string IVBase64) InitSymmetricEncryptionKeyIV()
         {
             var key = GetEncodedRandomString(32); // 256
@@ -27,6 +25,25 @@ namespace NonProfitProject.Code.Security
             var base64 = Convert.ToBase64String(GenerateRandomBytes(length));
             return base64;
         }
+        
+        //generates random bytes
+        private byte[] GenerateRandomBytes(int length)
+        {
+            var byteArray = new byte[length];
+            RandomNumberGenerator.Fill(byteArray);
+            return byteArray;
+        }
+
+
+
+
+        //keys should typically not be stored in the source code, however, I was unable to figure out how to use Azure key valut as I intended to do due to time constraint. In the real world, this key would be
+        //store somewhere else besides the source code or the database. 
+        //for now, we will be using this key and Iv that was generated through the code above.
+        readonly string key = "KvaG2bTeHTgRFhu7T80CzNzWFTyvpuvbr/7N4IHmvHM=";
+        readonly string IV = "I/Yum2/w3jAWolO4rzs+Ow==";
+
+
         //creates Cipher object using the key
         private Aes CreateCipher(string keyBase64)
         {
@@ -39,17 +56,6 @@ namespace NonProfitProject.Code.Security
 
             return cipher;
         }
-        //generates random bytes
-        private byte[] GenerateRandomBytes(int length)
-        {
-            var byteArray = new byte[length];
-            RandomNumberGenerator.Fill(byteArray);
-            return byteArray;
-        }
-
-        readonly string key = "KvaG2bTeHTgRFhu7T80CzNzWFTyvpuvbr/7N4IHmvHM=";
-        readonly string IV = "I/Yum2/w3jAWolO4rzs+Ow==";
-
         /////////////////////(string text, string key, string IV)
         public string Encrypt(string text)
         {
