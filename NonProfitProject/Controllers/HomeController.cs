@@ -22,12 +22,6 @@ namespace NonProfitProject.Controllers
 
         public IActionResult Index()
         {
-            AesEncryption aes = new AesEncryption();
-            var (Key, IvBase64) = aes.InitSymmetricEncryptionKeyIV();
-            System.Diagnostics.Debug.WriteLine("key: " + Key + "\nIV: " + IvBase64);
-            var encrypted = aes.Encrypt("Test123");
-            var decrypted = aes.Decrypt(encrypted);
-            System.Diagnostics.Debug.WriteLine("Encrypt: " + encrypted + "\nDecrypt: " + decrypted);
             return View();
         }
         public IActionResult UserIndex()
