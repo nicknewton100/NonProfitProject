@@ -12,9 +12,14 @@ namespace NonProfitProject.Controllers
 {
     public class DonateController : Controller
     {
-        public IActionResult Donate()
+        public IActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult Donate()
+        {
+            return View("Index");
         }
         public IActionResult Payment()
         {
