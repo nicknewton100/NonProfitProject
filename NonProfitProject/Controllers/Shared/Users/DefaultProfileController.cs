@@ -114,9 +114,9 @@ namespace NonProfitProject.Controllers.Shared.Users
             }
             AesEncryption aes = new AesEncryption();
             //check if the user already has this card in their saved payments
-            var test = context.SavedPayments.Where(sp => sp.CardNumber.Equals(aes.Encrypt(model.CardNumber)) &&
+            var checkSavedPayments = context.SavedPayments.Where(sp => sp.CardNumber.Equals(aes.Encrypt(model.CardNumber)) &&
                 sp.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking().FirstOrDefault();
-            if (test != null)
+            if (checkSavedPayments != null)
             {
                 ModelState.AddModelError("", "Error - This card has already been added");
             }

@@ -31,7 +31,7 @@ namespace NonProfitProject.Models.ViewModels.Shared.Users
         public string BillingAddr2 { get; set; }
         [Required(ErrorMessage = "Please enter a City")]
         public string BillingCity { get; set; }
-        [Required(ErrorMessage = "Please choose a State")]
+        [Required(ErrorMessage = "Please choose a State", AllowEmptyStrings = false)]
         public string BillingState { get; set; }
         [Required(ErrorMessage = "Please enter a Postal Code")]
         [DataType(DataType.PostalCode)]
