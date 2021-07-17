@@ -10,6 +10,9 @@
     Layout = "_AdminLayout";
     TempData.Keep("Action");
 }
+<head>
+    <script type="text/javascript" src="~/js/UserValidation.js"></script>
+</head>
 <div class="container">
     <div class="card-header-pills"><h1 class="fa fa-address-card">  @ViewData["Title"]</h1></div>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -315,12 +318,6 @@
     </div>   
     
     <script>
-        //checks to make sure the decimal doesn't go over 2 decimal places 
-        //credit : https://stackoverflow.com/questions/46321683/javascript-restrict-input-once-2-decimal-places-have-been-reached
-        var CheckDecimal = function (e) {
-            var t = e.value;
-            e.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
-        }
         function AddingToCommittee() {
             var selectCommittee = document.getElementById("SelectCommittee");
             if (selectCommittee.value == "None")

@@ -16,13 +16,15 @@ namespace NonProfitProject.Models
         public int ReceiptID { get; set; }
         public Receipts Receipt { get; set; }
         public string CardholderName { get; set; }
-        public string CardType { get; set;}
+        public string CardType { get; set; }
         public string CardNumber { get; set; }
         public string ExpDate { get; set; }
         public string CVV { get; set; }
         public int Last4Digits { get; set; }
 
         //this is used for billing address information
+        public string BillingFirstName { get; set; }
+        public string BillingLastName { get; set; }
         public string BillingAddr1 { get; set; }
         public string BillingAddr2 { get; set; }
         public string BillingCity { get; set; }

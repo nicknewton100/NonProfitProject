@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using NonProfitProject.Models;
 using NonProfitProject.Models.ViewModels.Shared.Users;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
+using NonProfitProject.Code.Security;
 
 namespace NonProfitProject.Controllers.Shared.Users
 {
@@ -82,10 +84,69 @@ namespace NonProfitProject.Controllers.Shared.Users
             }
             return View();
         }
-        public IActionResult EditPayment()
+        [HttpGet]
+        public IActionResult AddPayment()
         {
-            
             return View();
+        }
+        
+        [HttpPost]
+        public IActionResult AddPayment(SavedPaymentViewModel model)
+        {
+            if (model.usingAccountAddress)
+            {
+                User user = context.Users.Where(u => u.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking().FirstOrDefault();
+                model.BillingFirstName = user.UserFirstName;
+                ModelState.Remove("BillingFirstName");
+                model.BillingLastName = user.UserLastName;
+                ModelState.Remove("BillingLastName");
+                model.BillingAddr1 = user.UserAddr1;
+                ModelState.Remove("BillingAddr1");
+                model.BillingAddr2 = user.UserAddr2;
+                ModelState.Remove("BillingAddr2");
+                model.BillingCity = user.UserCity;
+                ModelState.Remove("BillingCity");
+                model.BillingState = user.UserState;
+                ModelState.Remove("BillingState");
+                model.BillingPostalCode = user.UserPostalCode;
+                ModelState.Remove("BillingPostalCode");
+
+            }
+            AesEncryption aes = new AesEncryption();
+            //check if the user already has this card in their saved payments
+            var test = context.SavedPayments.Where(sp => sp.CardNumber.Equals(aes.Encrypt(model.CardNumber)) &&
+                sp.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking().FirstOrDefault();
+            if (test != null)
+            {
+                ModelState.AddModelError("", "Error - This card has already been added");
+            }
+            if (ModelState.IsValid)
+            {
+                //used to encrypt sensitive ionformation
+                
+                SavedPaymentInformation savedPaymentInformation = new SavedPaymentInformation()
+                {
+                    UserID = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                    CardholderName = model.CardholderName,
+                    CardType = model.CardType,
+                    CardNumber = aes.Encrypt(model.CardNumber),
+                    ExpDate = model.CardExpDate,
+                    CVV = aes.Encrypt(model.CardCVV),
+                    BillingFirstName = model.BillingFirstName,
+                    BillingLastName = model.BillingLastName,
+                    BillingAddr1 = model.BillingAddr1,
+                    BillingAddr2 = model.BillingAddr2,
+                    BillingCity = model.BillingCity,
+                    BillingState = model.BillingState,
+                    BillingPostalCode = model.BillingPostalCode,
+                    Last4Digits = Int32.Parse(model.CardNumber.Substring(model.CardNumber.Length - 4))
+                    
+                };
+                context.SavedPayments.Add(savedPaymentInformation);
+                context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
     }
 }

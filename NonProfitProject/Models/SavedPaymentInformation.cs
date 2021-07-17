@@ -23,6 +23,8 @@ namespace NonProfitProject.Models
         public int Last4Digits { get; set; }
 
         //this is used for billing address information
+        public string BillingFirstName { get; set; }
+        public string BillingLastName { get; set; }
         public string BillingAddr1 { get; set; }
         public string BillingAddr2 { get; set; }
         public string BillingCity { get; set; }

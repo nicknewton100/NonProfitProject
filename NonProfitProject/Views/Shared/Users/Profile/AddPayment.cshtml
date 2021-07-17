@@ -1,0 +1,199 @@
+﻿@model NonProfitProject.Models.ViewModels.Shared.Users.SavedPaymentViewModel
+@{
+    ViewData["Title"] = "Add Payment Method";
+    ViewData["Title2"] = "Profile";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+
+}
+<head>
+    <script type="text/javascript" src="~/js/UserValidation.js"></script>
+</head>
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form class="align-items-center justify-content-center" asp-action="AddPayment">
+        <div class="row">
+            <div class="card w-auto">
+                <div class="card-header text-center">
+                    <h3>Billing Address</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-row" style="margin: 0 2rem;">
+                        <div class="form-group col-md-6">
+                            
+                            <label for="firstName">First Name</label>
+                            <input asp-for="BillingFirstName" class="form-control BillingInformation" id="firstName" placeholder="First Name">
+                            <span asp-validation-for="BillingFirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            
+                            <label for="lastName">Last Name</label>
+                            <input asp-for="BillingLastName" class="form-control BillingInformation" id="lastName" placeholder="Last Name">
+                            <span asp-validation-for="BillingLastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin: 0 2rem;">
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress">Address</label>
+                            <input asp-for="BillingAddr1" class="form-control BillingInformation" id="inputAddress" placeholder="1234 Main St">
+                            <span asp-validation-for="BillingAddr1" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress2">Address 2</label>
+                            <input asp-for="BillingAddr2" class="form-control BillingInformation" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                            <span asp-validation-for="BillingAddr2" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin: 0 2rem;">
+                        <div class="form-group col-md-3">
+                            <label for="inputCity">City</label>
+                            <input asp-for="BillingCity" class="form-control BillingInformation" id="inputCity">
+                            <span asp-validation-for="BillingCity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputState">State</label>
+                            <select asp-for="BillingState" id="inputState" name="state" class="form-control BillingInformation">
+                                <option value=""></option>
+                                <option value="Alaska">Alaska</option>
+                                <option value="Alabama">Alabama</option>
+                                <option value="Arkansas">Arkansas</option>
+                                <option value="Arizona">Arizona</option>
+                                <option value="California">California</option>
+                                <option value="Colorado">Colorado</option>
+                                <option value="Connecticu">Connecticut</option>
+                                <option value="District of Columbia">District of Columbia</option>
+                                <option value="Delaware">Delaware</option>
+                                <option value="Florida">Florida</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Hawaii">Hawaii</option>
+                                <option value="Iowa">Iowa</option>
+                                <option value="Idaho">Idaho</option>
+                                <option value="Illinois">Illinois</option>
+                                <option value="Indiana">Indiana</option>
+                                <option value="Kansas">Kansas</option>
+                                <option value="Kentucky">Kentucky</option>
+                                <option value="Louisiana">Louisiana</option>
+                                <option value="Massachusetts">Massachusetts</option>
+                                <option value="Maryland">Maryland</option>
+                                <option value="Maine">Maine</option>
+                                <option value="Michigan">Michigan</option>
+                                <option value="Michigan">Minnesota</option>
+                                <option value="Missouri">Missouri</option>
+                                <option value="Mississippi">Mississippi</option>
+                                <option value="Montana">Montana</option>
+                                <option value="North Carolina">North Carolina</option>
+                                <option value="North Dakota">North Dakota</option>
+                                <option value="Nebraska">Nebraska</option>
+                                <option value="New Hampshire">New Hampshire</option>
+                                <option value="New Jersey">New Jersey</option>
+                                <option value="New Mexico">New Mexico</option>
+                                <option value="Nevada">Nevada</option>
+                                <option value="New York">New York</option>
+                                <option value="Ohio">Ohio</option>
+                                <option value="Oklahoma">Oklahoma</option>
+                                <option value="Oregon">Oregon</option>
+                                <option value="Pennsylvania">Pennsylvania</option>
+                                <option value="Puerto Rico">Puerto Rico</option>
+                                <option value="Rhode Island">Rhode Island</option>
+                                <option value="South Carolina">South Carolina</option>
+                                <option value="South Dakota">South Dakota</option>
+                                <option value="Tennessee">Tennessee</option>
+                                <option value="Texas">Texas</option>
+                                <option value="Utah">Utah</option>
+                                <option value="Virginia">Virginia</option>
+                                <option value="Vermont">Vermont</option>
+                                <option value="Washington">Washington</option>
+                                <option value="Wisconsin">Wisconsin</option>
+                                <option value="West Virginia">West Virginia</option>
+                                <option value="Wyoming">Wyoming</option>
+                            </select>
+                            <span asp-validation-for="BillingState" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputPostalCode">Zip Code</label>
+                            <input asp-for="BillingPostalCode" type="text" class="form-control BillingInformation" id="inputPostalCode" oninput="postalcode_format(this)">
+                            <span asp-validation-for="BillingPostalCode" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <div class="form-row" style="margin:0 2rem;">
+                        <div class="form-check">
+                            <input asp-for="usingAccountAddress" class="form-check-input" type="checkbox" id="sameAddress" onchange="hideBillingInformation()" />
+                            <label class="form-check-label" for="check1"> Use Account Address</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card w-25">
+                <div class="card-header text-center">
+                    <h3>  Payment</h3>
+                </div>
+                <br />
+                <div class="card-body">
+                    <div class="form-row" style="margin-left: 2rem;">
+                        <div class="form-check">
+                            <span asp-validation-for="CardType" class="text-danger"></span>
+                            <input asp-for="CardType" class="form-check-input" type="radio" value="Credit Card" id="CreditCard" />
+                            <label class="fomr-check-label" for="CreditCard">Credit Card  <i class="far fa-credit-card"></i></label>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-left: 2rem;">
+                        <div class="form-check">
+                            <input asp-for="CardType" class="form-check-input" type="radio" value="Debit Card" id="DebitCard" />
+                            <label class="fomr-check-label" for="DebitCard">Debit Card  <i class="fab fa-cc-visa"></i></label>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="form-row" style="margin: 0 2rem;">
+                        <div class="form-group col-sm-auto">
+                            <label for="nameCard">Name on Card</label>
+                            <input asp-for="CardholderName" class="form-control" id="nameCard">
+                            <span asp-validation-for="CardholderName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-auto">
+                            <label for="creditCardNumber">Card Number</label>
+                            <input asp-for="CardNumber" class="form-control" id="creditCardNumber" oninput="this.value = cc_format(this.value)">
+                            <span asp-validation-for="CardNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin: 0 2rem;">
+                        <div class="form-group col-sm-auto">
+                            <label for="expirationDate">Expiration Date</label>
+                            <input asp-for="CardExpDate" type="text" class="form-control" id="expirationDate" oninput="card_expires_format(this)">
+                            <span asp-validation-for="CardExpDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-auto">
+                            <label for="cvv">CVV</label>
+                            <input asp-for="CardCVV" type="text" class="form-control" id="cvv" oninput="cvv_format(this)">
+                            <span asp-validation-for="CardCVV" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Add Payment</button>
+        <a class="btn btn-danger" asp-action="Index">Cancel</a>
+    </form>
+    <script>
+        function hideBillingInformation() {
+            var billingInformationInput = document.getElementsByClassName("BillingInformation");
+            if (document.getElementById("sameAddress").checked) {
+                for (var i = 0; i < billingInformationInput.length; i++) {
+                    billingInformationInput[i].disabled = true;
+                    billingInformationInput[i].setAttribute("data-val", "false");
+
+                }
+            }
+            else {
+                for (var i = 0; i < billingInformationInput.length; i++) {
+                    billingInformationInput[i].disabled = false;
+                    billingInformationInput[i].setAttribute("data-val", "true");
+                }
+            }
+        }
+    </script>
+</div>
