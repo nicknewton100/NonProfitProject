@@ -108,7 +108,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var committiees = context.Committees.Select(c => c.CommitteeName).ToList();
             foreach (string C in committiees)
             {
-                if (!C.Equals(model.CommitteeName) && committiees.Last().Equals(C))
+                if (!C.Equals(model.CommitteeName) && committiees.Last().Equals(C) && !model.CommitteeName.Equals("None"))
                 {
                     ModelState.AddModelError("AllCommittees", String.Format("The Committee {0} does not exist", model.CommitteeName));
                 }
@@ -116,6 +116,10 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 {
                     break;
                 }
+            }
+            if(!model.CommitteeName.Equals("None") && model.CommitteePosition == null)
+            {
+                ModelState.AddModelError("CommitteePosition", "Please assign the employee a Committee Position");
             }
             if (TempData["Action"].ToString().Equals("Edit") && model.Id != null)
             {
@@ -188,7 +192,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             Employees employee = context.Employees?.Include(e => e.User).FirstOrDefault(e => e.EmpID == model.Id) ?? null;
             //makes sure that the user and employee exists before trying to change them. If they dont, it sends it back to add employee
             //this was done because the data on the website could potentially be altered which could cause an error or the id sent through the url could be altered as well
-            if (employee == null)
+            if (employee == null )
             {
                 model.Id = null;
                 return await AddEmployee(model);
@@ -243,7 +247,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 if (updateUser.Succeeded)
                 {
                     context.SaveChanges();
-                    if (!model.CommitteeName.Equals("None"))
+                    if (!model.CommitteeName.Equals("None") || context.CommitteeMembers.Where(cm => cm.EmpID == model.Id).AsNoTracking().FirstOrDefault() != null)
                     {
                         AddToCommittee(model);
                     }
@@ -263,7 +267,11 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteEmployeeAsync(string id)
         {
-            var employee = context.Employees.Include(e => e.User).FirstOrDefault(e => e.EmpID == id);
+            var employee = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).AsNoTracking().FirstOrDefault(e => e.EmpID == id);
+            if(employee.CommitteeMembers != null)
+            {
+                DeleteCommitteeMember(employee.CommitteeMembers);
+            }
             context.Employees.Remove(employee);
             var result = await userManager.DeleteAsync(employee.User);
             if (result.Succeeded)
@@ -292,10 +300,22 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             else
             {
-                committeeMember.CommitteeID = context.Committees.Where(c => c.CommitteeName == model.CommitteeName).Select(c => c.CommitteesID).FirstOrDefault();
-                committeeMember.CommitteePosition = model.CommitteePosition;
-                context.CommitteeMembers.Update(committeeMember);
+                if (model.CommitteeName.Equals("None"))
+                {
+                    DeleteCommitteeMember(committeeMember);
+                }
+                else
+                {
+                    committeeMember.CommitteeID = context.Committees.Where(c => c.CommitteeName == model.CommitteeName).Select(c => c.CommitteesID).FirstOrDefault();
+                    committeeMember.CommitteePosition = model.CommitteePosition;
+                    context.CommitteeMembers.Update(committeeMember);
+                }
             }
+            context.SaveChanges();
+        }
+        public void DeleteCommitteeMember(CommitteeMembers member)
+        {
+            context.CommitteeMembers.Remove(member);
             context.SaveChanges();
         }
     }

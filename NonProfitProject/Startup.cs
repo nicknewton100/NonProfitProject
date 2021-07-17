@@ -38,7 +38,8 @@ namespace NonProfitProject
 
             services.AddSession();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews();           
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.Configure<RazorViewEngineOptions>(options =>
             {
@@ -47,7 +48,7 @@ namespace NonProfitProject
                 options.AreaViewLocationFormats.Add("/Views/Shared/Users/{1}/{0}" + RazorViewEngine.ViewExtension);
             });
 
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
 
             services.AddDbContext<NonProfitContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("NonProfitContext"))
