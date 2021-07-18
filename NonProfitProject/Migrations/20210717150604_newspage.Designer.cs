@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NonProfitProject.Models;
 
 namespace NonProfitProject.Migrations
 {
     [DbContext(typeof(NonProfitContext))]
-    partial class NonProfitContextModelSnapshot : ModelSnapshot
+    [Migration("20210717150604_newspage")]
+    partial class newspage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,11 +51,7 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             Id = "370d9876-b6ab-4694-baa9-ecc7bc5b451c",
-<<<<<<< HEAD
-                            ConcurrencyStamp = "aa1bc4e2-2663-4b94-8c88-161cd7b1c6fb",
-=======
-                            ConcurrencyStamp = "8f8dc08f-b7da-416c-8ddd-30748dbfdeae",
->>>>>>> orgin/NewsPage
+                            ConcurrencyStamp = "4998f149-a675-4ae5-a0a5-bc729126fb74",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -230,33 +228,21 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             CommitteesID = 1,
-<<<<<<< HEAD
-                            CommitteeCreationDate = new DateTime(2021, 7, 17, 0, 52, 47, 280, DateTimeKind.Utc).AddTicks(4969),
-=======
-                            CommitteeCreationDate = new DateTime(2021, 7, 18, 14, 57, 39, 429, DateTimeKind.Utc).AddTicks(2738),
->>>>>>> orgin/NewsPage
+                            CommitteeCreationDate = new DateTime(2021, 7, 17, 15, 6, 3, 624, DateTimeKind.Utc).AddTicks(5946),
                             CommitteeDescription = "Manages donations/membership dues",
                             CommitteeName = "Fundrasing Committee"
                         },
                         new
                         {
                             CommitteesID = 2,
-<<<<<<< HEAD
-                            CommitteeCreationDate = new DateTime(2021, 7, 17, 0, 52, 47, 280, DateTimeKind.Utc).AddTicks(5763),
-=======
-                            CommitteeCreationDate = new DateTime(2021, 7, 18, 14, 57, 39, 429, DateTimeKind.Utc).AddTicks(3200),
->>>>>>> orgin/NewsPage
+                            CommitteeCreationDate = new DateTime(2021, 7, 17, 15, 6, 3, 624, DateTimeKind.Utc).AddTicks(6434),
                             CommitteeDescription = "Manages news on the website",
                             CommitteeName = "News Committee"
                         },
                         new
                         {
                             CommitteesID = 3,
-<<<<<<< HEAD
-                            CommitteeCreationDate = new DateTime(2021, 7, 17, 0, 52, 47, 280, DateTimeKind.Utc).AddTicks(5781),
-=======
-                            CommitteeCreationDate = new DateTime(2021, 7, 18, 14, 57, 39, 429, DateTimeKind.Utc).AddTicks(3210),
->>>>>>> orgin/NewsPage
+                            CommitteeCreationDate = new DateTime(2021, 7, 17, 15, 6, 3, 624, DateTimeKind.Utc).AddTicks(6444),
                             CommitteeDescription = "Plans and organizes events",
                             CommitteeName = "Event and Planning Committee"
                         });
@@ -406,6 +392,9 @@ namespace NonProfitProject.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -441,27 +430,6 @@ namespace NonProfitProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("BillingAddr1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BillingAddr2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BillingCity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BillingFirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BillingLastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BillingPostalCode")
-                        .HasColumnType("int");
-
-                    b.Property<string>("BillingState")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CVV")
                         .HasColumnType("nvarchar(max)");
@@ -620,27 +588,6 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BillingAddr1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BillingAddr2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BillingCity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BillingFirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BillingLastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BillingPostalCode")
-                        .HasColumnType("int");
-
-                    b.Property<string>("BillingState")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CVV")
                         .HasColumnType("nvarchar(max)");
 
@@ -781,25 +728,14 @@ namespace NonProfitProject.Migrations
                             Id = "6b87b89f-0f9a-4e2d-b696-235e99655521",
                             AccessFailedCount = 0,
                             AccountDisabled = false,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "fbcb0afb-387e-411c-a5a4-625a1daa154f",
+                            ConcurrencyStamp = "46fd83e4-7978-4809-85b9-883cbff42097",
                             Email = "JohnJones@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEDNez4pIcTJDw+JI+vBFcIZriNexCWAG0qKvisKljbB4rxb2ZTEVeFKa31RFMQP2Bg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENvwbwixB9CkA450Msp6Zgo52Cko/zyb4LRlA7VgEMmrwaRM+DfEW12jqWTg/xZZDw==",
                             PhoneNumberConfirmed = false,
                             ReceiveWeeklyNewsletter = false,
-                            SecurityStamp = "6e448099-9617-4508-b3f4-6a0b2fba09d6",
-=======
-                            ConcurrencyStamp = "c9c17f00-28b9-40d6-aced-4b386f2d7418",
-                            Email = "JohnJones@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEPOtr1t0XFG/ZR6lyPrlyn48CeW2nFQ8ggtLRfYQ5yLBlICZgNwA0HPsm17pIHMe2g==",
-                            PhoneNumberConfirmed = false,
-                            ReceiveWeeklyNewsletter = false,
-                            SecurityStamp = "dcd36c94-d24f-4f27-8487-e1236c8f34e2",
->>>>>>> orgin/NewsPage
+                            SecurityStamp = "6bf0fbf0-0566-4152-8601-7da132ccdefb",
                             TwoFactorEnabled = false,
                             UserActive = true,
                             UserAddr1 = "513 S Augusta St",
