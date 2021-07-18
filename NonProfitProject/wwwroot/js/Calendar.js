@@ -9,6 +9,8 @@ let calendar = new FullCalendar.Calendar(calendarEl, {
     },
     events: []
 });
+
+//references for function below: https://stackoverflow.com/questions/16361364/accessing-mvcs-model-property-from-javascript
 function setCalendar(e) {
     var model = JSON.parse(e);
     for (var i = 0; i < model.length; i++) {

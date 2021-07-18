@@ -8,11 +8,11 @@ using NonProfitProject.Models.ViewModels;
 
 namespace NonProfitProject.Controllers
 {
-    public class CalendarController : Controller
+    public class EventCalendarController : Controller
     {
         private NonProfitContext context;
 
-        public CalendarController(NonProfitContext context)
+        public EventCalendarController(NonProfitContext context)
         {
             this.context = context;
         }

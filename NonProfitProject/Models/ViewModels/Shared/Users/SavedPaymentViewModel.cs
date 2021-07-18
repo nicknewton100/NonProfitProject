@@ -35,7 +35,17 @@ namespace NonProfitProject.Models.ViewModels.Shared.Users
         public string BillingState { get; set; }
         [Required(ErrorMessage = "Please enter a Postal Code")]
         [DataType(DataType.PostalCode)]
-        public int BillingPostalCode { get; set; }
+        public int? BillingPostalCode { get; set; }
+
+
+        //these attributes are used to store accountAddress
+        public string AcctFirstName { get; set; }
+        public string AcctLastName { get; set; }
+        public string AcctAddr1 { get; set; }
+        public string AcctAddr2 { get; set; }
+        public string AcctCity { get; set; }
+        public string AcctState { get; set; }
+        public int AcctPostalCode { get; set; }
 
         public bool usingAccountAddress { get; set; }
     }

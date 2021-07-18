@@ -180,20 +180,43 @@
     </form>
     <script>
         function hideBillingInformation() {
+            var firstname = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctFirstName)));
+            var lastname = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctLastName)));
+            var addr1 = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctAddr1)));
+            var addr2 = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctAddr2)));
+            if (addr2 == "null") {
+                addr2 = "";
+            }
+            var city = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctCity)));
+            var state = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctState)));
+            var postalcode = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctPostalCode)));
+
+            const accountvalues = [firstname, lastname, addr1, addr2, city, state, postalcode];
+
             var billingInformationInput = document.getElementsByClassName("BillingInformation");
+
             if (document.getElementById("sameAddress").checked) {
                 for (var i = 0; i < billingInformationInput.length; i++) {
                     billingInformationInput[i].disabled = true;
                     billingInformationInput[i].setAttribute("data-val", "false");
-                    billingInformationInput[i].value = "";
+                    billingInformationInput[i].value = accountvalues[i].replace('"', '').replace('"', '');
+                    if (billingInformationInput[i].id == "inputAddress2") {
+                        billingInformationInput[i].placeholder = "";
+                    }
                 }
+
             }
             else {
                 for (var i = 0; i < billingInformationInput.length; i++) {
                     billingInformationInput[i].disabled = false;
                     billingInformationInput[i].setAttribute("data-val", "true");
+                    billingInformationInput[i].value = "";
+                    if (billingInformationInput[i].id == "inputAddress2") {
+                        billingInformationInput[i].placeholder = "Apartment, studio, or floor";
+                    }
                 }
             }
+
         }
     </script>
 </div>

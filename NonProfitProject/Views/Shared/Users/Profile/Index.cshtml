@@ -24,7 +24,7 @@
             <!--FIRST NAME-->
             <div class="col-sm-2"><label>First Name: </label></div>
             <div class="col-sm-2">
-                <input readonly class="form-control" id="test" />
+                <input asp-for="FirstName" readonly class="form-control" />
             </div>
 
             <!--LAST NAME-->
@@ -99,10 +99,4 @@
 
         </div>
     </form>
-    <script>
-        var test = @Html.Raw(Json.Serialize(Model.FirstName));
-        var test1 = document.getElementById("test");
-        var obj = JSON.stringify(test);
-        test1.value = obj;
-    </script>
 </div>
