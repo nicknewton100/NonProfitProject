@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NonProfitProject.Models;
 
 namespace NonProfitProject.Migrations
 {
     [DbContext(typeof(NonProfitContext))]
-    partial class NonProfitContextModelSnapshot : ModelSnapshot
+    [Migration("20210717150604_newspage")]
+    partial class newspage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             Id = "370d9876-b6ab-4694-baa9-ecc7bc5b451c",
-                            ConcurrencyStamp = "8f8dc08f-b7da-416c-8ddd-30748dbfdeae",
+                            ConcurrencyStamp = "4998f149-a675-4ae5-a0a5-bc729126fb74",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -226,21 +228,21 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             CommitteesID = 1,
-                            CommitteeCreationDate = new DateTime(2021, 7, 18, 14, 57, 39, 429, DateTimeKind.Utc).AddTicks(2738),
+                            CommitteeCreationDate = new DateTime(2021, 7, 17, 15, 6, 3, 624, DateTimeKind.Utc).AddTicks(5946),
                             CommitteeDescription = "Manages donations/membership dues",
                             CommitteeName = "Fundrasing Committee"
                         },
                         new
                         {
                             CommitteesID = 2,
-                            CommitteeCreationDate = new DateTime(2021, 7, 18, 14, 57, 39, 429, DateTimeKind.Utc).AddTicks(3200),
+                            CommitteeCreationDate = new DateTime(2021, 7, 17, 15, 6, 3, 624, DateTimeKind.Utc).AddTicks(6434),
                             CommitteeDescription = "Manages news on the website",
                             CommitteeName = "News Committee"
                         },
                         new
                         {
                             CommitteesID = 3,
-                            CommitteeCreationDate = new DateTime(2021, 7, 18, 14, 57, 39, 429, DateTimeKind.Utc).AddTicks(3210),
+                            CommitteeCreationDate = new DateTime(2021, 7, 17, 15, 6, 3, 624, DateTimeKind.Utc).AddTicks(6444),
                             CommitteeDescription = "Plans and organizes events",
                             CommitteeName = "Event and Planning Committee"
                         });
@@ -726,14 +728,14 @@ namespace NonProfitProject.Migrations
                             Id = "6b87b89f-0f9a-4e2d-b696-235e99655521",
                             AccessFailedCount = 0,
                             AccountDisabled = false,
-                            ConcurrencyStamp = "c9c17f00-28b9-40d6-aced-4b386f2d7418",
+                            ConcurrencyStamp = "46fd83e4-7978-4809-85b9-883cbff42097",
                             Email = "JohnJones@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEPOtr1t0XFG/ZR6lyPrlyn48CeW2nFQ8ggtLRfYQ5yLBlICZgNwA0HPsm17pIHMe2g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENvwbwixB9CkA450Msp6Zgo52Cko/zyb4LRlA7VgEMmrwaRM+DfEW12jqWTg/xZZDw==",
                             PhoneNumberConfirmed = false,
                             ReceiveWeeklyNewsletter = false,
-                            SecurityStamp = "dcd36c94-d24f-4f27-8487-e1236c8f34e2",
+                            SecurityStamp = "6bf0fbf0-0566-4152-8601-7da132ccdefb",
                             TwoFactorEnabled = false,
                             UserActive = true,
                             UserAddr1 = "513 S Augusta St",

@@ -9,13 +9,19 @@ namespace NonProfitProject.Controllers
 {
     public class NewsController : Controller
     {
+        private NonProfitContext context;
+        public NewsController(NonProfitContext context)
+        {
+            this.context = context;
+        }
         public IActionResult Index()
         {
             return View();
         }
         public IActionResult NewsPage()
         {
-            return View();
+            var news = context.News.ToList();
+            return View(news);
         }
 
     }
