@@ -16,13 +16,8 @@ namespace NonProfitProject.Controllers
         }
         public IActionResult Index()
         {
-            return View();
-        }
-        public IActionResult NewsPage()
-        {
             var news = context.News.ToList();
             return View(news);
         }
-
     }
 }
