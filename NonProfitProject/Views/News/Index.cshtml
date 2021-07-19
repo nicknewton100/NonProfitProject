@@ -13,20 +13,12 @@
 
             @foreach (var news in Model)
             {
-
                 <h5 class="card-header">@news.NewsHeader</h5>
-            }
-
-
-
-            <!--Add the News Article Id here (hidden)-->
-            <h5 class="card-header">News Header Here</h5>
-            <div class="card-body">
-                <p>Date Here</p>
-                <p>News Information:</p>
-            </div>
-            <div class="card-footer">News Footer Here</div>
-        </div>
+                <div class="card-body">
+                            <h6>@news.NewsTitle</h6>
+                            <p>@news.NewsDescription</p>
+                </div>                    
+             }
     </div>
 </div>
 
