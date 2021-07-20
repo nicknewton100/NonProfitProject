@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputState">State</label>
-                            <select asp-for="BillingState" id="inputState" name="state" class="form-control BillingInformation">
+                            <select asp-for="BillingState"class="form-control BillingInformation" style="pointer-events:none">
                                 <option value=""></option>
                                 <option value="Alaska">Alaska</option>
                                 <option value="Alabama">Alabama</option>
@@ -197,7 +197,8 @@
 
             if (document.getElementById("sameAddress").checked) {
                 for (var i = 0; i < billingInformationInput.length; i++) {
-                    billingInformationInput[i].disabled = true;
+                    billingInformationInput[i].setAttribute("readonly", "readonly");
+                    billingInformationInput[i].setAttribute("style", "pointer-events:none;")
                     billingInformationInput[i].setAttribute("data-val", "false");
                     billingInformationInput[i].value = accountvalues[i].replace('"', '').replace('"', '');
                     if (billingInformationInput[i].id == "inputAddress2") {
@@ -208,7 +209,8 @@
             }
             else {
                 for (var i = 0; i < billingInformationInput.length; i++) {
-                    billingInformationInput[i].disabled = false;
+                    billingInformationInput[i].removeAttribute("readonly");
+                    billingInformationInput[i].setAttribute("style", "pointer-events:initial;")
                     billingInformationInput[i].setAttribute("data-val", "true");
                     billingInformationInput[i].value = "";
                     if (billingInformationInput[i].id == "inputAddress2") {
