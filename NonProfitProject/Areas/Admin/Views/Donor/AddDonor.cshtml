@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Add User";
+    ViewData["Title2"] = "Admin";
     Layout = "_AdminLayout";
 }
 
@@ -96,7 +97,8 @@
                                 </div>
                             </div>
                         </div>
-                        <br /><br />
+                        <!--COMMENTED OUT SINCE IT IS UNNECESSARY AT THE TIME-->
+                        @*<br /><br />
                         <h4>Other: </h4>
                         <div class="dropdown-divider"></div>
                         <div class="form-check row">
@@ -122,12 +124,12 @@
                                     Receiving Newsletters?
                                 </label>
                             </div>
-                        </div>
+                        </div>*@
                         <br /><br />
                         <div class="row">
                             <div class="col-auto">
                                 <button class="btn btn-primary">Add User</button>
-                                <a class="btn btn-danger" asp-area="Admin" asp-controller="User" asp-action="Index">Cancel</a>
+                                <a class="btn btn-danger" asp-area="Admin" asp-controller="Donor" asp-action="Index">Cancel</a>
                             </div>
                         </div>
                     </div>                    

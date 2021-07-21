@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="form-row" style="margin: 0 2rem;">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-5">
                             <label for="inputCity">City</label>
                             <input asp-for="BillingCity" class="form-control BillingInformation" id="inputCity">
                             <span asp-validation-for="BillingCity" class="text-danger"></span>
@@ -110,7 +110,7 @@
                             </select>
                             <span asp-validation-for="BillingState" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="inputPostalCode">Zip Code</label>
                             <input asp-for="BillingPostalCode" type="text" class="form-control BillingInformation" id="inputPostalCode" oninput="postalcode_format(this)">
                             <span asp-validation-for="BillingPostalCode" class="text-danger"></span>
@@ -138,15 +138,15 @@
                     }
                 </div>
             </div>
-            <div class="card w-25">
+            <div class="card w-auto">
                 <div class="card-header text-center">
                     <h3>  Payment</h3>
                 </div>
                 <br />
                 <div class="card-body">
                     <div class="form-row" style="margin-left: 2rem;">
+                        <span asp-validation-for="CardType" class="text-danger"></span>
                         <div class="form-check">
-                            <span asp-validation-for="CardType" class="text-danger"></span>
                             <input asp-for="CardType" class="form-check-input" type="radio" value="Credit Card" id="CreditCard" />
                             <label class="fomr-check-label" for="CreditCard">Credit Card  <i class="far fa-credit-card"></i></label>
                         </div>

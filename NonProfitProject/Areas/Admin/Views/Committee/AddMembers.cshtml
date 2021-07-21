@@ -26,11 +26,11 @@
                     @foreach (Employees empl in sessionModel.Employees)
                     {
                         <tr>
-                            <th>@empl.User.UserFirstName</th>
-                            <th>@empl.User.UserLastName</th>
-                            <th>@empl.User.Email</th>
-                            <th>@empl.Position</th>
-                            <th>
+                            <td>@empl.User.UserFirstName</td>
+                            <td>@empl.User.UserLastName</td>
+                            <td>@empl.User.Email</td>
+                            <td>@empl.Position</td>
+                            <td>
                                 <div class="row">
                                     <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","Employee",new {id = empl.EmpID })'">Details</button>
                                     <button type="button" data-toggle="modal" data-target="#Modal-@empl.EmpID" style="margin-bottom:0px; float:right; background-color:transparent; outline:none; border: none;">Add to Committee</button>
@@ -56,11 +56,16 @@
                                         </div>
                                     </div>
                                 </div>
-                            </th>
+                            </td>
                         </tr>
                     }
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="container" style="margin:1rem 0;">
+        <div class="d-flex flex-row-reverse">
+            <a class="btn btn-dark" asp-controller="Committee" asp-action="Index">Cancel</a>
         </div>
     </div>
 </div>
