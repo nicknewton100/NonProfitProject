@@ -2,7 +2,8 @@
 @{
     @using Microsoft.AspNetCore.Identity;
     @inject UserManager<User> usermanager
-    ViewData["Title"] = "Users List";
+    ViewData["Title"] = "Donors List";
+    ViewData["Title2"] = "Admin";
     Layout = "_AdminLayout";
     int userCount = 1;
 }
@@ -10,7 +11,7 @@
 <div class="container">
     <div class="container" style="margin: 1rem 0;">
         <div class="card-header-pills"><h1 class="fas fa-user"> Donors</h1></div>
-        <a button class="btn btn-outline-dark" asp-area="Admin" asp-controller="Donors" asp-action="AddDonor">Add Donor</a>
+        <a button class="btn btn-outline-dark" asp-area="Admin" asp-controller="Donor" asp-action="AddDonor">Add Donor</a>
     </div>
     <div class="container" style="font-size:medium;">
         <dvi class="card">

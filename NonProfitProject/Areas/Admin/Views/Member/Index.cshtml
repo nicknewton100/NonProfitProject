@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Members List";
+    ViewData["Title2"] = "Admin";
+    Layout = "_AdminLayout";
+}
+
+<div class="container">
+    <div class="container">
+        <div class="card-header-pills"><h1 class="fas fa-handshake"> Members</h1></div>
+        <a class="btn btn-outline-dark" asp-area="Admin" asp-controller="Member" asp-action="AddMember">
+            Add Member
+        </a>
+    </div>
+    <br />
+    <div class="container" style="font-size:medium;">
+        <div class="card">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" hidden>#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Join Date</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row" hidden>Member ID</td>
+                        <td>Member First Name</td>
+                        <td>Member Last Name</td>
+                        <td>Email</td>
+                        <td>Join Date?</td>
+                        <td><button class="btn btn-dark">Details</button></td>
+                        <td><button class="btn btn-dark">Delete</button></td>
+                    </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+    </div>
+</div>

@@ -13,11 +13,11 @@ namespace NonProfitProject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
     [Route("[area]/[controller]s/[action]/{id?}")]
-    public class DonorsController : Controller
+    public class DonorController : Controller
     {
         private NonProfitContext context;
         private UserManager<User> userManager;
-        public DonorsController(NonProfitContext context, UserManager<User> userManager)
+        public DonorController(NonProfitContext context, UserManager<User> userManager)
         {
             this.context = context;
             this.userManager = userManager;
