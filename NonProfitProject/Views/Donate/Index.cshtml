@@ -25,25 +25,20 @@
 
 <div class="container-fluid" style="padding:0 5rem">
     <div class=" container">
+        <h4 class="text-center justify-content-center">Please select your donation amount...</h4>
         @if (User.Identity.IsAuthenticated)
         {
-            <br />
-            <br />
-            <br />
-            <br />
+            <br />            
         }
-        @if(TempData["SessionTimeout"]?.ToString() != null)
+        @if (TempData["SessionTimeout"]?.ToString() != null)
         {
             <span>TempData["SessionTimeout"].ToString()</span>
             <br />
         }
 
-        <h4 class="text-center justify-content-center">Please select your donation amount...</h4>
+
         @if (User.Identity.IsAuthenticated)
         {
-            <br />
-            <br />
-            <br />
             <br />
         }
         <div id="DIVbtns" class="row justify-content-center text-center">
@@ -62,27 +57,26 @@
                     <button id="button3" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this)">$150</button>
                 </div>
             </div>
+        </div>
+        <div id="DIVbtns" class="row justify-content-center text-center">
             <div class="col-sm-2">
                 <div class="card" style="margin:15px 0;">
-                    <button id="button4" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this)">$500</button>
+                    <button id="button4" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this)">$300</button>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="card" style="margin:15px 0;">
-                    <button id="button5" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this)">$1000</button>
+                    <button id="button5" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this)">$400</button>
                 </div>
             </div>
         </div>
         @if (User.Identity.IsAuthenticated)
         {
             <br />
-            <br />
-            <br />
-            <br />
         }
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-10">
+                <div class="col-auto">
                     <div class="card">
                         <div class="card card-header">
                             <h3 class="fas fa-hand-holding-usd">
@@ -129,7 +123,7 @@
                                         <span asp-validation-for="Addr2" class="text-danger"></span>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-5">
                                             <label for="inputCity">City<label style="color: red;"> *</label></label>
                                             <input asp-for="City" type="text" class="form-control" id="inputCity" />
                                             <span asp-validation-for="City" class="text-danger"></span>
@@ -193,7 +187,7 @@
                                             </select>
                                             <span asp-validation-for="State" class="text-danger"></span>
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="inputZip">Zip<label style="color: red;"> *</label></label>
                                             <input asp-for="PostalCode" type="text" class="form-control" id="inputZip" oninput="postalcode_format(this)">
                                             <span asp-validation-for="PostalCode" class="text-danger"></span>

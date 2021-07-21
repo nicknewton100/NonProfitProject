@@ -10,7 +10,7 @@ namespace NonProfitProject.Models.ViewModels
     {
         [Required(ErrorMessage = "Please enter Cardholder Name")]
         public string CardholderName { get; set; }
-        [Required(ErrorMessage = "Please slect Card Type")]
+        [Required(ErrorMessage = "Please select Card Type")]
         public string CardType { get; set; }
         [Required(ErrorMessage = "Please enter Card number")]
         public string CardNumber { get; set; }
