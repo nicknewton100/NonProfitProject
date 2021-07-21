@@ -3,24 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
-using NonProfitProject.Models;
-using NonProfitProject.Controllers.Shared.Users;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
-    //If admin, show this page.
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class HomeController : Controller
+    [Route("[area]/[controller]/[action]/{id?}")]
+    public class NewsController : Controller
     {
-        //Admin home page view
-        [Authorize(Roles = "Admin")]
         public IActionResult Index()
-        {   
+        {
             return View();
         }
-
+        public IActionResult EditNews()
+        {
+            return View();
+        }
     }
 }

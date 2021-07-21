@@ -7,7 +7,50 @@
 
 <div class="container">
     <div class="card-header">
-        <h1> Welcome</h1>
+        <h1> Welcome User</h1>
     </div>
     <br />
+
+    <!--ICONS TO LINK TO THE OTHER PART OF THE USER DASHBOARDS-->
+    <div class="row justify-content-md-center">
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="" asp-controller="Home" asp-action="Index">
+            <!--WEBSITE ICON AND LINK TO THE THE HOMEPAGE WEBSITE-->
+            <h1 class="card-header fas fa-laptop-code"></h1>
+            <div class="card-body">
+                <h3 class="card-title">Website</h3>
+                <p class="card-text">View the homepage of the website</p>
+            </div>
+        </a>
+
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Users" asp-controller="Event" asp-action="Index">
+            <!--EVENTS ICON AND LINK TO ALL THE CALENDAR EVENTS-->
+            <h1 class="card-header far fa-calendar-alt"></h1>
+            <div class="card-body">
+                <h3 class="card-title">Events</h3>
+                <p class="card-text">View the list of events on the calendar</p>
+            </div>
+        </a>
+
+ 
+    </div>
+    <div class="row"><br /></div>
+    <div class="row justify-content-md-center">
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Users" asp-controller="Donate" asp-action="Index">
+            <!--EVENTS ICON AND LINK TO ALL THE CALENDAR EVENTS-->
+            <h1 class="card-header fas fa-comments-dollar"></h1>
+            <div class="card-body">
+                <h3 class="card-title">My Donations</h3>
+                <p class="card-text">View the list of the donations you made</p>
+            </div>
+        </a>
+        <a class="card w-25 btn btn-outline-dark" style="margin: 0 1rem;" asp-area="Users" asp-controller="Profile" asp-action="Index">
+            <!--EVENTS ICON AND LINK TO ALL THE CALENDAR EVENTS-->
+            <h1 class="card-header far fa-user-circle"></h1>
+            <div class="card-body">
+                <h3 class="card-title">Profile</h3>
+                <p class="card-text">View and edit your personal information</p>
+            </div>
+        </a>
+    </div>
+    <div class="row"><br /></div>
 </div>
