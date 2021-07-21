@@ -35,5 +35,6 @@ namespace NonProfitProject.Models.ViewModels
         public int BillingPostalCode { get; set; }
 
         public bool useHomeAddress { get; set; }
+        public bool savePayment { get; set; }
     }
 }

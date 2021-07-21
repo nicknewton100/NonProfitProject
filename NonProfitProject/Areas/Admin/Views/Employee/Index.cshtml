@@ -22,6 +22,7 @@
                         <th scope="col">Last</th>
                         <th scope="col">Email Address</th>
                         <th scope="col">Hire Date</th>
+                        <th scope="col">Release Date</th>
                         <th scope="col">Position</th>
                         <th scope="col"></th>
                     </tr>
@@ -35,6 +36,17 @@
                             <th>@empl.User.UserLastName</th>
                             <th>@empl.User.Email</th>
                             <th>@empl.HireDate</th>
+                            <th>
+                                @if (!empl.ReleaseDate.HasValue)
+                                {
+                                    @:N/A
+                                }
+                                else
+                                {
+                                    @empl.ReleaseDate
+                                }
+
+                            </th>
                             <th>@empl.Position</th>
                             <th>
                                 <div class="row">

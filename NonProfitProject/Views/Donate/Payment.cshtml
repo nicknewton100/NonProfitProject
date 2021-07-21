@@ -27,7 +27,7 @@
                             <span asp-validation-for="BillingFirstName" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
-                            
+
                             <label for="lastName">Last Name</label>
                             <input asp-for="BillingLastName" class="form-control BillingInformation" id="lastName" placeholder="Last Name">
                             <span asp-validation-for="BillingLastName" class="text-danger"></span>
@@ -122,9 +122,20 @@
                     <div class="form-row" style="margin:0 2rem;">
                         <div class="form-check">
                             <input asp-for="useHomeAddress" class="form-check-input" type="checkbox" id="sameAddress" onchange="hideBillingInformation()" />
-                            <label class="form-check-label" for="check1"> Use Home Address</label>
+                            <label class="form-check-label" for="check1"> Use home address</label>
                         </div>
                     </div>
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="form-row" style="margin:0 2rem;">
+                                <div class="form-check">
+                                    <input asp-for="savePayment" class="form-check-input" type="checkbox" />
+                                    <label class="form-check-label" for="check1"> Save this payment method</label>
+                                </div>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
             <div class="card w-25">
@@ -175,7 +186,7 @@
             </div>
         </div>
         <br />
-        <button type="submit" class="btn btn-primary">Place Order</button>
+        <button type="submit" class="btn btn-primary">Review Order</button>
         <a class="btn btn-danger" asp-action="Index">Cancel</a>
     </form>
     <script>
@@ -189,7 +200,7 @@
             }
             var city = JSON.stringify(@Html.Raw(Json.Serialize(DonationInformation.City)));
             var state = JSON.stringify(@Html.Raw(Json.Serialize(DonationInformation.State)));
-            var postalcode = JSON.stringify(@Html.Raw(Json.Serialize(DonationInformation.PostalCode)));
+            var postalcode = JSON.stringify(@Html.Raw(Json.Serialize(DonationInformation.PostalCode.ToString())));
 
             const accountvalues = [firstname, lastname, addr1, addr2, city, state, postalcode];
 

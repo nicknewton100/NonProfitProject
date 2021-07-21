@@ -16,6 +16,7 @@ namespace NonProfitProject.Models
         public Committees committee { get; set; }
         public string EmpID { get; set;}
         public Employees employee { get; set; }
+        [Required(ErrorMessage = "Please assign new member to a position")]
         public string CommitteePosition { get; set; }
     }
 }

@@ -25,7 +25,27 @@
 
 <div class="container-fluid" style="padding:0 5rem">
     <div class=" container">
-        <h4 class="text-center">Please select your donation amount...</h4>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <br />
+            <br />
+            <br />
+            <br />
+        }
+        @if(TempData["SessionTimeout"]?.ToString() != null)
+        {
+            <span>TempData["SessionTimeout"].ToString()</span>
+            <br />
+        }
+
+        <h4 class="text-center justify-content-center">Please select your donation amount...</h4>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <br />
+            <br />
+            <br />
+            <br />
+        }
         <div id="DIVbtns" class="row justify-content-center text-center">
             <div class="col-sm-2">
                 <div class="card" style="margin:15px 0;">
@@ -53,123 +73,133 @@
                 </div>
             </div>
         </div>
-        
+        @if (User.Identity.IsAuthenticated)
+        {
+            <br />
+            <br />
+            <br />
+            <br />
+        }
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-10">
                     <div class="card">
                         <div class="card card-header">
-                            <h3 class="fas fa-hand-holding-usd">  @ViewData["Title"]: <span class="msg"></span><span asp-validation-for="DonationAmount" id="DonationAmountValidation" class="text-danger"></span>
+                            <h3 class="fas fa-hand-holding-usd">
+                                @ViewData["Title"]: <span class="msg"></span><span asp-validation-for="DonationAmount" id="DonationAmountValidation" class="text-danger"></span>
                             </h3>
                         </div>
                         <div class="card card-body">
                             <form asp-action="Donate" method="post">
                                 <input hidden asp-for="DonationAmount" id="DonationAmount" />
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputFirstName">First Name<label style="color: red;"> *</label></label>
-                                        <input asp-for="FirstName" type="text" class="form-control" id="inputFirstName" placeholder="First Name" />
-                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputFirstName">First Name<label style="color: red;"> *</label></label>
+                                            <input asp-for="FirstName" type="text" class="form-control" id="inputFirstName" placeholder="First Name" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputLastName">Last Name<label style="color: red;"> *</label></label>
+                                            <input asp-for="LastName" type="text" class="form-control" id="inputLastName" placeholder="Last Name" />
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputLastName">Last Name<label style="color: red;"> *</label></label>
-                                        <input asp-for="LastName" type="text" class="form-control" id="inputLastName" placeholder="Last Name" />
-                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4">Email<label style="color: red;"> *</label></label>
+                                            <input asp-for="Email" type="email" class="form-control" id="inputEmail4" placeholder="Email" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPhone">Phone<label style="color:white;"> _</label></label>
+                                            <input asp-for="Phone" class="form-control" id="inputPhone" placeholder="Phone" oninput="phoneNumberFormatter(this)" />
+                                            <span asp-validation-for="Phone" class="text-danger"></span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4">Email<label style="color: red;"> *</label></label>
-                                        <input asp-for="Email" type="email" class="form-control" id="inputEmail4" placeholder="Email" />
-                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    <div class="form-group">
+                                        <label for="inputAddress">Address<label style="color: red;"> *</label></label>
+                                        <input asp-for="Addr1" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" />
+                                        <span asp-validation-for="Addr1" class="text-danger"></span>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputPhone">Phone<label style="color:white;"> _</label></label>
-                                        <input asp-for="Phone" class="form-control" id="inputPhone" placeholder="Phone" oninput="phoneNumberFormatter(this)" />
-                                        <span asp-validation-for="Phone" class="text-danger"></span>
+                                    <div class="form-group">
+                                        <label for="inputAddress2">Address 2</label>
+                                        <input asp-for="Addr2" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
+                                        <span asp-validation-for="Addr2" class="text-danger"></span>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputAddress">Address<label style="color: red;"> *</label></label>
-                                    <input asp-for="Addr1" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" />
-                                    <span asp-validation-for="Addr1" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputAddress2">Address 2</label>
-                                    <input asp-for="Addr2" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
-                                    <span asp-validation-for="Addr2" class="text-danger"></span>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputCity">City<label style="color: red;"> *</label></label>
-                                        <input asp-for="City" type="text" class="form-control" id="inputCity" />
-                                        <span asp-validation-for="City" class="text-danger"></span>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputCity">City<label style="color: red;"> *</label></label>
+                                            <input asp-for="City" type="text" class="form-control" id="inputCity" />
+                                            <span asp-validation-for="City" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="inputState">State<label style="color: red;"> *</label></label>
+                                            <select asp-for="State" class="form-control">
+                                                <option></option>
+                                                <option value="Alaska">Alaska</option>
+                                                <option value="Alabama">Alabama</option>
+                                                <option value="Arkansas">Arkansas</option>
+                                                <option value="Arizona">Arizona</option>
+                                                <option value="California">California</option>
+                                                <option value="Colorado">Colorado</option>
+                                                <option value="Connecticut">Connecticut</option>
+                                                <option value="District of Columbia">District of Columbia</option>
+                                                <option value="Delaware">Delaware</option>
+                                                <option value="Florida">Florida</option>
+                                                <option value="Georgia">Georgia</option>
+                                                <option value="Hawaii">Hawaii</option>
+                                                <option value="Iowa">Iowa</option>
+                                                <option value="Idaho">Idaho</option>
+                                                <option value="Illinois">Illinois</option>
+                                                <option value="Indiana">Indiana</option>
+                                                <option value="Kansas">Kansas</option>
+                                                <option value="Kentucky">Kentucky</option>
+                                                <option value="Louisiana">Louisiana</option>
+                                                <option value="Massachusetts">Massachusetts</option>
+                                                <option value="Maryland">Maryland</option>
+                                                <option value="Maine">Maine</option>
+                                                <option value="Michigan">Michigan</option>
+                                                <option value="Michigan">Minnesota</option>
+                                                <option value="Missouri">Missouri</option>
+                                                <option value="Mississippi">Mississippi</option>
+                                                <option value="Montana">Montana</option>
+                                                <option value="North Carolina">North Carolina</option>
+                                                <option value="North Dakota">North Dakota</option>
+                                                <option value="Nebraska">Nebraska</option>
+                                                <option value="New Hampshire">New Hampshire</option>
+                                                <option value="New Jersey">New Jersey</option>
+                                                <option value="New Mexico">New Mexico</option>
+                                                <option value="Nevada">Nevada</option>
+                                                <option value="New York">New York</option>
+                                                <option value="Ohio">Ohio</option>
+                                                <option value="Oklahoma">Oklahoma</option>
+                                                <option value="Oregon">Oregon</option>
+                                                <option value="Pennsylvania">Pennsylvania</option>
+                                                <option value="Puerto Rico">Puerto Rico</option>
+                                                <option value="Rhode Island">Rhode Island</option>
+                                                <option value="South Carolina">South Carolina</option>
+                                                <option value="South Dakota">South Dakota</option>
+                                                <option value="Tennessee">Tennessee</option>
+                                                <option value="Texas">Texas</option>
+                                                <option value="Utah">Utah</option>
+                                                <option value="Virginia">Virginia</option>
+                                                <option value="Vermont">Vermont</option>
+                                                <option value="Washington">Washington</option>
+                                                <option value="Wisconsin">Wisconsin</option>
+                                                <option value="West Virginia">West Virginia</option>
+                                                <option value="Wyoming">Wyoming</option>
+                                            </select>
+                                            <span asp-validation-for="State" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputZip">Zip<label style="color: red;"> *</label></label>
+                                            <input asp-for="PostalCode" type="text" class="form-control" id="inputZip" oninput="postalcode_format(this)">
+                                            <span asp-validation-for="PostalCode" class="text-danger"></span>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="inputState">State<label style="color: red;"> *</label></label>
-                                        <select asp-for="State" class="form-control">
-                                            <option></option>
-                                            <option value="Alaska">Alaska</option>
-                                            <option value="Alabama">Alabama</option>
-                                            <option value="Arkansas">Arkansas</option>
-                                            <option value="Arizona">Arizona</option>
-                                            <option value="California">California</option>
-                                            <option value="Colorado">Colorado</option>
-                                            <option value="Connecticut">Connecticut</option>
-                                            <option value="District of Columbia">District of Columbia</option>
-                                            <option value="Delaware">Delaware</option>
-                                            <option value="Florida">Florida</option>
-                                            <option value="Georgia">Georgia</option>
-                                            <option value="Hawaii">Hawaii</option>
-                                            <option value="Iowa">Iowa</option>
-                                            <option value="Idaho">Idaho</option>
-                                            <option value="Illinois">Illinois</option>
-                                            <option value="Indiana">Indiana</option>
-                                            <option value="Kansas">Kansas</option>
-                                            <option value="Kentucky">Kentucky</option>
-                                            <option value="Louisiana">Louisiana</option>
-                                            <option value="Massachusetts">Massachusetts</option>
-                                            <option value="Maryland">Maryland</option>
-                                            <option value="Maine">Maine</option>
-                                            <option value="Michigan">Michigan</option>
-                                            <option value="Michigan">Minnesota</option>
-                                            <option value="Missouri">Missouri</option>
-                                            <option value="Mississippi">Mississippi</option>
-                                            <option value="Montana">Montana</option>
-                                            <option value="North Carolina">North Carolina</option>
-                                            <option value="North Dakota">North Dakota</option>
-                                            <option value="Nebraska">Nebraska</option>
-                                            <option value="New Hampshire">New Hampshire</option>
-                                            <option value="New Jersey">New Jersey</option>
-                                            <option value="New Mexico">New Mexico</option>
-                                            <option value="Nevada">Nevada</option>
-                                            <option value="New York">New York</option>
-                                            <option value="Ohio">Ohio</option>
-                                            <option value="Oklahoma">Oklahoma</option>
-                                            <option value="Oregon">Oregon</option>
-                                            <option value="Pennsylvania">Pennsylvania</option>
-                                            <option value="Puerto Rico">Puerto Rico</option>
-                                            <option value="Rhode Island">Rhode Island</option>
-                                            <option value="South Carolina">South Carolina</option>
-                                            <option value="South Dakota">South Dakota</option>
-                                            <option value="Tennessee">Tennessee</option>
-                                            <option value="Texas">Texas</option>
-                                            <option value="Utah">Utah</option>
-                                            <option value="Virginia">Virginia</option>
-                                            <option value="Vermont">Vermont</option>
-                                            <option value="Washington">Washington</option>
-                                            <option value="Wisconsin">Wisconsin</option>
-                                            <option value="West Virginia">West Virginia</option>
-                                            <option value="Wyoming">Wyoming</option>
-                                        </select>
-                                        <span asp-validation-for="State" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="inputZip">Zip<label style="color: red;"> *</label></label>
-                                        <input asp-for="PostalCode" type="text" class="form-control" id="inputZip" oninput="postalcode_format(this)">
-                                        <span asp-validation-for="PostalCode" class="text-danger"></span>
-                                    </div>
-                                </div>
+                                }
                                 <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
                             </form>
                         </div>

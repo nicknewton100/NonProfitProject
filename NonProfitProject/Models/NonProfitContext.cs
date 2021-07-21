@@ -95,8 +95,7 @@ namespace NonProfitProject.Models
                     Salary = 54000,
                     HireDate = new DateTime(2020, 02, 04, 11, 14, 0),
                     ReleaseDate = null
-                }
-                );
+                });
             //Creates data for committees
             builder.Entity<Committees>().HasData(
                 new Committees
@@ -276,6 +275,24 @@ namespace NonProfitProject.Models
                 {
                     await userManager.AddToRoleAsync(user, "Member");
                 }
+            }
+            if (await userManager.FindByNameAsync("One-TimeDonation") == null)
+            {
+                User user = new User
+                {
+                    UserName = "One-TimeDonation",
+                    Email = "N/A",
+                    UserFirstName = "N/A",
+                    UserLastName = "N/A",
+                    UserAddr1 = "N/A",
+                    UserCity = "N/A",
+                    UserState = "N/A",
+                    UserGender = "N/A",
+                    UserActive = true,
+                    ReceiveWeeklyNewsletter = false
+                };
+                //Never need access to this account because its used to store the One-Time Donations that are made from users that are not registered/signedin so I made the password as obscure as possible
+                var result = await userManager.CreateAsync(user, "ckGoxk+&|5'#vM?(/Jo0keFGAds,HY%]Ujz4{6kFW8*a~~KWc~K{9x,lK2$kWJ");
             }
         }
     }

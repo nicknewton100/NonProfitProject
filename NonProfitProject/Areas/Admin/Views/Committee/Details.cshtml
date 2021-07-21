@@ -1,0 +1,62 @@
+﻿@model Committees
+@{
+    ViewData["Title"] = ViewBag.Action + "Committee";
+    ViewData["Title2"] = "Admin";
+    Layout = "_AdminLayout";
+}
+
+<div class="container">
+    <a class="btn btn-outline-dark" asp-action="AddMembers" asp-route-name="@Model.CommitteeName">Add Members</a>
+    <div class="container">
+        <h1>@Model.CommitteeName</h1>
+        <h4>Created on @Model.CommitteeCreationDate.ToShortDateString()</h4>
+        <h4>@Model.CommitteeDescription</h4>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Position</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Email Address</th>                   
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var President = Model.committeeMembers?.Where(cm => cm.CommitteePosition == "President").FirstOrDefault();
+                    if (President != null)
+                    {
+                        <tr>
+                            <th>@President.CommitteePosition</th>
+                            <th>@President.employee.User.UserFirstName</th>
+                            <th>@President.employee.User.UserLastName</th>
+                            <th>@President.employee.User.Email</th>
+                        </tr>
+                        Model.committeeMembers.Remove(President);
+                    }
+                    var VicePresident = Model.committeeMembers?.Where(cm => cm.CommitteePosition == "Vice President").FirstOrDefault();
+                    if (VicePresident != null)
+                    {
+                        <tr>
+                            <th>@VicePresident.CommitteePosition</th>
+                            <th>@VicePresident.employee.User.UserFirstName</th>
+                            <th>@VicePresident.employee.User.UserLastName</th>
+                            <th>@VicePresident.employee.User.Email</th>
+                        </tr>
+                        Model.committeeMembers.Remove(VicePresident);
+                    }
+                }
+                @foreach (var member in Model.committeeMembers)
+                {
+                    <tr>
+                        <th>@member.CommitteePosition</th>
+                        <th>@member.employee.User.UserFirstName</th>
+                        <th>@member.employee.User.UserLastName</th>
+                        <th>@member.employee.User.Email</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

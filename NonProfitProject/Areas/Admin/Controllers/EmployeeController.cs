@@ -30,7 +30,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public IActionResult Index()
         {
             //queries employee information
-            var employees = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).ToList();
+            var employees = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).OrderBy(e => e.User.UserLastName + ", " + e.User.UserFirstName).ToList();
             return View(employees);
         }
         public IActionResult AddEmployee()

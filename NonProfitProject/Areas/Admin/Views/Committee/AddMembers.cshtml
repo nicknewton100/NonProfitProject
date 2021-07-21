@@ -1,0 +1,67 @@
+﻿@model CommitteeMembers
+@{
+    ViewData["Title"] = "Add Members";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+    @using NonProfitProject.Models.Extensions;
+    var sessionModel = Context.Session.GetObject<NonProfitProject.Areas.Admin.Models.ViewModels.AddCommitteeMemberViewModel>("AddCommitteeMemberModel");
+}
+<div class="container">
+    <div class="container">
+        <div class="card-header-pills"><h1 class="far fa-id-card"> Add To @sessionModel.Committee.CommitteeName</h1></div>
+    </div>
+    <br />
+    <div class="container" style="font-size:medium;">
+        <div class="card">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Position</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Employees empl in sessionModel.Employees)
+                    {
+                        <tr>
+                            <th>@empl.User.UserFirstName</th>
+                            <th>@empl.User.UserLastName</th>
+                            <th>@empl.User.Email</th>
+                            <th>@empl.Position</th>
+                            <th>
+                                <div class="row">
+                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","Employee",new {id = empl.EmpID })'">Details</button>
+                                    <button type="button" data-toggle="modal" data-target="#Modal-@empl.EmpID" style="margin-bottom:0px; float:right; background-color:transparent; outline:none; border: none;">Add to Committee</button>
+
+                                    <div class="modal fade" id="Modal-@empl.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <form method="post" asp-action="AddMembers" asp-route-id="@empl.EmpID">
+                                                    <div class="row" style="width:500px;margin:0px auto;">
+                                                        <h5 class="modal-title" id="exampleModalLabel" style="margin-left:20px;color:black;">Please assign your new member a Position</h5>
+                                                        <input asp-for="CommitteePosition" class="form-control" />
+                                                        <div class="col">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float:right;">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-dark">Add To Committee</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

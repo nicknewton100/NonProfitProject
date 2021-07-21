@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NonProfitProject.Models;
 using System;
@@ -12,22 +13,28 @@ namespace NonProfitProject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
     [Route("[area]/[controller]s/[action]/{id?}")]
-    public class UserController : Controller
+    public class DonorsController : Controller
     {
         private NonProfitContext context;
-        public UserController(NonProfitContext context)
+        private UserManager<User> userManager;
+        public DonorsController(NonProfitContext context, UserManager<User> userManager)
         {
             this.context = context;
+            this.userManager = userManager;
         }
         //Shows Users Table List
         [Route("~/[area]/[controller]s")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var user = await userManager.GetUsersInRoleAsync("User");
+            var members = await userManager.GetUsersInRoleAsync("Member");
             //queries users that are not in the employee table
-            var users = context.Users.Where(u => !context.Employees.Any(e => u.Id == e.UserID)).ToList();
+            //var users = context.Users.Where(u => !context.Employees.Any(e => u.Id == e.UserID || u.UserName == "One-TimeDonation")).OrderBy(u => u.UserLastName + ", " + u.UserFirstName).ToList();
+
+            var users = context.Users.Where(u => u.UserName != "One-TimeDonation" && user.Contains(u) || members.Contains(u)).OrderBy(u => u.UserLastName + ", " + u.UserFirstName).ToList();
             return View(users);
         }
-        public IActionResult AddUser()
+        public IActionResult AddDonor()
         {
             return View();
         }
@@ -35,7 +42,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         //////////////////////////////////////////////////////////////////////
         //Edit 2 pieces of code below to appropriate where to return view from
         [HttpGet]
-        public IActionResult EditUser(int userID)
+        public IActionResult EditDonor(int userID)
         {
             ViewBag.Action = "Edit";
             var User = context.Users.Find(userID);
@@ -43,7 +50,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditUser(User user)
+        public IActionResult EditDonor(User user)
         {
             if (ModelState.IsValid)
             {

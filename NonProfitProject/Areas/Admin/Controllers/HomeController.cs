@@ -20,10 +20,5 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {   
             return View();
         }
-        [Authorize(Roles = "Employee")]
-        public IActionResult EmpIndex()
-        {
-            return View();
-        }
     }
 }
