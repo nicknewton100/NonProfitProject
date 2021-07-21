@@ -17,10 +17,9 @@
             @{
                 foreach (var committee in Model)
                 {
-                    <div class="card w-auto">
-                        <a class="card-header fas fa-user-edit btn btn-outline-dark" sp-area="Admin" asp-controller="Committee" asp-action="Details" asp-route-name="@committee.CommitteeName" style="font-size: xx-large; border:none"></a>
+                    <div class="card w-auto" style="margin:.5rem;">
+                        <a class="card-header btn btn-outline-dark" sp-area="Admin" asp-controller="Committee" asp-action="Details" asp-route-name="@committee.CommitteeName" style="font-size: xx-large; border:none"><h3 class="text-center">@committee.CommitteeName</h3></a>
                         <div class="card-body">
-                            <h3 class="card-title text-center">@committee.CommitteeName</h3>
                             <div style="font-size:small;">
                                 <table class="table table-bordered">
                                     <thead class="thead-dark">
@@ -39,9 +38,9 @@
                                             if (President != null)
                                             {
                                                 <tr>
-                                                    <th>@President.CommitteePosition</th>
-                                                    <th>@President.employee.User.UserFirstName</th>
-                                                    <th>@President.employee.User.UserLastName</th>
+                                                    <td>@President.CommitteePosition</td>
+                                                    <td>@President.employee.User.UserFirstName</td>
+                                                    <td>@President.employee.User.UserLastName</td>
                                                 </tr>
                                                 committee.committeeMembers.Remove(President);
                                                 isLessThan5 += 1;
@@ -51,9 +50,9 @@
                                             if (VicePresident != null)
                                             {
                                                 <tr>
-                                                    <th>@VicePresident.CommitteePosition</th>
-                                                    <th>@VicePresident.employee.User.UserFirstName</th>
-                                                    <th>@VicePresident.employee.User.UserLastName</th>
+                                                    <td>@VicePresident.CommitteePosition</td>
+                                                    <td>@VicePresident.employee.User.UserFirstName</td>
+                                                    <td>@VicePresident.employee.User.UserLastName</td>
                                                 </tr>
                                                 committee.committeeMembers.Remove(VicePresident);
                                                 isLessThan5 += 1;
@@ -68,9 +67,9 @@
                                                 break;
                                             }
                                             <tr>
-                                                <th>@member.CommitteePosition</th>
-                                                <th>@member.employee.User.UserFirstName</th>
-                                                <th>@member.employee.User.UserLastName</th>
+                                                <td>@member.CommitteePosition</td>
+                                                <td>@member.employee.User.UserFirstName</td>
+                                                <td>@member.employee.User.UserLastName</td>
                                             </tr>
                                             isLessThan5 += 1;
                                         }
