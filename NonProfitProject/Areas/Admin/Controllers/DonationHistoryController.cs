@@ -109,9 +109,24 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 }
                 context.Receipts.Update(currentReceipt);
                 context.SaveChanges();
-                return RedirectToAction("Details");
+                TempData["DonationChanges"] = String.Format("The Donation with Receipt ID {0} has been updated", currentReceipt.ReceiptID);
+                return RedirectToAction("Index");
             }
             return View();
+        }
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var receipt = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Where(r => r.ReceiptID == id).FirstOrDefault();
+            if(receipt == null)
+            {
+                TempData["DonationChanges"] = String.Format("The Donation with Receipt ID {0} does not exist", id);
+                return RedirectToAction("Index");
+            }
+            context.Receipts.Remove(receipt);
+            context.SaveChanges();
+            TempData["DonationChanges"] = String.Format("The Donation with Receipt ID {0} has been deleted", id);
+            return RedirectToAction("Index");
         }
     }
 }

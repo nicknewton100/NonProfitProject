@@ -30,7 +30,7 @@
                         <tr>
                             <th scope="row">@donation.ReceiptID</th>
                             <th scope="row">
-                                @{ 
+                                @{
                                     if (donation.User.UserName.Equals("One-TimeDonation"))
                                     {
                                         @:N/A
@@ -50,8 +50,8 @@
                             <th>
                                 <div class="row">
                                     <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","DonationHistory",new {id = donation.ReceiptID })'">Details</button>
-                                    <form method="post" asp-action="DeleteEmployee" asp-route-id="@donation.ReceiptID">
-                                        <button type="submit" class="btn btn-dark deleteEmp">Delete</button>
+                                    <form method="post" asp-action="Delete" asp-route-id="@donation.ReceiptID">
+                                        <button type="submit" class="btn btn-dark">Delete</button>
                                     </form>
                                 </div>
                             </th>
@@ -60,5 +60,6 @@
                 </tbody>
             </table>
         </div>
+        <h5 class="text-primary">@TempData["DonationChanges"]?.ToString()</h5>
     </div>
 </div>
