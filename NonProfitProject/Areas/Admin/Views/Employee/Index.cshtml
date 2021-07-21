@@ -1,6 +1,7 @@
 ﻿@model List<Employees>
 @{
     ViewData["Title"] = "Employees List";
+    ViewData["Title2"] = "Admin";
     Layout = "_AdminLayout";
 }
 
@@ -25,18 +26,19 @@
                         <th scope="col">Release Date</th>
                         <th scope="col">Position</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (Employees empl in Model)
                     {
                         <tr>
-                            <th scope="row" hidden>@empl.EmpID</th>
-                            <th>@empl.User.UserFirstName</th>
-                            <th>@empl.User.UserLastName</th>
-                            <th>@empl.User.Email</th>
-                            <th>@empl.HireDate</th>
-                            <th>
+                            <td scope="row" hidden>@empl.EmpID</td>
+                            <td>@empl.User.UserFirstName</td>
+                            <td>@empl.User.UserLastName</td>
+                            <td>@empl.User.Email</td>
+                            <td>@empl.HireDate</td>
+                            <td>
                                 @if (!empl.ReleaseDate.HasValue)
                                 {
                                     @:N/A
@@ -46,16 +48,17 @@
                                     @empl.ReleaseDate
                                 }
 
-                            </th>
-                            <th>@empl.Position</th>
-                            <th>
-                                <div class="row">
-                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","Employee",new {id = empl.EmpID })'">Details</button>
-                                    <form method="post" asp-action="DeleteEmployee" asp-route-id="@empl.EmpID">
-                                        <button type="submit" class="btn btn-dark deleteEmp">Delete</button>
-                                    </form>
-                                </div>
-                            </th>
+                            </td>
+                            <td>@empl.Position</td>
+                            <td>
+                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","Employee",new {id = empl.EmpID })'">Details</button>
+                                
+                            </td>
+                            <td>
+                                <form method="post" asp-action="DeleteEmployee" asp-route-id="@empl.EmpID">
+                                    <button type="submit" class="btn btn-dark deleteEmp">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 </tbody>
