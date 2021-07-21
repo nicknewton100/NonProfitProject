@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using NonProfitProject.Models;
+using NonProfitProject.Controllers.Shared.Users;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
@@ -20,5 +21,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {   
             return View();
         }
+
     }
 }
