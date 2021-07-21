@@ -1,0 +1,340 @@
+﻿@model Receipts
+@{
+    ViewData["Title"] = "Donation - ID " + Model.ReceiptID;
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+}
+<div class="container">
+    <div class="card-header-pills"><h1 class="fa fa-dollar-sign">  @ViewData["Title"]</h1></div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div>
+        <form asp-action="Edit" method="post" style="font-size:medium">
+            <div class="row">
+                <input type="hidden" asp-for="ReceiptID">
+                <div class="card w-auto" style="margin:0.5rem;padding:0.25rem;">
+                    <div class="card-body">
+                        <h4>Donor Information</h4>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="form-group">
+                                <!--FIRST NAME-->
+                                <div class="col-auto"><label>First Name: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoiceDonorInformation.FirstName" class="form-control" />
+                                    <span asp-validation-for="InvoiceDonorInformation.FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <!--LAST NAME-->
+                                <div class="col-auto"><label>Last Name: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoiceDonorInformation.LastName" class="form-control" />
+                                    <span asp-validation-for="InvoiceDonorInformation.LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group w-50">
+                                <!--EMAIL ADDRESS-->
+                                <div class="col-auto"><label>Email Address: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoiceDonorInformation.Email" class="form-control" id="Email" />
+                                    <span asp-validation-for="InvoiceDonorInformation.Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group DetailsDisable w-25">
+                                <!--CONFIRM EMAIL ADDRESS-->
+                                <div class="col-auto"><label>Phone: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoiceDonorInformation.Phone" class="form-control" id="EmailConfirmed">
+                                    <span asp-validation-for="InvoiceDonorInformation.Phone" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group w-50">
+                                <!--ADDRESS 1-->
+                                <div class="col-auto"><label>Address 1: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoiceDonorInformation.Addr1" class="form-control" />
+                                    <span asp-validation-for="InvoiceDonorInformation.Addr1" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group w-50">
+                                <!--ADDRESS 2-->
+                                <div class="col-auto"><label>Address 2: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoiceDonorInformation.Addr2" class="form-control" />
+                                    <span asp-validation-for="InvoiceDonorInformation.Addr2" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <!--CITY-->
+                                <div class="col-auto"><label>City: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoiceDonorInformation.City" class="form-control" />
+                                    <span asp-validation-for="InvoiceDonorInformation.City" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <!--STATE-->
+                                <div class="col-auto"><label>State: </label></div>
+                                <div class="col-auto">
+                                    <select asp-for="InvoiceDonorInformation.State" id="inputState" name="state" class="form-control BillingInformation">
+                                        <option></option>
+                                        <option value="Alaska">Alaska</option>
+                                        <option value="Alabama">Alabama</option>
+                                        <option value="Arkansas">Arkansas</option>
+                                        <option value="Arizona">Arizona</option>
+                                        <option value="California">California</option>
+                                        <option value="Colorado">Colorado</option>
+                                        <option value="Connecticut">Connecticut</option>
+                                        <option value="District of Columbia">District of Columbia</option>
+                                        <option value="Delaware">Delaware</option>
+                                        <option value="Florida">Florida</option>
+                                        <option value="Georgia">Georgia</option>
+                                        <option value="Hawaii">Hawaii</option>
+                                        <option value="Iowa">Iowa</option>
+                                        <option value="Idaho">Idaho</option>
+                                        <option value="Illinois">Illinois</option>
+                                        <option value="Indiana">Indiana</option>
+                                        <option value="Kansas">Kansas</option>
+                                        <option value="Kentucky">Kentucky</option>
+                                        <option value="Louisiana">Louisiana</option>
+                                        <option value="Massachusetts">Massachusetts</option>
+                                        <option value="Maryland">Maryland</option>
+                                        <option value="Maine">Maine</option>
+                                        <option value="Michigan">Michigan</option>
+                                        <option value="Michigan">Minnesota</option>
+                                        <option value="Missouri">Missouri</option>
+                                        <option value="Mississippi">Mississippi</option>
+                                        <option value="Montana">Montana</option>
+                                        <option value="North Carolina">North Carolina</option>
+                                        <option value="North Dakota">North Dakota</option>
+                                        <option value="Nebraska">Nebraska</option>
+                                        <option value="New Hampshire">New Hampshire</option>
+                                        <option value="New Jersey">New Jersey</option>
+                                        <option value="New Mexico">New Mexico</option>
+                                        <option value="Nevada">Nevada</option>
+                                        <option value="New York">New York</option>
+                                        <option value="Ohio">Ohio</option>
+                                        <option value="Oklahoma">Oklahoma</option>
+                                        <option value="Oregon">Oregon</option>
+                                        <option value="Pennsylvania">Pennsylvania</option>
+                                        <option value="Puerto Rico">Puerto Rico</option>
+                                        <option value="Rhode Island">Rhode Island</option>
+                                        <option value="South Carolina">South Carolina</option>
+                                        <option value="South Dakota">South Dakota</option>
+                                        <option value="Tennessee">Tennessee</option>
+                                        <option value="Texas">Texas</option>
+                                        <option value="Utah">Utah</option>
+                                        <option value="Virginia">Virginia</option>
+                                        <option value="Vermont">Vermont</option>
+                                        <option value="Washington">Washington</option>
+                                        <option value="Wisconsin">Wisconsin</option>
+                                        <option value="West Virginia">West Virginia</option>
+                                        <option value="Wyoming">Wyoming</option>
+                                    </select>
+                                    <span asp-validation-for="InvoiceDonorInformation.State" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-auto"><label>Postal Code: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoiceDonorInformation.PostalCode" class="form-control" oninput="postalcode_format(this)" />
+                                    <span asp-validation-for="InvoiceDonorInformation.PostalCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <h4>Payment Information</h4>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="form-group w-auto">
+                                <!--ADDRESS 1-->
+                                <div class="col-auto"><label>Carholder Name: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoicePayment.CardholderName" class="form-control" />
+                                    <span asp-validation-for="InvoicePayment.CardholderName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group w-auto">
+                                <!--ADDRESS 2-->
+                                <div class="col-auto"><label>Card Type: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoicePayment.CardType" class="form-control" />
+                                    <span asp-validation-for="InvoicePayment.CardType" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group w-25">
+                                <!--CITY-->
+                                <div class="col-auto"><label>Card Number: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" value="xxxx-xxxx-xxxx-@Model.InvoicePayment.Last4Digits" />
+                                    <!-- <span asp-validation-for="CardNumber" class="text-danger"></span>-->
+                                </div>
+                            </div>
+                            <div class="form-group w-auto">
+                                <!--STATE-->
+                                <div class="col-auto"><label>Expiration Date: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" asp-for="InvoicePayment.ExpDate" class="form-control BillingInformation">
+                                    <span asp-validation-for="InvoicePayment.ExpDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <h4>Billing Information</h4>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="form-group">
+                                <!--POSITION-->
+                                <div class="col-auto"><label>First Name: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoicePayment.BillingFirstName" class="form-control" />
+                                    <span asp-validation-for="InvoicePayment.BillingFirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <!--SALARY-->
+                                <div class="col-auto"><label>Last Name: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoicePayment.BillingLastName" class="form-control" oninput="CheckDecimal(this)" />
+                                    <span asp-validation-for="InvoicePayment.BillingLastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group w-50">
+                                <!--ADDRESS 1-->
+                                <div class="col-auto"><label>Address 1: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoicePayment.BillingAddr1" class="form-control" />
+                                    <span asp-validation-for="InvoicePayment.BillingAddr1" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group w-50">
+                                <!--ADDRESS 2-->
+                                <div class="col-auto"><label>Address 2: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoicePayment.BillingAddr2" class="form-control" />
+                                    <span asp-validation-for="InvoicePayment.BillingAddr2" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <!--CITY-->
+                                <div class="col-auto"><label>City: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoicePayment.BillingCity" class="form-control" />
+                                    <span asp-validation-for="InvoicePayment.BillingCity" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <!--STATE-->
+                                <div class="col-auto"><label>State: </label></div>
+                                <div class="col-auto">
+                                    <select asp-for="InvoicePayment.BillingState" class="form-control BillingInformation">
+                                        <option></option>
+                                        <option value="Alaska">Alaska</option>
+                                        <option value="Alabama">Alabama</option>
+                                        <option value="Arkansas">Arkansas</option>
+                                        <option value="Arizona">Arizona</option>
+                                        <option value="California">California</option>
+                                        <option value="Colorado">Colorado</option>
+                                        <option value="Connecticut">Connecticut</option>
+                                        <option value="District of Columbia">District of Columbia</option>
+                                        <option value="Delaware">Delaware</option>
+                                        <option value="Florida">Florida</option>
+                                        <option value="Georgia">Georgia</option>
+                                        <option value="Hawaii">Hawaii</option>
+                                        <option value="Iowa">Iowa</option>
+                                        <option value="Idaho">Idaho</option>
+                                        <option value="Illinois">Illinois</option>
+                                        <option value="Indiana">Indiana</option>
+                                        <option value="Kansas">Kansas</option>
+                                        <option value="Kentucky">Kentucky</option>
+                                        <option value="Louisiana">Louisiana</option>
+                                        <option value="Massachusetts">Massachusetts</option>
+                                        <option value="Maryland">Maryland</option>
+                                        <option value="Maine">Maine</option>
+                                        <option value="Michigan">Michigan</option>
+                                        <option value="Michigan">Minnesota</option>
+                                        <option value="Missouri">Missouri</option>
+                                        <option value="Mississippi">Mississippi</option>
+                                        <option value="Montana">Montana</option>
+                                        <option value="North Carolina">North Carolina</option>
+                                        <option value="North Dakota">North Dakota</option>
+                                        <option value="Nebraska">Nebraska</option>
+                                        <option value="New Hampshire">New Hampshire</option>
+                                        <option value="New Jersey">New Jersey</option>
+                                        <option value="New Mexico">New Mexico</option>
+                                        <option value="Nevada">Nevada</option>
+                                        <option value="New York">New York</option>
+                                        <option value="Ohio">Ohio</option>
+                                        <option value="Oklahoma">Oklahoma</option>
+                                        <option value="Oregon">Oregon</option>
+                                        <option value="Pennsylvania">Pennsylvania</option>
+                                        <option value="Puerto Rico">Puerto Rico</option>
+                                        <option value="Rhode Island">Rhode Island</option>
+                                        <option value="South Carolina">South Carolina</option>
+                                        <option value="South Dakota">South Dakota</option>
+                                        <option value="Tennessee">Tennessee</option>
+                                        <option value="Texas">Texas</option>
+                                        <option value="Utah">Utah</option>
+                                        <option value="Virginia">Virginia</option>
+                                        <option value="Vermont">Vermont</option>
+                                        <option value="Washington">Washington</option>
+                                        <option value="Wisconsin">Wisconsin</option>
+                                        <option value="West Virginia">West Virginia</option>
+                                        <option value="Wyoming">Wyoming</option>
+                                    </select>
+                                    <span asp-validation-for="InvoicePayment.BillingState" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-auto"><label>Postal Code: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="InvoicePayment.BillingPostalCode" class="form-control" oninput="postalcode_format(this)" />
+                                    <span asp-validation-for="InvoicePayment.BillingPostalCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <br />
+                                @{
+                                    if (TempData["Action"].ToString().Equals("Details"))
+                                    {
+                                        <button type="button" class="btn-lg btn-outline-dark" onclick="location.href = '@Url.Action("Edit","DonationHistory",new {id = Model.ReceiptID })'">Edit Donation</button>
+                                        <script>
+                                            var inputs, index, selects;
+                                            inputs = document.getElementsByTagName('input');
+                                            selects = document.getElementsByTagName('select');
+                                            for (var index = 0; index < inputs.length; ++index) {
+                                                inputs[index].disabled = true;
+                                            }
+                                            for (var index = 0; index < selects.length; ++index) {
+                                                selects[index].disabled = true;
+                                            }
+                                        </script>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn-lg btn-outline-dark">Save Changes</button>
+                                    }
+                                }
+                            </div>
+                            <div class="col">
+                                <br />
+                                <button type="button" class="btn-lg btn-dark " onclick="location.href = '@Url.Action("Index","DonationHistory")'">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
