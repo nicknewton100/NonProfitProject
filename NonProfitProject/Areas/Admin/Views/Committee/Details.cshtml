@@ -6,7 +6,6 @@
 }
 
 <div class="container">
-
     <div class="container">
         <h1>@Model.CommitteeName</h1>
         <h4>Created on @Model.CommitteeCreationDate.ToShortDateString()</h4>
@@ -16,7 +15,7 @@
             <a class="btn btn-dark" asp-controller="Committee" asp-action="Index">Return to Board of Committees</a>
         </div>
     </div>
-    <div class="container" style="font-size:medium;">
+    <div class="card" style="font-size:medium;">
         <table class="table">
             <thead class="thead-dark">
                 <tr>

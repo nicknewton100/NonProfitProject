@@ -73,9 +73,19 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return RedirectToAction("AddMembers", new { name = sessionmodel.Committee.CommitteeName, id = "" });
         }
+        [Route("~/[area]/[controller]/{name}/AddMembers/[action]/{id}")]
         public IActionResult EmployeeDetails(string id)
         {
-            return View();
+            var employee = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID) && e.EmpID == id).FirstOrDefault();
+            var sessionmodel = HttpContext.Session.GetObject<AddCommitteeMemberViewModel>("AddCommitteeMemberModel");
+            if (employee == null || sessionmodel == null)
+            {
+                TempData["AddCommitteeMemberTimeout"] = "Session Timeout";
+                return RedirectToAction("Index");
+            }
+            //resets the session time
+            HttpContext.Session.SetObject("AddCommitteeMemberModel", sessionmodel);
+            return View(employee);
         }
         public IActionResult AddCommittee()
         {
