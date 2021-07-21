@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Edit Article";
+    ViewData["Title2"] = "Admin";
+    Layout = "_AdminLayout";
+}
+
+<div class="container">
+    <div class="card-header-pills"><h1 class="far fa-newspaper"> News Articles</h1></div>
+
+    <form>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-auto"><label>News Header: </label></div>
+                <div class="col-lg-auto">
+                    <input class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-auto"><label>Publisher: </label></div>
+                <div class="col-auto">
+                    <input class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-auto"><label>Date Published: </label></div>
+                <div class="col-auto">
+                    <input class="form-control" type="date" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-auto"><label>News Information: </label> </div>
+                <div class="col-auto">
+                    <textarea cols="150" rows="10" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-auto">
+                    <button class="btn btn-dark">Add</button>
+                    <a class="btn btn-danger" asp-area="Admin" asp-controller="News" asp-action="Index">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
