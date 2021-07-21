@@ -145,8 +145,8 @@
                 <br />
                 <div class="card-body">
                     <div class="form-row" style="margin-left: 2rem;">
+                        <span asp-validation-for="CardType" class="text-danger"></span>
                         <div class="form-check">
-                            <span asp-validation-for="CardType" class="text-danger"></span>
                             <input asp-for="CardType" class="form-check-input" type="radio" value="Credit Card" id="CreditCard" />
                             <label class="fomr-check-label" for="CreditCard">Credit Card  <i class="far fa-credit-card"></i></label>
                         </div>
