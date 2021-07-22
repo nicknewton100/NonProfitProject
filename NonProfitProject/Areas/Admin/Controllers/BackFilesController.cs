@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
 using Microsoft.SqlServer.Management.Smo;
+using Microsoft.SqlServer.Management.Sdk.Sfc;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
@@ -28,6 +29,10 @@ namespace NonProfitProject.Areas.Admin.Controllers
             try
             {
                 string directory = @"..\\Backup";
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
                 string saveDirectory = Path.GetFullPath(directory).ToString() + "\\" + DateTime.Now.ToString("dd_MM_yyyy_HHmmss") + ".sql";
 
                 StringBuilder sb = new StringBuilder();
@@ -43,16 +48,19 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 options.AppendToFile = true;
                 options.Indexes = true;
                 options.WithDependencies = true;
-                dbs.Script(options);
+                List<string> tables = new List<string> { "__EFMigrationsHistory", "AspNetRoleClaims", "AspNetRoles", "AspNetUserClaims", "AspNetUserLogins", "AspNetUserRoles", "AspNetUsers", "AspNetUserTokens", "CommitteeMembers", "Committees", "Donations", "Employees", "Events", "InvoiceDonorInformation", "InvoicePayments", "MembershipDues", "News", "Receipts", "SavedPayments" };
+                foreach (var tbl in tables)
+                {
+                    dbs.Tables[tbl].EnumScript(options);
+                }
+                byte[] fileBytes = System.IO.File.ReadAllBytes(saveDirectory);
+                return File(fileBytes, "application/force-download", "BackupApplication.sql");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 TempData["Error"] = e.Message;
-            }
-            /*byte[] fileBytes = System.IO.File.ReadAllBytes(saveDirectory);
-            return File(fileBytes, "application/force-download", "BackupApplication.sql");*/
-
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }           
         }
 
         [HttpPost]
