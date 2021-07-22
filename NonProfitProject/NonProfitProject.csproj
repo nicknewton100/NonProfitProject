@@ -34,7 +34,6 @@
     <Folder Include="Controllers\Shared\Employee\" />
     <Folder Include="Models\ViewModels\Shared\Employee\" />
     <Folder Include="Models\ViewModels\Shared\Member\" />
-    <Folder Include="Backup\" />
     <Folder Include="Views\Shared\Employee\" />
     <Folder Include="Views\Shared\Member\" />
   </ItemGroup>
