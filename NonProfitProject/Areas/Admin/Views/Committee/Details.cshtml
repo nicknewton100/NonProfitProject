@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = ViewBag.Action + "Committee";
     ViewData["Title2"] = "Admin";
-    Layout = "_AdminLayout";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
 }
 
 <div class="container">
@@ -23,6 +23,8 @@
                     <th scope="col">First</th>
                     <th scope="col">Last</th>
                     <th scope="col">Email Address</th>
+                    <th scope="col" class="w-25">Phone</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -31,10 +33,19 @@
                     if (President != null)
                     {
                         <tr>
-                            <td>@President.CommitteePosition</td>
+                            <td>@President.CommitteePosition<button class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;"></button></td>
                             <td>@President.employee.User.UserFirstName</td>
                             <td>@President.employee.User.UserLastName</td>
                             <td>@President.employee.User.Email</td>
+                            <td>@President.employee.User.PhoneNumber</td>
+                            <td>
+                                <div class="row">
+                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","Committee",new {id = President.EmpID, name = Model.CommitteeName})'">Details</button>
+                                    <form asp-action="RemoveMember" method="post" asp-route-id="@President.employee.EmpID">
+                                        <button type="submit" class="btn btn-dark">Remove From Committee</button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                         Model.committeeMembers.Remove(President);
                     }
@@ -42,10 +53,19 @@
                     if (VicePresident != null)
                     {
                         <tr>
-                            <td>@VicePresident.CommitteePosition</td>
+                            <td>@VicePresident.CommitteePosition<button class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;"></button></td>
                             <td>@VicePresident.employee.User.UserFirstName</td>
                             <td>@VicePresident.employee.User.UserLastName</td>
                             <td>@VicePresident.employee.User.Email</td>
+                            <td>@VicePresident.employee.User.PhoneNumber</td>
+                            <td>
+                                <div class="row">
+                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","Committee",new {id = VicePresident.EmpID, name = Model.CommitteeName})'">Details</button>
+                                    <form asp-action="RemoveMember" method="post" asp-route-id="@VicePresident.employee.EmpID">
+                                        <button type="submit" class="btn btn-dark">Remove From Committee</button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                         Model.committeeMembers.Remove(VicePresident);
                     }
@@ -53,10 +73,19 @@
                 @foreach (var member in Model.committeeMembers)
                 {
                     <tr>
-                        <td>@member.CommitteePosition</td>
+                        <td>@member.CommitteePosition<button class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;"></button></td>
                         <td>@member.employee.User.UserFirstName</td>
                         <td>@member.employee.User.UserLastName</td>
                         <td>@member.employee.User.Email</td>
+                        <td>@member.employee.User.PhoneNumber</td>
+                        <td>
+                            <div class="row">
+                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","Committee",new {id = member.EmpID, name = Model.CommitteeName})'">Details</button>
+                                <form asp-action="RemoveMember" method="post" asp-route-id="@member.employee.EmpID">
+                                    <button type="submit" class="btn btn-dark">Remove From Committee</button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 }
             </tbody>
