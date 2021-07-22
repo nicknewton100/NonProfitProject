@@ -36,32 +36,44 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 Directory.CreateDirectory(directory);
             }
             string saveDirectory = directory + "\\" + DateTime.Now.ToString("dd_MM_yyyy_HHmmss") + ".bak";
-
-            sqlConnection.Open();
-            sqlCommand = new SqlCommand("backup database cpt275seniorproj to disk='" + saveDirectory +"'", sqlConnection);
-            sqlCommand.ExecuteNonQuery();
-            sqlConnection.Close();
+            try
+            {
+                sqlConnection.Open();
+                sqlCommand = new SqlCommand("backup database cpt275seniorproj to disk='" + saveDirectory +"'", sqlConnection);
+                sqlCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+            catch(Exception e)
+            {
+                TempData["Error"] = e.Message;
+            }
+            
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public IActionResult Backup()
         {
-            string path = Environment.CurrentDirectory.ToString();
-            path = "..\\..\\..\\" + path;
-            string directory = @"..\\Backup";
+            string path = @"..\\..\\..\\";
+            string directory = @"..\\..\\..\\Backup";
             // check if backup folder exist, otherwise create it.
             if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
             }
-            string saveDirectory = directory + "\\" + DateTime.Now.ToString("dd_MM_yyyy_HHmmss") + ".zip";
-            ZipFile.CreateFromDirectory(path, saveDirectory);
+            try
+            {
+                string saveDirectory = directory + "\\" + DateTime.Now.ToString("dd_MM_yyyy_HHmmss") + ".zip";
+                ZipFile.CreateFromDirectory(path, saveDirectory);
 
-            byte[] fileBytes = System.IO.File.ReadAllBytes(saveDirectory);
-
-            return File(fileBytes, "application/force-download", "BackupApplication.zip");
-            //return RedirectToAction("Index");
+                byte[] fileBytes = System.IO.File.ReadAllBytes(saveDirectory);
+                return File(fileBytes, "application/force-download", "BackupApplication.zip");
+            }
+            catch(Exception e)
+            {
+                TempData["Error"] = e.Message;
+                return RedirectToAction("Index");
+            }
         }
     }
 }
