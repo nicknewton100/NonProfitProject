@@ -48,7 +48,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public IActionResult Backup()
         {
             var path = Environment.CurrentDirectory.ToString();
-            string directory = @"..\\Backup";
+            string directory = @"..\\..\\..\\..\\Backup";
             // check if backup folder exist, otherwise create it.
             if (!Directory.Exists(directory))
             {
