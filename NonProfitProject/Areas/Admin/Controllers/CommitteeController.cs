@@ -36,7 +36,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public IActionResult Details(string name)
         {
             var committee = context.Committees?.Include(c => c.committeeMembers).ThenInclude(cm => cm.employee).ThenInclude(e => e.User).Where(c => c.CommitteeName.Equals(name)).AsNoTracking().FirstOrDefault();
-            if(committee == null)
+            if (committee == null)
             {
                 return RedirectToAction("Index");
             }
@@ -64,6 +64,18 @@ namespace NonProfitProject.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Route("~/[area]/[controller]/[action]{id}/{name}/{position}")]
+        public IActionResult EditPosition(string id,string name, string position)
+        {
+            var member = context.CommitteeMembers.Include(cm => cm.employee).ThenInclude(e => e.User).Where(cm => cm.EmpID == id).FirstOrDefault();
+            if(member == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Details", new { name = name });
+        }
+
+        [HttpPost]
         public IActionResult RemoveMember(string id)
         {
             var employee = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).Where(e => e.EmpID == id).AsNoTracking().FirstOrDefault();
@@ -84,8 +96,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult AddMembers(string name)
         {
-            var sessionmodel = HttpContext.Session.GetObject<CommitteeMemberViewModel>("CommitteeMemberModel");
-            HttpContext.Session.SetObject("CommitteeMemberModel", sessionmodel);
+            var CommitteeMemberModel = new CommitteeMemberViewModel() { Committee = context.Committees?.Where(c => c.CommitteeName == name).AsNoTracking().FirstOrDefault(), Employees = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID)).AsNoTracking().ToList() };
+            HttpContext.Session.SetObject("CommitteeMemberModel", CommitteeMemberModel);
             return View();
         }
 

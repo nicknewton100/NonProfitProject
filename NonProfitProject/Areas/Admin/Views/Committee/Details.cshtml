@@ -33,7 +33,28 @@
                     if (President != null)
                     {
                         <tr>
-                            <td>@President.CommitteePosition<button class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;"></button></td>
+                            <td>@President.CommitteePosition<button type="button" data-toggle="modal" data-target="#Modal-@President.employee.EmpID" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;"></button>
+                                                            <div class="modal fade" id="Modal-@President.employee.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <form method="post" asp-action="EditPosition" asp-route-id="@President.EmpID" asp-route-position="">
+                                                                            <div class="modal-header justify-content-center">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Assign Position</h5>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="row justify-content-center">
+                                                                                    <input asp-for="@President.CommitteePosition" class="form-control w-50" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit" class="btn btn-dark">Edit Position</button>
+                                                                                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Cancel</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>   
+                            </td>
                             <td>@President.employee.User.UserFirstName</td>
                             <td>@President.employee.User.UserLastName</td>
                             <td>@President.employee.User.Email</td>
@@ -53,7 +74,31 @@
                     if (VicePresident != null)
                     {
                         <tr>
-                            <td>@VicePresident.CommitteePosition<button class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;"></button></td>
+                            <td>
+                                @VicePresident.CommitteePosition
+                                                        <button type="button" data-toggle="modal" data-target="#Modal-@VicePresident.employee.EmpID" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;"></button>
+                                                        <div class="modal fade" id="Modal-@VicePresident.employee.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <form method="post" asp-action="EditPosition" asp-route-id="@VicePresident.employee.EmpID">
+                                                                        <div class="modal-header justify-content-center">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Assign Position</h5>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="row justify-content-center">
+                                                                                <input asp-for="@VicePresident.CommitteePosition" class="form-control w-50" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" class="btn btn-dark">Edit Position</button>
+                                                                            <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Cancel</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
                             <td>@VicePresident.employee.User.UserFirstName</td>
                             <td>@VicePresident.employee.User.UserLastName</td>
                             <td>@VicePresident.employee.User.Email</td>
@@ -73,7 +118,30 @@
                 @foreach (var member in Model.committeeMembers)
                 {
                     <tr>
-                        <td>@member.CommitteePosition<button class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;"></button></td>
+                        <td>
+                            @member.CommitteePosition
+                                                <button type="button" data-toggle="modal" data-target="#Modal-@member.employee.EmpID" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;"></button>
+                                                <div class="modal fade" id="Modal-@member.employee.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <form method="post" asp-action="EditPosition" asp-route-id="@member.EmpID" asp-route-name="@member.committee.CommitteeName">
+                                                                <div class="modal-header justify-content-center">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Assign Position</h5>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row justify-content-center">
+                                                                        <input asp-for="@member.CommitteePosition" class="form-control w-50" id="@member.EmpID" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-dark" onclick="setAction(this, '@member.EmpID')">Edit Position</button>
+                                                                    <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Cancel</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
                         <td>@member.employee.User.UserFirstName</td>
                         <td>@member.employee.User.UserLastName</td>
                         <td>@member.employee.User.Email</td>
@@ -92,3 +160,12 @@
         </table>
     </div>
 </div>
+<script type="text/javascript">
+    function setAction(e, id) {
+        let input = document.getElementById(id);
+        let _form = e.form;
+        let attr = _form.getAttribute("action");
+        _form.setAttribute("action", attr + '/?position=' + input.value.replace(' ', '%20'));
+        //_form.submit();
+    }
+</script>

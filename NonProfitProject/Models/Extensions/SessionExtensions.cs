@@ -11,7 +11,7 @@ namespace NonProfitProject.Models.Extensions
     {
         public static void SetObject<T>(this ISession session, string key, T value)
         {
-            session.SetString(key, JsonConvert.SerializeObject(value));
+             session.SetString(key, JsonConvert.SerializeObject(value));
         }
 
         public static T GetObject<T>(this ISession session, string key)
