@@ -19,6 +19,7 @@ namespace NonProfitProject.Models.ViewModels.Shared.Users
         public string State { get; set; }
         public int PostalCode { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
         public string Gender { get; set; }
