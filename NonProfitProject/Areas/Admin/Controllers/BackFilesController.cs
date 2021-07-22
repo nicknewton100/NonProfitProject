@@ -14,7 +14,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class BackupFilesController : Controller
+    public class BackFilesController : Controller
     {
         public IActionResult Index()
         {
@@ -24,7 +24,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult BackupDatabase()
         {
-            SqlConnection sqlConnection = new SqlConnection("Server=cpt275.database.windows.net,1433;Initial Catalog=cpt275seniorproj;Persist Security Info=False;User ID=cpt275;Password=987963Gizm0;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            SqlConnection sqlConnection = new SqlConnection("Server=(localdb)\\cpt275;Initial Catalog=cpt275seniorproj;Persist Security Info=False;User ID=cpt275;Password=987963Gizm0;MultipleActiveResultSets=False;Encrypt=false;TrustServerCertificate=False;");
             SqlCommand sqlCommand = new SqlCommand();
             SqlDataAdapter sqlData = new SqlDataAdapter();
             DataTable dt = new DataTable();
@@ -47,8 +47,9 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Backup()
         {
-            var path = Environment.CurrentDirectory.ToString();
-            string directory = @"..\\..\\..\\Backup";
+            string path = Environment.CurrentDirectory.ToString();
+            path = "..\\..\\..\\" + path;
+            string directory = @"..\\Backup";
             // check if backup folder exist, otherwise create it.
             if (!Directory.Exists(directory))
             {
