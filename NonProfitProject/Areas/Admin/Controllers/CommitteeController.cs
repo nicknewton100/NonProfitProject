@@ -22,38 +22,79 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             this.context = context;
         }
+
+
         [Route("~/[area]/[controller]s")]
         public IActionResult Index()
         {
             var model = context.Committees.Include(c => c.committeeMembers).ThenInclude(cm => cm.employee).ThenInclude(e => e.User).ToList();
             return View(model);
         }
+
+
         [Route("~/[area]/[controller]/{name}")]
         public IActionResult Details(string name)
         {
-            var committee = context.Committees.Include(c => c.committeeMembers).ThenInclude(cm => cm.employee).ThenInclude(e => e.User).Where(c => c.CommitteeName.Equals(name)).FirstOrDefault();
-            return View(committee);
-        }
-        
-        [Route("~/[area]/[controller]/{name}/[action]")]
-        [HttpGet]
-        public IActionResult AddMembers(string name)
-        {
-            var committee = context.Committees?.Where(c => c.CommitteeName == name).FirstOrDefault() ?? null;
+            var committee = context.Committees?.Include(c => c.committeeMembers).ThenInclude(cm => cm.employee).ThenInclude(e => e.User).Where(c => c.CommitteeName.Equals(name)).AsNoTracking().FirstOrDefault();
             if(committee == null)
             {
                 return RedirectToAction("Index");
             }
-            var employees = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID)).ToList();
-            var addCommitteeMemberModel = new AddCommitteeMemberViewModel() { Committee = committee, Employees = employees };
-            HttpContext.Session.SetObject("AddCommitteeMemberModel",addCommitteeMemberModel);
+            //creates session model
+            var CommitteeMemberModel = new CommitteeMemberViewModel() { Committee = context.Committees?.Where(c => c.CommitteeName == name).AsNoTracking().FirstOrDefault(), Employees = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID)).AsNoTracking().ToList() };
+            HttpContext.Session.SetObject("CommitteeMemberModel", CommitteeMemberModel);
+            return View(committee);
+        }
+
+
+        [Route("~/[area]/[controller]/{name}/[action]/{id}")]
+        public IActionResult MemberDetails(string id)
+        {
+            var employee = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).Where(e => e.EmpID == id).FirstOrDefault();
+            var sessionmodel = HttpContext.Session.GetObject<CommitteeMemberViewModel>("CommitteeMemberModel");
+            if (employee == null || sessionmodel == null)
+            {
+                TempData["AddCommitteeMemberTimeout"] = "Session Timeout";
+                return RedirectToAction("Index");
+            }
+            ViewBag.Action = "MemberDetails";
+            //resets the session time
+            HttpContext.Session.SetObject("CommitteeMemberModel", sessionmodel);
+            return View("EmployeeDetails", employee);
+        }
+
+        [HttpPost]
+        public IActionResult RemoveMember(string id)
+        {
+            var employee = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).Where(e => e.EmpID == id).AsNoTracking().FirstOrDefault();
+            var committeeID = employee.CommitteeMembers.CommitteeID;
+            if(employee == null)
+            {
+                return RedirectToAction("Index");
+            }
+            TempData["MemberChanges"] = String.Format("{0} has been removed from the committee", employee.User.UserFirstName + " " + employee.User.UserLastName);
+            context.CommitteeMembers.Remove(employee.CommitteeMembers);
+            context.SaveChanges();
+            
+            return RedirectToAction("Details", new { name = context.Committees.Find(committeeID).CommitteeName });
+        }
+
+
+        [Route("~/[area]/[controller]/{name}/[action]")]
+        [HttpGet]
+        public IActionResult AddMembers(string name)
+        {
+            var sessionmodel = HttpContext.Session.GetObject<CommitteeMemberViewModel>("CommitteeMemberModel");
+            HttpContext.Session.SetObject("CommitteeMemberModel", sessionmodel);
             return View();
         }
+
+
         [HttpPost]
         [Route("~/[area]/[controller]/{name}/[action]/{id}")]
         public IActionResult AddMembers(CommitteeMembers model, string id)
         {
-            var sessionmodel = HttpContext.Session.GetObject<AddCommitteeMemberViewModel>("AddCommitteeMemberModel");
+            var sessionmodel = HttpContext.Session.GetObject<CommitteeMemberViewModel>("CommitteeMemberModel");
             if (sessionmodel == null)
             {
                 TempData["AddCommitteeMemberTimeout"] = "Session Timeout";
@@ -73,20 +114,24 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return RedirectToAction("AddMembers", new { name = sessionmodel.Committee.CommitteeName, id = "" });
         }
+
+
         [Route("~/[area]/[controller]/{name}/AddMembers/[action]/{id}")]
         public IActionResult EmployeeDetails(string id)
         {
             var employee = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID) && e.EmpID == id).FirstOrDefault();
-            var sessionmodel = HttpContext.Session.GetObject<AddCommitteeMemberViewModel>("AddCommitteeMemberModel");
+            var sessionmodel = HttpContext.Session.GetObject<CommitteeMemberViewModel>("CommitteeMemberModel");
             if (employee == null || sessionmodel == null)
             {
                 TempData["AddCommitteeMemberTimeout"] = "Session Timeout";
                 return RedirectToAction("Index");
             }
             //resets the session time
-            HttpContext.Session.SetObject("AddCommitteeMemberModel", sessionmodel);
+            HttpContext.Session.SetObject("CommitteeMemberModel", sessionmodel);
             return View(employee);
         }
+
+
         public IActionResult AddCommittee()
         {
             ViewBag.Action = "Add";

@@ -1,9 +1,17 @@
 ﻿@model Employees
 @{
-    ViewData["Title"] = "Employee Details";
+    if(ViewBag.Action == "MemberDetails")
+    {
+        ViewData["Title"] = "Member Details";
+    }
+    else
+    {
+        ViewData["Title"] = "Employee Details";
+    }
+
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
     @using NonProfitProject.Models.Extensions;
-    var sessionModel = Context.Session.GetObject<NonProfitProject.Areas.Admin.Models.ViewModels.AddCommitteeMemberViewModel>("AddCommitteeMemberModel");
+    var sessionModel = Context.Session.GetObject<NonProfitProject.Areas.Admin.Models.ViewModels.CommitteeMemberViewModel>("CommitteeMemberModel");
 }
 <head>
     <script type="text/javascript" src="~/js/UserValidation.js"></script>
@@ -22,28 +30,28 @@
                             <!--FIRST NAME-->
                             <div class="col-auto"><label>First Name: </label></div>
                             <div class="col-auto">
-                                <input asp-for="User.UserFirstName" class="form-control" />
+                                <input asp-for="User.UserFirstName" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group">
                             <!--LAST NAME-->
                             <div class="col-auto"><label>Last Name: </label></div>
                             <div class="col-auto">
-                                <input asp-for="User.UserLastName" class="form-control" />
+                                <input asp-for="User.UserLastName" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group">
                             <!--BIRTH DATE-->
                             <div class="col-auto"><label>Birth Date: </label></div>
                             <div class="col-auto">
-                                <input asp-for="User.UserBirthDate" class="form-control" type="date" />
+                                <input asp-for="User.UserBirthDate" class="form-control" type="date" disabled/>
                             </div>
                         </div>
                         <div class="form-group">
                             <!--GENDER-->
                             <div class="col-auto"><label>Gender: </label></div>
                             <div class="col-auto">
-                                <select class="form-control" asp-for="User.UserGender" name="Gender" id="Gender">
+                                <select class="form-control" asp-for="User.UserGender" disabled>
                                     <option></option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -60,16 +68,14 @@
                             <!--ADDRESS 1-->
                             <div class="col-auto"><label>Address 1: </label></div>
                             <div class="col-auto">
-                                <input asp-for="User.UserAddr1" class="form-control" />
-                                <span asp-validation-for="User.UserAddr1" class="text-danger"></span>
+                                <input asp-for="User.UserAddr1" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group w-50">
                             <!--ADDRESS 2-->
                             <div class="col-auto"><label>Address 2: </label></div>
                             <div class="col-auto">
-                                <input asp-for="User.UserAddr2" class="form-control" />
-                                <span asp-validation-for="User.UserAddr2" class="text-danger"></span>
+                                <input asp-for="User.UserAddr2" class="form-control" disabled/>
                             </div>
                         </div>
                     </div>
@@ -78,15 +84,14 @@
                             <!--CITY-->
                             <div class="col-auto"><label>City: </label></div>
                             <div class="col-auto">
-                                <input asp-for="User.UserCity" class="form-control" />
-                                <span asp-validation-for="User.UserCity" class="text-danger"></span>
+                                <input asp-for="User.UserCity" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group">
                             <!--STATE-->
                             <div class="col-auto"><label>State: </label></div>
                             <div class="col-auto">
-                                <select asp-for="User.UserState" class="form-control BillingInformation">
+                                <select asp-for="User.UserState" class="form-control" disabled>
                                     <option></option>
                                     <option value="Alaska">Alaska</option>
                                     <option value="Alabama">Alabama</option>
@@ -141,13 +146,12 @@
                                     <option value="West Virginia">West Virginia</option>
                                     <option value="Wyoming">Wyoming</option>
                                 </select>
-                                <span asp-validation-for="User.UserState" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-auto"><label>Postal Code: </label></div>
                             <div class="col-auto">
-                                <input asp-for="User.UserPostalCode" class="form-control" />
+                                <input asp-for="User.UserPostalCode" class="form-control" disabled/>
                             </div>
                         </div>
                     </div>
@@ -159,31 +163,51 @@
                             <!--POSITION-->
                             <div class="col-auto"><label>Position: </label></div>
                             <div class="col-auto">
-                                <input asp-for="Position" class="form-control" />
+                                <input asp-for="Position" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group">
                             <!--SALARY-->
                             <div class="col-auto"><label>Salary: </label></div>
                             <div class="col-auto">
-                                <input class="form-control" value="$@Model.Salary" />
+                                <input class="form-control" value="$@Model.Salary" disabled/>
                             </div>
                         </div>
                         <div class="form-group">
                             <!--HIRE DATE-->
                             <div class="col-auto"><label>Hire Date: </label></div>
                             <div class="col-auto">
-                                <input class="form-control" value="@Model.HireDate" />
+                                <input class="form-control" value="@Model.HireDate" disabled/>
                             </div>
                         </div>
                         <div class="form-group">
                             <!--RELEASE DATE-->
                             <div class="col-auto"><label>Release Date: </label></div>
                             <div class="col-auto">
-                                <input class="form-control" value="@Model.ReleaseDate" />
+                                <input class="form-control" value="@Model.ReleaseDate" disabled/>
                             </div>
                         </div>
                     </div>
+                    @if (ViewBag!.Action == "MemberDetails")
+                    {
+                        <div class="row">
+                            <div class="form-group">
+                                <!--COMMITTEE-->
+                                <div class="col-auto"><label>Committee: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" value="@sessionModel.Committee.CommitteeName" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group" id="CommitteePosition">
+                                <!--COMMITTEE POSITION-->
+                                <div class="col-auto"><label>Committee Position: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="CommitteeMembers.CommitteePosition" class="form-control" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="row"></div>
                     <br />
                     <h4>Login Information</h4>
                     <div class="dropdown-divider"></div>
@@ -193,7 +217,7 @@
                                 <!--USERNAME-->
                                 <div class="col-auto"><label>Username: </label></div>
                                 <div class="col-auto">
-                                    <input asp-for="User.UserName" class="form-control" id="Username" />
+                                    <input asp-for="User.UserName" class="form-control" id="Username" disabled/>
                                 </div>
                             </div>
                         </div>
@@ -202,17 +226,28 @@
                                 <!--EMAIL ADDRESS-->
                                 <div class="col-auto"><label>Email Address: </label></div>
                                 <div class="col-auto">
-                                    <input asp-for="User.Email" class="form-control" id="Email" />
+                                    <input asp-for="User.Email" class="form-control" id="Email" disabled/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                       <form method="post" asp-action="AddMembers" asp-route-id="@Model.EmpID">
-                            <button type="submit" class="btn-lg btn-outline-dark mr-1">Add to @sessionModel.Committee.CommitteeName</button>
-                       </form>
-                       <br />
-                       <button type="button" class="btn-lg btn-dark " onclick="location.href = '@Url.Action("AddMembers","Committee",new {name = sessionModel.Committee.CommitteeName })'">Back</button>                                
+                        @if (ViewBag!.Action == "MemberDetails")
+                        {
+                            <form method="post" asp-action="RemoveMember" asp-route-id="@Model.EmpID">
+                                <button type="submit" class="btn-lg btn-outline-dark mr-1">Remove from @sessionModel.Committee.CommitteeName</button>
+                            </form>
+                            <br />
+                            <button type="button" class="btn-lg btn-dark " onclick="location.href = '@Url.Action("Details","Committee",new {name = sessionModel.Committee.CommitteeName })'">Back</button>
+                        }
+                        else
+                        {
+                            <form method="post" asp-action="AddMembers" asp-route-id="@Model.EmpID">
+                                <button type="submit" class="btn-lg btn-outline-dark mr-1">Add to @sessionModel.Committee.CommitteeName</button>
+                            </form>
+                            <br />
+                            <button type="button" class="btn-lg btn-dark" onclick="location.href = '@Url.Action("AddMembers","Committee",new {name = sessionModel.Committee.CommitteeName})'">Back</button>
+                        }
                     </div>
                 </div>
             </div>

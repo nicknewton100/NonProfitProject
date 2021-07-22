@@ -3,7 +3,7 @@
     ViewData["Title"] = "Add Members";
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
     @using NonProfitProject.Models.Extensions;
-    var sessionModel = Context.Session.GetObject<NonProfitProject.Areas.Admin.Models.ViewModels.AddCommitteeMemberViewModel>("AddCommitteeMemberModel");
+    var sessionModel = Context.Session.GetObject<NonProfitProject.Areas.Admin.Models.ViewModels.CommitteeMemberViewModel>("CommitteeMemberModel");
 }
 <div class="container">
     <div class="container">
@@ -39,7 +39,7 @@
                                 <td>
                                     <div class="row">
                                         <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("EmployeeDetails","Committee",new {id = empl.EmpID, name = sessionModel.Committee.CommitteeName })'">Details</button>
-                                        <button type="button" class="btn-lg btn-dark " data-toggle="modal" data-target="#Modal-@empl.EmpID">Add to Committee</button>
+                                        <button type="button" class="btn btn-dark " data-toggle="modal" data-target="#Modal-@empl.EmpID">Add to Committee</button>
                                         <!--Please make this popup look good----------------------------->
                                         <div class="modal fade" id="Modal-@empl.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
