@@ -55,7 +55,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public IActionResult Backup()
         {
             string path = @"..\\..\\..\\";
-            string directory = "D:\\home\\site\\wwwroot\\Backup";
+            string directory = @"..\\..\\..\\..\\";
             // check if backup folder exist, otherwise create it.            
             try
             {
@@ -71,8 +71,21 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             catch(Exception e)
             {
-                TempData["Error"] = e.Message;
+                path = Environment.CurrentDirectory;
+                /*directory = @"..\\Backup";
+
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+                string saveDirectory = directory + "\\" + DateTime.Now.ToString("dd_MM_yyyy_HHmmss") + ".zip";
+                ZipFile.CreateFromDirectory(path, saveDirectory);
+
+                byte[] fileBytes = System.IO.File.ReadAllBytes(saveDirectory);
+                return File(fileBytes, "application/force-download", "BackupApplication.zip");*/
+                TempData["Error"] = e.Message + "                      \n\n" + path.ToString();
                 return RedirectToAction("Index");
+                
             }
         }
     }
