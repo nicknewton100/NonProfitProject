@@ -24,7 +24,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult BackupDatabase()
         {
-            SqlConnection sqlConnection = new SqlConnection("Server=(localdb)\\cpt275;Initial Catalog=cpt275seniorproj;Persist Security Info=False;User ID=cpt275;Password=987963Gizm0;MultipleActiveResultSets=False;Encrypt=false;TrustServerCertificate=False;");
+            SqlConnection sqlConnection = new SqlConnection("Server=(localdb)\\cpt275.database.windows.net;Initial Catalog=cpt275seniorproj;Persist Security Info=False;User ID=cpt275;Password=987963Gizm0;MultipleActiveResultSets=False;Encrypt=false;TrustServerCertificate=False;");
             SqlCommand sqlCommand = new SqlCommand();
             SqlDataAdapter sqlData = new SqlDataAdapter();
             DataTable dt = new DataTable();
@@ -55,7 +55,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public IActionResult Backup()
         {
             string path = @"..\\..\\..\\";
-            string directory = @"..\\..\\..\\Backup";
+            string directory = "D:\\Backup";
             // check if backup folder exist, otherwise create it.
             if (!Directory.Exists(directory))
             {
