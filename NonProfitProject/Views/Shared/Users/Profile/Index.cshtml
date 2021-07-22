@@ -18,7 +18,7 @@
         </div>
     </div>
     <div>
-        <form style="font-size:medium">
+        <form style="font-size:large">
             <input type="hidden" asp-for="UserID" />
             <div class="row">
                 <div class="card w-auto" style="margin:0.5rem;padding:0.25rem;">
@@ -26,8 +26,7 @@
                         <h4>Personal Information</h4>
                         <div class="dropdown-divider"></div>
                         <div class="row">
-                            <div class="col-auto"><p>First Name:  @Model.FirstName</p> </div>
-                            <div class="col-auto"><p>Last Name:  @Model.LastName</p></div>
+                            <div class="col-auto"><p>Name:  @Model.FirstName @Model.LastName</p> </div>
                             <div class="col-auto"><p>Birthdate:  @Model.BirthDate.ToString("MM/dd/yyyy")</p></div>
                             <div class="col-auto"><p>Gender:  @Model.Gender</p></div>
                         </div>
