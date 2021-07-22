@@ -19,9 +19,9 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col" hidden>#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Email Address</th>
+                        <th scope="col">Join Date</th>
                         <th scope="col">Roles</th>
                         <th scope="col"></th>
                     </tr>
@@ -31,17 +31,17 @@
                     {
                         var roles = await usermanager.GetRolesAsync(user);
                         <tr>
-                            <th scope="row" hidden>@userCount</th>
-                            <th>@user.UserFirstName</th>
-                            <th>@user.UserLastName</th>
-                            <th>@user.Email</th>
-                            <th>@roles[0]</th>
-                            <th>
+                            <td scope="row" hidden>@userCount</td>
+                            <td>@user.UserFirstName @user.UserLastName</td>
+                            <td>@user.Email</td>
+                            <td>@user.UserCreationDate.ToString("MM/dd/yyyy")</td>
+                            <td>@roles[0]</td>
+                            <td>
                                 <div class="row ">
                                     <button class="btn btn-outline-dark mr-1">Edit</button>
                                     <button class="btn btn-dark">Delete</button>
                                 </div>
-                            </th>
+                            </td>
                         </tr>
                         userCount += 1;
                     }
