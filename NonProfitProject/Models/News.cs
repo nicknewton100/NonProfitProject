@@ -15,5 +15,6 @@ namespace NonProfitProject.Models
         public DateTime NewsCreationDate { get; set; }
         public DateTime NewsPublishDate { get; set; }
         public DateTime NewsLastUpdated { get; set; }
+        public string NewsDescription { get; set; }
     }
 }

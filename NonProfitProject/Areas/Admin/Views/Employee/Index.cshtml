@@ -1,6 +1,7 @@
 ﻿@model List<Employees>
 @{
     ViewData["Title"] = "Employees List";
+    ViewData["Title2"] = "Admin";
     Layout = "_AdminLayout";
 }
 
@@ -18,11 +19,12 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col" hidden>#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Email Address</th>
                         <th scope="col">Hire Date</th>
+                        <th scope="col">Release Date</th>
                         <th scope="col">Position</th>
+                        <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -30,20 +32,30 @@
                     @foreach (Employees empl in Model)
                     {
                         <tr>
-                            <th scope="row" hidden>@empl.EmpID</th>
-                            <th>@empl.User.UserFirstName</th>
-                            <th>@empl.User.UserLastName</th>
-                            <th>@empl.User.Email</th>
-                            <th>@empl.HireDate</th>
-                            <th>@empl.Position</th>
-                            <th>
-                                <div class="row">
-                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","Employee",new {id = empl.EmpID })'">Details</button>
-                                    <form method="post" asp-action="DeleteEmployee" asp-route-id="@empl.EmpID">
-                                        <button type="submit" class="btn btn-dark deleteEmp">Delete</button>
-                                    </form>
-                                </div>
-                            </th>
+                            <td scope="row" hidden>@empl.EmpID</td>
+                            <td>@empl.User.UserFirstName @empl.User.UserLastName</td>
+                            <td>@empl.User.Email</td>
+                            <td>@empl.HireDate.ToString("MM/dd/yyyy")</td>
+                            <td>
+                                @if (!empl.ReleaseDate.HasValue)
+                                {
+                                    @:N/A
+                                }
+                                else
+                                {
+                                    @empl.ReleaseDate
+                                }
+                            </td>
+                            <td>@empl.Position</td>
+                            <td>
+                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","Employee",new {id = empl.EmpID })'">Details</button>
+                                
+                            </td>
+                            <td>
+                                <form method="post" asp-action="DeleteEmployee" asp-route-id="@empl.EmpID">
+                                    <button type="submit" class="btn btn-dark deleteEmp">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 </tbody>

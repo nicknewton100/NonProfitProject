@@ -6,9 +6,9 @@ using NonProfitProject.Models;
 
 namespace NonProfitProject.Areas.Admin.Models.ViewModels
 {
-    public class CommitteeViewModel
+    public class CommitteeMemberViewModel
     {
-        //not completed yet
-        public List<Employees> employee;
+        public Committees Committee { get; set; }
+        public List<Employees> Employees { get; set; }
     }
 }

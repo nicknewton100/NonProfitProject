@@ -1,0 +1,83 @@
+﻿@model CommitteeMembers
+@{
+    ViewData["Title"] = "Add Members";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+    @using NonProfitProject.Models.Extensions;
+    var sessionModel = Context.Session.GetObject<NonProfitProject.Areas.Admin.Models.ViewModels.CommitteeMemberViewModel>("CommitteeMemberModel");
+}
+<div class="container">
+    <div class="container">
+        <div class="card-header-pills"><h1 class="far fa-id-card"> Add To @sessionModel.Committee.CommitteeName</h1></div>
+    </div>
+    <br />
+    <div class="container" style="font-size:medium;">
+        <div class="card">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Position</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (sessionModel.Employees.Count == 0)
+                    {
+                        @:All Employees have been assigned to a Committee
+                    }
+                    else
+                    {
+                        @foreach (Employees empl in sessionModel.Employees)
+                        {
+                            <tr>
+                                <td>@empl.User.UserFirstName</td>
+                                <td>@empl.User.UserLastName</td>
+                                <td>@empl.User.Email</td>
+                                <td>@empl.Position</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("EmployeeDetails","Committee",new {id = empl.EmpID, name = sessionModel.Committee.CommitteeName })'">Details</button>
+                                            <button type="button" class="btn btn-dark " data-toggle="modal" data-target="#Modal-@empl.EmpID">Add to Committee</button>
+                                        </div>
+                                        <!--POP UP MODAL IS FIXED-->
+                                        <div>
+                                            <div class="modal fade" id="Modal-@empl.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <form method="post" asp-action="AddMembers" asp-route-id="@empl.EmpID">
+                                                            <div class="modal-header justify-content-center">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Assign Position</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row justify-content-center">
+                                                                    <input asp-for="CommitteePosition" class="form-control w-50" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-dark">Add To @sessionModel.Committee.CommitteeName</button>
+                                                                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Cancel</button>
+                                                            </div>                                                               
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container" style="margin:1rem 0;">
+        <div class="d-flex flex-row-reverse">
+            <a class="btn btn-danger" asp-controller="Committee" asp-action="Details" asp-route-name="@sessionModel.Committee.CommitteeName">Cancel</a>
+        </div>
+    </div>
+</div>
+

@@ -22,7 +22,7 @@ namespace NonProfitProject.Code
         {
             this.context = context;
         }
-        
+
         public void SendNewsletter()
         {
             List<User> users = new List<User>();

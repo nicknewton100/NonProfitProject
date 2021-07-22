@@ -48,11 +48,17 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult EditEvent(Event model)
         {
+            if(model.EventStartDate >= model.EventEndDate)
+            {
+                ModelState.AddModelError("EventStartDate", "Event Start Date must be before End Date");
+            }
+            
             if (ModelState.IsValid)
             {
                 string addOrEdit;
                 if (model.EventID == 0 || context.Events.AsNoTracking().Where(e => e.EventID == model.EventID).FirstOrDefault() == null)
                 {
+                    model.EventID = 0;
                     context.Events.Add(model);
                     addOrEdit = "added";
                 }

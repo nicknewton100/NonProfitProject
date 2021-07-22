@@ -61,7 +61,30 @@ namespace NonProfitProject.Models
                     RoleId = "370d9876-b6ab-4694-baa9-ecc7bc5b451c",
                     UserId = "6b87b89f-0f9a-4e2d-b696-235e99655521"
                 });
-
+            //Create News
+            builder.Entity<News>().HasData(
+                new News
+                {
+                    NewsID = 1,
+                    NewsTitle = "10k Run for Cancer!",
+                    NewsHeader = "Come Join Us!",
+                    NewsFooter = "News Comittee",
+                    NewsCreationDate = new DateTime(2021, 7, 15),
+                    NewsPublishDate = new DateTime(2021, 7, 15),
+                    NewsLastUpdated = new DateTime(2021, 7, 15),
+                    NewsDescription = "Run for a whole week straight for cancer at the end of July. 15 Dollar Admission Fee. Event runs from July 24-31!"
+                },
+                new News
+                {
+                    NewsID = 2,
+                    NewsTitle = "Movie Night",
+                    NewsHeader = "Movie Time!",
+                    NewsFooter = "News Comittee",
+                    NewsCreationDate = new DateTime(2021, 7, 15),
+                    NewsPublishDate = new DateTime(2021, 7, 15),
+                    NewsLastUpdated = new DateTime(2021, 7, 15),
+                    NewsDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks! Snacks: Popcorn. Event runs on July 26!"
+                });
             //creates data for employees
             builder.Entity<Employees>().HasData(
                 new Employees
@@ -72,8 +95,7 @@ namespace NonProfitProject.Models
                     Salary = 54000,
                     HireDate = new DateTime(2020, 02, 04, 11, 14, 0),
                     ReleaseDate = null
-                }
-                );
+                });
             //Creates data for committees
             builder.Entity<Committees>().HasData(
                 new Committees
@@ -253,6 +275,24 @@ namespace NonProfitProject.Models
                 {
                     await userManager.AddToRoleAsync(user, "Member");
                 }
+            }
+            if (await userManager.FindByNameAsync("One-TimeDonation") == null)
+            {
+                User user = new User
+                {
+                    UserName = "One-TimeDonation",
+                    Email = "N/A",
+                    UserFirstName = "N/A",
+                    UserLastName = "N/A",
+                    UserAddr1 = "N/A",
+                    UserCity = "N/A",
+                    UserState = "N/A",
+                    UserGender = "N/A",
+                    UserActive = true,
+                    ReceiveWeeklyNewsletter = false
+                };
+                //Never need access to this account because its used to store the One-Time Donations that are made from users that are not registered/signedin so I made the password as obscure as possible
+                var result = await userManager.CreateAsync(user, "ckGoxk+&|5'#vM?(/Jo0keFGAds,HY%]Ujz4{6kFW8*a~~KWc~K{9x,lK2$kWJ");
             }
         }
     }

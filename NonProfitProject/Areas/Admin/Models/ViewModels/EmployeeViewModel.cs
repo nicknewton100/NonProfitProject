@@ -24,7 +24,6 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [StringLength(60)]
         public string Position { get; set; }
         [Required(ErrorMessage = "Please estimate employee's Salary")]
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal? Salary { get; set; }
 
         public DateTime HireDate { get; set; }

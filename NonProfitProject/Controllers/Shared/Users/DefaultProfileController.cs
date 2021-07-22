@@ -64,7 +64,6 @@ namespace NonProfitProject.Controllers.Shared.Users
                 {
                     ModelState.AddModelError("", "Password is incorrect");
                 }
-
             }
             return View(model);
         }
@@ -87,31 +86,14 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpGet]
         public IActionResult AddPayment()
         {
-            return View();
+            var user = context.Users.Find(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            return View(new SavedPaymentViewModel() {AcctFirstName = user.UserFirstName, AcctLastName = user.UserLastName,AcctAddr1 = user.UserAddr1, AcctAddr2 = user.UserAddr2, AcctCity = user.UserCity, AcctState = user.UserState, AcctPostalCode = user.UserPostalCode, BillingPostalCode = null});
         }
         
         [HttpPost]
         public IActionResult AddPayment(SavedPaymentViewModel model)
         {
-            if (model.usingAccountAddress)
-            {
-                User user = context.Users.Where(u => u.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking().FirstOrDefault();
-                model.BillingFirstName = user.UserFirstName;
-                ModelState.Remove("BillingFirstName");
-                model.BillingLastName = user.UserLastName;
-                ModelState.Remove("BillingLastName");
-                model.BillingAddr1 = user.UserAddr1;
-                ModelState.Remove("BillingAddr1");
-                model.BillingAddr2 = user.UserAddr2;
-                ModelState.Remove("BillingAddr2");
-                model.BillingCity = user.UserCity;
-                ModelState.Remove("BillingCity");
-                model.BillingState = user.UserState;
-                ModelState.Remove("BillingState");
-                model.BillingPostalCode = user.UserPostalCode;
-                ModelState.Remove("BillingPostalCode");
-
-            }
+            //used to encrypt sensitive ionformation
             AesEncryption aes = new AesEncryption();
             //check if the user already has this card in their saved payments
             var checkSavedPayments = context.SavedPayments.Where(sp => sp.CardNumber.Equals(aes.Encrypt(model.CardNumber)) &&
@@ -122,8 +104,6 @@ namespace NonProfitProject.Controllers.Shared.Users
             }
             if (ModelState.IsValid)
             {
-                //used to encrypt sensitive ionformation
-                
                 SavedPaymentInformation savedPaymentInformation = new SavedPaymentInformation()
                 {
                     UserID = User.FindFirstValue(ClaimTypes.NameIdentifier),
@@ -138,9 +118,8 @@ namespace NonProfitProject.Controllers.Shared.Users
                     BillingAddr2 = model.BillingAddr2,
                     BillingCity = model.BillingCity,
                     BillingState = model.BillingState,
-                    BillingPostalCode = model.BillingPostalCode,
+                    BillingPostalCode = (int)model.BillingPostalCode,
                     Last4Digits = Int32.Parse(model.CardNumber.Substring(model.CardNumber.Length - 4))
-                    
                 };
                 context.SavedPayments.Add(savedPaymentInformation);
                 context.SaveChanges();

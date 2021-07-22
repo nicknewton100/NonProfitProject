@@ -1,8 +1,9 @@
-﻿
+﻿@model List<Committees>
 @{
     ViewData["Title"] = "Board Committees";
     ViewData["Title2"] = "Admin";
     Layout = "_AdminLayout";
+
 }
 
 <div class="container">
@@ -13,98 +14,73 @@
 
     <div class="container">
         <div class="row justify-content-md-center">
-            <!--EVENTS AND PLANNING COMMITTEE-->
-            <div class="card w-25">
-                <a class="card-header fas fa-comment-dollar btn btn-outline-dark" asp-area="Admin" asp-controller="Committee" asp-action="DetailCommittee" style="font-size: xx-large; border:none"></a>
-                <div class="card-body">
-                    <h3 class="card-title text-center">Planning Committee</h3>
-                    <div style="font-size:small;">
-                        <table class="table table-bordered">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <th>Danny</th>
-                                    <th>Short</th>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <th>Jane</th>
-                                    <th>Doe</th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            @{
+                foreach (var committee in Model)
+                {
+                    <div class="card w-auto" style="margin:.5rem;">
+                        <a class="card-header btn btn-outline-dark" sp-area="Admin" asp-controller="Committee" asp-action="Details" asp-route-name="@committee.CommitteeName" style="font-size: xx-large; border:none"><h3 class="text-center">@committee.CommitteeName</h3></a>
+                        <div class="card-body">
+                            <div style="font-size:small;">
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Position</th>
+                                            <th scope="col">First Name</th>
+                                            <th scope="col">Last Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            //used to only allow 5 people to show up on the committee preview page
+                                            int isLessThan5 = 0;
 
-            <!--FUNDRAISING COMMITTEE-->
-            <div class="card w-50">
-                <a class="card-header fas fa-user-edit btn btn-outline-dark" sp-area="Admin" asp-controller="Committee" asp-action="DetailCommittee" style="font-size: xx-large; border:none"></a>
-                <div class="card-body">
-                    <h3 class="card-title text-center">Fundraising Committee</h3>
-                    <div style="font-size:small;">
-                        <table class="table table-bordered">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <th>Joe</th>
-                                    <th>Young</th>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <th>Gambi</th>
-                                    <th>White</th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                                            var President = committee.committeeMembers?.Where(cm => cm.CommitteePosition == "President").FirstOrDefault();
+                                            if (President != null)
+                                            {
+                                                <tr>
+                                                    <td>@President.CommitteePosition</td>
+                                                    <td>@President.employee.User.UserFirstName</td>
+                                                    <td>@President.employee.User.UserLastName</td>
+                                                </tr>
+                                                committee.committeeMembers.Remove(President);
+                                                isLessThan5 += 1;
+                                            }
 
-            <!--NEWS COMMITTEE-->
-            <div class="card w-25">
-                <a class="card-header far fa-newspaper btn btn-outline-dark" sp-area="Admin" asp-controller="Committee" asp-action="DetailCommittee" style="font-size: xx-large; border:none"></a>
-                <div class="card-body">
-                    <h3 class="card-title text-center">News Committee</h3>
-                    <div style="font-size:small;">
-                        <table class="table table-bordered">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <th>Tony</th>
-                                    <th>Stark</th>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <th>Bruce</th>
-                                    <th>Banner</th>
-                                </tr>
-                            </tbody>
-                        </table>
+                                            var VicePresident = committee.committeeMembers?.Where(cm => cm.CommitteePosition == "Vice President").FirstOrDefault();
+                                            if (VicePresident != null)
+                                            {
+                                                <tr>
+                                                    <td>@VicePresident.CommitteePosition</td>
+                                                    <td>@VicePresident.employee.User.UserFirstName</td>
+                                                    <td>@VicePresident.employee.User.UserLastName</td>
+                                                </tr>
+                                                committee.committeeMembers.Remove(VicePresident);
+                                                isLessThan5 += 1;
+                                            }
+
+                                        }
+
+                                        @foreach (var member in committee.committeeMembers)
+                                        {
+                                            if (isLessThan5 >= 5)
+                                            {
+                                                break;
+                                            }
+                                            <tr>
+                                                <td>@member.CommitteePosition</td>
+                                                <td>@member.employee.User.UserFirstName</td>
+                                                <td>@member.employee.User.UserLastName</td>
+                                            </tr>
+                                            isLessThan5 += 1;
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                }
+            }
         </div>
     </div>
     

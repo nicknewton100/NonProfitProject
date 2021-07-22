@@ -1,112 +1,119 @@
-﻿@model NonProfitProject.Models.ViewModels.Shared.Users.SavedPaymentViewModel
+﻿@model NonProfitProject.Models.ViewModels.DonationPaymentViewModel
 @{
-    ViewData["Title"] = "Payment";
-    ViewData["Title2"] = "Non-Paw-Fit Animal Rescue";
-
+    ViewData["Title"] = "Payment Method";
+    Layout = "_HomePage";
+    @using NonProfitProject.Models.Extensions;
+    @using NonProfitProject.Models.ViewModels;
+    var DonationInformation = Context.Session.GetObject<DonationViewModel>("DonationInformation");
 }
+<head>
+    <script type="text/javascript" src="~/js/UserValidation.js"></script>
+</head>
 
-
-<div class="container" style="margin:1rem 5rem;">
-    <h1>Checkout</h1>
-
-    <form class="align-items-center justify-content-center">
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form class="align-items-center justify-content-center" asp-action="Payment">
         <div class="row">
             <div class="card w-auto">
                 <div class="card-header text-center">
                     <h3>Billing Address</h3>
                 </div>
-                <br />
                 <div class="card-body">
                     <div class="form-row" style="margin: 0 2rem;">
                         <div class="form-group col-md-6">
                             <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                            <input asp-for="BillingFirstName" class="form-control BillingInformation" id="firstName" placeholder="First Name">
+                            <span asp-validation-for="BillingFirstName" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
+
                             <label for="lastName">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                            <input asp-for="BillingLastName" class="form-control BillingInformation" id="lastName" placeholder="Last Name">
+                            <span asp-validation-for="BillingLastName" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-row" style="margin: 0 2rem;">
                         <div class="form-group col-md-6">
                             <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                            <input asp-for="BillingAddr1" class="form-control BillingInformation" id="inputAddress" placeholder="1234 Main St">
+                            <span asp-validation-for="BillingAddr1" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputAddress2">Address 2</label>
-                            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                            <input asp-for="BillingAddr2" class="form-control BillingInformation" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                            <span asp-validation-for="BillingAddr2" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-row" style="margin: 0 2rem;">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-5">
                             <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity">
+                            <input asp-for="BillingCity" class="form-control BillingInformation" id="inputCity">
+                            <span asp-validation-for="BillingCity" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
-                            <select id="inputState" name="state" class="form-control">
-                                <option value="">N/A</option>
-                                <option value="AK">Alaska</option>
-                                <option value="AL">Alabama</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="AZ">Arizona</option>
-                                <option value="CA">California</option>
-                                <option value="CO">Colorado</option>
-                                <option value="CT">Connecticut</option>
-                                <option value="DC">District of Columbia</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="HI">Hawaii</option>
-                                <option value="IA">Iowa</option>
-                                <option value="ID">Idaho</option>
-                                <option value="IL">Illinois</option>
-                                <option value="IN">Indiana</option>
-                                <option value="KS">Kansas</option>
-                                <option value="KY">Kentucky</option>
-                                <option value="LA">Louisiana</option>
-                                <option value="MA">Massachusetts</option>
-                                <option value="MD">Maryland</option>
-                                <option value="ME">Maine</option>
-                                <option value="MI">Michigan</option>
-                                <option value="MN">Minnesota</option>
-                                <option value="MO">Missouri</option>
-                                <option value="MS">Mississippi</option>
-                                <option value="MT">Montana</option>
-                                <option value="NC">North Carolina</option>
-                                <option value="ND">North Dakota</option>
-                                <option value="NE">Nebraska</option>
-                                <option value="NH">New Hampshire</option>
-                                <option value="NJ">New Jersey</option>
-                                <option value="NM">New Mexico</option>
-                                <option value="NV">Nevada</option>
-                                <option value="NY">New York</option>
-                                <option value="OH">Ohio</option>
-                                <option value="OK">Oklahoma</option>
-                                <option value="OR">Oregon</option>
-                                <option value="PA">Pennsylvania</option>
-                                <option value="PR">Puerto Rico</option>
-                                <option value="RI">Rhode Island</option>
-                                <option value="SC">South Carolina</option>
-                                <option value="SD">South Dakota</option>
-                                <option value="TN">Tennessee</option>
-                                <option value="TX">Texas</option>
-                                <option value="UT">Utah</option>
-                                <option value="VA">Virginia</option>
-                                <option value="VT">Vermont</option>
-                                <option value="WA">Washington</option>
-                                <option value="WI">Wisconsin</option>
-                                <option value="WV">West Virginia</option>
-                                <option value="WY">Wyoming</option>
+                            <label>State</label>
+                            <select asp-for="BillingState" class="form-control BillingInformation">
+                                <option></option>
+                                <option value="Alaska">Alaska</option>
+                                <option value="Alabama">Alabama</option>
+                                <option value="Arkansas">Arkansas</option>
+                                <option value="Arizona">Arizona</option>
+                                <option value="California">California</option>
+                                <option value="Colorado">Colorado</option>
+                                <option value="Connecticut">Connecticut</option>
+                                <option value="District of Columbia">District of Columbia</option>
+                                <option value="Delaware">Delaware</option>
+                                <option value="Florida">Florida</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Hawaii">Hawaii</option>
+                                <option value="Iowa">Iowa</option>
+                                <option value="Idaho">Idaho</option>
+                                <option value="Illinois">Illinois</option>
+                                <option value="Indiana">Indiana</option>
+                                <option value="Kansas">Kansas</option>
+                                <option value="Kentucky">Kentucky</option>
+                                <option value="Louisiana">Louisiana</option>
+                                <option value="Massachusetts">Massachusetts</option>
+                                <option value="Maryland">Maryland</option>
+                                <option value="Maine">Maine</option>
+                                <option value="Michigan">Michigan</option>
+                                <option value="Michigan">Minnesota</option>
+                                <option value="Missouri">Missouri</option>
+                                <option value="Mississippi">Mississippi</option>
+                                <option value="Montana">Montana</option>
+                                <option value="North Carolina">North Carolina</option>
+                                <option value="North Dakota">North Dakota</option>
+                                <option value="Nebraska">Nebraska</option>
+                                <option value="New Hampshire">New Hampshire</option>
+                                <option value="New Jersey">New Jersey</option>
+                                <option value="New Mexico">New Mexico</option>
+                                <option value="Nevada">Nevada</option>
+                                <option value="New York">New York</option>
+                                <option value="Ohio">Ohio</option>
+                                <option value="Oklahoma">Oklahoma</option>
+                                <option value="Oregon">Oregon</option>
+                                <option value="Pennsylvania">Pennsylvania</option>
+                                <option value="Puerto Rico">Puerto Rico</option>
+                                <option value="Rhode Island">Rhode Island</option>
+                                <option value="South Carolina">South Carolina</option>
+                                <option value="South Dakota">South Dakota</option>
+                                <option value="Tennessee">Tennessee</option>
+                                <option value="Texas">Texas</option>
+                                <option value="Utah">Utah</option>
+                                <option value="Virginia">Virginia</option>
+                                <option value="Vermont">Vermont</option>
+                                <option value="Washington">Washington</option>
+                                <option value="Wisconsin">Wisconsin</option>
+                                <option value="West Virginia">West Virginia</option>
+                                <option value="Wyoming">Wyoming</option>
                             </select>
+                            <span asp-validation-for="BillingState" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="inputCountry">Country</label>
-                            <input type="text" class="form-control" id="inputCountry">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
+                            <label for="inputPostalCode">Zip Code</label>
+                            <input asp-for="BillingPostalCode" type="text" class="form-control BillingInformation" id="inputPostalCode" oninput="postalcode_format(this)">
+                            <span asp-validation-for="BillingPostalCode" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -114,79 +121,115 @@
 
                     <div class="form-row" style="margin:0 2rem;">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="check1" />
-                            <label class="form-check-label" for="check1"> Shipping address is the same as my billing address</label>
+                            <input asp-for="useHomeAddress" class="form-check-input" type="checkbox" id="sameAddress" onchange="hideBillingInformation()" />
+                            <label class="form-check-label" for="check1"> Use home address</label>
                         </div>
                     </div>
-                    <div class="form-row" style="margin:0 2rem;">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="check2" />
-                            <label class="form-check-label" for="check2"> Save this information for next time</label>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row" style="margin:0 2rem;">
-                        <h5 style="margin: 0 2rem;">Donation Amount:  </h5>
-                        <div class="form-group col-md-5">
-
-                            <label hidden for="donations"></label>
-                            <input class="form-control" id="donations" type="text" />
-                        </div>
-                    </div>
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="form-row" style="margin:0 2rem;">
+                                <div class="form-check">
+                                    <input asp-for="savePayment" class="form-check-input" type="checkbox" />
+                                    <label class="form-check-label" for="check1"> Save this payment method</label>
+                                </div>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
-            <div class="card w-25">
+            <div class="card w-auto">
                 <div class="card-header text-center">
                     <h3>  Payment</h3>
                 </div>
                 <br />
                 <div class="card-body">
                     <div class="form-row" style="margin-left: 2rem;">
+                        <span asp-validation-for="CardType" class="text-danger"></span>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" value="" id="CreditCard" />
+                            <input asp-for="CardType" class="form-check-input" type="radio" value="Credit Card" id="CreditCard" />
                             <label class="fomr-check-label" for="CreditCard">Credit Card  <i class="far fa-credit-card"></i></label>
                         </div>
                     </div>
                     <div class="form-row" style="margin-left: 2rem;">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" value="" id="DebitCard" />
+                            <input asp-for="CardType" class="form-check-input" type="radio" value="Debit Card" id="DebitCard" />
                             <label class="fomr-check-label" for="DebitCard">Debit Card  <i class="fab fa-cc-visa"></i></label>
-                        </div>
-                    </div>
-                    <div class="form-row" style="margin-left: 2rem;">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="" id="PayPal" />
-                            <label class="fomr-check-label" for="PayPal">PayPal  <i class="fab fa-cc-paypal"></i></label>
                         </div>
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="form-row" style="margin: 0 2rem;">
                         <div class="form-group col-sm-auto">
                             <label for="nameCard">Name on Card</label>
-                            <input type="text" class="form-control" id="nameCard">
+                            <input asp-for="CardholderName" class="form-control" id="nameCard">
+                            <span asp-validation-for="CardholderName" class="text-danger"></span>
                         </div>
                         <div class="form-group col-sm-auto">
-                            <label for="creditCardNumber">Credit Card Number</label>
-                            <input type="text" class="form-control" id="creditCardNumber">
+                            <label for="creditCardNumber">Card Number</label>
+                            <input asp-for="CardNumber" class="form-control" id="creditCardNumber" oninput="this.value = cc_format(this.value)">
+                            <span asp-validation-for="CardNumber" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-row" style="margin: 0 2rem;">
                         <div class="form-group col-sm-auto">
                             <label for="expirationDate">Expiration Date</label>
-                            <input type="text" class="form-control" id="expirationDate">
+                            <input asp-for="ExpDate" type="text" class="form-control" id="expirationDate" oninput="card_expires_format(this)">
+                            <span asp-validation-for="ExpDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-sm-auto">
                             <label for="cvv">CVV</label>
-                            <input type="text" class="form-control" id="cvv">
+                            <input asp-for="CVV" type="text" class="form-control" id="cvv" oninput="cvv_format(this)">
+                            <span asp-validation-for="CVV" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="row" style="margin: 0 3rem;">
-                        <button type="submit" class="btn btn-primary" style="margin: 0 0.5rem;">Submit</button>
-                        <a class="btn btn-danger" style="margin: 0 0.5rem;" asp-controller="Home" asp-action="Index">Cancel</a>
-                    </div>
                 </div>
-
             </div>
         </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Review Order</button>
+        <a class="btn btn-danger" asp-action="Index">Cancel</a>
     </form>
+    <script>
+        function hideBillingInformation() {
+            var firstname = JSON.stringify(@Html.Raw(Json.Serialize(DonationInformation.FirstName)));
+            var lastname = JSON.stringify(@Html.Raw(Json.Serialize(DonationInformation.LastName)));
+            var addr1 = JSON.stringify(@Html.Raw(Json.Serialize(DonationInformation.Addr1)));
+            var addr2 = JSON.stringify(@Html.Raw(Json.Serialize(DonationInformation.Addr2)));
+            if (addr2 == "null") {
+                addr2 = "";
+            }
+            var city = JSON.stringify(@Html.Raw(Json.Serialize(DonationInformation.City)));
+            var state = JSON.stringify(@Html.Raw(Json.Serialize(DonationInformation.State)));
+            var postalcode = JSON.stringify(@Html.Raw(Json.Serialize(DonationInformation.PostalCode.ToString())));
+
+            const accountvalues = [firstname, lastname, addr1, addr2, city, state, postalcode];
+
+            var billingInformationInput = document.getElementsByClassName("BillingInformation");
+
+            if (document.getElementById("sameAddress").checked) {
+                for (var i = 0; i < billingInformationInput.length; i++) {
+                    billingInformationInput[i].setAttribute("readonly", "readonly");
+                    billingInformationInput[i].setAttribute("style", "pointer-events:none;");
+                    billingInformationInput[i].setAttribute("data-val", "false");
+                    billingInformationInput[i].value = accountvalues[i].replace('"', '').replace('"', '');
+                    if (billingInformationInput[i].id == "inputAddress2") {
+                        billingInformationInput[i].placeholder = "";
+                    }
+                }
+
+            }
+            else {
+                for (var i = 0; i < billingInformationInput.length; i++) {
+                    billingInformationInput[i].removeAttribute("readonly");
+                    billingInformationInput[i].setAttribute("style", "pointer-events:initial;");
+                    billingInformationInput[i].setAttribute("data-val", "true");
+                    billingInformationInput[i].value = "";
+                    if (billingInformationInput[i].id == "inputAddress2") {
+                        billingInformationInput[i].placeholder = "Apartment, studio, or floor";
+                    }
+                }
+            }
+
+        }
+    </script>
 </div>

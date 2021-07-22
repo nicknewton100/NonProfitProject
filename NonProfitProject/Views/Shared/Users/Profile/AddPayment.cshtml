@@ -19,7 +19,7 @@
                     <h3>Billing Address</h3>
                 </div>
                 <div class="card-body">
-                    <div class="form-row" style="margin: 0 2rem;">
+                    <div class="form-row" style="margin: 0 2rem; font-size:small;">
                         <div class="form-group col-md-6">
                             
                             <label for="firstName">First Name</label>
@@ -33,7 +33,7 @@
                             <span asp-validation-for="BillingLastName" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="form-row" style="margin: 0 2rem;">
+                    <div class="form-row" style="margin: 0 2rem; font-size:small;">
                         <div class="form-group col-md-6">
                             <label for="inputAddress">Address</label>
                             <input asp-for="BillingAddr1" class="form-control BillingInformation" id="inputAddress" placeholder="1234 Main St">
@@ -45,7 +45,7 @@
                             <span asp-validation-for="BillingAddr2" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="form-row" style="margin: 0 2rem;">
+                    <div class="form-row" style="margin: 0 2rem; font-size:small;">
                         <div class="form-group col-md-3">
                             <label for="inputCity">City</label>
                             <input asp-for="BillingCity" class="form-control BillingInformation" id="inputCity">
@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputState">State</label>
-                            <select asp-for="BillingState" id="inputState" name="state" class="form-control BillingInformation">
+                            <select asp-for="BillingState" class="form-control BillingInformation" style="pointer-events:none">
                                 <option value=""></option>
                                 <option value="Alaska">Alaska</option>
                                 <option value="Alabama">Alabama</option>
@@ -119,7 +119,7 @@
 
                     <div class="dropdown-divider"></div>
 
-                    <div class="form-row" style="margin:0 2rem;">
+                    <div class="form-row" style="margin: 0 2rem; font-size: small;">
                         <div class="form-check">
                             <input asp-for="usingAccountAddress" class="form-check-input" type="checkbox" id="sameAddress" onchange="hideBillingInformation()" />
                             <label class="form-check-label" for="check1"> Use Account Address</label>
@@ -133,21 +133,21 @@
                 </div>
                 <br />
                 <div class="card-body">
-                    <div class="form-row" style="margin-left: 2rem;">
+                    <div class="form-row" style="margin-left: 2rem; font-size: small;">
+                        <span asp-validation-for="CardType" class="text-danger"></span>
                         <div class="form-check">
-                            <span asp-validation-for="CardType" class="text-danger"></span>
                             <input asp-for="CardType" class="form-check-input" type="radio" value="Credit Card" id="CreditCard" />
                             <label class="fomr-check-label" for="CreditCard">Credit Card  <i class="far fa-credit-card"></i></label>
                         </div>
                     </div>
-                    <div class="form-row" style="margin-left: 2rem;">
+                    <div class="form-row" style="margin-left: 2rem; font-size: small;">
                         <div class="form-check">
                             <input asp-for="CardType" class="form-check-input" type="radio" value="Debit Card" id="DebitCard" />
                             <label class="fomr-check-label" for="DebitCard">Debit Card  <i class="fab fa-cc-visa"></i></label>
                         </div>
                     </div>
                     <div class="dropdown-divider"></div>
-                    <div class="form-row" style="margin: 0 2rem;">
+                    <div class="form-row" style="margin: 0 2rem; font-size: small;">
                         <div class="form-group col-sm-auto">
                             <label for="nameCard">Name on Card</label>
                             <input asp-for="CardholderName" class="form-control" id="nameCard">
@@ -159,7 +159,7 @@
                             <span asp-validation-for="CardNumber" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="form-row" style="margin: 0 2rem;">
+                    <div class="form-row" style="margin: 0 2rem; font-size: small;">
                         <div class="form-group col-sm-auto">
                             <label for="expirationDate">Expiration Date</label>
                             <input asp-for="CardExpDate" type="text" class="form-control" id="expirationDate" oninput="card_expires_format(this)">
@@ -175,25 +175,50 @@
             </div>
         </div>
         <br />
-        <button type="submit" class="btn btn-primary">Add Payment</button>
+        <button type="submit" class="btn btn-dark">Add Payment</button>
         <a class="btn btn-danger" asp-action="Index">Cancel</a>
     </form>
     <script>
         function hideBillingInformation() {
+            var firstname = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctFirstName)));
+            var lastname = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctLastName)));
+            var addr1 = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctAddr1)));
+            var addr2 = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctAddr2)));
+            if (addr2 == "null") {
+                addr2 = "";
+            }
+            var city = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctCity)));
+            var state = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctState)));
+            var postalcode = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctPostalCode)));
+
+            const accountvalues = [firstname, lastname, addr1, addr2, city, state, postalcode];
+
             var billingInformationInput = document.getElementsByClassName("BillingInformation");
+
             if (document.getElementById("sameAddress").checked) {
                 for (var i = 0; i < billingInformationInput.length; i++) {
-                    billingInformationInput[i].disabled = true;
+                    billingInformationInput[i].setAttribute("readonly", "readonly");
+                    billingInformationInput[i].setAttribute("style", "pointer-events:none;")
                     billingInformationInput[i].setAttribute("data-val", "false");
-                    billingInformationInput[i].value = "";
+                    billingInformationInput[i].value = accountvalues[i].replace('"', '').replace('"', '');
+                    if (billingInformationInput[i].id == "inputAddress2") {
+                        billingInformationInput[i].placeholder = "";
+                    }
                 }
+
             }
             else {
                 for (var i = 0; i < billingInformationInput.length; i++) {
-                    billingInformationInput[i].disabled = false;
+                    billingInformationInput[i].removeAttribute("readonly");
+                    billingInformationInput[i].setAttribute("style", "pointer-events:initial;")
                     billingInformationInput[i].setAttribute("data-val", "true");
+                    billingInformationInput[i].value = "";
+                    if (billingInformationInput[i].id == "inputAddress2") {
+                        billingInformationInput[i].placeholder = "Apartment, studio, or floor";
+                    }
                 }
             }
+
         }
     </script>
 </div>

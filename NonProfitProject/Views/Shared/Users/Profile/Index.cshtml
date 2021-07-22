@@ -3,99 +3,71 @@
     ViewData["Title"] = "Profile";
     ViewData["Title2"] = "Non-Paw-Fit";
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+
 }
 
 
 <div class="container">
     <div class="card-header-pills"><h1 class="fa fa-address-card"> @ViewData["Title"]</h1></div>
     <div class="row" >
-        <div class="justify-content-center" style="margin:1rem;">
+        <div style="margin:1rem;">
             <a class="btn-lg btn-dark text-decoration-none" asp-action="EditLogin">Edit Login Information</a>
         </div>
         <div class="justify-content-center" style="margin:1rem;">
             <a class="btn-lg btn-dark text-decoration-none" asp-action="AddPayment">Manage Payment Information</a>
         </div>
     </div>
-    <br />
-    <form style="font-size:medium">
-        <input type="hidden" asp-for="UserID" />
-        <div class="form-group row">
-            <!--FIRST NAME-->
-            <div class="col-sm-2"><label>First Name: </label></div>
-            <div class="col-sm-2">
-                <input readonly asp-for="FirstName" class="form-control" />
+    <div>
+        <form style="font-size:large">
+            <input type="hidden" asp-for="UserID" />
+            <div class="row">
+                <div class="card w-auto" style="margin:0.5rem;padding:0.25rem;">
+                    <div class="card-body">
+                        <h4>Personal Information</h4>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col-auto"><p>Name:  @Model.FirstName @Model.LastName</p> </div>
+                            <div class="col-auto"><p>Birthdate:  @Model.BirthDate.ToString("MM/dd/yyyy")</p></div>
+                            <div class="col-auto"><p>Gender:  @Model.Gender</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto"><p>Username:  @Model.Username</p></div>
+                            <div class="col-auto"><p>Email Address:  @Model.Email</p></div>
+                        </div>
+                        <h4>Address Information</h4>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col-auto"><p>Street Address:  @Model.Addr1</p></div>
+                            <div class="col-auto"><p>@Model.Addr2</p></div>
+                            <div class="col-auto"><p>City:  @Model.City</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto"><p>State:  @Model.State</p></div>
+                            <div class="col-auto"><p>Postal Code:  @Model.PostalCode</p></div>
+                        </div>
+                        <h4>Card Information</h4>
+                        <div class="row">
+                            <div class="card w-auto" style="margin:0 0.5rem;">
+                                <div class="card-body">
+                                    <h4>Debit Card </h4>
+                                    <h5>Name on Card</h5>
+                                    <h6>Expiration Date</h6>
+                                </div>
+                            </div>
+                            <div class="card w-auto" style="margin:0 0.5rem;">
+                                <div class="card-body">
+                                    <h5>Debit Card </h5>
+                                    <h5>Name on Card</h5>
+                                    <h6>Expiration Date</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <!--LAST NAME-->
-            <div class="col-sm-2"><label>Last Name: </label></div>
-            <div class="col-sm-2">
-                <input readonly asp-for="LastName" class="form-control" />
-            </div>
-
-            <!--BIRTHDAY-->
-            <div class="col-sm-1"><label>Birthday: </label></div>
-            <div class="col-sm-2">
-                <input readonly type="date" asp-for="BirthDate" class="form-control" />
-            </div>
-
-        </div>
-
-        <div class="form-group row">
-
-            <!--USERNAME-->
-            <div class="col-sm-2"><div class="fas fa-user-alt"></div>  <label>Username: </label></div>
-            <div class="col-sm-2">
-                <input readonly asp-for="Username" class="form-control" />
-            </div>
-
-            <!--EMAIL ADDRESS-->
-            <div class="col-sm-2"><div class="fa fa-envelope"></div>  <label>Email Address: </label></div>
-            <div class="col-sm-5">
-                <input readonly asp-for="Email" class="form-control" />
-            </div>
-        </div>
-
-        <div class="form-group row">
+        </form>
+    </div>
+    
 
 
-            <!--STREET ADDRESS-->
-            <div class="col-sm-2"><div class="fas fa-home"></div>  <label>Street Address: </label></div>
-            <div class="col-sm-3">
-                <input readonly asp-for="Addr1" class="form-control" />
-            </div>
-
-
-            <!--CITY-->
-            <div class="col-sm-1 text-right"><label>City: </label></div>
-            <div class="col-sm-2">
-                <input readonly asp-for="City" class="form-control" />
-            </div>
-
-            <!--STATE-->
-            <div class="col-sm-1 text-right"><label>State: </label></div>
-            <div class="col-sm-2">
-                <input readonly asp-for="State" class="form-control" />
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <!--POSTAL CODE-->
-            <div class="col-sm-2"><label>Postal Code: </label></div>
-            <div class="col-sm-2">
-                <input readonly asp-for="PostalCode" class="form-control" />
-            </div>
-
-            <!--GENDER-->
-            <div class="col-sm-1"><label>Gender: </label></div>
-            <div class="col-sm-2">
-                <select readonly class="form-control" asp-for="Gender" disabled>
-                    <option value="#" disabled selected>...</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Prefer Not to Say">Prefer Not to Say</option>
-                </select>
-            </div>
-
-        </div>
-    </form>
 </div>

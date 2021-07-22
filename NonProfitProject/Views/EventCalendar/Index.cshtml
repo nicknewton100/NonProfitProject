@@ -1,4 +1,4 @@
-﻿@model List<Event>
+﻿@model List<NonProfitProject.Models.ViewModels.CalendarViewModel>
 @{
     ViewData["Title"] = "Calendar";
     ViewData["Title2"] = "Non-Paw-Fit Animal Rescue";
@@ -20,4 +20,8 @@
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.css' rel='stylesheet' />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.js'></script>
     <script src="~/js/Calendar.js"></script>
+    <script type="text/javascript">
+        //references for function below: https://stackoverflow.com/questions/16361364/accessing-mvcs-model-property-from-javascript
+        window.onload(setCalendar('@Html.Raw(Json.Serialize(Model))'))
+    </script>
 </div>

@@ -1,0 +1,25 @@
+﻿@model List<News>
+@{
+    ViewData["Title"] = "News Page";
+    ViewData["Title2"] = "Non-Paw-Fit Animal Rescue";
+    Layout = "_HomePage";
+
+}
+
+<div class="container">
+    <h1>News Articles</h1>
+    <div class="row justify-content-sm-start align-content-lg-center">
+        <div class="card w-25" style="margin:0.5rem;">
+
+            @foreach (var news in Model)
+            {
+                <h5 class="card-header">@news.NewsHeader</h5>
+                <div class="card-body">
+                            <h6>@news.NewsTitle</h6>
+                            <p>@news.NewsDescription</p>
+                </div>                    
+             }
+        </div>
+    </div>
+</div>
+

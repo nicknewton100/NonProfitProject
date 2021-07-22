@@ -7,20 +7,18 @@ let calendar = new FullCalendar.Calendar(calendarEl, {
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    events: [
-        {
-            title: '10k Run for Cancer!',
-            start: '2021-07-24',    
-            end: '2021-07-31'
-        },
-        {
-            title: 'Movie Night',
-            start: '2021-07-26',
-            end: '2021-07-26'
-        },
-    ]
+    events: []
 });
 
-calendar.render();
+//references for function below: https://stackoverflow.com/questions/16361364/accessing-mvcs-model-property-from-javascript
+function setCalendar(e) {
+    var model = JSON.parse(e);
+    for (var i = 0; i < model.length; i++) {
+        model[i].eventStartDate = model[i].eventStartDate.substring(0, model[i].eventStartDate.length - 9);
+        model[i].eventEndDate = model[i].eventEndDate.substring(0, model[i].eventEndDate.length - 9);
+        calendar.addEvent({ title: model[i].eventName, start: model[i].eventStartDate, end: model[i].eventEndDate });
+    }
+}
+    calendar.render();
 
 /*Bootstrap calendar import from https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.js */
