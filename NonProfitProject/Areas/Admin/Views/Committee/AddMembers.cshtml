@@ -38,26 +38,30 @@
                                 <td>@empl.Position</td>
                                 <td>
                                     <div class="row">
-                                        <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("EmployeeDetails","Committee",new {id = empl.EmpID, name = sessionModel.Committee.CommitteeName })'">Details</button>
-                                        <button type="button" class="btn btn-dark " data-toggle="modal" data-target="#Modal-@empl.EmpID">Add to Committee</button>
-                                        <!--Please make this popup look good----------------------------->
-                                        <div class="modal fade" id="Modal-@empl.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <form method="post" asp-action="AddMembers" asp-route-id="@empl.EmpID">
-                                                        <div class="row justify-content-center" style="width:500px;margin:0px auto;">
-                                                            <h5 class="modal-title" id="exampleModalLabel" style="margin-left:20px;color:black;">Assign Position</h5>
-                                                        </div>
-                                                        <div class="row justify-content-center">
-                                                            <input asp-for="CommitteePosition" class="form-control w-25" />
-                                                        </div>
-                                                        <div class="modal-footer justify-content-center">
-                                                            <div class="row">
-                                                                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-dark">Cancel</button>
-                                                                <button type="submit" class="btn btn-dark">Add To @sessionModel.Committee.CommitteeName</button>
+                                        <div class="col-auto">
+                                            <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("EmployeeDetails","Committee",new {id = empl.EmpID, name = sessionModel.Committee.CommitteeName })'">Details</button>
+                                            <button type="button" class="btn btn-dark " data-toggle="modal" data-target="#Modal-@empl.EmpID">Add to Committee</button>
+                                        </div>
+                                        <!--POP UP MODAL IS FIXED-->
+                                        <div>
+                                            <div class="modal fade" id="Modal-@empl.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <form method="post" asp-action="AddMembers" asp-route-id="@empl.EmpID">
+                                                            <div class="modal-header justify-content-center">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Assign Position</h5>
                                                             </div>
-                                                        </div>
-                                                    </form>
+                                                            <div class="modal-body">
+                                                                <div class="row justify-content-center">
+                                                                    <input asp-for="CommitteePosition" class="form-control w-50" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-dark">Add To @sessionModel.Committee.CommitteeName</button>
+                                                                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Cancel</button>
+                                                            </div>                                                               
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -72,7 +76,7 @@
     </div>
     <div class="container" style="margin:1rem 0;">
         <div class="d-flex flex-row-reverse">
-            <a class="btn btn-dark" asp-controller="Committee" asp-action="Details" asp-route-name="@sessionModel.Committee.CommitteeName">Cancel</a>
+            <a class="btn btn-danger" asp-controller="Committee" asp-action="Details" asp-route-name="@sessionModel.Committee.CommitteeName">Cancel</a>
         </div>
     </div>
 </div>
