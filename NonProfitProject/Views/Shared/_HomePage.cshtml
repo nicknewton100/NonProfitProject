@@ -89,8 +89,8 @@
                     <div class="btn-group">
                         <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @User.Identity.Name</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" asp-area="Users" asp-controller="Profile" asp-action="Index">Profile</a>
                             <a class="dropdown-item" asp-area="Users" asp-controller="Home" asp-action="Index"> Dashboard</a>
+                            <a class="dropdown-item" asp-area="Users" asp-controller="Profile" asp-action="Index">Profile</a>
                             <form class="dropdown-item bg-dark" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
                                 <button type="submit" class="btn btn-dark">Logout</button>
                             </form>
