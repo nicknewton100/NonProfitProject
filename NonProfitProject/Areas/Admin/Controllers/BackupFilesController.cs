@@ -14,7 +14,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class BackFilesController : Controller
+    public class BackupFilesController : Controller
     {
         public IActionResult Index()
         {
@@ -48,7 +48,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public IActionResult Backup()
         {
             var path = Environment.CurrentDirectory.ToString();
-            string directory = @"..\\..\\..\\..\\Backup";
+            string directory = @"..\\..\\..\\Backup";
             // check if backup folder exist, otherwise create it.
             if (!Directory.Exists(directory))
             {
