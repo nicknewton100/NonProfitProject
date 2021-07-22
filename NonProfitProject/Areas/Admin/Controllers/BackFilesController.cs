@@ -8,7 +8,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Text;
+using Microsoft.SqlServer.Management.Smo;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
@@ -24,69 +25,52 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult BackupDatabase()
         {
-            SqlConnection sqlConnection = new SqlConnection("Server=(localdb)\\cpt275.database.windows.net;Initial Catalog=cpt275seniorproj;Persist Security Info=False;User ID=cpt275;Password=987963Gizm0;MultipleActiveResultSets=False;Encrypt=false;TrustServerCertificate=False;");
-            SqlCommand sqlCommand = new SqlCommand();
-            SqlDataAdapter sqlData = new SqlDataAdapter();
-            DataTable dt = new DataTable();
-            var path = Environment.CurrentDirectory.ToString();
-            string directory = @"..\\Backup";
-            // check if backup folder exist, otherwise create it.
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-            string saveDirectory = directory + "\\" + DateTime.Now.ToString("dd_MM_yyyy_HHmmss") + ".bak";
             try
             {
-                sqlConnection.Open();
-                sqlCommand = new SqlCommand("backup database cpt275seniorproj to disk='" + saveDirectory +"'", sqlConnection);
-                sqlCommand.ExecuteNonQuery();
-                sqlConnection.Close();
+                string directory = @"..\\Backup";
+                string saveDirectory = Path.GetFullPath(directory).ToString() + "\\" + DateTime.Now.ToString("dd_MM_yyyy_HHmmss") + ".sql";
+
+                StringBuilder sb = new StringBuilder();
+                Server srv = new Server(new Microsoft.SqlServer.Management.Common.ServerConnection("tcp:cpt275.database.windows.net,1433", "cpt275", "987963Gizm0"));
+                Database dbs = srv.Databases["cpt275seniorproj"];
+                ScriptingOptions options = new ScriptingOptions();
+                options.ScriptData = true;
+                options.ScriptDrops = false;
+                options.FileName = saveDirectory;
+                options.EnforceScriptingOptions = true;
+                options.ScriptSchema = true;
+                options.IncludeHeaders = true;
+                options.AppendToFile = true;
+                options.Indexes = true;
+                options.WithDependencies = true;
+                dbs.Script(options);
             }
             catch(Exception e)
             {
                 TempData["Error"] = e.Message;
             }
-            
+            /*byte[] fileBytes = System.IO.File.ReadAllBytes(saveDirectory);
+            return File(fileBytes, "application/force-download", "BackupApplication.sql");*/
+
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public IActionResult Backup()
         {
-            string path = @"..\\..\\..\\";
-            string directory = @"..\\..\\..\\..\\";
-            // check if backup folder exist, otherwise create it.            
-            try
+            string path = Environment.CurrentDirectory.ToString(); ;
+
+            string directory = @"..\\Backup";
+
+            if (!Directory.Exists(directory))
             {
-                if (!Directory.Exists(directory))
-                {
-                    Directory.CreateDirectory(directory);
-                }
-                string saveDirectory = directory + "\\" + DateTime.Now.ToString("dd_MM_yyyy_HHmmss") + ".zip";
-                ZipFile.CreateFromDirectory(path, saveDirectory);
-
-                byte[] fileBytes = System.IO.File.ReadAllBytes(saveDirectory);
-                return File(fileBytes, "application/force-download", "BackupApplication.zip");
+                Directory.CreateDirectory(directory);
             }
-            catch(Exception e)
-            {
-                path = Environment.CurrentDirectory;
-                /*directory = @"..\\Backup";
+            string saveDirectory = directory + "\\" + DateTime.Now.ToString("dd_MM_yyyy_HHmmss") + ".zip";
+            ZipFile.CreateFromDirectory(path, saveDirectory);
 
-                if (!Directory.Exists(directory))
-                {
-                    Directory.CreateDirectory(directory);
-                }
-                string saveDirectory = directory + "\\" + DateTime.Now.ToString("dd_MM_yyyy_HHmmss") + ".zip";
-                ZipFile.CreateFromDirectory(path, saveDirectory);
-
-                byte[] fileBytes = System.IO.File.ReadAllBytes(saveDirectory);
-                return File(fileBytes, "application/force-download", "BackupApplication.zip");*/
-                TempData["Error"] = e.Message + "                      \n\n" + path.ToString();
-                return RedirectToAction("Index");
-                
-            }
+            byte[] fileBytes = System.IO.File.ReadAllBytes(saveDirectory);
+            return File(fileBytes, "application/force-download", "BackupApplication.zip");
         }
     }
 }
