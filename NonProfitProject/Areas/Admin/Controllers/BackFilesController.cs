@@ -55,14 +55,14 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public IActionResult Backup()
         {
             string path = @"..\\..\\..\\";
-            string directory = "D:\\Backup";
-            // check if backup folder exist, otherwise create it.
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
+            string directory = "D:\\home\\site\\wwwroot\\Backup";
+            // check if backup folder exist, otherwise create it.            
             try
             {
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
                 string saveDirectory = directory + "\\" + DateTime.Now.ToString("dd_MM_yyyy_HHmmss") + ".zip";
                 ZipFile.CreateFromDirectory(path, saveDirectory);
 
