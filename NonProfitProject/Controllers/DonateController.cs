@@ -25,6 +25,11 @@ namespace NonProfitProject.Controllers
         }
         public IActionResult Index()
         {
+            var DonationInformation = HttpContext.Session.GetObject<DonationViewModel>("DonationInformation");
+            if (DonationInformation != null)
+            {
+                return View(DonationInformation);
+            }
             return View();
         }
 
@@ -283,6 +288,5 @@ namespace NonProfitProject.Controllers
             HttpContext.Session.Remove("DonationInformation");
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

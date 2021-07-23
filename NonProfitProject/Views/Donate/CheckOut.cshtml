@@ -95,7 +95,7 @@
                         <h4 style="text-decoration:underline">Billing Details</h4>
                         <br />
                         <p>@sessionModel.DonationPaymentViewModel.BillingFirstName @sessionModel.DonationPaymentViewModel.BillingLastName</p>
-                                                                                <p>@sessionModel.DonationPaymentViewModel.BillingAddr1@sessionModel.DonationPaymentViewModel.BillingAddr2@sessionModel.DonationPaymentViewModel.BillingCity</p>
+                                                                                <p>@sessionModel.DonationPaymentViewModel.BillingAddr1 @sessionModel.DonationPaymentViewModel.BillingAddr2 @sessionModel.DonationPaymentViewModel.BillingCity</p>
                         <p>@sessionModel.DonationPaymentViewModel.BillingState, @sessionModel.DonationPaymentViewModel.BillingPostalCode</p>
                     </div>
                 </div>
@@ -114,10 +114,10 @@
                 <h5>3. ORDER REVIEW</h5>
             </div>
             <div class="card-body">
-                <h6>By click the Place Order button, you confirm that you have read and understood, and accept our Terms and Conditions, Return Policy, and PrivacyPolicy.<h6>
+                <h6>By click the Place Order button, you confirm that you have read and understood, and accept our Terms and Conditions, Return Policy, and PrivacyPolicy.</h6>
                 <div class="row justify-content-end" style="margin-right:2rem;">
                     <form method="post" asp-action="CancelOrder">
-                        <button type="submit" class="btn btn-dark" >Cancel Order</button>
+                        <button type="submit" class="btn btn-dark mr-1" >Cancel Order</button>
                     </form>
                     <form method="post" asp-action="PlaceOrder">
                         <button type="submit" class="btn btn-outline-dark">Place Order</button>

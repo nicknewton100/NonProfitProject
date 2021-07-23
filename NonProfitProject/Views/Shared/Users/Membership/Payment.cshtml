@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Payment Method";
     ViewData["Title2"] = "Non-Paw-Fit Animal Rescue";
-    Layout = "_HomePage";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
     @using NonProfitProject.Models.Extensions;
     @using NonProfitProject.Models.ViewModels.Shared.Users;
     var sessionModel = Context.Session.GetObject<SignupMembershipViewModel>("SignupMembershipModel");
@@ -22,7 +22,7 @@
                     <h3>Billing Address</h3>
                 </div>
                 <div class="card-body">
-                    <div class="form-row" style="margin: 0 2rem;">
+                    <div class="form-row" style="margin: 0 2rem; font-size:small">
                         <div class="form-group col-md-6">
                             <label for="firstName">First Name</label>
                             <input asp-for="BillingFirstName" class="form-control BillingInformation" id="firstName" placeholder="First Name">
@@ -35,7 +35,7 @@
                             <span asp-validation-for="BillingLastName" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="form-row" style="margin: 0 2rem;">
+                    <div class="form-row" style="margin: 0 2rem; font-size: small">
                         <div class="form-group col-md-6">
                             <label for="inputAddress">Address</label>
                             <input asp-for="BillingAddr1" class="form-control BillingInformation" id="inputAddress" placeholder="1234 Main St">
@@ -47,7 +47,7 @@
                             <span asp-validation-for="BillingAddr2" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="form-row" style="margin: 0 2rem;">
+                    <div class="form-row" style="margin: 0 2rem; font-size: small">
                         <div class="form-group col-md-5">
                             <label for="inputCity">City</label>
                             <input asp-for="BillingCity" class="form-control BillingInformation" id="inputCity">
@@ -121,19 +121,18 @@
 
                     <div class="dropdown-divider"></div>
 
-                    <div class="form-row" style="margin:0 2rem;">
+                    <div class="form-row" style="margin: 0 2rem; font-size: small">
                         <div class="form-check">
                             <input asp-for="useHomeAddress" class="form-check-input" type="checkbox" id="sameAddress" onchange="hideBillingInformation()" />
                             <label class="form-check-label" for="check1"> Use home address</label>
                         </div>
                     </div>
-                            <div class="form-row" style="margin:0 2rem;">
+                            <div class="form-row" style="margin: 0 2rem; font-size: small">
                                 <div class="form-check">
                                     <input asp-for="savePayment" class="form-check-input" type="checkbox" />
                                     <label class="form-check-label" for="check1"> Save this payment method</label>
                                 </div>
                             </div>
-                        }
                 </div>
             </div>
             <div class="card w-auto">
@@ -142,21 +141,23 @@
                 </div>
                 <br />
                 <div class="card-body">
-                    <span asp-validation-for="CardType" class="text-danger" style="margin-left: 2rem;"></span>
-                    <div class="form-row" style="margin-left: 2rem;">
+                    <div style="font-size: small">
+                        <span asp-validation-for="CardType" class="text-danger" style="margin-left: 2rem;"></span>
+                    </div>
+                    <div class="form-row" style="margin-left: 2rem; font-size: small">
                         <div class="form-check">
                             <input asp-for="CardType" class="form-check-input" type="radio" value="Credit Card" id="CreditCard" />
                             <label class="fomr-check-label" for="CreditCard">Credit Card  <i class="far fa-credit-card"></i></label>
                         </div>
                     </div>
-                    <div class="form-row" style="margin-left: 2rem;">
+                    <div class="form-row" style="margin-left: 2rem; font-size: small">
                         <div class="form-check">
                             <input asp-for="CardType" class="form-check-input" type="radio" value="Debit Card" id="DebitCard" />
                             <label class="fomr-check-label" for="DebitCard">Debit Card  <i class="fab fa-cc-visa"></i></label>
                         </div>
                     </div>
                     <div class="dropdown-divider"></div>
-                    <div class="form-row" style="margin: 0 2rem;">
+                    <div class="form-row" style="margin: 0 2rem; font-size: small">
                         <div class="form-group col-sm-auto">
                             <label for="nameCard">Name on Card</label>
                             <input asp-for="CardholderName" class="form-control" id="nameCard">
@@ -168,7 +169,7 @@
                             <span asp-validation-for="CardNumber" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="form-row" style="margin: 0 2rem;">
+                    <div class="form-row" style="margin: 0 2rem; font-size: small">
                         <div class="form-group col-sm-auto">
                             <label for="expirationDate">Expiration Date</label>
                             <input asp-for="ExpDate" type="text" class="form-control" id="expirationDate" oninput="card_expires_format(this)">
