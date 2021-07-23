@@ -27,6 +27,11 @@ namespace NonProfitProject.Controllers
         {
             return View();
         }
+        public IActionResult CheckOut()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Donate(DonationViewModel model)
         {
