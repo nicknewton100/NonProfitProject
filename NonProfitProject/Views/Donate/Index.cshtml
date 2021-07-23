@@ -18,7 +18,7 @@
         }
         @if (TempData["SessionTimeout"]?.ToString() != null)
         {
-            <span>TempData["SessionTimeout"].ToString()</span>
+            <span>@TempData["SessionTimeout"].ToString()</span>
             <br />
         }
 
@@ -70,7 +70,7 @@
                         </div>
                         <div class="card card-body">
                             <form asp-action="Donate" method="post">
-                                <input hidden asp-for="DonationAmount" id="DonationAmount" />
+                                <input hidden asp-for="DonationAmount" id="DonationAmount" value=0.00/>
                                 @if (!User.Identity.IsAuthenticated)
                                 {
                                     <div class="form-row">
