@@ -9,11 +9,11 @@
 <div class="row" style="margin-top:5.5rem; padding:2rem;">
     @foreach (var news in Model)
     {
-        <div class="column" style="padding:2rem;">
+        <div class="column" style="padding:2rem; display:flex; justify-content: center; flex-direction: row;">
             <div class="card">
-                <h5 class="card-header">@news.NewsHeader</h5>
+                <h5 class="card-header" style="text-align: center;">@news.NewsHeader</h5>
                 <div class="card-body">
-                    <h6>@news.NewsTitle</h6>
+                    <h6 style="text-align: center;">@news.NewsTitle</h6>
                     <p>@news.NewsDescription</p>
                 </div>
             </div>
