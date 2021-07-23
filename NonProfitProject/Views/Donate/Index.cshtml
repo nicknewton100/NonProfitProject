@@ -9,26 +9,12 @@
     <script type="text/javascript" src="~/js/UserValidation.js"></script>
 </head>
 
-<!--Referenced website below to create onClick commands-->
-<!--https://stackoverflow.com/questions/38356695/how-to-make-button-stay-highlighted-after-click-on-screen-->
-<script type="text/javascript">
-    function selectBtn(e) {
-        var sel = document.getElementById('DIVbtns').getElementsByTagName("button");
-        for (var i = 0; i < sel.length; i++) {
-            sel[i].classList.remove("active");
-        }
-        e.classList.add("active");
-        document.getElementById("DonationAmount").value = e.innerHTML.replaceAll('$', '');
-        document.getElementById("DonationAmountValidation").hidden = true;
-    }
-</script>
-
 <div class="container-fluid" style="padding:0 5rem">
     <div class=" container">
         <h4 class="text-center justify-content-center">Please select your donation amount...</h4>
         @if (User.Identity.IsAuthenticated)
         {
-            <br />            
+            <br />
         }
         @if (TempData["SessionTimeout"]?.ToString() != null)
         {
@@ -57,7 +43,7 @@
                     <button id="button3" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this)">$150</button>
                 </div>
             </div>
-             <div class="col-sm-2">
+            <div class="col-sm-2">
                 <div class="card" style="margin:15px 0;">
                     <button id="button4" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this)">$300</button>
                 </div>
@@ -67,7 +53,7 @@
                     <button id="button5" class="btn btn-outline-primary example" style="font-size:50px" onclick="selectBtn(this)">$400</button>
                 </div>
             </div>
-        </div>        
+        </div>
         @if (User.Identity.IsAuthenticated)
         {
             <br />
@@ -203,7 +189,19 @@
             </div>
         </div>
 
-
+        <!--Referenced website below to create onClick commands-->
+        <!--https://stackoverflow.com/questions/38356695/how-to-make-button-stay-highlighted-after-click-on-screen-->
+        <script type="text/javascript">
+            function selectBtn(e) {
+                var sel = document.getElementById('DIVbtns').getElementsByTagName("button");
+                for (var i = 0; i < sel.length; i++) {
+                    sel[i].classList.remove("active");
+                }
+                e.classList.add("active");
+                document.getElementById("DonationAmount").value = e.innerHTML.replaceAll('$', '');
+                document.getElementById("DonationAmountValidation").hidden = true;
+            }
+        </script>
 
         <script>
             console.clear();
