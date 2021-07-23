@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NonProfitProject.Models;
 
 namespace NonProfitProject.Migrations
 {
     [DbContext(typeof(NonProfitContext))]
-    partial class NonProfitContextModelSnapshot : ModelSnapshot
+    [Migration("20210723152056_createdMembershipTypes")]
+    partial class createdMembershipTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             Id = "370d9876-b6ab-4694-baa9-ecc7bc5b451c",
-                            ConcurrencyStamp = "434db00d-6c5e-4f13-a620-f91894a406d3",
+                            ConcurrencyStamp = "473a683d-cbec-4cb1-94f0-523dece737eb",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -227,21 +229,21 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             CommitteesID = 1,
-                            CommitteeCreationDate = new DateTime(2021, 7, 23, 15, 41, 11, 191, DateTimeKind.Utc).AddTicks(2800),
+                            CommitteeCreationDate = new DateTime(2021, 7, 23, 15, 20, 55, 455, DateTimeKind.Utc).AddTicks(7747),
                             CommitteeDescription = "Manages donations/membership dues",
                             CommitteeName = "Fundrasing Committee"
                         },
                         new
                         {
                             CommitteesID = 2,
-                            CommitteeCreationDate = new DateTime(2021, 7, 23, 15, 41, 11, 191, DateTimeKind.Utc).AddTicks(3082),
+                            CommitteeCreationDate = new DateTime(2021, 7, 23, 15, 20, 55, 455, DateTimeKind.Utc).AddTicks(8019),
                             CommitteeDescription = "Manages news on the website",
                             CommitteeName = "News Committee"
                         },
                         new
                         {
                             CommitteesID = 3,
-                            CommitteeCreationDate = new DateTime(2021, 7, 23, 15, 41, 11, 191, DateTimeKind.Utc).AddTicks(3094),
+                            CommitteeCreationDate = new DateTime(2021, 7, 23, 15, 20, 55, 455, DateTimeKind.Utc).AddTicks(8029),
                             CommitteeDescription = "Plans and organizes events",
                             CommitteeName = "Event and Planning Committee"
                         });
@@ -497,7 +499,7 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("MembershipTypeID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ReceiptID")
                         .HasColumnType("int");
@@ -506,8 +508,6 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("MemDuesID");
-
-                    b.HasIndex("MembershipTypeID");
 
                     b.HasIndex("ReceiptID")
                         .IsUnique();
@@ -522,8 +522,8 @@ namespace NonProfitProject.Migrations
                     b.Property<string>("MembershipTypeID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Amount")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -531,32 +531,6 @@ namespace NonProfitProject.Migrations
                     b.HasKey("MembershipTypeID");
 
                     b.ToTable("MembershipTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            MembershipTypeID = "fdsfdf-n53g3g-h3j9xe768w-nm4b35",
-                            Amount = 10.00m,
-                            Name = "Basic"
-                        },
-                        new
-                        {
-                            MembershipTypeID = "fs8t4h-chgje6-dshuv57d8-sng94v",
-                            Amount = 20.00m,
-                            Name = "Advanced"
-                        },
-                        new
-                        {
-                            MembershipTypeID = "dk5k4g-df5h7d-v5y8s2ch5t-f5h5db",
-                            Amount = 50.00m,
-                            Name = "Premium"
-                        },
-                        new
-                        {
-                            MembershipTypeID = "jk5dgd-eh4d6h-f5sf4g77h5-dfs4g",
-                            Amount = 100.00m,
-                            Name = "Paw-fect"
-                        });
                 });
 
             modelBuilder.Entity("NonProfitProject.Models.News", b =>
@@ -810,14 +784,14 @@ namespace NonProfitProject.Migrations
                             Id = "6b87b89f-0f9a-4e2d-b696-235e99655521",
                             AccessFailedCount = 0,
                             AccountDisabled = false,
-                            ConcurrencyStamp = "e0bd4b50-751c-473c-89fa-b06e19caf2a5",
+                            ConcurrencyStamp = "e85e09cc-f7b9-40e3-848a-70a15f9740ab",
                             Email = "JohnJones@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAECmmnOqVptgPsKXvprg0xQloQEYbaqY89G0k6cqnPWQzp4DhpJVbUnNC5yIVefZkQw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJz5CbHb4ATLl4cWyHyIjCJMXGQBr7WakOB3MPkVMLOZ5J8AAyEbsb+r2iF2mD7pOA==",
                             PhoneNumberConfirmed = false,
                             ReceiveWeeklyNewsletter = false,
-                            SecurityStamp = "b76cc1f7-f720-48b4-9a19-402cecfb6a21",
+                            SecurityStamp = "4b378cc7-94a1-4948-9db3-e3a869e63e3e",
                             TwoFactorEnabled = false,
                             UserActive = true,
                             UserAddr1 = "513 S Augusta St",
@@ -952,10 +926,6 @@ namespace NonProfitProject.Migrations
 
             modelBuilder.Entity("NonProfitProject.Models.MembershipDues", b =>
                 {
-                    b.HasOne("NonProfitProject.Models.MembershipType", "MembershipType")
-                        .WithMany()
-                        .HasForeignKey("MembershipTypeID");
-
                     b.HasOne("NonProfitProject.Models.Receipts", "Receipt")
                         .WithOne("MembershipDue")
                         .HasForeignKey("NonProfitProject.Models.MembershipDues", "ReceiptID")
@@ -965,8 +935,6 @@ namespace NonProfitProject.Migrations
                     b.HasOne("NonProfitProject.Models.User", "User")
                         .WithMany("MembershipDues")
                         .HasForeignKey("UserID");
-
-                    b.Navigation("MembershipType");
 
                     b.Navigation("Receipt");
 

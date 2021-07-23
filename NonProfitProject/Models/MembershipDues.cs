@@ -16,7 +16,8 @@ namespace NonProfitProject.Models
         public User User { get; set; }
         public int ReceiptID { get; set; }
         public Receipts Receipt { get; set; }
-        public decimal MemAmount { get; set; }
+        public string MembershipTypeID { get; set; }
+        public MembershipType MembershipType { get; set; }
         public DateTime MemStartDate { get; set; }
         public DateTime MemEndDate { get; set; }
         public DateTime MemRenewalDate { get; set; }

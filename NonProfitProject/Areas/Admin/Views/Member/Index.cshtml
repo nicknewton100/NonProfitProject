@@ -1,4 +1,4 @@
-﻿
+﻿@model List<NonProfitProject.Models.User>
 @{
     ViewData["Title"] = "Members List";
     ViewData["Title2"] = "Admin";
@@ -28,19 +28,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td scope="row" hidden>Member ID</td>
-                        <td>Member First Name</td>
-                        <td>Member Last Name</td>
-                        <td>Email</td>
-                        <td>Join Date?</td>
-                        <td><button class="btn btn-dark">Details</button></td>
-                        <td><button class="btn btn-dark">Delete</button></td>
-                    </tr>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.UserFirstName</td>
+                            <td>@user.UserLastName</td>
+                            <td>@user.Email</td>
+                            <td>@user.UserCreationDate</td>
+                            <td>
+                            <button class="btn btn-dark">Details</button>
+                            </td>
+                            <td>
+                                <form method="post" asp-action="RemoveMember" asp-route-id="@user.Id">
+                                    <button class="btn btn-dark">Remove Member</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
-
-
             </table>
         </div>
+        <h5 class="text-primary">@TempData["MemberChanges"]?.ToString()</h5>
     </div>
 </div>

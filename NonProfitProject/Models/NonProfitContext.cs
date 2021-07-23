@@ -24,10 +24,38 @@ namespace NonProfitProject.Models
         public DbSet<Receipts> Receipts { get; set; }
         public DbSet<InvoiceDonorInformation> InvoiceDonorInformation { get; set; }
         public DbSet<MembershipDues> MembershipDues { get; set; }
+        public DbSet<MembershipType> MembershipTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<MembershipType>().HasData(
+                new MembershipType
+                {
+                    MembershipTypeID = "fdsfdf-n53g3g-h3j9xe768w-nm4b35",
+                    Name = "Basic",
+                    Amount = 10.00m
+                },
+                new MembershipType
+                {
+                    MembershipTypeID = "fs8t4h-chgje6-dshuv57d8-sng94v",
+                    Name = "Advanced",
+                    Amount = 20.00m
+                },
+                new MembershipType
+                {
+                    MembershipTypeID = "dk5k4g-df5h7d-v5y8s2ch5t-f5h5db",
+                    Name = "Premium",
+                    Amount = 50.00m
+                },
+                new MembershipType
+                {
+                    MembershipTypeID = "jk5dgd-eh4d6h-f5sf4g77h5-dfs4g",
+                    Name = "Paw-fect",
+                    Amount = 100.00m
+                }
+                );
 
             //creates employee for user --seeded so there isnt an error in the migration files  when updating database
             builder.Entity<IdentityRole>().HasData(new IdentityRole
@@ -228,7 +256,6 @@ namespace NonProfitProject.Models
         //creates roles if they do not exist within the database
         public static async void CreateRoles(IServiceProvider serviceProvider)
         {
-            UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
             RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             if(await roleManager.FindByNameAsync("User") == null)
@@ -250,7 +277,6 @@ namespace NonProfitProject.Models
         public static async void CreateDeafultUsers(IServiceProvider serviceProvider)
         {
             UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
-            RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             if (await userManager.FindByNameAsync("KarenSmith") == null)
             {
@@ -292,7 +318,7 @@ namespace NonProfitProject.Models
                     ReceiveWeeklyNewsletter = false
                 };
                 //Never need access to this account because its used to store the One-Time Donations that are made from users that are not registered/signedin so I made the password as obscure as possible
-                var result = await userManager.CreateAsync(user, "ckGoxk+&|5'#vM?(/Jo0keFGAds,HY%]Ujz4{6kFW8*a~~KWc~K{9x,lK2$kWJ");
+                await userManager.CreateAsync(user, "ckGoxk+&|5'#vM?(/Jo0keFGAds,HY%]Ujz4{6kFW8*a~~KWc~K{9x,lK2$kWJ");
             }
         }
     }

@@ -16,8 +16,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
     [Route("[area]/[controller]s/[action]/{id?}")]
     public class DonorController : Controller
     {
-        private NonProfitContext context;
-        private UserManager<User> userManager;
+        private readonly NonProfitContext context;
+        private readonly UserManager<User> userManager;
         public DonorController(NonProfitContext context, UserManager<User> userManager)
         {
             this.context = context;

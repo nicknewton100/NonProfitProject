@@ -1,0 +1,50 @@
+﻿@model List<MembershipType>
+@{
+    ViewData["Title"] = "Sign up for Membership";
+    ViewData["Title2"] = "Profile";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+}
+    <div class="card w-auto" style="margin:.5rem;">
+        <div class="card-header btn btn-outline-dark" style="font-size: xx-large; border:none" asp-action="Signup" asp-route-name="Basic"><h3 class="text-center">Basic</h3></div>
+        <div class="card-body">
+            <div style="font-size:small;">
+               Amount: $10.00
+                <form method="post" asp-action="Signup" asp-route-name="Basic">
+                    <button type="submit">Choose</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card w-auto" style="margin:.5rem;">
+        <div class="card-header btn btn-outline-dark" style="font-size: xx-large; border:none"><h3 class="text-center">Advanced</h3></div>
+        <div class="card-body">
+            <div style="font-size:small;">
+                Amount: $20.00
+                <form method="post" asp-action="Signup" asp-route-name="Advanced">
+                    <button type="submit">Choose</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card w-auto" style="margin:.5rem;">
+        <div class="card-header btn btn-outline-dark" style="font-size: xx-large; border:none"><h3 class="text-center">Premium</h3></div>
+        <div class="card-body">
+            <div style="font-size:small;">
+                Amount: $50.00
+                <form method="post" asp-action="Signup" asp-route-name="Premium">
+                    <button type="submit">Choose</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card w-auto" style="margin:.5rem;">
+        <div class="card-header btn btn-outline-dark" style="font-size: xx-large; border:none"><h3 class="text-center">Paw-fect</h3></div>
+        <div class="card-body">
+            <div style="font-size:small;">
+                Amount: $100.00
+                <form method="post" asp-action="Signup" asp-route-name="Paw-fect">
+                    <button type="submit">Choose</button>
+                </form>
+            </div>
+        </div>
+    </div>
