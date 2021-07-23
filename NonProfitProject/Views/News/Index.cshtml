@@ -6,19 +6,18 @@
 
 }
 
-<div class="container" style="margin-top:5.5rem; ">
-    <h1>News Articles</h1>
-    <div class="row justify-content-sm-start align-content-lg-center">
-        <div class="card w-25" style="margin:0.5rem;">
-            @foreach (var news in Model)
-            {
+<div class="row" style="margin-top:5.5rem; padding:2rem;">
+    @foreach (var news in Model)
+    {
+        <div class="column" style="padding:2rem;">
+            <div class="card">
                 <h5 class="card-header">@news.NewsHeader</h5>
                 <div class="card-body">
                     <h6>@news.NewsTitle</h6>
                     <p>@news.NewsDescription</p>
-                </div>                    
-             }
+                </div>
+            </div>
         </div>
-    </div>
+    }
 </div>
 
