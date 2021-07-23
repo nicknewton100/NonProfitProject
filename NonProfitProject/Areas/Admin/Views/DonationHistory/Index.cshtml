@@ -1,6 +1,7 @@
 ﻿@model List<Receipts>
 @{
     ViewData["Title"] = "Donation History";
+    ViewData["Title2"] = "Admin";
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
 }
 <div class="container">
@@ -15,12 +16,12 @@
                     <tr>
                         <th scope="col" class="w-auto">Receipt ID</th>
                         <th scope="col">Username</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Email Address</th>
                         <th scope="col">Total</th>
                         <th scope="col">Payment</th>
                         <th scope="col">Date</th>
+                        <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -28,8 +29,8 @@
                     @foreach (var donation in Model)
                     {
                         <tr>
-                            <th scope="row">@donation.ReceiptID</th>
-                            <th scope="row">
+                            <td scope="row">@donation.ReceiptID</td>
+                            <td scope="row">
                                 @{
                                     if (donation.User.UserName.Equals("One-TimeDonation"))
                                     {
@@ -40,21 +41,20 @@
                                         @donation.User.UserName
                                     }
                                 }
-                            </th>
-                            <th>@donation.InvoiceDonorInformation.FirstName</th>
-                            <th>@donation.InvoiceDonorInformation.LastName</th>
-                            <th>@donation.InvoiceDonorInformation.Email</th>
-                            <th>@donation.Total.ToString("C")</th>
-                            <th>xxxx-xxxx-xxxx-@donation.InvoicePayment.Last4Digits</th>
-                            <th>@donation.Date</th>
-                            <th>
-                                <div class="row">
-                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","DonationHistory",new {id = donation.ReceiptID })'">Details</button>
-                                    <form method="post" asp-action="Delete" asp-route-id="@donation.ReceiptID">
-                                        <button type="submit" class="btn btn-dark">Delete</button>
-                                    </form>
-                                </div>
-                            </th>
+                            </td>
+                            <td>@donation.InvoiceDonorInformation.FirstName @donation.InvoiceDonorInformation.LastName</td>
+                            <td>@donation.InvoiceDonorInformation.Email</td>
+                            <td>@donation.Total.ToString("C")</td>
+                            <td>xxxx-xxxx-xxxx-@donation.InvoicePayment.Last4Digits</td>
+                            <td>@donation.Date.ToString("MM/dd/yyyy")</td>
+                            <td>
+                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","DonationHistory",new {id = donation.ReceiptID })'">Details</button>
+                            </td>
+                            <td>
+                                <form method="post" asp-action="Delete" asp-route-id="@donation.ReceiptID">
+                                    <button type="submit" class="btn btn-dark">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 </tbody>

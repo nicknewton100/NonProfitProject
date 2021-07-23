@@ -64,14 +64,18 @@ namespace NonProfitProject.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Route("~/[area]/[controller]/[action]{id}/{name}/{position}")]
+        [Route("~/[area]/[controller]/[action]/{id}/{name}/{position}")]
         public IActionResult EditPosition(string id,string name, string position)
         {
             var member = context.CommitteeMembers.Include(cm => cm.employee).ThenInclude(e => e.User).Where(cm => cm.EmpID == id).FirstOrDefault();
-            if(member == null)
+            if(member == null || position.Length == 0)
             {
                 return RedirectToAction("Index");
             }
+            member.CommitteePosition = position;
+            context.CommitteeMembers.Update(member);
+            context.SaveChanges();
+            TempData["MemberChanges"] = String.Format("{0} has been removed from the committee", member.employee.User.UserFirstName + " " + member.employee.User.UserLastName);
             return RedirectToAction("Details", new { name = name });
         }
 

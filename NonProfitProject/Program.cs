@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using NonProfitProject.Code;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,9 +23,9 @@ namespace NonProfitProject
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>()
-                    .UseDefaultServiceProvider(
-                        options => options.ValidateScopes = false);
+                    webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+                    webBuilder.UseWebRoot("wwwroot");
+                    webBuilder.UseStartup<Startup>().UseDefaultServiceProvider(options => options.ValidateScopes = false);
                 }).ConfigureServices(services =>
                 {
                     services.AddHostedService<BackgroundTasks>();
