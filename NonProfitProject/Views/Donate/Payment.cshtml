@@ -1,6 +1,7 @@
 ﻿@model NonProfitProject.Models.ViewModels.DonationPaymentViewModel
 @{
     ViewData["Title"] = "Payment Method";
+    ViewData["Title2"] = "Non-Paw-Fit Animal Rescue";
     Layout = "_HomePage";
     @using NonProfitProject.Models.Extensions;
     @using NonProfitProject.Models.ViewModels;
@@ -10,7 +11,8 @@
     <script type="text/javascript" src="~/js/UserValidation.js"></script>
 </head>
 
-<div class="container">
+
+<div class="container" style="margin-top:5.5rem; ">
     <h1>@ViewData["Title"]</h1>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form class="align-items-center justify-content-center" asp-action="Payment">
@@ -144,8 +146,8 @@
                 </div>
                 <br />
                 <div class="card-body">
+                    <span asp-validation-for="CardType" class="text-danger" style="margin-left: 2rem;"></span>
                     <div class="form-row" style="margin-left: 2rem;">
-                        <span asp-validation-for="CardType" class="text-danger"></span>
                         <div class="form-check">
                             <input asp-for="CardType" class="form-check-input" type="radio" value="Credit Card" id="CreditCard" />
                             <label class="fomr-check-label" for="CreditCard">Credit Card  <i class="far fa-credit-card"></i></label>
@@ -186,7 +188,7 @@
             </div>
         </div>
         <br />
-        <button type="submit" class="btn btn-primary">Review Order</button>
+        <button type="submit" class="btn btn-primary" asp-action="CheckOut">Review Order</button>
         <a class="btn btn-danger" asp-action="Index">Cancel</a>
     </form>
     <script>
