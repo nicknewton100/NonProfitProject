@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 using System.Text;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Sdk.Sfc;
+using Microsoft.AspNetCore.Hosting;
+using AspNetCore.Reporting;
+using NonProfitProject.Models;
+using System.Data.Common;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
@@ -18,6 +22,15 @@ namespace NonProfitProject.Areas.Admin.Controllers
     [Area("Admin")]
     public class BackFilesController : Controller
     {
+        private IWebHostEnvironment webHostEnvironment;
+        private NonProfitContext context;
+        public BackFilesController(IWebHostEnvironment webHostEnvironment, NonProfitContext context)
+        {
+            this.webHostEnvironment = webHostEnvironment;
+            this.context = context;
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+        }
+        
         public IActionResult Index()
         {
             return View();
@@ -80,5 +93,48 @@ namespace NonProfitProject.Areas.Admin.Controllers
             byte[] fileBytes = System.IO.File.ReadAllBytes(saveDirectory);
             return File(fileBytes, "application/force-download", "BackupApplication.zip");
         }
+
+        [HttpPost]
+        public IActionResult Print()
+        {
+            var employee = context.Employees.ToList();
+            DataTable dt = new DataTable();
+            dt = getData(employee);
+
+            string mimetype = "";
+            int extension = 1;
+            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptEmployee.rdlc";
+            
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("prm", "RDLC Report");
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("dsEmployee", dt);
+            //localReport.AddDataSource("dsUsers",context)
+            var result = localReport.Execute(RenderType.Pdf,extension ,parameters, mimetype);
+
+            return File(result.MainStream, "application/pdf");
+        }
+
+        public DataTable getData(List<Employees> context)
+        {
+            var dt = new DataTable();
+            dt.Columns.Add("EmpID");
+            dt.Columns.Add("UserID");
+            dt.Columns.Add("Position");
+            DataRow row;
+            foreach(var i in context)
+            {
+                row = dt.NewRow();
+                row["EmpID"] = i.EmpID;
+                row["UserID"] = i.UserID;
+                row["Position"] = i.Position;
+                dt.Rows.Add(row);
+            }
+            return dt;
+        }
+        /*public DataTable getUser(List<NonProfitProject.Models.User> context)
+        {
+
+        }*/
     }
 }
