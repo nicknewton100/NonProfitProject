@@ -1,15 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
+    ViewData["Title"] = "Back Up";
+    ViewData["Title2"] = "Admin";
 }
 @TempData["Error"]?.ToString()
-<form method="post" asp-action="Backup">
-    <button type="submit">Backup application</button>
-</form>
-<form method="post" asp-action="BackupDatabase">
-    <button type="submit">Backup database</button>
-</form>
-<form method="post" asp-action="Print">
-    <button type="submit">Print</button>
-</form>
+<div class="container">
+    <div class="card-header-pills"><h1>Reports to Download</h1></div>
+    <div class="row form-group">
+        <div class="card w-auto" style="margin:0 0.5rem;">
+            <div class="card-header"><h6>Backup Application</h6></div>
+            <div class="card-body">
+                <form method="post" asp-action="Backup">
+                    <button class="btn btn-dark" type="submit">Download</button>
+                </form>
+            </div>
+        </div>
+        <div class="card w-auto" style="margin:0 0.5rem;">
+            <div class="card-header"><h6>Backup Database</h6></div>
+            <div class="card-body">
+                <form method="post" asp-action="BackupDatabase">
+                    <button class="btn btn-dark" type="submit">Download</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card w-auto" style="margin:0 0.5rem;">
+            <div class="card-header"><h6>Print Employee List</h6></div>
+            <div class="card-body">
+                <form method="post" asp-action="Print">
+                    <button class="btn btn-outline-dark" type="submit">Print</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
