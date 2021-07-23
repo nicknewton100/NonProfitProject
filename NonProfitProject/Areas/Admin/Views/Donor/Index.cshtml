@@ -14,7 +14,7 @@
         <a button class="btn btn-outline-dark" asp-area="Admin" asp-controller="Donor" asp-action="AddDonor">Add Donor</a>
     </div>
     <div class="container" style="font-size:medium;">
-        <dvi class="card">
+        <div class="card">
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -38,8 +38,10 @@
                             <td>@roles[0]</td>
                             <td>
                                 <div class="row ">
-                                    <button class="btn btn-outline-dark mr-1">Edit</button>
-                                    <button class="btn btn-dark">Delete</button>
+                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","Donor",new {id = user.Id })'">Details</button>
+                                    <form method="post" asp-action="Delete" asp-route-id="@user.Id">
+                                        <button type="submit" class="btn btn-dark">Delete</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -47,7 +49,8 @@
                     }
                 </tbody>
             </table>
-        </dvi>
+        </div>
+        <h5 class="text-primary">@TempData["DonorChanges"]?.ToString()</h5>
     </div>
 </div>
 
