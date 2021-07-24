@@ -94,24 +94,24 @@ namespace NonProfitProject.Models
                 new News
                 {
                     NewsID = 1,
-                    NewsTitle = "10k Run for Cancer!",
-                    NewsHeader = "Come Join Us!",
+                    NewsTitle = "Non-PAW-Fit Raise Awareness",
+                    NewsHeader = "New Members are Wecome",
                     NewsFooter = "News Comittee",
                     NewsCreationDate = new DateTime(2021, 7, 15),
                     NewsPublishDate = new DateTime(2021, 7, 15),
                     NewsLastUpdated = new DateTime(2021, 7, 15),
-                    NewsDescription = "Run for a whole week straight for cancer at the end of July. 15 Dollar Admission Fee. Event runs from July 24-31!"
+                    NewsDescription = "The Non-PAW-Fit Animal Rescue started their non-profit organization to raise awareness of abandoned pets across the United States.  Then mission:  To Rescue Pets from unwanted homes and provide them new home where they are become part of the family."
                 },
                 new News
                 {
                     NewsID = 2,
-                    NewsTitle = "Movie Night",
-                    NewsHeader = "Movie Time!",
+                    NewsTitle = "Non-PAW-Fit Rescued Over 50",
+                    NewsHeader = "50 Animals Rescued From Unwanted Homes",
                     NewsFooter = "News Comittee",
                     NewsCreationDate = new DateTime(2021, 7, 15),
                     NewsPublishDate = new DateTime(2021, 7, 15),
                     NewsLastUpdated = new DateTime(2021, 7, 15),
-                    NewsDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks! Snacks: Popcorn. Event runs on July 26!"
+                    NewsDescription = "Pets from cats and dogs to parrots and snakes are being rescued from unwanted homes and given a place to stay until they find their forever home."
                 });
             //creates data for employees
             builder.Entity<Employees>().HasData(
