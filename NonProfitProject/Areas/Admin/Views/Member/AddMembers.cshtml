@@ -1,0 +1,64 @@
+﻿@model IList<NonProfitProject.Models.User>
+@{
+    ViewData["Title"] = "Add Members";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+    @using NonProfitProject.Models.Extensions;
+}
+<div class="container">
+    <div class="container">
+        <div class="card-header-pills"><h1 class="far fa-id-card"> Add Members</h1></div>
+    </div>
+    <br />
+    <div class="container" style="font-size:medium;">
+        <div class="card">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Join Date</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count == 0)
+                    {
+                        @:No Users Exist
+                    }
+                    else
+                    {
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.UserName</td>
+                                <td>@user.UserFirstName</td>
+                                <td>@user.UserLastName</td>
+                                <td>@user.Email</td>
+                                <td>@user.UserCreationDate.ToString("MM/dd/yyyy")</td>
+
+                                <td>
+                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("DonorDetails","Member",new {id = user.Id })'">Details</button>
+                                </td>
+                                <td>
+                                    <form method="post" asp-action="AddMembers" asp-route-id="@user.Id">
+                                        <button type="submit" class="btn btn-dark">Add Member</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <h5 class="text-primary">@TempData["MemberChanges"]?.ToString()</h5>
+    </div>
+    <div class="container" style="margin:1rem 0;">
+        <div class="d-flex flex-row-reverse">
+            <a class="btn btn-danger" asp-action="Index">Cancel</a>
+        </div>
+    </div>
+</div>
+

@@ -50,11 +50,89 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 var result = await userManager.RemoveFromRoleAsync(user, "Member");
                 if (!result.Succeeded)
                 {
-                    String.Format("The User with ID \"{0}\" is not a member", id);
+                    TempData["MemberChanges"] = String.Format("The User with ID \"{0}\" is not a member", id);
                 }
             }
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddMembers()
+        {
+            var users = await userManager.GetUsersInRoleAsync("User");
+            var usersModel = context.Users.Where(u => u.UserName != "One-TimeDonation" && users.Contains(u)).OrderBy(u => u.UserLastName + ", " + u.UserFirstName).ToList();
+            return View(users);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddMembers(string id)
+        {
+            var user = context.Users.Find(id);
+            if(user == null || !await userManager?.IsInRoleAsync(user, "User"))
+            {
+                TempData["MemberChanges"] = String.Format("The User with ID \"{0}\" is not a User", id);
+                return RedirectToAction("AddMembers");
+            }
+            var result = await userManager.RemoveFromRoleAsync(user,"User");
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, "Member");
+                TempData["MemberChanges"] = String.Format("{0} is now a Member", user.UserFirstName + " " + user.UserLastName);
+                return RedirectToAction("AddMembers");
+            }
+            return View();
+        }
+        public IActionResult Details(string id)
+        {
+            var user = context.Users.Include(u => u.MembershipDues).ThenInclude(md => md.MembershipType).Where(u => u.Id == id).FirstOrDefault();
+            if (user == null)
+            {
+                TempData["MemberChanges"] = String.Format("The User with ID \"{0}\" is not a User", id);
+                return RedirectToAction("Index");
+            }
+            MemberViewModel memberViewModel = new MemberViewModel()
+            {
+                id = user.Id,
+                Firstname = user.UserFirstName,
+                Lastname = user.UserLastName,
+                Gender = user.UserGender,
+                Addr1 = user.UserAddr1,
+                Addr2 = user.UserAddr2,
+                City = user.UserCity,
+                State = user.UserState,
+                PostalCode = user.UserPostalCode,
+                Email = user.Email,
+                EmailConfirmed = user.Email,
+                Username = user.UserName,
+                BirthDate = user.UserBirthDate,
+                PhoneNumber = user.PhoneNumber,
+            };
+            if(user.MembershipDues.Count() > 0 && user.MembershipDues.Last().MemActive)
+            {
+                memberViewModel.MembershipType = user.MembershipDues.Last().MembershipType.Name;
+                memberViewModel.MemberSince = MembershipDues.GetConsecutiveDate(user.MembershipDues.ToList());
+                memberViewModel.LastRenewalDate = user.MembershipDues.Last().MemStartDate;
+                memberViewModel.FutureEndDate = user.MembershipDues.Last().MemEndDate;
+                memberViewModel.FutureRenewalDate = user.MembershipDues.Last().MemRenewalDate;
+            }
+            
+            ViewBag.Action = "Details";
+            return View("EditMember", memberViewModel);
+        }
+        public async Task<IActionResult> DonorDetails(string id)
+        {
+            var user = context.Users.Include(u => u.MembershipDues).Where(u => u.Id == id).FirstOrDefault();
+            if (user == null)
+            {
+                TempData["MemberChanges"] = String.Format("The User with ID \"{0}\" is not a User", id);
+                return RedirectToAction("AddMembers");
+            }
+            ViewBag.Action = "Details";
+            return View("EditMember");
+        }
+
+        
+
         public IActionResult EditMember()
         {
             return View();

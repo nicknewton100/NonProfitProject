@@ -8,9 +8,7 @@
 <div class="container">
     <div class="container">
         <div class="card-header-pills"><h1 class="fas fa-handshake"> Members</h1></div>
-        <a class="btn btn-outline-dark" asp-area="Admin" asp-controller="Member" asp-action="EditMember">
-            Add Member
-        </a>
+        <a class="btn btn-outline-dark" asp-action="AddMembers">Add Member</a>
     </div>
     <br />
     <div class="container" style="font-size:medium;">
@@ -19,6 +17,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col" hidden>#</th>
+                        <th scope="col">Username</th>
                         <th scope="col">First</th>
                         <th scope="col">Last</th>
                         <th scope="col">Email Address</th>
@@ -31,12 +30,13 @@
                     @foreach (var user in Model)
                     {
                         <tr>
+                            <td>@user.UserName</td>
                             <td>@user.UserFirstName</td>
                             <td>@user.UserLastName</td>
                             <td>@user.Email</td>
-                            <td>@user.UserCreationDate</td>
+                            <td>@user.UserCreationDate.ToString("MM/dd/yyyy")</td>
                             <td>
-                            <button class="btn btn-dark">Details</button>
+                                <button type="button" class="btn btn-dark" onclick="location.href = '@Url.Action("Details","Member",new {id = user.Id })'">Details</button>
                             </td>
                             <td>
                                 <form method="post" asp-action="RemoveMember" asp-route-id="@user.Id">
