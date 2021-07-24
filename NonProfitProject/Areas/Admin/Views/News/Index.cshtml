@@ -7,18 +7,18 @@
 
 <div class="container">
     <div class="card-header-pills"><h1 class="far fa-newspaper"> News Articles</h1></div>
-    <a class="btn btn-outline-dark" asp-area="Admin" asp-controller="News" asp-action="EditNews">Add News</a>
+    <a class="btn btn-outline-dark" asp-area="Admin" asp-controller="News" asp-action="AddNews">Add News</a>
     <br /><br />
           <div class="container">
               <div class="row" style="font-size:small">
                   @foreach (var news in Model)
                   {
-                      <div class="card w-25" style="margin:0.25rem;">
-                          <div class="card-header text-center"><h3>@news.NewsTitle</h3></div>
+                      <div class="card w-100" style="margin:0.25rem;">
+                          <div class="card-header"><h3>@news.NewsTitle</h3></div>
 
                           <div class="card-body">
                               <div class="card-title"><h5>@news.NewsHeader</h5></div>
-                              <div class="card-text"><p>@news.NewsDescription</p></div>
+                              <div class="card-text" id="newsBody">@Html.Raw(news.NewsBody)</div>
                           </div>
                           <div class="card-footer">
                               <div class="card-text">
@@ -28,10 +28,13 @@
                                   </div>
                                   <div class="row justify-content-between">
                                       <div class="col-auto">
-                                          <a class="card-link text-primary" asp-area="Admin" asp-controller="News" asp-action="EditNews">Edit</a>
+                                          <a class="card-link text-primary" asp-action="EditNews" asp-route-id="@news.NewsID">Edit</a>
                                       </div>
                                       <div class="col-auto">
-                                          <a class="card-link text-danger" asp-area="Admin" asp-controller="News" asp-action="EditNews">Delete</a>
+                                          <form method="post" asp-action="Delete" asp-route-id="@news.NewsID">
+                                              <button class="card-link text-danger">Delete</button>
+                                          </form>
+                                          
                                       </div>
                                   </div>
                               </div>
@@ -40,4 +43,5 @@
                   }
               </div>
           </div>
+    
 </div>

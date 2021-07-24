@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NonProfitProject.Models;
 
 namespace NonProfitProject.Migrations
 {
     [DbContext(typeof(NonProfitContext))]
-    partial class NonProfitContextModelSnapshot : ModelSnapshot
+    [Migration("20210724203924_fixedNews")]
+    partial class fixedNews
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             Id = "370d9876-b6ab-4694-baa9-ecc7bc5b451c",
-                            ConcurrencyStamp = "e49c2b1f-dc20-4f7d-8e37-fff21537b564",
+                            ConcurrencyStamp = "0d12e372-8665-44a4-b06a-b07a31e84094",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -227,21 +229,21 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             CommitteesID = 1,
-                            CommitteeCreationDate = new DateTime(2021, 7, 24, 21, 3, 28, 192, DateTimeKind.Utc).AddTicks(8927),
+                            CommitteeCreationDate = new DateTime(2021, 7, 24, 20, 39, 24, 87, DateTimeKind.Utc).AddTicks(8980),
                             CommitteeDescription = "Manages donations/membership dues",
                             CommitteeName = "Fundrasing Committee"
                         },
                         new
                         {
                             CommitteesID = 2,
-                            CommitteeCreationDate = new DateTime(2021, 7, 24, 21, 3, 28, 192, DateTimeKind.Utc).AddTicks(9262),
+                            CommitteeCreationDate = new DateTime(2021, 7, 24, 20, 39, 24, 87, DateTimeKind.Utc).AddTicks(9246),
                             CommitteeDescription = "Manages news on the website",
                             CommitteeName = "News Committee"
                         },
                         new
                         {
                             CommitteesID = 3,
-                            CommitteeCreationDate = new DateTime(2021, 7, 24, 21, 3, 28, 192, DateTimeKind.Utc).AddTicks(9271),
+                            CommitteeCreationDate = new DateTime(2021, 7, 24, 20, 39, 24, 87, DateTimeKind.Utc).AddTicks(9258),
                             CommitteeDescription = "Plans and organizes events",
                             CommitteeName = "Event and Planning Committee"
                         });
@@ -566,11 +568,7 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("NewsBody")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("NewsCreationDate")
@@ -580,7 +578,6 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NewsHeader")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("NewsLastUpdated")
@@ -590,7 +587,6 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NewsTitle")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("NewsID");
@@ -816,14 +812,14 @@ namespace NonProfitProject.Migrations
                             Id = "6b87b89f-0f9a-4e2d-b696-235e99655521",
                             AccessFailedCount = 0,
                             AccountDisabled = false,
-                            ConcurrencyStamp = "cab2dfb0-80ec-43ee-9ad5-51f34eab610a",
+                            ConcurrencyStamp = "000885f9-c0cc-4476-a9ad-d1d8ec123495",
                             Email = "JohnJones@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEPHWlQDi39ztIFucyh3xrbrLU0z8awB7e2zsrYnl8F4h9l4rQqpPq7gVAV2gvIfcvw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMgFWWlmVQebNMdrYrYtUbh5aEIsodtoaTfAeyx5PCnY1dc9FXhfeKU1sWcbNxKWTQ==",
                             PhoneNumberConfirmed = false,
                             ReceiveWeeklyNewsletter = false,
-                            SecurityStamp = "9a1a7494-f94c-4e46-a810-870a15aff32c",
+                            SecurityStamp = "53117a30-bba1-4e04-932c-27d0ce3d2d8b",
                             TwoFactorEnabled = false,
                             UserActive = true,
                             UserAddr1 = "513 S Augusta St",

@@ -6,7 +6,7 @@
     else {
         ViewData["Title"] = "Edit Member";
     }
-
+    TempData.Keep("Membership");
     ViewData["Title2"] = "Admin";
     Layout = "_AdminLayout";
 }
@@ -18,7 +18,7 @@
     <div class="card-header-pills"><h1 class="fas fa-user-edit">  @ViewData["Title"]</h1></div>
     <h5 class="text-primary">@TempData["DonorChanges"]?.ToString()</h5>
     <div>
-        <form method="post" asp-action="EditDonor" style="font-size:medium">
+        <form method="post" asp-action="EditMember" style="font-size:medium">
             <div class="row">
                 <div class="card w-auto" style="margin:0.5rem;padding:0.25rem;">
                     <div class="card-body">
@@ -156,47 +156,68 @@
                             </div>
                         </div>
                         <br />
-                        <h4>Membership Information</h4>
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="form-group w-25">
-                                <div class="col-auto"><label>Membership Status: </label></div>
-                                <div class="col-auto">
-                                    <input asp-for="MembershipType" class="form-control" />
-                                    <span asp-validation-for="MembershipType" class="text-danger"></span>
+                            <h4>Membership Information</h4>
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                @if (TempData["Membership"]?.ToString() == "Membership")
+                                {
+                                    <div class="form-group w-25">
+                                        <div class="col-auto"><label>Membership Status: </label></div>
+                                        <div class="col-auto">
+                                            <select asp-for="MembershipType" class="form-control" onchange="cancelMembership(this)">
+                                                <option value="">N/A</option>
+                                                <option value="Basic">Basic</option>
+                                                <option value="Advanced">Advanced</option>
+                                                <option value="Premium">Premium</option>
+                                                <option value="Paw-fect">Paw-fect</option>
+                                            </select>
+                                            <span asp-validation-for="MembershipType" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    @if(ViewBag.Action != "Edit")
+                                    {
+                                    <div class="form-group">
+                                        <div class="col-auto"><label>Member Since: </label></div>
+                                        <div class="col-auto">
+                                            <input asp-for="MemberSince" class="form-control membership" />
+                                            <span asp-validation-for="MemberSince" class="text-danger membership"></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="col-auto"><label>Last Contract Start Date: </label></div>
+                                        <div class="col-auto">
+                                            <input asp-for="LastRenewalDate" class="form-control membership" />
+                                            <span asp-validation-for="LastRenewalDate" class="text-danger membership"></span>
+                                        </div>
+                                    </div>
+                                    }
+                                }
+                                else 
+                                { 
+                                    <h6>This member doesnt have any membership dues</h6>
+                                }
+                                </div>
+                            @if(TempData["Membership"]?.ToString() == "Membership") 
+                            { 
+                            <div class="row membership">
+                                <div class="form-group">
+                                    <div class="col-auto"><label>Future End Date: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="FutureEndDate" class="form-control" />
+                                        <span asp-validation-for="FutureEndDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-auto"><label>Future Renewal Date: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="FutureRenewalDate" class="form-control"/>
+                                        <span asp-validation-for="FutureRenewalDate" class="text-danger"></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-auto"><label>Member Since: </label></div>
-                                <div class="col-auto">
-                                    <input asp-for="MemberSince" class="form-control" />
-                                    <span asp-validation-for="MemberSince" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-auto"><label>Last Renewed: </label></div>
-                                <div class="col-auto">
-                                    <input asp-for="LastRenewalDate" class="form-control" />
-                                    <span asp-validation-for="LastRenewalDate" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-auto"><label>Future End Date: </label></div>
-                                <div class="col-auto">
-                                    <input asp-for="FutureEndDate" class="form-control" />
-                                    <span asp-validation-for="FutureRenewalDate" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-auto"><label>Future Renewal Date: </label></div>
-                                <div class="col-auto">
-                                    <input asp-for="FutureRenewalDate" class="form-control" oninput="postalcode_format(this)" />
-                                    <span asp-validation-for="FutureRenewalDate" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
+                            }
 
                         <h4>Login Information</h4>
                         <div class="dropdown-divider"></div>
@@ -288,6 +309,20 @@
                                                 }
                                             }
                                             window.onload(changeLoginInformation());
+
+                                            function cancelMembership(e) {
+                                                var membershipInputs = document.getElementsByClassName("membership");
+                                                if (e.value == "") {
+                                                    for (var i = 0; i < membershipInputs.length; i++) {
+                                                        membershipInputs[i].hidden = true;
+                                                    }
+                                                }
+                                                else {
+                                                    for (var i = 0; i < membershipInputs.length; i++) {
+                                                        membershipInputs[i].hidden = false;
+                                                    }
+                                                }
+                                            }
                                         </script>
                                     }
                                     else if (ViewBag.Action == "Details")
@@ -313,21 +348,7 @@
                             </div>
                         </div>
                         <!--COMMENTED OUT SINCE IT IS UNNECESSARY AT THE TIME-->
-                        <br /><br />
-                        @if (ViewBag.Action != "Details")
-                        {
-                            <h4>Other: </h4>
-                            <div class="dropdown-divider"></div>
-                            <div class="form-check row">
-                                <div class="col-auto">
-                                    <input asp-for="IsBecomingMember" class="form-check-input" type="checkbox">
-                                    <label class="form-check-label" for="vip">
-                                        Becoming a VIP Member?
-                                    </label>
-                                </div>
-                            </div>
-                        }
-
+                        <br />
                         @**<div class="form-check row">
             <div class="col-auto">
                 <input class="form-check-input" type="checkbox" value="" id="emp">
@@ -349,14 +370,14 @@
                             <div class="col-auto">
                                 @if (ViewBag.Action == "Details")
                                 {
-                                    <button type="button" class="btn btn-outline-dark" onclick="location.href = '@Url.Action("EditMember","Member")'">Edit Member</button>
+                                    <button type="button" class="btn btn-outline-dark" onclick="location.href = '@Url.Action("EditMember","Member", new { id = Model.id })'">Edit Member</button>
                                 }
                                 else
                                 {
                                     <button type="submit" class="btn btn-outline-dark">Save Changes</button>
                                 }
 
-                                <a class="btn btn-dark" asp-controller="Donor" asp-action="Index">Cancel</a>
+                                <a class="btn btn-dark" asp-controller="Member" asp-action="Index">Cancel</a>
                             </div>
                         </div>
                     </div>

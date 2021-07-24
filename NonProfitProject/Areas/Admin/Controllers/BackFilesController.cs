@@ -35,7 +35,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             return View();
         }
-
+        //credit https://weblogs.asp.net/shahar/generating-sql-backup-script-for-tables-amp-data-from-any-net-application-using-smo
         [HttpPost]
         public IActionResult BackupDatabase()
         {
