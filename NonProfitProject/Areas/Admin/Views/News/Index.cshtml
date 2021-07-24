@@ -1,4 +1,4 @@
-﻿
+﻿@model List<News>
 @{
     ViewData["Title"] = "News Articles";
     ViewData["Title2"] = "Admin";
@@ -8,19 +8,33 @@
 <div class="container">
     <div class="card-header-pills"><h1 class="far fa-newspaper"> News Articles</h1></div>
     <a class="btn btn-outline-dark" asp-area="Admin" asp-controller="News" asp-action="EditNews">Add News</a>
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <div class="row">
-                <div class="card w-auto" style="margin:0.5rem;">
-                    <!--Add the News Article Id here (hidden)-->
-                    <h3 class="card-header">News Header Here</h3>
-                    <div class="card-body">
-                        <p>Date Here</p>
-                        <p>News Information??</p>
-                    </div>
-                    <div class="card-footer">Publisher <div class="card-link"><a href="#">Edit</a></div></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <br /><br />
+          <div class="container">
+              <div class="row" style="font-size:small">
+                  @foreach (var news in Model)
+                  {
+                      <div class="card w-25" style="margin:0.25rem;">
+                          <div class="card-header text-center"><h3>@news.NewsTitle</h3></div>
+
+                          <div class="card-body">
+                              <div class="card-title"><h5>@news.NewsHeader</h5></div>
+                              <div class="card-text"><p>@news.NewsDescription</p></div>
+                          </div>
+                          <div class="card-footer">
+                              <div class="card-text">
+                                  <div class="row justify-content-between">
+                                      <div class="col-auto text-body">@news.NewsFooter</div>
+                                      <div class="col-auto text-body">@news.NewsPublishDate.ToString("MM/dd/yyyy")</div>
+                                  </div>
+                                  <div class="row justify-content-end" >
+                                      <div class="col-auto" style="margin-left:1rem;">
+                                          <a class="card-link text-dark"  asp-area="Admin" asp-controller="News" asp-action="EditNews">Edit</a>
+                                      </div>
+                                  </div>
+                              </div>
+                              </div>
+                      </div>
+                  }
+              </div>
+          </div>
 </div>
