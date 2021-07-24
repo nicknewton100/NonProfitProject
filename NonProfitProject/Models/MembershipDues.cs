@@ -32,7 +32,7 @@ namespace NonProfitProject.Models
                 string membershipType = membershipDues.Last().MembershipType.Name;
                 for (int i = membershipDues.Count - 1; i >= 0; i--)
                 {
-                    if(i == 0 || membershipDues[i].MemStartDate != membershipDues?[i -1].MemRenewalDate && membershipDues[i].MembershipType.Name == membershipDues?[i - 1].MembershipType.Name)
+                    if(i == 0 || membershipDues[i].MemStartDate.Date != membershipDues?[i -1].MemRenewalDate.Date && membershipDues[i].MembershipType.Name == membershipDues?[i - 1].MembershipType.Name)
                     {
                         consecutiveMember = membershipDues[i].MemStartDate;
                         break;
