@@ -18,6 +18,7 @@
                 <div class="col-auto"><label>News Title: </label></div>
                 <div class="col-lg-auto">
                     <input asp-for="NewsTitle" class="form-control" />
+                    <span asp-validation-for="NewsTitle" class="text-danger"></span>
                 </div>
             </div>
         </div>
@@ -26,6 +27,7 @@
                 <div class="col-auto"><label>News Header: </label></div>
                 <div class="col-lg-auto">
                     <input asp-for="NewsHeader" class="form-control" />
+                    <span asp-validation-for="NewsHeader" class="text-danger"></span>
                 </div>
             </div>
         </div>
@@ -34,6 +36,7 @@
                 <div class="col-auto"><label>News Body: </label> </div>
                 <div class="col-auto">
                     <textarea id="NewsBody" asp-for="NewsBody" cols="150" rows="25" class="form-control"></textarea>
+                    <span asp-validation-for="NewsBody" class="text-danger"></span>
                     <script>
                         tinymce.init({
                             selector: 'textarea',

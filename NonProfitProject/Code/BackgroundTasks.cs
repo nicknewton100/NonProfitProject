@@ -34,7 +34,7 @@ namespace NonProfitProject.Code
         //Cancels newsletter subscription
         Task IHostedService.StartAsync(CancellationToken cancellationToken)
         {
-            timer = new Timer(o => RenewMembership(), null, TimeSpan.Zero, TimeSpan.FromMinutes(30));
+            timer = new Timer(o => RenewMembership(), null, TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(25));
             return Task.CompletedTask;
         }
         //Cancels newsletter subscription

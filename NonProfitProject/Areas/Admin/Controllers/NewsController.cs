@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using NonProfitProject.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
@@ -51,13 +52,19 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 string addOrEdit;
                 if (model.NewsID == 0 || context.News.AsNoTracking().Where(n => n.NewsID == model.NewsID).FirstOrDefault() == null)
                 {
+                    var user = context.Users.Where(u => u.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).FirstOrDefault();
                     model.NewsID = 0;
+                    model.NewsPublishDate = DateTime.UtcNow;
+                    model.NewsLastUpdated = DateTime.UtcNow;
+                    model.CreatedBy = user.UserFirstName + " " + user.UserLastName;
                     context.News.Add(model);
                     addOrEdit = "added";
                 }
                 else
                 {
-                    context.News.Update(model);
+                    var news = context.News.Where(n => n.NewsID == model.NewsID).FirstOrDefault();
+                    news.NewsLastUpdated = DateTime.UtcNow;
+                    context.News.Update(news);
                     addOrEdit = "updated";
                 }
 
