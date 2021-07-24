@@ -225,7 +225,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError("FutureEndDate", "End Date has to be before Renewal Date");
                 }
-                else if (model.FutureEndDate < DateTime.UtcNow)
+                else if (model.FutureEndDate < DateTime.UtcNow.Date)
                 {
                     ModelState.AddModelError("FutureEndDate", "End Date and Renewal Date have to be in the future");
                 }

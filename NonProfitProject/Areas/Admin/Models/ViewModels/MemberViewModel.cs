@@ -69,14 +69,18 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
 
         //membership information
         public string MembershipType { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? MemberSince { get; set; }
 
         //last membership
         [Required(ErrorMessage = "Please assign Start Date")]
+        [DataType(DataType.Date)]
         public DateTime? LastRenewalDate { get; set; }
         [Required(ErrorMessage = "Please assign End Date")]
+        [DataType(DataType.Date)]
         public DateTime? FutureEndDate { get; set; }
         [Required(ErrorMessage = "Please assign Renewal Date")]
+        [DataType(DataType.Date)]
         public DateTime? FutureRenewalDate { get; set; }
     }
 }

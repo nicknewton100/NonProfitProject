@@ -127,9 +127,9 @@ namespace NonProfitProject.Controllers.Shared.Users
             {
                 UserID = User.FindFirstValue(ClaimTypes.NameIdentifier),
                 MembershipTypeID = sessionModel.Membership.MembershipType.MembershipTypeID,
-                MemStartDate = DateTime.UtcNow,
-                MemEndDate = DateTime.UtcNow.AddMonths(1),
-                MemRenewalDate = DateTime.UtcNow.AddMonths(1),
+                MemStartDate = DateTime.UtcNow.Date,
+                MemEndDate = DateTime.UtcNow.AddMonths(1).Date,
+                MemRenewalDate = DateTime.UtcNow.AddMonths(1).Date,
                 MemActive = true,
             };
             AesEncryption aes = new AesEncryption();
