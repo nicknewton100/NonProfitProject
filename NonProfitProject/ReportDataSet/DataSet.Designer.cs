@@ -62,6 +62,8 @@ namespace NonProfitProject.ReportDataSet {
         
         private Employees1DataTable tableEmployees1;
         
+        private MembershipTypesDataTable tableMembershipTypes;
+        
         private global::System.Data.DataRelation relationFK_AspNetRoleClaims_AspNetRoles_RoleId;
         
         private global::System.Data.DataRelation relationFK_AspNetUserRoles_AspNetRoles_RoleId;
@@ -95,6 +97,8 @@ namespace NonProfitProject.ReportDataSet {
         private global::System.Data.DataRelation relationFK_Receipts_AspNetUsers_UserID;
         
         private global::System.Data.DataRelation relationFK_SavedPayments_AspNetUsers_UserID;
+        
+        private global::System.Data.DataRelation relationMembershipTypes_MembershipDues;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -180,6 +184,9 @@ namespace NonProfitProject.ReportDataSet {
                 }
                 if ((ds.Tables["Employees1"] != null)) {
                     base.Tables.Add(new Employees1DataTable(ds.Tables["Employees1"]));
+                }
+                if ((ds.Tables["MembershipTypes"] != null)) {
+                    base.Tables.Add(new MembershipTypesDataTable(ds.Tables["MembershipTypes"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -391,6 +398,16 @@ namespace NonProfitProject.ReportDataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public MembershipTypesDataTable MembershipTypes {
+            get {
+                return this.tableMembershipTypes;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -512,6 +529,9 @@ namespace NonProfitProject.ReportDataSet {
                 }
                 if ((ds.Tables["Employees1"] != null)) {
                     base.Tables.Add(new Employees1DataTable(ds.Tables["Employees1"]));
+                }
+                if ((ds.Tables["MembershipTypes"] != null)) {
+                    base.Tables.Add(new MembershipTypesDataTable(ds.Tables["MembershipTypes"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -660,6 +680,12 @@ namespace NonProfitProject.ReportDataSet {
                     this.tableEmployees1.InitVars();
                 }
             }
+            this.tableMembershipTypes = ((MembershipTypesDataTable)(base.Tables["MembershipTypes"]));
+            if ((initTable == true)) {
+                if ((this.tableMembershipTypes != null)) {
+                    this.tableMembershipTypes.InitVars();
+                }
+            }
             this.relationFK_AspNetRoleClaims_AspNetRoles_RoleId = this.Relations["FK_AspNetRoleClaims_AspNetRoles_RoleId"];
             this.relationFK_AspNetUserRoles_AspNetRoles_RoleId = this.Relations["FK_AspNetUserRoles_AspNetRoles_RoleId"];
             this.relationFK_CommitteeMembers_Committees_CommitteeID = this.Relations["FK_CommitteeMembers_Committees_CommitteeID"];
@@ -677,6 +703,7 @@ namespace NonProfitProject.ReportDataSet {
             this.relationFK_MembershipDues_AspNetUsers_UserID = this.Relations["FK_MembershipDues_AspNetUsers_UserID"];
             this.relationFK_Receipts_AspNetUsers_UserID = this.Relations["FK_Receipts_AspNetUsers_UserID"];
             this.relationFK_SavedPayments_AspNetUsers_UserID = this.Relations["FK_SavedPayments_AspNetUsers_UserID"];
+            this.relationMembershipTypes_MembershipDues = this.Relations["MembershipTypes_MembershipDues"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -725,6 +752,8 @@ namespace NonProfitProject.ReportDataSet {
             base.Tables.Add(this.tableAspNetUsers);
             this.tableEmployees1 = new Employees1DataTable();
             base.Tables.Add(this.tableEmployees1);
+            this.tableMembershipTypes = new MembershipTypesDataTable();
+            base.Tables.Add(this.tableMembershipTypes);
             this.relationFK_AspNetRoleClaims_AspNetRoles_RoleId = new global::System.Data.DataRelation("FK_AspNetRoleClaims_AspNetRoles_RoleId", new global::System.Data.DataColumn[] {
                         this.tableAspNetRoles.IdColumn}, new global::System.Data.DataColumn[] {
                         this.tableAspNetRoleClaims.RoleIdColumn}, false);
@@ -793,6 +822,10 @@ namespace NonProfitProject.ReportDataSet {
                         this.tableAspNetUsers.IdColumn}, new global::System.Data.DataColumn[] {
                         this.tableSavedPayments.UserIDColumn}, false);
             this.Relations.Add(this.relationFK_SavedPayments_AspNetUsers_UserID);
+            this.relationMembershipTypes_MembershipDues = new global::System.Data.DataRelation("MembershipTypes_MembershipDues", new global::System.Data.DataColumn[] {
+                        this.tableMembershipTypes.MembershipTypeIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMembershipDues.MembershipTypeIDColumn}, false);
+            this.Relations.Add(this.relationMembershipTypes_MembershipDues);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -911,6 +944,12 @@ namespace NonProfitProject.ReportDataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializeMembershipTypes() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -1020,6 +1059,9 @@ namespace NonProfitProject.ReportDataSet {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void Employees1RowChangeEventHandler(object sender, Employees1RowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void MembershipTypesRowChangeEventHandler(object sender, MembershipTypesRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -5138,7 +5180,7 @@ namespace NonProfitProject.ReportDataSet {
             
             private global::System.Data.DataColumn columnReceiptID;
             
-            private global::System.Data.DataColumn columnMemAmount;
+            private global::System.Data.DataColumn columnMembershipTypeID;
             
             private global::System.Data.DataColumn columnMemStartDate;
             
@@ -5207,9 +5249,9 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn MemAmountColumn {
+            public global::System.Data.DataColumn MembershipTypeIDColumn {
                 get {
-                    return this.columnMemAmount;
+                    return this.columnMembershipTypeID;
                 }
             }
             
@@ -5282,13 +5324,13 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public MembershipDuesRow AddMembershipDuesRow(AspNetUsersRow parentAspNetUsersRowByFK_MembershipDues_AspNetUsers_UserID, ReceiptsRow parentReceiptsRowByFK_MembershipDues_Receipts_ReceiptID, decimal MemAmount, System.DateTime MemStartDate, System.DateTime MemEndDate, System.DateTime MemRenewalDate, bool MemActive) {
+            public MembershipDuesRow AddMembershipDuesRow(AspNetUsersRow parentAspNetUsersRowByFK_MembershipDues_AspNetUsers_UserID, ReceiptsRow parentReceiptsRowByFK_MembershipDues_Receipts_ReceiptID, MembershipTypesRow parentMembershipTypesRowByMembershipTypes_MembershipDues, System.DateTime MemStartDate, System.DateTime MemEndDate, System.DateTime MemRenewalDate, bool MemActive) {
                 MembershipDuesRow rowMembershipDuesRow = ((MembershipDuesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
                         null,
-                        MemAmount,
+                        null,
                         MemStartDate,
                         MemEndDate,
                         MemRenewalDate,
@@ -5298,6 +5340,9 @@ namespace NonProfitProject.ReportDataSet {
                 }
                 if ((parentReceiptsRowByFK_MembershipDues_Receipts_ReceiptID != null)) {
                     columnValuesArray[2] = parentReceiptsRowByFK_MembershipDues_Receipts_ReceiptID[0];
+                }
+                if ((parentMembershipTypesRowByMembershipTypes_MembershipDues != null)) {
+                    columnValuesArray[3] = parentMembershipTypesRowByMembershipTypes_MembershipDues[0];
                 }
                 rowMembershipDuesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMembershipDuesRow);
@@ -5331,7 +5376,7 @@ namespace NonProfitProject.ReportDataSet {
                 this.columnMemDuesID = base.Columns["MemDuesID"];
                 this.columnUserID = base.Columns["UserID"];
                 this.columnReceiptID = base.Columns["ReceiptID"];
-                this.columnMemAmount = base.Columns["MemAmount"];
+                this.columnMembershipTypeID = base.Columns["MembershipTypeID"];
                 this.columnMemStartDate = base.Columns["MemStartDate"];
                 this.columnMemEndDate = base.Columns["MemEndDate"];
                 this.columnMemRenewalDate = base.Columns["MemRenewalDate"];
@@ -5347,8 +5392,8 @@ namespace NonProfitProject.ReportDataSet {
                 base.Columns.Add(this.columnUserID);
                 this.columnReceiptID = new global::System.Data.DataColumn("ReceiptID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnReceiptID);
-                this.columnMemAmount = new global::System.Data.DataColumn("MemAmount", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMemAmount);
+                this.columnMembershipTypeID = new global::System.Data.DataColumn("MembershipTypeID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMembershipTypeID);
                 this.columnMemStartDate = new global::System.Data.DataColumn("MemStartDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMemStartDate);
                 this.columnMemEndDate = new global::System.Data.DataColumn("MemEndDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
@@ -5367,7 +5412,7 @@ namespace NonProfitProject.ReportDataSet {
                 this.columnMemDuesID.Unique = true;
                 this.columnUserID.MaxLength = 450;
                 this.columnReceiptID.AllowDBNull = false;
-                this.columnMemAmount.AllowDBNull = false;
+                this.columnMembershipTypeID.AllowDBNull = false;
                 this.columnMemStartDate.AllowDBNull = false;
                 this.columnMemEndDate.AllowDBNull = false;
                 this.columnMemRenewalDate.AllowDBNull = false;
@@ -7916,6 +7961,295 @@ namespace NonProfitProject.ReportDataSet {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class MembershipTypesDataTable : global::System.Data.TypedTableBase<MembershipTypesRow> {
+            
+            private global::System.Data.DataColumn columnMembershipTypeID;
+            
+            private global::System.Data.DataColumn columnName;
+            
+            private global::System.Data.DataColumn columnAmount;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public MembershipTypesDataTable() {
+                this.TableName = "MembershipTypes";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal MembershipTypesDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected MembershipTypesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn MembershipTypeIDColumn {
+                get {
+                    return this.columnMembershipTypeID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn NameColumn {
+                get {
+                    return this.columnName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn AmountColumn {
+                get {
+                    return this.columnAmount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public MembershipTypesRow this[int index] {
+                get {
+                    return ((MembershipTypesRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event MembershipTypesRowChangeEventHandler MembershipTypesRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event MembershipTypesRowChangeEventHandler MembershipTypesRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event MembershipTypesRowChangeEventHandler MembershipTypesRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event MembershipTypesRowChangeEventHandler MembershipTypesRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddMembershipTypesRow(MembershipTypesRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public MembershipTypesRow AddMembershipTypesRow(string MembershipTypeID, string Name, decimal Amount) {
+                MembershipTypesRow rowMembershipTypesRow = ((MembershipTypesRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        MembershipTypeID,
+                        Name,
+                        Amount};
+                rowMembershipTypesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowMembershipTypesRow);
+                return rowMembershipTypesRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public MembershipTypesRow FindByMembershipTypeID(string MembershipTypeID) {
+                return ((MembershipTypesRow)(this.Rows.Find(new object[] {
+                            MembershipTypeID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                MembershipTypesDataTable cln = ((MembershipTypesDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new MembershipTypesDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnMembershipTypeID = base.Columns["MembershipTypeID"];
+                this.columnName = base.Columns["Name"];
+                this.columnAmount = base.Columns["Amount"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnMembershipTypeID = new global::System.Data.DataColumn("MembershipTypeID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMembershipTypeID);
+                this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnName);
+                this.columnAmount = new global::System.Data.DataColumn("Amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAmount);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnMembershipTypeID}, true));
+                this.columnMembershipTypeID.AllowDBNull = false;
+                this.columnMembershipTypeID.Unique = true;
+                this.columnMembershipTypeID.MaxLength = 450;
+                this.columnName.MaxLength = 2147483647;
+                this.columnAmount.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public MembershipTypesRow NewMembershipTypesRow() {
+                return ((MembershipTypesRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new MembershipTypesRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(MembershipTypesRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.MembershipTypesRowChanged != null)) {
+                    this.MembershipTypesRowChanged(this, new MembershipTypesRowChangeEvent(((MembershipTypesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.MembershipTypesRowChanging != null)) {
+                    this.MembershipTypesRowChanging(this, new MembershipTypesRowChangeEvent(((MembershipTypesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.MembershipTypesRowDeleted != null)) {
+                    this.MembershipTypesRowDeleted(this, new MembershipTypesRowChangeEvent(((MembershipTypesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.MembershipTypesRowDeleting != null)) {
+                    this.MembershipTypesRowDeleting(this, new MembershipTypesRowChangeEvent(((MembershipTypesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveMembershipTypesRow(MembershipTypesRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DataSet ds = new DataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "MembershipTypesDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class AspNetRoleClaimsRow : global::System.Data.DataRow {
@@ -9774,12 +10108,12 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal MemAmount {
+            public string MembershipTypeID {
                 get {
-                    return ((decimal)(this[this.tableMembershipDues.MemAmountColumn]));
+                    return ((string)(this[this.tableMembershipDues.MembershipTypeIDColumn]));
                 }
                 set {
-                    this[this.tableMembershipDues.MemAmountColumn] = value;
+                    this[this.tableMembershipDues.MembershipTypeIDColumn] = value;
                 }
             }
             
@@ -9846,6 +10180,17 @@ namespace NonProfitProject.ReportDataSet {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_MembershipDues_AspNetUsers_UserID"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public MembershipTypesRow MembershipTypesRow {
+                get {
+                    return ((MembershipTypesRow)(this.GetParentRow(this.Table.ParentRelations["MembershipTypes_MembershipDues"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["MembershipTypes_MembershipDues"]);
                 }
             }
             
@@ -11396,6 +11741,82 @@ namespace NonProfitProject.ReportDataSet {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class MembershipTypesRow : global::System.Data.DataRow {
+            
+            private MembershipTypesDataTable tableMembershipTypes;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal MembershipTypesRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableMembershipTypes = ((MembershipTypesDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string MembershipTypeID {
+                get {
+                    return ((string)(this[this.tableMembershipTypes.MembershipTypeIDColumn]));
+                }
+                set {
+                    this[this.tableMembershipTypes.MembershipTypeIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Name {
+                get {
+                    try {
+                        return ((string)(this[this.tableMembershipTypes.NameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Name\' in table \'MembershipTypes\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMembershipTypes.NameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal Amount {
+                get {
+                    return ((decimal)(this[this.tableMembershipTypes.AmountColumn]));
+                }
+                set {
+                    this[this.tableMembershipTypes.AmountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsNameNull() {
+                return this.IsNull(this.tableMembershipTypes.NameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetNameNull() {
+                this[this.tableMembershipTypes.NameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public MembershipDuesRow[] GetMembershipDuesRows() {
+                if ((this.Table.ChildRelations["MembershipTypes_MembershipDues"] == null)) {
+                    return new MembershipDuesRow[0];
+                }
+                else {
+                    return ((MembershipDuesRow[])(base.GetChildRows(this.Table.ChildRelations["MembershipTypes_MembershipDues"])));
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -12027,6 +12448,40 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public Employees1Row Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class MembershipTypesRowChangeEvent : global::System.EventArgs {
+            
+            private MembershipTypesRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public MembershipTypesRowChangeEvent(MembershipTypesRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public MembershipTypesRow Row {
                 get {
                     return this.eventRow;
                 }
