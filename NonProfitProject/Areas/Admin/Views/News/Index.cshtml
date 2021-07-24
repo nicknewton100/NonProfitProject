@@ -26,9 +26,12 @@
                                       <div class="col-auto text-body">@news.NewsFooter</div>
                                       <div class="col-auto text-body">@news.NewsPublishDate.ToString("MM/dd/yyyy")</div>
                                   </div>
-                                  <div class="row justify-content-end" >
-                                      <div class="col-auto" style="margin-left:1rem;">
-                                          <a class="card-link text-dark"  asp-area="Admin" asp-controller="News" asp-action="EditNews">Edit</a>
+                                  <div class="row justify-content-between">
+                                      <div class="col-auto">
+                                          <a class="card-link text-primary" asp-area="Admin" asp-controller="News" asp-action="EditNews">Edit</a>
+                                      </div>
+                                      <div class="col-auto">
+                                          <a class="card-link text-danger" asp-area="Admin" asp-controller="News" asp-action="EditNews">Delete</a>
                                       </div>
                                   </div>
                               </div>
