@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using NonProfitProject.Models;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
@@ -12,9 +13,15 @@ namespace NonProfitProject.Areas.Admin.Controllers
     [Route("[area]/[controller]/[action]/{id?}")]
     public class NewsController : Controller
     {
+        private NonProfitContext context;
+        public NewsController(NonProfitContext context)
+        {
+            this.context = context;
+        }
         public IActionResult Index()
         {
-            return View();
+            var news = context.News.ToList();
+            return View(news);
         }
         public IActionResult EditNews()
         {
