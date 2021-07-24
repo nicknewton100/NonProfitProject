@@ -6,18 +6,30 @@
 
 }
 
-<div class="row" style="margin-top:5.5rem; padding:2rem;">
-    @foreach (var news in Model)
-    {
-        <div class="column" style="padding:2rem; display:flex; justify-content: center; flex-direction: row;">
-            <div class="card">
-                <h5 class="card-header" style="text-align: center;">@news.NewsHeader</h5>
+<div class="container" style="margin-top:5.5rem;">
+    <div class="card-header-pills"><h1>News</h1></div>
+    <div class="row">
+        @foreach (var news in Model)
+        {
+            <div class="card w-25" style="margin:0.15rem;">
+                <div class="card-header"><h3>@news.NewsTitle</h3></div>
+
                 <div class="card-body">
-                    <h6 style="text-align: center;">@news.NewsTitle</h6>
-                    <p>@news.NewsDescription</p>
+                    <div class="card-title"><h5>@news.NewsHeader</h5></div>
+                    <div class="card-text"><p>@news.NewsDescription</p></div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-text">
+                        <p>By: @news.NewsFooter</p>
+                        <p>Date: @news.NewsPublishDate.ToString("MM/dd/yyyy")</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+
+    </div>
+    
+
 </div>
+
 
