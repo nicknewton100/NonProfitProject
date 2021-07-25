@@ -64,6 +64,9 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 {
                     var news = context.News.Where(n => n.NewsID == model.NewsID).FirstOrDefault();
                     news.NewsLastUpdated = DateTime.UtcNow;
+                    news.NewsTitle = model.NewsTitle;
+                    news.NewsHeader = model.NewsHeader;
+                    news.NewsBody = model.NewsBody;
                     context.News.Update(news);
                     addOrEdit = "updated";
                 }
