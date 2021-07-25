@@ -16,8 +16,6 @@ namespace NonProfitProject.Models
         [Required(ErrorMessage = "Body Text is Requied")]
         [DataType(DataType.MultilineText)]
         public string NewsBody { get; set; }
-        public string NewsFooter { get; set; }
-        public DateTime NewsCreationDate { get; set; }
         public DateTime NewsPublishDate { get; set; }
         public DateTime NewsLastUpdated { get; set; }
         public string CreatedBy { get; set; }
