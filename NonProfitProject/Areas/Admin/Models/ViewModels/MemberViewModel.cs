@@ -10,53 +10,53 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
     {
         //user information
         public string id { get; set; }
-        [Required(ErrorMessage = "Please enter employee's First Name")]
+        [Required(ErrorMessage = "Please enter member's First Name")]
         [StringLength(60)]
         public string Firstname { get; set; }
-        [Required(ErrorMessage = "Please enter employee's Last Name")]
+        [Required(ErrorMessage = "Please enter member's Last Name")]
         [StringLength(60)]
         public string Lastname { get; set; }
-        [Required(ErrorMessage = "Please enter employee's Gender")]
+        [Required(ErrorMessage = "Please enter member's Gender")]
         [StringLength(20)]
         public string Gender { get; set; }
-        [Required(ErrorMessage = "Please enter employee's Address")]
+        [Required(ErrorMessage = "Please enter member's Address")]
         [StringLength(255)]
         public string Addr1 { get; set; }
         [StringLength(50)]
         public string Addr2 { get; set; }
-        [Required(ErrorMessage = "Please enter employee's City")]
+        [Required(ErrorMessage = "Please enter member's City")]
         [StringLength(60)]
         public string City { get; set; }
-        [Required(ErrorMessage = "Please enter employee's State")]
+        [Required(ErrorMessage = "Please enter member's State")]
         [StringLength(60)]
         public string State { get; set; }
-        [Required(ErrorMessage = "Please enter employee's Postal Code")]
+        [Required(ErrorMessage = "Please enter member's Postal Code")]
         [DataType(DataType.PostalCode)]
         public int? PostalCode { get; set; }
-        [Required(ErrorMessage = "Please enter employee's BirthDate")]
+        [Required(ErrorMessage = "Please enter member's BirthDate")]
         [DataType(DataType.Date)]
         public DateTime? BirthDate { get; set; }
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Please enter employee's Username")]
+        [Required(ErrorMessage = "Please enter member's Username")]
         [StringLength(25)]
         public string Username { get; set; }
-        [Required(ErrorMessage = "Please enter employee's Email Address")]
+        [Required(ErrorMessage = "Please enter member's Email Address")]
         [StringLength(60)]
         [DataType(DataType.EmailAddress)]
-        [Compare("EmailConfirmed", ErrorMessage = "Employee's email does not match")]
+        [Compare("EmailConfirmed", ErrorMessage = "member's email does not match")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Please confirm employee's Email Address")]
+        [Required(ErrorMessage = "Please confirm member's Email Address")]
         [StringLength(60)]
         [DataType(DataType.EmailAddress)]
         public string EmailConfirmed { get; set; }
-        [Required(ErrorMessage = "Please enter employee's Temporary Password")]
+        [Required(ErrorMessage = "Please enter member's Temporary Password")]
         [StringLength(60)]
         [DataType(DataType.Password)]
-        [Compare("TemporaryPasswordConfirmed", ErrorMessage = "Employee's password does not match")]
+        [Compare("TemporaryPasswordConfirmed", ErrorMessage = "member's password does not match")]
         public string TemporaryPassword { get; set; }
-        [Required(ErrorMessage = "Please confirm employee's Temporary Password")]
+        [Required(ErrorMessage = "Please confirm member's Temporary Password")]
         [StringLength(60)]
         [DataType(DataType.Password)]
         public string TemporaryPasswordConfirmed { get; set; }

@@ -18,7 +18,7 @@ namespace NonProfitProject.Controllers
 {
     public class DonateController : Controller
     {
-        private NonProfitContext context;
+        protected NonProfitContext context;
         public DonateController(NonProfitContext context)
         {
             this.context = context;
@@ -66,7 +66,7 @@ namespace NonProfitProject.Controllers
             {
                 var DonationInformation = HttpContext.Session.GetObject<DonationViewModel>("DonationInformation");
 
-                if(DonationInformation == null)
+                if(DonationInformation == null || DonationInformation.DonationPaymentViewModel == null)
                 {
                     HttpContext.Session.SetObject("DonationInformation", model);
                     return RedirectToAction("Payment");
