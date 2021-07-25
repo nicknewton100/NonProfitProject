@@ -1,6 +1,6 @@
 ﻿@model List<Receipts>
 @{
-    ViewData["Title"] = "Donation History";
+    ViewData["Title"] = "Membership Dues History";
     ViewData["Title2"] = "Admin";
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
 }
@@ -14,13 +14,13 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col" class="w-auto">Receipt #</th>
+                        <th scope="col" class="w-auto">Receipt ID</th>
                         <th scope="col">Username</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email Address</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Payment</th>
-                        <th scope="col">Date</th>
+                        <th scope="col">Membership</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Billing Date</th>
+                        <th scope="col">Active Membership</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
@@ -30,25 +30,22 @@
                     {
                         <tr>
                             <td scope="row">@donation.ReceiptID</td>
-                            <td scope="row">
-                                @{
-                                    if (donation.User.UserName.Equals("One-TimeDonation"))
-                                    {
-                                        @:N/A
+                            <td scope="row">@donation.User.UserName</td>
+                            <td>@donation.MembershipDue.MembershipType.Name</td>
+                            <td>@donation.MembershipDue.MemStartDate.ToShortDateString()</td>
+                            <td>@donation.MembershipDue.MemEndDate.ToShortDateString()</td>
+                            <td>@donation.MembershipDue.MemRenewalDate.ToShortDateString()</td>
+                            <td>@{
+                                    if (donation.MembershipDue.MemActive) { 
+                                        <p>Yes</p>
                                     }
-                                    else
-                                    {
-                                        @donation.User.UserName
+                                    else { 
+                                        <p>No</p>
                                     }
-                                }
+                                 }
                             </td>
-                            <td>@donation.InvoiceDonorInformation.FirstName @donation.InvoiceDonorInformation.LastName</td>
-                            <td>@donation.InvoiceDonorInformation.Email</td>
-                            <td>@donation.Total.ToString("C")</td>
-                            <td>xxxx-xxxx-xxxx-@donation.InvoicePayment.Last4Digits</td>
-                            <td>@donation.Date.ToString("MM/dd/yyyy")</td>
                             <td>
-                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","DonationHistory",new {id = donation.ReceiptID })'">Details</button>
+                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","MembershipHistory",new {id = donation.ReceiptID })'">Details</button>
                             </td>
                             <td>
                                 <form method="post" asp-action="Delete" asp-route-id="@donation.ReceiptID">

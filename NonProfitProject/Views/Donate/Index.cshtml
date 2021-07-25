@@ -210,6 +210,11 @@
 
             btns.forEach(function (i) {
                 i.addEventListener('click', function () {
+                    /*Swal.fire(
+                        'Donation',
+                        'You are donating ' + i.innerHTML,
+                        'success'
+                    )*/
                     alert(`You are donating ${i.innerHTML}`);
                     document.querySelector('.msg').innerHTML = i.innerHTML;
                 });

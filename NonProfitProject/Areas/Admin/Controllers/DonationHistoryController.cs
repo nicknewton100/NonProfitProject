@@ -27,7 +27,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         }
         public IActionResult Details(int id)
         {
-            var donation = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Include(r => r.User).Where(r => r.ReceiptID == id).FirstOrDefault();
+            var donation = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Include(r => r.User).Where(r => r.ReceiptID == id && r.MembershipDue == null).FirstOrDefault();
             if (donation == null)
             {
                 return RedirectToAction("Index");
@@ -37,7 +37,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var receipt = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Include(r => r.User).Where(r => r.ReceiptID == id).FirstOrDefault();
+            var receipt = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Include(r => r.User).Where(r => r.ReceiptID == id && r.MembershipDue == null).FirstOrDefault();
             if(receipt == null)
             {
                 return RedirectToAction("Index");
@@ -62,7 +62,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(EditDonationViewModel model)
         {
-            var currentReceipt = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Include(r => r.User).Where(r => r.ReceiptID == model.ReceiptID).AsNoTracking().FirstOrDefault();
+            var currentReceipt = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Include(r => r.User).Where(r => r.ReceiptID == model.ReceiptID && r.MembershipDue == null).AsNoTracking().FirstOrDefault();
             model.Username = currentReceipt.User.UserName;
             if (!model.isChangingCardInformation)
             {
@@ -106,6 +106,14 @@ namespace NonProfitProject.Areas.Admin.Controllers
                     currentReceipt.InvoicePayment.ExpDate = model.ExpDate;
                     currentReceipt.InvoicePayment.CVV = model.CVV;
                     currentReceipt.InvoicePayment.Last4Digits = Int32.Parse(model.CardNumber.Substring(model.CardNumber.Length - 4));
+
+                    currentReceipt.InvoicePayment.BillingFirstName = model.BillingFirstName;
+                    currentReceipt.InvoicePayment.BillingLastName = model.BillingLastName;
+                    currentReceipt.InvoicePayment.BillingAddr1 = model.BillingAddr1;
+                    currentReceipt.InvoicePayment.BillingAddr2 = model.BillingAddr2;
+                    currentReceipt.InvoicePayment.BillingCity = model.BillingCity;
+                    currentReceipt.InvoicePayment.BillingState = model.BillingState;
+                    currentReceipt.InvoicePayment.BillingPostalCode = (int)model.BillingPostalCode;
                 }
                 context.Receipts.Update(currentReceipt);
                 context.SaveChanges();
