@@ -185,13 +185,7 @@
                                     </div>
 
 
-                                    <div class="form-group">
-                                        <div class="col-auto"><label>Last Contract Start Date: </label></div>
-                                        <div class="col-auto">
-                                            <input asp-for="LastRenewalDate" class="form-control membership" />
-                                            <span asp-validation-for="LastRenewalDate" class="text-danger membership"></span>
-                                        </div>
-                                    </div>
+                                    
                                     }
                                 }
                                 else 
@@ -202,15 +196,24 @@
                             @if(TempData["Membership"]?.ToString() == "Membership") 
                             { 
                             <div class="row membership">
+                                @if(ViewBag.Action != "Edit") { 
+                                    <div class="form-group">
+                                    <div class="col-auto"><label>Membership Start Date: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="LastRenewalDate" class="form-control membership" />
+                                        <span asp-validation-for="LastRenewalDate" class="text-danger membership"></span>
+                                    </div>
+                                </div>
+                                }
                                 <div class="form-group">
-                                    <div class="col-auto"><label>Future End Date: </label></div>
+                                    <div class="col-auto"><label>Membership End Date: </label></div>
                                     <div class="col-auto">
                                         <input asp-for="FutureEndDate" class="form-control" />
                                         <span asp-validation-for="FutureEndDate" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-auto"><label>Future Renewal Date: </label></div>
+                                    <div class="col-auto"><label>Next Billing Date: </label></div>
                                     <div class="col-auto">
                                         <input asp-for="FutureRenewalDate" class="form-control"/>
                                         <span asp-validation-for="FutureRenewalDate" class="text-danger"></span>
