@@ -11,14 +11,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @ViewData["Title2"]</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link id="pagestyle" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link id="pagestyle" rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/dashboard.css" />
-    <link rel="stylesheet" href="~/css/parallax.css"/>
+    <link rel="stylesheet" href="~/css/parallax.css" />
+    <link id="dark-theme-style" rel="stylesheet" />
+
+
 
 </head>
 <body>
-
     <div>
         <main role="main" class="pb-3">
             @RenderBody()
@@ -31,6 +33,7 @@
     <script src="https://kit.fontawesome.com/deab61ee00.js" crossorigin="anonymous"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/index.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
