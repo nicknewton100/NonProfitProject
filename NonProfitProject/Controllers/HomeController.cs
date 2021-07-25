@@ -24,10 +24,6 @@ namespace NonProfitProject.Controllers
         {
             return View();
         }
-        public IActionResult UserIndex()
-        {
-            return View();
-        }
 
         public IActionResult Privacy()
         {
@@ -35,10 +31,6 @@ namespace NonProfitProject.Controllers
         }
 
         public IActionResult AboutUs()
-        {
-            return View();
-        }
-        public IActionResult NewsPage()
         {
             return View();
         }

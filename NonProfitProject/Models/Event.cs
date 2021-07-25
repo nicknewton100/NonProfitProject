@@ -19,16 +19,25 @@ namespace NonProfitProject.Models
         [JsonProperty(PropertyName = "EventName")]
         public string EventName { get; set; }
         [Required(ErrorMessage = "Please enter a start date for the event")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [JsonProperty(PropertyName = "StartDate")]
         public DateTime EventStartDate { get; set; }
         [Required(ErrorMessage = "Please enter an end date for the event")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [JsonProperty(PropertyName = "EndDate")]
         public DateTime EventEndDate { get; set; }
         [Required(ErrorMessage = "Please enter an event description")]
         [StringLength(200)]
         [JsonProperty(PropertyName = "EventDescription")]
         public string EventDescription { get; set; }
+        [Required(ErrorMessage = "Please enter event address")]
+        public string EventAddr1 { get; set; }
+        public string EventAddr2 { get; set; }
+        [Required(ErrorMessage = "Please enter event city")]
+        public string EventCity { get; set; }
+        [Required(ErrorMessage = "Please enter event state")]
+        public string EventState { get; set; }
+        [Required(ErrorMessage = "Please enter event postal code")]
+        public int EventPostalCode { get; set; }
     }
 }

@@ -161,26 +161,38 @@ namespace NonProfitProject.Models
             new Event
             {
                 EventID = 1,
-                EventStartDate = new DateTime(2021, 01, 05, 0, 0, 0),
-                EventEndDate = new DateTime(2021, 01, 25, 0, 0, 0),
+                EventStartDate = new DateTime(2021, 01, 05, 12, 0, 0),
+                EventEndDate = new DateTime(2021, 01, 25, 16, 0, 0),
                 EventName = "Walk-a-thon",
-                EventDescription = "Walking for a good cause."
+                EventDescription = "Walking for a good cause.",
+                EventAddr1 = "222 Magnolia Shaw A St",
+                EventCity = "North Augusta",
+                EventState = "South Carolina",
+                EventPostalCode = 29841
             },
             new Event
             {
                 EventID = 2,
-                EventStartDate = new DateTime(2022, 03, 01, 0, 0, 0),
-                EventEndDate = new DateTime(2022, 03, 30, 0, 0, 0),
+                EventStartDate = new DateTime(2022, 03, 01, 13, 0, 0),
+                EventEndDate = new DateTime(2022, 03, 01, 19, 0, 0),
                 EventName = "Triathon",
-                EventDescription = "Biking, Swimming, and Running"
+                EventDescription = "Biking, Swimming, and Running",
+                EventAddr1 = "881 Glenn Rd",
+                EventCity = "Clover",
+                EventState = "South Carolina",
+                EventPostalCode = 29710
             },
             new Event
             {
                 EventID = 3,
-                EventStartDate = new DateTime(2022, 05, 01, 0, 0, 0),
-                EventEndDate = new DateTime(2022, 05, 05, 0, 0, 0),
+                EventStartDate = new DateTime(2022, 05, 01, 7, 0, 0),
+                EventEndDate = new DateTime(2022, 05, 01, 10, 0, 0),
                 EventName = "Movie Night",
-                EventDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks!"
+                EventDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks!",
+                EventAddr1 = "739 Gaillard Rd",
+                EventCity = "Moncks Corner",
+                EventState = "South Carolina",
+                EventPostalCode = 29461
             });
 
             //sets relationship between employees and Committee Memebers
