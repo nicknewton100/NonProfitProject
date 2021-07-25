@@ -96,22 +96,20 @@ namespace NonProfitProject.Models
                     NewsID = 1,
                     NewsTitle = "Non-PAW-Fit Raise Awareness",
                     NewsHeader = "New Members are Wecome",
-                    NewsFooter = "News Comittee",
-                    NewsCreationDate = new DateTime(2021, 7, 15),
-                    NewsPublishDate = new DateTime(2021, 7, 15),
-                    NewsLastUpdated = new DateTime(2021, 7, 15),
-                    NewsBody = "The Non-PAW-Fit Animal Rescue started their non-profit organization to raise awareness of abandoned pets across the United States.  Then mission:  To Rescue Pets from unwanted homes and provide them new home where they are become part of the family."
+                    NewsPublishDate = DateTime.UtcNow,
+                    NewsLastUpdated = DateTime.UtcNow,
+                    NewsBody = "The Non-PAW-Fit Animal Rescue started their non-profit organization to raise awareness of abandoned pets across the United States.  Then mission:  To Rescue Pets from unwanted homes and provide them new home where they are become part of the family.",
+                    CreatedBy = "Unknown"
                 },
                 new News
                 {
                     NewsID = 2,
                     NewsTitle = "Non-PAW-Fit Rescued Over 50",
                     NewsHeader = "50 Animals Rescued From Unwanted Homes",
-                    NewsFooter = "News Comittee",
-                    NewsCreationDate = new DateTime(2021, 7, 15),
-                    NewsPublishDate = new DateTime(2021, 7, 15),
-                    NewsLastUpdated = new DateTime(2021, 7, 15),
-                    NewsBody = "Pets from cats and dogs to parrots and snakes are being rescued from unwanted homes and given a place to stay until they find their forever home."
+                    NewsPublishDate = DateTime.UtcNow,
+                    NewsLastUpdated = DateTime.UtcNow,
+                    NewsBody = "Pets from cats and dogs to parrots and snakes are being rescued from unwanted homes and given a place to stay until they find their forever home.",
+                    CreatedBy = "Unknown"
                 });
             //creates data for employees
             builder.Entity<Employees>().HasData(
