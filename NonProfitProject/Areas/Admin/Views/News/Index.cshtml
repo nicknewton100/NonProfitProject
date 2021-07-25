@@ -1,4 +1,4 @@
-﻿
+﻿@model List<News>
 @{
     ViewData["Title"] = "News Articles";
     ViewData["Title2"] = "Admin";
@@ -7,20 +7,40 @@
 
 <div class="container">
     <div class="card-header-pills"><h1 class="far fa-newspaper"> News Articles</h1></div>
-    <a class="btn btn-outline-dark" asp-area="Admin" asp-controller="News" asp-action="EditNews">Add News</a>
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <div class="row">
-                <div class="card w-auto" style="margin:0.5rem;">
-                    <!--Add the News Article Id here (hidden)-->
-                    <h3 class="card-header">News Header Here</h3>
-                    <div class="card-body">
-                        <p>Date Here</p>
-                        <p>News Information??</p>
-                    </div>
-                    <div class="card-footer">Publisher <div class="card-link"><a href="#">Edit</a></div></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <a class="btn btn-outline-dark" asp-area="Admin" asp-controller="News" asp-action="AddNews">Add News</a>
+    <br /><br />
+          <div class="container">
+              <div class="row" style="font-size:small">
+                  @foreach (var news in Model)
+                  {
+                      <div class="card w-75" style="margin:0.25rem;">
+                          <div class="card-body">
+                              <h3 style="margin-bottom:0px;">@news.NewsTitle</h3>
+                              <div class="card-title">
+                                <p style="font-size:18px;">@news.NewsHeader</p>
+                              </div>
+                              <p style="margin: 0px; color: darkgray;">Published: @news.NewsPublishDate.ToString("F")</p>
+                              <p style="margin:0px;color:darkgray;">Last updated: @news.NewsLastUpdated.ToString("F")</p>
+                              <p style="margin: 0px; color: darkgray; ">Written By: @news.CreatedBy</p>
+                              <br />
+                              <div class="card-text" id="newsBody">@Html.Raw(news.NewsBody)</div>
+                          </div>
+                          <div class="card-footer">
+                                  <div class="row justify-content-between">
+                                      <div class="col-auto">
+                                          <a class="card-link text-primary" asp-action="EditNews" asp-route-id="@news.NewsID">Edit</a>
+                                      </div>
+                                      <div class="col-auto">
+                                          <form method="post" asp-action="Delete" asp-route-id="@news.NewsID">
+                                              <button class="card-link text-danger" style=" background: none !important; border: none;">Delete</button>
+                                          </form>
+                                          
+                                      </div>
+                                  </div>
+                              </div>
+                      </div>
+                  }
+              </div>
+          </div>
+    
 </div>

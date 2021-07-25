@@ -10,7 +10,7 @@ namespace NonProfitProject.Models.ViewModels
     {
         //donation information
         [Required(ErrorMessage = "Please select a Donation Amount")]
-        public decimal? DonationAmount { get; set; }
+        public decimal DonationAmount { get; set; }
         [StringLength(160)]
         public string Comments { get; set; }
         //personal information 
@@ -30,5 +30,7 @@ namespace NonProfitProject.Models.ViewModels
         public string State { get; set; }
         [Required(ErrorMessage = "Please provide your Postal Code")]
         public int PostalCode { get; set; }
+
+        public DonationPaymentViewModel DonationPaymentViewModel { get; set; }
     }
 }

@@ -24,10 +24,38 @@ namespace NonProfitProject.Models
         public DbSet<Receipts> Receipts { get; set; }
         public DbSet<InvoiceDonorInformation> InvoiceDonorInformation { get; set; }
         public DbSet<MembershipDues> MembershipDues { get; set; }
+        public DbSet<MembershipType> MembershipTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<MembershipType>().HasData(
+                new MembershipType
+                {
+                    MembershipTypeID = "fdsfdf-n53g3g-h3j9xe768w-nm4b35",
+                    Name = "Basic",
+                    Amount = 10.00m
+                },
+                new MembershipType
+                {
+                    MembershipTypeID = "fs8t4h-chgje6-dshuv57d8-sng94v",
+                    Name = "Advanced",
+                    Amount = 20.00m
+                },
+                new MembershipType
+                {
+                    MembershipTypeID = "dk5k4g-df5h7d-v5y8s2ch5t-f5h5db",
+                    Name = "Premium",
+                    Amount = 50.00m
+                },
+                new MembershipType
+                {
+                    MembershipTypeID = "jk5dgd-eh4d6h-f5sf4g77h5-dfs4g",
+                    Name = "Paw-fect",
+                    Amount = 100.00m
+                }
+                );
 
             //creates employee for user --seeded so there isnt an error in the migration files  when updating database
             builder.Entity<IdentityRole>().HasData(new IdentityRole
@@ -66,24 +94,22 @@ namespace NonProfitProject.Models
                 new News
                 {
                     NewsID = 1,
-                    NewsTitle = "10k Run for Cancer!",
-                    NewsHeader = "Come Join Us!",
-                    NewsFooter = "News Comittee",
-                    NewsCreationDate = new DateTime(2021, 7, 15),
-                    NewsPublishDate = new DateTime(2021, 7, 15),
-                    NewsLastUpdated = new DateTime(2021, 7, 15),
-                    NewsDescription = "Run for a whole week straight for cancer at the end of July. 15 Dollar Admission Fee. Event runs from July 24-31!"
+                    NewsTitle = "Non-PAW-Fit Raise Awareness",
+                    NewsHeader = "New Members are Wecome",
+                    NewsPublishDate = DateTime.UtcNow,
+                    NewsLastUpdated = DateTime.UtcNow,
+                    NewsBody = "The Non-PAW-Fit Animal Rescue started their non-profit organization to raise awareness of abandoned pets across the United States.  Then mission:  To Rescue Pets from unwanted homes and provide them new home where they are become part of the family.",
+                    CreatedBy = "Unknown"
                 },
                 new News
                 {
                     NewsID = 2,
-                    NewsTitle = "Movie Night",
-                    NewsHeader = "Movie Time!",
-                    NewsFooter = "News Comittee",
-                    NewsCreationDate = new DateTime(2021, 7, 15),
-                    NewsPublishDate = new DateTime(2021, 7, 15),
-                    NewsLastUpdated = new DateTime(2021, 7, 15),
-                    NewsDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks! Snacks: Popcorn. Event runs on July 26!"
+                    NewsTitle = "Non-PAW-Fit Rescued Over 50",
+                    NewsHeader = "50 Animals Rescued From Unwanted Homes",
+                    NewsPublishDate = DateTime.UtcNow,
+                    NewsLastUpdated = DateTime.UtcNow,
+                    NewsBody = "Pets from cats and dogs to parrots and snakes are being rescued from unwanted homes and given a place to stay until they find their forever home.",
+                    CreatedBy = "Unknown"
                 });
             //creates data for employees
             builder.Entity<Employees>().HasData(
@@ -135,26 +161,38 @@ namespace NonProfitProject.Models
             new Event
             {
                 EventID = 1,
-                EventStartDate = new DateTime(2021, 01, 05, 0, 0, 0),
-                EventEndDate = new DateTime(2021, 01, 25, 0, 0, 0),
+                EventStartDate = new DateTime(2021, 01, 05, 12, 0, 0),
+                EventEndDate = new DateTime(2021, 01, 25, 16, 0, 0),
                 EventName = "Walk-a-thon",
-                EventDescription = "Walking for a good cause."
+                EventDescription = "Walking for a good cause.",
+                EventAddr1 = "222 Magnolia Shaw A St",
+                EventCity = "North Augusta",
+                EventState = "South Carolina",
+                EventPostalCode = 29841
             },
             new Event
             {
                 EventID = 2,
-                EventStartDate = new DateTime(2022, 03, 01, 0, 0, 0),
-                EventEndDate = new DateTime(2022, 03, 30, 0, 0, 0),
+                EventStartDate = new DateTime(2022, 03, 01, 13, 0, 0),
+                EventEndDate = new DateTime(2022, 03, 01, 19, 0, 0),
                 EventName = "Triathon",
-                EventDescription = "Biking, Swimming, and Running"
+                EventDescription = "Biking, Swimming, and Running",
+                EventAddr1 = "881 Glenn Rd",
+                EventCity = "Clover",
+                EventState = "South Carolina",
+                EventPostalCode = 29710
             },
             new Event
             {
                 EventID = 3,
-                EventStartDate = new DateTime(2022, 05, 01, 0, 0, 0),
-                EventEndDate = new DateTime(2022, 05, 05, 0, 0, 0),
+                EventStartDate = new DateTime(2022, 05, 01, 7, 0, 0),
+                EventEndDate = new DateTime(2022, 05, 01, 10, 0, 0),
                 EventName = "Movie Night",
-                EventDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks!"
+                EventDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks!",
+                EventAddr1 = "739 Gaillard Rd",
+                EventCity = "Moncks Corner",
+                EventState = "South Carolina",
+                EventPostalCode = 29461
             });
 
             //sets relationship between employees and Committee Memebers
@@ -228,7 +266,6 @@ namespace NonProfitProject.Models
         //creates roles if they do not exist within the database
         public static async void CreateRoles(IServiceProvider serviceProvider)
         {
-            UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
             RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             if(await roleManager.FindByNameAsync("User") == null)
@@ -250,7 +287,6 @@ namespace NonProfitProject.Models
         public static async void CreateDeafultUsers(IServiceProvider serviceProvider)
         {
             UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
-            RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             if (await userManager.FindByNameAsync("KarenSmith") == null)
             {
@@ -292,7 +328,7 @@ namespace NonProfitProject.Models
                     ReceiveWeeklyNewsletter = false
                 };
                 //Never need access to this account because its used to store the One-Time Donations that are made from users that are not registered/signedin so I made the password as obscure as possible
-                var result = await userManager.CreateAsync(user, "ckGoxk+&|5'#vM?(/Jo0keFGAds,HY%]Ujz4{6kFW8*a~~KWc~K{9x,lK2$kWJ");
+                await userManager.CreateAsync(user, "ckGoxk+&|5'#vM?(/Jo0keFGAds,HY%]Ujz4{6kFW8*a~~KWc~K{9x,lK2$kWJ");
             }
         }
     }

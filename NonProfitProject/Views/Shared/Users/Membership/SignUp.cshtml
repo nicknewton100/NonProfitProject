@@ -1,0 +1,74 @@
+﻿@model List<MembershipType>
+@{
+    ViewData["Title"] = "Sign up for Membership";
+    ViewData["Title2"] = "Profile";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+}
+
+<!--USE THIS RESOURCE TO CREATE A BOOTSTRAP PRICING TABLE:  https://getbootstrap.com/docs/4.0/examples/pricing/ -->
+<div class="container ">
+    <div class="card-header-pills text-center"><h1>Membership Prices</h1></div>
+    <br />
+    <div class="row justify-content-center">
+        <div class="card-deck mb-3 text-center" style="margin:0 0.25rem;">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header"><h2>BASIC</h2></div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$10 <small class="text-muted">/ mo</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Basic Membership</li>
+                        <l1>Automatic payment</l1>
+                    </ul>
+                    <form method="post" asp-action="Signup" asp-route-name="Basic">
+                        <button class="btn btn-success" type="submit" style="border-radius: 5rem; padding:0.5rem 2rem;">Select</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck mb-3 text-center" style="margin:0 0.25rem;">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header"><h2>ADVANCED</h2></div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$20 <small class="text-muted">/ mo</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Advanced Membership</li>
+                        <l1>Automatic payment</l1>
+                    </ul>
+                    <form method="post" asp-action="Signup" asp-route-name="Advanced">
+                        <button class="btn btn-success" type="submit" style="border-radius: 5rem; padding:0.5rem 2rem;">Select</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck mb-3 text-center" style="margin:0 0.25rem;">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header"><h2>PREMIUM</h2></div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$50 <small class="text-muted">/ mo</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Premium Membership</li>
+                        <l1>Automatic payment</l1>
+                    </ul>
+                    <form method="post" asp-action="Signup" asp-route-name="Premium">
+                        <button class="btn btn-success" type="submit" style="border-radius: 5rem; padding:0.5rem 2rem;">Select</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck mb-3 text-center" style="margin:0 0.25rem;">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header"><h2>PAW-FECT</h2></div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$100 <small class="text-muted">/ mo</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Paw-fect Membership</li>
+                        <l1>Automatic payment</l1>
+                    </ul>
+                    <form method="post" asp-action="Signup" asp-route-name="Paw-fect">
+                        <button class="btn btn-success" type="submit" style="border-radius: 5rem; padding:0.5rem 2rem;">Select</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

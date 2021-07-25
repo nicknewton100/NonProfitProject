@@ -49,7 +49,7 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             Id = "370d9876-b6ab-4694-baa9-ecc7bc5b451c",
-                            ConcurrencyStamp = "05f5d12c-8098-4422-841d-37f0d3c47bdd",
+                            ConcurrencyStamp = "b33a9c42-989c-47c0-9995-fb5e30fe5b3e",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -177,6 +177,7 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CommitteePosition")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmpID")
@@ -226,21 +227,21 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             CommitteesID = 1,
-                            CommitteeCreationDate = new DateTime(2021, 7, 18, 15, 42, 43, 461, DateTimeKind.Utc).AddTicks(1344),
+                            CommitteeCreationDate = new DateTime(2021, 7, 25, 15, 30, 30, 508, DateTimeKind.Utc).AddTicks(8170),
                             CommitteeDescription = "Manages donations/membership dues",
                             CommitteeName = "Fundrasing Committee"
                         },
                         new
                         {
                             CommitteesID = 2,
-                            CommitteeCreationDate = new DateTime(2021, 7, 18, 15, 42, 43, 461, DateTimeKind.Utc).AddTicks(1794),
+                            CommitteeCreationDate = new DateTime(2021, 7, 25, 15, 30, 30, 508, DateTimeKind.Utc).AddTicks(8448),
                             CommitteeDescription = "Manages news on the website",
                             CommitteeName = "News Committee"
                         },
                         new
                         {
                             CommitteesID = 3,
-                            CommitteeCreationDate = new DateTime(2021, 7, 18, 15, 42, 43, 461, DateTimeKind.Utc).AddTicks(1804),
+                            CommitteeCreationDate = new DateTime(2021, 7, 25, 15, 30, 30, 508, DateTimeKind.Utc).AddTicks(8458),
                             CommitteeDescription = "Plans and organizes events",
                             CommitteeName = "Event and Planning Committee"
                         });
@@ -252,9 +253,6 @@ namespace NonProfitProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("DonationAmount")
                         .HasColumnType("decimal(18,2)");
@@ -327,6 +325,17 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("EventAddr1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventAddr2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventCity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("EventDescription")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -340,8 +349,15 @@ namespace NonProfitProject.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("EventPostalCode")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EventStartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("EventState")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EventID");
 
@@ -351,26 +367,38 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             EventID = 1,
+                            EventAddr1 = "222 Magnolia Shaw A St",
+                            EventCity = "North Augusta",
                             EventDescription = "Walking for a good cause.",
-                            EventEndDate = new DateTime(2021, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventEndDate = new DateTime(2021, 1, 25, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             EventName = "Walk-a-thon",
-                            EventStartDate = new DateTime(2021, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            EventPostalCode = 29841,
+                            EventStartDate = new DateTime(2021, 1, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventState = "South Carolina"
                         },
                         new
                         {
                             EventID = 2,
+                            EventAddr1 = "881 Glenn Rd",
+                            EventCity = "Clover",
                             EventDescription = "Biking, Swimming, and Running",
-                            EventEndDate = new DateTime(2022, 3, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventEndDate = new DateTime(2022, 3, 1, 19, 0, 0, 0, DateTimeKind.Unspecified),
                             EventName = "Triathon",
-                            EventStartDate = new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            EventPostalCode = 29710,
+                            EventStartDate = new DateTime(2022, 3, 1, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventState = "South Carolina"
                         },
                         new
                         {
                             EventID = 3,
+                            EventAddr1 = "739 Gaillard Rd",
+                            EventCity = "Moncks Corner",
                             EventDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks!",
-                            EventEndDate = new DateTime(2022, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventEndDate = new DateTime(2022, 5, 1, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             EventName = "Movie Night",
-                            EventStartDate = new DateTime(2022, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            EventPostalCode = 29461,
+                            EventStartDate = new DateTime(2022, 5, 1, 7, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventState = "South Carolina"
                         });
                 });
 
@@ -486,9 +514,6 @@ namespace NonProfitProject.Migrations
                     b.Property<bool>("MemActive")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("MemAmount")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime>("MemEndDate")
                         .HasColumnType("datetime2");
 
@@ -498,6 +523,9 @@ namespace NonProfitProject.Migrations
                     b.Property<DateTime>("MemStartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("MembershipTypeID")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("ReceiptID")
                         .HasColumnType("int");
 
@@ -505,6 +533,8 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("MemDuesID");
+
+                    b.HasIndex("MembershipTypeID");
 
                     b.HasIndex("ReceiptID")
                         .IsUnique();
@@ -514,6 +544,48 @@ namespace NonProfitProject.Migrations
                     b.ToTable("MembershipDues");
                 });
 
+            modelBuilder.Entity("NonProfitProject.Models.MembershipType", b =>
+                {
+                    b.Property<string>("MembershipTypeID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MembershipTypeID");
+
+                    b.ToTable("MembershipTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            MembershipTypeID = "fdsfdf-n53g3g-h3j9xe768w-nm4b35",
+                            Amount = 10.00m,
+                            Name = "Basic"
+                        },
+                        new
+                        {
+                            MembershipTypeID = "fs8t4h-chgje6-dshuv57d8-sng94v",
+                            Amount = 20.00m,
+                            Name = "Advanced"
+                        },
+                        new
+                        {
+                            MembershipTypeID = "dk5k4g-df5h7d-v5y8s2ch5t-f5h5db",
+                            Amount = 50.00m,
+                            Name = "Premium"
+                        },
+                        new
+                        {
+                            MembershipTypeID = "jk5dgd-eh4d6h-f5sf4g77h5-dfs4g",
+                            Amount = 100.00m,
+                            Name = "Paw-fect"
+                        });
+                });
+
             modelBuilder.Entity("NonProfitProject.Models.News", b =>
                 {
                     b.Property<int>("NewsID")
@@ -521,16 +593,15 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("NewsCreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NewsDescription")
+                    b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NewsFooter")
+                    b.Property<string>("NewsBody")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NewsHeader")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("NewsLastUpdated")
@@ -540,6 +611,7 @@ namespace NonProfitProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NewsTitle")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("NewsID");
@@ -550,24 +622,22 @@ namespace NonProfitProject.Migrations
                         new
                         {
                             NewsID = 1,
-                            NewsCreationDate = new DateTime(2021, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NewsDescription = "Run for a whole week straight for cancer at the end of July. 15 Dollar Admission Fee. Event runs from July 24-31!",
-                            NewsFooter = "News Comittee",
-                            NewsHeader = "Come Join Us!",
-                            NewsLastUpdated = new DateTime(2021, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NewsPublishDate = new DateTime(2021, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NewsTitle = "10k Run for Cancer!"
+                            CreatedBy = "Unknown",
+                            NewsBody = "The Non-PAW-Fit Animal Rescue started their non-profit organization to raise awareness of abandoned pets across the United States.  Then mission:  To Rescue Pets from unwanted homes and provide them new home where they are become part of the family.",
+                            NewsHeader = "New Members are Wecome",
+                            NewsLastUpdated = new DateTime(2021, 7, 25, 15, 30, 30, 508, DateTimeKind.Utc).AddTicks(4200),
+                            NewsPublishDate = new DateTime(2021, 7, 25, 15, 30, 30, 508, DateTimeKind.Utc).AddTicks(3899),
+                            NewsTitle = "Non-PAW-Fit Raise Awareness"
                         },
                         new
                         {
                             NewsID = 2,
-                            NewsCreationDate = new DateTime(2021, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NewsDescription = "Finding Nemo with yummy snacks and any drink of choice. Cost of entry is $5 for movie and snacks! Snacks: Popcorn. Event runs on July 26!",
-                            NewsFooter = "News Comittee",
-                            NewsHeader = "Movie Time!",
-                            NewsLastUpdated = new DateTime(2021, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NewsPublishDate = new DateTime(2021, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NewsTitle = "Movie Night"
+                            CreatedBy = "Unknown",
+                            NewsBody = "Pets from cats and dogs to parrots and snakes are being rescued from unwanted homes and given a place to stay until they find their forever home.",
+                            NewsHeader = "50 Animals Rescued From Unwanted Homes",
+                            NewsLastUpdated = new DateTime(2021, 7, 25, 15, 30, 30, 508, DateTimeKind.Utc).AddTicks(4888),
+                            NewsPublishDate = new DateTime(2021, 7, 25, 15, 30, 30, 508, DateTimeKind.Utc).AddTicks(4870),
+                            NewsTitle = "Non-PAW-Fit Rescued Over 50"
                         });
                 });
 
@@ -765,14 +835,14 @@ namespace NonProfitProject.Migrations
                             Id = "6b87b89f-0f9a-4e2d-b696-235e99655521",
                             AccessFailedCount = 0,
                             AccountDisabled = false,
-                            ConcurrencyStamp = "4a448536-2d44-49a0-8022-609db1310054",
+                            ConcurrencyStamp = "039c8654-f6af-4432-9c36-27ab129fc797",
                             Email = "JohnJones@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEG0HcKAlgIHXaA6ONcWzgpZbgMzdhRgXBpPDpi4iTHv0W034JYAXb+RRslkeFdEjAQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBIEUqj/jTFw1ObByNVwVlO40YmjHjMd8wGIjvK9APVNfXi467jZMYW5FRC/PQKWKg==",
                             PhoneNumberConfirmed = false,
                             ReceiveWeeklyNewsletter = false,
-                            SecurityStamp = "a74a7e77-79cd-4d7b-8dfb-776f15dd065d",
+                            SecurityStamp = "142d7c94-1232-4001-9ecd-b64d4ddcc900",
                             TwoFactorEnabled = false,
                             UserActive = true,
                             UserAddr1 = "513 S Augusta St",
@@ -907,6 +977,10 @@ namespace NonProfitProject.Migrations
 
             modelBuilder.Entity("NonProfitProject.Models.MembershipDues", b =>
                 {
+                    b.HasOne("NonProfitProject.Models.MembershipType", "MembershipType")
+                        .WithMany()
+                        .HasForeignKey("MembershipTypeID");
+
                     b.HasOne("NonProfitProject.Models.Receipts", "Receipt")
                         .WithOne("MembershipDue")
                         .HasForeignKey("NonProfitProject.Models.MembershipDues", "ReceiptID")
@@ -916,6 +990,8 @@ namespace NonProfitProject.Migrations
                     b.HasOne("NonProfitProject.Models.User", "User")
                         .WithMany("MembershipDues")
                         .HasForeignKey("UserID");
+
+                    b.Navigation("MembershipType");
 
                     b.Navigation("Receipt");
 

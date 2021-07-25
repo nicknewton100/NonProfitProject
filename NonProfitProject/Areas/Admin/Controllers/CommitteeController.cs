@@ -17,7 +17,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
     [Route("[area]/[controller]s/[action]/{id?}")]
     public class CommitteeController : Controller
     {
-        private NonProfitContext context;
+        private readonly NonProfitContext context;
         public CommitteeController(NonProfitContext context)
         {
             this.context = context;

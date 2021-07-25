@@ -1,14 +1,24 @@
-﻿@{ 
-    ViewData["Title"] = "Edit Member";
+﻿@model NonProfitProject.Areas.Admin.Models.ViewModels.MemberViewModel
+@{
+    if(ViewBag.Action == "Details") {
+        ViewData["Title"] = "Member Details";
+    }
+    else {
+        ViewData["Title"] = "Edit Member";
+    }
+    TempData.Keep("Membership");
     ViewData["Title2"] = "Admin";
     Layout = "_AdminLayout";
-
 }
 
+<head>
+    <script type="text/javascript" src="~/js/UserValidation.js"></script>
+</head>
 <div class="container">
-    <div class="card-header-pills"><h1 class="fas fa-handshake"> @ViewData["Title"]</h1></div>
+    <div class="card-header-pills"><h1 class="fas fa-user-edit">  @ViewData["Title"]</h1></div>
+    <h5 class="text-primary">@TempData["DonorChanges"]?.ToString()</h5>
     <div>
-        <form>
+        <form method="post" asp-action="EditMember" style="font-size:medium">
             <div class="row">
                 <div class="card w-auto" style="margin:0.5rem;padding:0.25rem;">
                     <div class="card-body">
@@ -16,79 +26,70 @@
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="form-group">
-                                <!--FIRST NAME-->
                                 <div class="col-auto"><label>First Name: </label></div>
                                 <div class="col-auto">
-                                    <input  class="form-control" data-val="false" />
-                                    <span class="text-danger"></span>
+                                    <input asp-for="Firstname" class="form-control" />
+                                    <span asp-validation-for="Firstname" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <!--LAST NAME-->
                                 <div class="col-auto"><label>Last Name: </label></div>
                                 <div class="col-auto">
-                                    <input  class="form-control" data-val="false" />
-                                    <span  class="text-danger"></span>
+                                    <input asp-for="Lastname" class="form-control" />
+                                    <span asp-validation-for="Lastname" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <!--BIRTH DATE-->
                                 <div class="col-auto"><label>Birth Date: </label></div>
                                 <div class="col-auto">
-                                    <input  class="form-control" type="date" data-val="false" />
-                                    <span  class="text-danger"></span>
+                                    <input asp-for="BirthDate" class="form-control" type="date" />
+                                    <span asp-validation-for="BirthDate" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <!--GENDER-->
-                                <div class="col-auto"><label>Gender: </label></div>
+                                <div class="col-auto"><label for="gender">Gender: </label></div>
                                 <div class="col-auto">
-                                    <select class="form-control" name="Gender" id="Gender" data-val="false">
+                                    <select asp-for="Gender" class="form-control">
                                         <option></option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                         <option value="Prefer Not to Say">Prefer Not to Say</option>
                                     </select>
-
-                                    <span class="text-danger"></span>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
-                        <br />
+                        <br /><br />
                         <h4>Address Information</h4>
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="form-group w-50">
-                                <!--ADDRESS 1-->
                                 <div class="col-auto"><label>Address 1: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" />
-                                    <span class="text-danger"></span>
+                                    <input asp-for="Addr1" class="form-control" />
+                                    <span asp-validation-for="Addr1" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group w-50">
-                                <!--ADDRESS 2-->
                                 <div class="col-auto"><label>Address 2: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" />
-                                    <span class="text-danger"></span>
+                                    <input asp-for="Addr2" class="form-control" />
+                                    <span asp-validation-for="Addr2" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <!--CITY-->
                                 <div class="col-auto"><label>City: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" />
-                                    <span class="text-danger"></span>
+                                    <input asp-for="City" class="form-control" />
+                                    <span asp-validation-for="City" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <!--STATE-->
                                 <div class="col-auto"><label>State: </label></div>
                                 <div class="col-auto">
-                                    <select id="inputState" name="state" class="form-control" data-val="false">
+                                    <select asp-for="State" class="form-control BillingInformation">
                                         <option></option>
                                         <option value="Alaska">Alaska</option>
                                         <option value="Alabama">Alabama</option>
@@ -143,19 +144,84 @@
                                         <option value="West Virginia">West Virginia</option>
                                         <option value="Wyoming">Wyoming</option>
                                     </select>
-                                    <span class="text-danger"></span>
+                                    <span asp-validation-for="State" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <!--POSTAL CODE-->
                                 <div class="col-auto"><label>Postal Code: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" oninput="postalcode_format(this)" />
-                                    <span class="text-danger"></span>
+                                    <input asp-for="PostalCode" class="form-control" oninput="postalcode_format(this)" />
+                                    <span asp-validation-for="PostalCode" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
                         <br />
+                            <h4>Membership Information</h4>
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                @if (TempData["Membership"]?.ToString() == "Membership")
+                                {
+                                    <div class="form-group w-25">
+                                        <div class="col-auto"><label>Membership Status: </label></div>
+                                        <div class="col-auto">
+                                            <select asp-for="MembershipType" class="form-control" onchange="cancelMembership(this)">
+                                                <option value="">N/A</option>
+                                                <option value="Basic">Basic</option>
+                                                <option value="Advanced">Advanced</option>
+                                                <option value="Premium">Premium</option>
+                                                <option value="Paw-fect">Paw-fect</option>
+                                            </select>
+                                            <span asp-validation-for="MembershipType" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    @if(ViewBag.Action != "Edit")
+                                    {
+                                    <div class="form-group">
+                                        <div class="col-auto"><label>Member Since: </label></div>
+                                        <div class="col-auto">
+                                            <input asp-for="MemberSince" class="form-control membership" />
+                                            <span asp-validation-for="MemberSince" class="text-danger membership"></span>
+                                        </div>
+                                    </div>
+
+
+                                    
+                                    }
+                                }
+                                else 
+                                { 
+                                    <h6>This member doesnt have any membership dues</h6>
+                                }
+                                </div>
+                            @if(TempData["Membership"]?.ToString() == "Membership") 
+                            { 
+                            <div class="row membership">
+                                @if(ViewBag.Action != "Edit") { 
+                                    <div class="form-group">
+                                    <div class="col-auto"><label>Membership Start Date: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="LastRenewalDate" class="form-control membership" />
+                                        <span asp-validation-for="LastRenewalDate" class="text-danger membership"></span>
+                                    </div>
+                                </div>
+                                }
+                                <div class="form-group">
+                                    <div class="col-auto"><label>Membership End Date: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="FutureEndDate" class="form-control" />
+                                        <span asp-validation-for="FutureEndDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-auto"><label>Next Billing Date: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="FutureRenewalDate" class="form-control"/>
+                                        <span asp-validation-for="FutureRenewalDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+
                         <h4>Login Information</h4>
                         <div class="dropdown-divider"></div>
                         <div id="LoginInformation">
@@ -164,8 +230,8 @@
                                     <!--USERNAME-->
                                     <div class="col-auto"><label>Username: </label></div>
                                     <div class="col-auto">
-                                        <inputclass="form-control" id="Username" data-val="false" />
-                                        <span class="text-danger"></span>
+                                        <input asp-for="Username" class="form-control" id="Username" />
+                                        <span asp-validation-for="Username" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -174,16 +240,16 @@
                                     <!--EMAIL ADDRESS-->
                                     <div class="col-auto"><label>Email Address: </label></div>
                                     <div class="col-auto">
-                                        <input class="form-control" id="Email" data-val="false" />
-                                        <span class="text-danger"></span>
+                                        <input asp-for="Email" class="form-control" id="Email" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="form-group DetailsDisable w-50">
                                     <!--CONFIRM EMAIL ADDRESS-->
                                     <div class="col-auto"><label>Confirm Email Address: </label></div>
                                     <div class="col-auto">
-                                        <input class="form-control" id="EmailConfirmed" data-val="false" />
-                                        <span class="text-danger"></span>
+                                        <input asp-for="EmailConfirmed" class="form-control" id="EmailConfirmed" />
+                                        <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -193,8 +259,8 @@
                                     <!--TEMPORARY PASSWORD-->
                                     <div class="col-auto"><label>Temporary Password: </label></div>
                                     <div class="col-auto">
-                                        <input id="TemporaryPassword" class="form-control" data-val="false" />
-                                        <span  class="text-danger"></span>
+                                        <input id="TemporaryPassword" asp-for="TemporaryPassword" class="form-control" data-val="false" />
+                                        <span asp-validation-for="TemporaryPassword" class="text-danger"></span>
                                     </div>
                                     <div class="col-auto">
                                         <input type="checkbox" name="ShowPassword" onchange="document.getElementById('TemporaryPassword').type = this.checked ? 'text' : 'password'; document.getElementById('TemporaryPasswordConfirmed').type = this.checked ? 'text' : 'password';">
@@ -205,10 +271,116 @@
                                     <!--CONFIRM TEMPORARY PASSWORD-->
                                     <div class="col-auto"><label>Confirm Temporary Password: </label></div>
                                     <div class="col-auto">
-                                        <input id="TemporaryPasswordConfirmed" class="form-control" data-val="false" />
-                                        <span class="text-danger"></span>
+                                        <input id="TemporaryPasswordConfirmed" asp-for="TemporaryPasswordConfirmed" class="form-control" data-val="false" />
+                                        <span asp-validation-for="TemporaryPasswordConfirmed" class="text-danger"></span>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                @{
+                                    if (ViewBag.Action == "Edit")
+                                    {
+                                        <input type="hidden" asp-for="id">
+                                        <div class="row">
+                                            <div class="col-auto" style="margin-left:1rem;">
+                                                <input type="checkbox" id="ChangeLoginInformation" onchange="changeLoginInformation()" asp-for="IsChangingLogininformation" />
+                                                <label>  Change Login Information</label>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            var tempPassword = document.getElementById("TemporaryPassword");
+                                            tempPassword.placeholder = "optional"
+                                            var tempPasswordConfirmed = document.getElementById("TemporaryPasswordConfirmed");
+                                            tempPasswordConfirmed.placeholder = "optional";
+                                            var initialUsername = document.getElementById("Username").value;
+                                            var initialEmail = document.getElementById("Email").value;
+
+                                            function changeLoginInformation() {
+                                                let x = document.getElementById("ChangeLoginInformation");
+                                                if (x.checked) {
+                                                    document.getElementById("LoginInformation").style.display = "initial";
+                                                }
+                                                else {
+                                                    document.getElementById("LoginInformation").style.display = "none";
+                                                    document.getElementById("Email").value = initialEmail;
+                                                    document.getElementById("EmailConfirmed").value = initialEmail;
+                                                    document.getElementById("Username").value = initialUsername;
+                                                    tempPassword.value = "";
+                                                    tempPasswordConfirmed.value = "";
+                                                }
+                                            }
+                                            window.onload(changeLoginInformation());
+
+                                            function cancelMembership(e) {
+                                                var membershipInputs = document.getElementsByClassName("membership");
+                                                if (e.value == "") {
+                                                    for (var i = 0; i < membershipInputs.length; i++) {
+                                                        membershipInputs[i].hidden = true;
+                                                    }
+                                                }
+                                                else {
+                                                    for (var i = 0; i < membershipInputs.length; i++) {
+                                                        membershipInputs[i].hidden = false;
+                                                    }
+                                                }
+                                            }
+                                        </script>
+                                    }
+                                    else if (ViewBag.Action == "Details")
+                                    {
+                                        <script>
+                                            var inputs, index, selects;
+                                            inputs = document.getElementsByTagName('input');
+                                            selects = document.getElementsByTagName('select');
+                                            for (var index = 0; index < inputs.length; ++index) {
+                                                inputs[index].disabled = true;
+                                            }
+                                            for (var index = 0; index < selects.length; ++index) {
+                                                selects[index].disabled = true;
+                                            }
+                                            passwordElements = document.getElementsByClassName("DetailsDisable");
+                                            passwordElements[0].style.display = "none";
+                                            passwordElements[1].style.display = "none";
+                                            passwordElements[2].style.display = "none";
+                                            document.getElementById("SelectCommittee").disabled = true;
+                                        </script>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <!--COMMENTED OUT SINCE IT IS UNNECESSARY AT THE TIME-->
+                        <br />
+                        @**<div class="form-check row">
+            <div class="col-auto">
+                <input class="form-check-input" type="checkbox" value="" id="emp">
+                <label class="form-check-label" for="empl">
+                    Joining the Team?
+                </label>
+            </div>
+        </div>
+        <div class="form-check row">
+            <div class="col-auto">
+                <input class="form-check-input" type="checkbox" value="" id="news">
+                <label class="form-check-label" for="news">
+                    Receiving Newsletters?
+                </label>
+            </div>
+        </div>*@
+                        <br /><br />
+                        <div class="row">
+                            <div class="col-auto">
+                                @if (ViewBag.Action == "Details")
+                                {
+                                    <button type="button" class="btn btn-outline-dark" onclick="location.href = '@Url.Action("EditMember","Member", new { id = Model.id })'">Edit Member</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-outline-dark">Save Changes</button>
+                                }
+
+                                <a class="btn btn-dark" asp-controller="Member" asp-action="Index">Cancel</a>
                             </div>
                         </div>
                     </div>

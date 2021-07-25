@@ -119,7 +119,7 @@ namespace NonProfitProject.Controllers.Shared.Users
                     BillingCity = model.BillingCity,
                     BillingState = model.BillingState,
                     BillingPostalCode = (int)model.BillingPostalCode,
-                    Last4Digits = Int32.Parse(model.CardNumber.Substring(model.CardNumber.Length - 4))
+                    Last4Digits = Int32.Parse(model.CardNumber[^4..])
                 };
                 context.SavedPayments.Add(savedPaymentInformation);
                 context.SaveChanges();

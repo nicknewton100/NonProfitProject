@@ -18,6 +18,5 @@ namespace NonProfitProject.Models
         public Receipts Receipt { get; set; }
         public decimal DonationAmount { get; set; }
         public DateTime DonationDate { get; set; }
-        public string Comments { get; set; }
     }
 }

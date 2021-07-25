@@ -1,39 +1,49 @@
-﻿
+﻿@model News
 @{
     ViewData["Title"] = "Edit Article";
     ViewData["Title2"] = "Admin";
     Layout = "_AdminLayout";
 }
+<head>
+    <script src="https://cdn.tiny.cloud/1/9u3uiq672u85xw0g91istvdtwew3owch5oqyu6le4if9vaay/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
 
 <div class="container">
     <div class="card-header-pills"><h1 class="far fa-newspaper"> News Articles</h1></div>
 
-    <form>
-        <div class="row">
-            <div class="form-group">
-                <div class="col-auto"><label>News Header: </label></div>
+    <form method="post" asp-action="EditNews">
+        <input asp-for="NewsID" hidden readonly />
+        <div class="row w-50">
+            <div class="form-group w-50">
+                <div class="col-auto"><label>News Title: </label></div>
                 <div class="col-lg-auto">
-                    <input class="form-control" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-auto"><label>Publisher: </label></div>
-                <div class="col-auto">
-                    <input class="form-control" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-auto"><label>Date Published: </label></div>
-                <div class="col-auto">
-                    <input class="form-control" type="date" />
+                    <input asp-for="NewsTitle" class="form-control" />
+                    <span asp-validation-for="NewsTitle" class="text-danger"></span>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="form-group">
-                <div class="col-auto"><label>News Information: </label> </div>
+            <div class="form-group w-50">
+                <div class="col-auto"><label>News Header: </label></div>
+                <div class="col-lg-auto">
+                    <input asp-for="NewsHeader" class="form-control" />
+                    <span asp-validation-for="NewsHeader" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group w-100">
+                <div class="col-auto"><label>News Body: </label> </div>
                 <div class="col-auto">
-                    <textarea cols="150" rows="10" class="form-control"></textarea>
+                    <textarea id="NewsBody" asp-for="NewsBody" cols="150" rows="25" class="form-control"></textarea>
+                    <span asp-validation-for="NewsBody" class="text-danger"></span>
+                    <script>
+                        tinymce.init({
+                            selector: 'textarea',
+                            plugins: 'a11ychecker advcode linkchecker autolink lists media mediaembed powerpaste table advtable tinymcespellchecker',
+                            toolbar_mode: 'floating'
+                        });
+                    </script>
                 </div>
             </div>
         </div>
@@ -47,3 +57,21 @@
         </div>
     </form>
 </div>
+<script type="text/javascript">
+
+    document.getElementById('NewsBody').addEventListener('keydown', function (e) {
+        if (e.key == 'Tab') {
+            e.preventDefault();
+            var start = this.selectionStart;
+            var end = this.selectionEnd;
+
+            // set textarea value to: text before caret + tab + text after caret
+            this.value = this.value.substring(0, start) +
+                "\t" + this.value.substring(end);
+
+            // put caret at right position again
+            this.selectionStart =
+                this.selectionEnd = start + 1;
+        }
+    });
+</script>

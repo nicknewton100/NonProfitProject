@@ -14,7 +14,7 @@ namespace NonProfitProject.Models.ViewModels
         public string CardType { get; set; }
         [Required(ErrorMessage = "Please enter Card number")]
         public string CardNumber { get; set; }
-        [Required(ErrorMessage = "Please enter Card Expiration Date")]
+        [Required(ErrorMessage = "Please enter Expiration Date")]
         public string ExpDate { get; set; }
         [Required(ErrorMessage = "Please enter CVV Number")]
         public string CVV { get; set; }

@@ -1,13 +1,17 @@
-﻿@{
-    ViewData["Title"] = "Add User";
+﻿@model NonProfitProject.Areas.Admin.Models.ViewModels.DonorViewModel
+@{
+    ViewData["Title"] = "Add Donor";
     ViewData["Title2"] = "Admin";
     Layout = "_AdminLayout";
 }
 
+<head>
+    <script type="text/javascript" src="~/js/UserValidation.js"></script>
+</head>
 <div class="container">
     <div class="card-header-pills"><h1 class="fas fa-user-edit">  @ViewData["Title"]</h1></div>
     <div>
-        <form method="post" style="font-size:medium">
+        <form method="post" asp-action="AddDonor" style="font-size:medium">
             <div class="row">
                 <div class="card w-auto" style="margin:0.5rem;padding:0.25rem;">
                     <div class="card-body">
@@ -17,34 +21,34 @@
                             <div class="form-group">
                                 <div class="col-auto"><label>First Name: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" />
-                                    <span class="text-danger"></span>
+                                    <input asp-for="Firstname" class="form-control" />
+                                    <span asp-validation-for="Firstname" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-auto"><label>Last Name: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" />
-                                    <span class="text-danger"></span>
+                                    <input asp-for="Lastname" class="form-control" />
+                                    <span asp-validation-for="Lastname" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-auto"><label>Birth Date: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" type="date" data-val="false" />
-                                    <span class="text-danger"></span>
+                                    <input asp-for="BirthDate" class="form-control" type="date" />
+                                    <span asp-validation-for="BirthDate" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-auto"><label for="gender">Gender: </label></div>
                                 <div class="col-auto">
-                                    <select class="form-control" name="gender" id="gender">
-                                        <option value="#" disabled selected>...</option>
+                                    <select asp-for="Gender" class="form-control">
+                                        <option></option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                         <option value="Prefer Not to Say">Prefer Not to Say</option>
                                     </select>
-                                    <span class="text-danger"></span>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -55,15 +59,15 @@
                             <div class="form-group w-50">
                                 <div class="col-auto"><label>Address 1: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" />
-                                    <span class="text-danger"></span>
+                                    <input asp-for="Addr1" class="form-control" />
+                                    <span asp-validation-for="Addr1" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group w-50">
                                 <div class="col-auto"><label>Address 2: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" />
-                                    <span class="text-danger"></span>
+                                    <input asp-for="Addr2" class="form-control" />
+                                    <span asp-validation-for="Addr2" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -71,65 +75,168 @@
                             <div class="form-group">
                                 <div class="col-auto"><label>City: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" />
-                                    <span class="text-danger"></span>
+                                    <input asp-for="City" class="form-control" />
+                                    <span asp-validation-for="City" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-auto"><label>State: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" />
-                                    <span class="text-danger"></span>
+                                    <select asp-for="State" class="form-control BillingInformation">
+                                        <option></option>
+                                        <option value="Alaska">Alaska</option>
+                                        <option value="Alabama">Alabama</option>
+                                        <option value="Arkansas">Arkansas</option>
+                                        <option value="Arizona">Arizona</option>
+                                        <option value="California">California</option>
+                                        <option value="Colorado">Colorado</option>
+                                        <option value="Connecticut">Connecticut</option>
+                                        <option value="District of Columbia">District of Columbia</option>
+                                        <option value="Delaware">Delaware</option>
+                                        <option value="Florida">Florida</option>
+                                        <option value="Georgia">Georgia</option>
+                                        <option value="Hawaii">Hawaii</option>
+                                        <option value="Iowa">Iowa</option>
+                                        <option value="Idaho">Idaho</option>
+                                        <option value="Illinois">Illinois</option>
+                                        <option value="Indiana">Indiana</option>
+                                        <option value="Kansas">Kansas</option>
+                                        <option value="Kentucky">Kentucky</option>
+                                        <option value="Louisiana">Louisiana</option>
+                                        <option value="Massachusetts">Massachusetts</option>
+                                        <option value="Maryland">Maryland</option>
+                                        <option value="Maine">Maine</option>
+                                        <option value="Michigan">Michigan</option>
+                                        <option value="Michigan">Minnesota</option>
+                                        <option value="Missouri">Missouri</option>
+                                        <option value="Mississippi">Mississippi</option>
+                                        <option value="Montana">Montana</option>
+                                        <option value="North Carolina">North Carolina</option>
+                                        <option value="North Dakota">North Dakota</option>
+                                        <option value="Nebraska">Nebraska</option>
+                                        <option value="New Hampshire">New Hampshire</option>
+                                        <option value="New Jersey">New Jersey</option>
+                                        <option value="New Mexico">New Mexico</option>
+                                        <option value="Nevada">Nevada</option>
+                                        <option value="New York">New York</option>
+                                        <option value="Ohio">Ohio</option>
+                                        <option value="Oklahoma">Oklahoma</option>
+                                        <option value="Oregon">Oregon</option>
+                                        <option value="Pennsylvania">Pennsylvania</option>
+                                        <option value="Puerto Rico">Puerto Rico</option>
+                                        <option value="Rhode Island">Rhode Island</option>
+                                        <option value="South Carolina">South Carolina</option>
+                                        <option value="South Dakota">South Dakota</option>
+                                        <option value="Tennessee">Tennessee</option>
+                                        <option value="Texas">Texas</option>
+                                        <option value="Utah">Utah</option>
+                                        <option value="Virginia">Virginia</option>
+                                        <option value="Vermont">Vermont</option>
+                                        <option value="Washington">Washington</option>
+                                        <option value="Wisconsin">Wisconsin</option>
+                                        <option value="West Virginia">West Virginia</option>
+                                        <option value="Wyoming">Wyoming</option>
+                                    </select>
+                                    <span asp-validation-for="State" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-auto"><label>Postal Code: </label></div>
                                 <div class="col-auto">
-                                    <input class="form-control" data-val="false" />
-                                    <span class="text-danger"></span>
+                                    <input asp-for="PostalCode" class="form-control" oninput="postalcode_format(this)"/>
+                                    <span asp-validation-for="PostalCode" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-auto"><label>Country: </label></div>
-                                <div class="col-auto">
-                                    <input class="form-control" data-val="false" />
-                                    <span class="text-danger"></span>
+                        </div>
+
+                        <h4>Login Information</h4>
+                        <div class="dropdown-divider"></div>
+                        <div id="LoginInformation">
+                            <div class="row">
+                                <div class="form-group">
+                                    <!--USERNAME-->
+                                    <div class="col-auto"><label>Username: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="Username" class="form-control" id="Username" />
+                                        <span asp-validation-for="Username" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group w-50">
+                                    <!--EMAIL ADDRESS-->
+                                    <div class="col-auto"><label>Email Address: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="Email" class="form-control" id="Email" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group DetailsDisable w-50">
+                                    <!--CONFIRM EMAIL ADDRESS-->
+                                    <div class="col-auto"><label>Confirm Email Address: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="EmailConfirmed" class="form-control" id="EmailConfirmed" />
+                                        <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group DetailsDisable w-50">
+                                    <!--TEMPORARY PASSWORD-->
+                                    <div class="col-auto"><label>Temporary Password: </label></div>
+                                    <div class="col-auto">
+                                        <input id="TemporaryPassword" asp-for="TemporaryPassword" class="form-control" />
+                                        <span asp-validation-for="TemporaryPassword" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="checkbox" name="ShowPassword" onchange="document.getElementById('TemporaryPassword').type = this.checked ? 'text' : 'password'; document.getElementById('TemporaryPasswordConfirmed').type = this.checked ? 'text' : 'password';">
+                                        <label for="ShowPassword"> Show Password</label>
+                                    </div>
+                                </div>
+                                <div class="form-group DetailsDisable w-50">
+                                    <!--CONFIRM TEMPORARY PASSWORD-->
+                                    <div class="col-auto"><label>Confirm Temporary Password: </label></div>
+                                    <div class="col-auto">
+                                        <input id="TemporaryPasswordConfirmed" asp-for="TemporaryPasswordConfirmed" class="form-control" />
+                                        <span asp-validation-for="TemporaryPasswordConfirmed" class="text-danger"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!--COMMENTED OUT SINCE IT IS UNNECESSARY AT THE TIME-->
-                        @*<br /><br />
+                        <br /><br />
                         <h4>Other: </h4>
                         <div class="dropdown-divider"></div>
                         <div class="form-check row">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="" id="vip">
+                                <input asp-for="IsBecomingMember" class="form-check-input" type="checkbox">
                                 <label class="form-check-label" for="vip">
                                     Becoming a VIP Member?
                                 </label>
                             </div>
                         </div>
-                        <div class="form-check row">
-                            <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="" id="emp">
-                                <label class="form-check-label" for="empl">
-                                    Joining the Team?
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-check row">
-                            <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="" id="news">
-                                <label class="form-check-label" for="news">
-                                    Receiving Newsletters?
-                                </label>
-                            </div>
-                        </div>*@
+                        @**<div class="form-check row">
+            <div class="col-auto">
+                <input class="form-check-input" type="checkbox" value="" id="emp">
+                <label class="form-check-label" for="empl">
+                    Joining the Team?
+                </label>
+            </div>
+        </div>
+        <div class="form-check row">
+            <div class="col-auto">
+                <input class="form-check-input" type="checkbox" value="" id="news">
+                <label class="form-check-label" for="news">
+                    Receiving Newsletters?
+                </label>
+            </div>
+        </div>*@
                         <br /><br />
                         <div class="row">
                             <div class="col-auto">
-                                <button class="btn btn-primary">Add User</button>
-                                <a class="btn btn-danger" asp-area="Admin" asp-controller="Donor" asp-action="Index">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Add User</button>
+                                <a class="btn btn-danger" asp-controller="Donor" asp-action="Index">Cancel</a>
                             </div>
                         </div>
                     </div>                    

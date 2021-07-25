@@ -28,8 +28,8 @@
                 {
                 <tr>
                     <th scope="row" hidden>@events.EventID </th>
-                    <th>@events.EventStartDate.ToShortDateString()</th>
-                    <th>@events.EventEndDate.ToShortDateString()</th>
+                    <th>@events.EventStartDate.ToString("d") <br /> @events.EventStartDate.ToShortTimeString()</th>
+                    <th>@events.EventEndDate.ToString("g") <br /> @events.EventEndDate.ToShortTimeString()</th>
                     <th>@events.EventName</th>
                     <th>@events.EventDescription</th>
                     <th>

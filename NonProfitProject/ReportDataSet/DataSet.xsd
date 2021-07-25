@@ -454,7 +454,7 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="ReceiptID" msprop:Generator_ColumnVarNameInTable="columnReceiptID" msprop:Generator_ColumnPropNameInRow="ReceiptID" msprop:Generator_ColumnPropNameInTable="ReceiptIDColumn" msprop:Generator_UserColumnName="ReceiptID" type="xs:int" />
-              <xs:element name="MemAmount" msprop:Generator_ColumnVarNameInTable="columnMemAmount" msprop:Generator_ColumnPropNameInRow="MemAmount" msprop:Generator_ColumnPropNameInTable="MemAmountColumn" msprop:Generator_UserColumnName="MemAmount" type="xs:decimal" />
+              <xs:element name="MembershipTypeID" msprop:Generator_ColumnVarNameInTable="columnMembershipTypeID" msprop:Generator_ColumnPropNameInRow="MembershipTypeID" msprop:Generator_ColumnPropNameInTable="MembershipTypeIDColumn" msprop:Generator_UserColumnName="MembershipTypeID" type="xs:string" />
               <xs:element name="MemStartDate" msprop:Generator_ColumnVarNameInTable="columnMemStartDate" msprop:Generator_ColumnPropNameInRow="MemStartDate" msprop:Generator_ColumnPropNameInTable="MemStartDateColumn" msprop:Generator_UserColumnName="MemStartDate" type="xs:dateTime" />
               <xs:element name="MemEndDate" msprop:Generator_ColumnVarNameInTable="columnMemEndDate" msprop:Generator_ColumnPropNameInRow="MemEndDate" msprop:Generator_ColumnPropNameInTable="MemEndDateColumn" msprop:Generator_UserColumnName="MemEndDate" type="xs:dateTime" />
               <xs:element name="MemRenewalDate" msprop:Generator_ColumnVarNameInTable="columnMemRenewalDate" msprop:Generator_ColumnPropNameInRow="MemRenewalDate" msprop:Generator_ColumnPropNameInTable="MemRenewalDateColumn" msprop:Generator_UserColumnName="MemRenewalDate" type="xs:dateTime" />
@@ -798,6 +798,47 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="MembershipTypes" msprop:Generator_TableClassName="MembershipTypesDataTable" msprop:Generator_TableVarName="tableMembershipTypes" msprop:Generator_RowChangedName="MembershipTypesRowChanged" msprop:Generator_TablePropName="MembershipTypes" msprop:Generator_RowDeletingName="MembershipTypesRowDeleting" msprop:Generator_RowChangingName="MembershipTypesRowChanging" msprop:Generator_RowEvHandlerName="MembershipTypesRowChangeEventHandler" msprop:Generator_RowDeletedName="MembershipTypesRowDeleted" msprop:Generator_RowClassName="MembershipTypesRow" msprop:Generator_UserTableName="MembershipTypes" msprop:Generator_RowEvArgName="MembershipTypesRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MembershipTypeID" msprop:Generator_ColumnVarNameInTable="columnMembershipTypeID" msprop:Generator_ColumnPropNameInRow="MembershipTypeID" msprop:Generator_ColumnPropNameInTable="MembershipTypeIDColumn" msprop:Generator_UserColumnName="MembershipTypeID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="450" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Amount" msprop:Generator_ColumnVarNameInTable="columnAmount" msprop:Generator_ColumnPropNameInRow="Amount" msprop:Generator_ColumnPropNameInTable="AmountColumn" msprop:Generator_UserColumnName="Amount" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Employee_x0020_Contact_x0020_Information" msprop:Generator_TableClassName="Employee_Contact_InformationDataTable" msprop:Generator_TableVarName="tableEmployee_Contact_Information" msprop:Generator_TablePropName="Employee_Contact_Information" msprop:Generator_RowDeletingName="Employee_Contact_InformationRowDeleting" msprop:Generator_RowChangingName="Employee_Contact_InformationRowChanging" msprop:Generator_RowEvHandlerName="Employee_Contact_InformationRowChangeEventHandler" msprop:Generator_RowDeletedName="Employee_Contact_InformationRowDeleted" msprop:Generator_UserTableName="Employee Contact Information" msprop:Generator_RowChangedName="Employee_Contact_InformationRowChanged" msprop:Generator_RowEvArgName="Employee_Contact_InformationRowChangeEvent" msprop:Generator_RowClassName="Employee_Contact_InformationRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Financial_x0020_Report" msprop:Generator_TableClassName="Financial_ReportDataTable" msprop:Generator_TableVarName="tableFinancial_Report" msprop:Generator_TablePropName="Financial_Report" msprop:Generator_RowDeletingName="Financial_ReportRowDeleting" msprop:Generator_RowChangingName="Financial_ReportRowChanging" msprop:Generator_RowEvHandlerName="Financial_ReportRowChangeEventHandler" msprop:Generator_RowDeletedName="Financial_ReportRowDeleted" msprop:Generator_UserTableName="Financial Report" msprop:Generator_RowChangedName="Financial_ReportRowChanged" msprop:Generator_RowEvArgName="Financial_ReportRowChangeEvent" msprop:Generator_RowClassName="Financial_ReportRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Members_x0020_Contact_x0020_Information" msprop:Generator_TableClassName="Members_Contact_InformationDataTable" msprop:Generator_TableVarName="tableMembers_Contact_Information" msprop:Generator_TablePropName="Members_Contact_Information" msprop:Generator_RowDeletingName="Members_Contact_InformationRowDeleting" msprop:Generator_RowChangingName="Members_Contact_InformationRowChanging" msprop:Generator_RowEvHandlerName="Members_Contact_InformationRowChangeEventHandler" msprop:Generator_RowDeletedName="Members_Contact_InformationRowDeleted" msprop:Generator_UserTableName="Members Contact Information" msprop:Generator_RowChangedName="Members_Contact_InformationRowChanged" msprop:Generator_RowEvArgName="Members_Contact_InformationRowChangeEvent" msprop:Generator_RowClassName="Members_Contact_InformationRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Donor_x0020_Contact_x0020_Information" msprop:Generator_TableClassName="Donor_Contact_InformationDataTable" msprop:Generator_TableVarName="tableDonor_Contact_Information" msprop:Generator_TablePropName="Donor_Contact_Information" msprop:Generator_RowDeletingName="Donor_Contact_InformationRowDeleting" msprop:Generator_RowChangingName="Donor_Contact_InformationRowChanging" msprop:Generator_RowEvHandlerName="Donor_Contact_InformationRowChangeEventHandler" msprop:Generator_RowDeletedName="Donor_Contact_InformationRowDeleted" msprop:Generator_UserTableName="Donor Contact Information" msprop:Generator_RowChangedName="Donor_Contact_InformationRowChanged" msprop:Generator_RowEvArgName="Donor_Contact_InformationRowChangeEvent" msprop:Generator_RowClassName="Donor_Contact_InformationRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -880,6 +921,10 @@
       <xs:selector xpath=".//mstns:Employees1" />
       <xs:field xpath="mstns:EmpID" />
     </xs:unique>
+    <xs:unique name="MembershipTypes_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:MembershipTypes" />
+      <xs:field xpath="mstns:MembershipTypeID" />
+    </xs:unique>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
@@ -900,6 +945,7 @@
       <msdata:Relationship name="FK_MembershipDues_AspNetUsers_UserID" msdata:parent="AspNetUsers" msdata:child="MembershipDues" msdata:parentkey="Id" msdata:childkey="UserID" msprop:Generator_UserChildTable="MembershipDues" msprop:Generator_ChildPropName="GetMembershipDuesRows" msprop:Generator_UserRelationName="FK_MembershipDues_AspNetUsers_UserID" msprop:Generator_RelationVarName="relationFK_MembershipDues_AspNetUsers_UserID" msprop:Generator_UserParentTable="AspNetUsers" msprop:Generator_ParentPropName="AspNetUsersRow" />
       <msdata:Relationship name="FK_Receipts_AspNetUsers_UserID" msdata:parent="AspNetUsers" msdata:child="Receipts" msdata:parentkey="Id" msdata:childkey="UserID" msprop:Generator_UserChildTable="Receipts" msprop:Generator_ChildPropName="GetReceiptsRows" msprop:Generator_UserRelationName="FK_Receipts_AspNetUsers_UserID" msprop:Generator_RelationVarName="relationFK_Receipts_AspNetUsers_UserID" msprop:Generator_UserParentTable="AspNetUsers" msprop:Generator_ParentPropName="AspNetUsersRow" />
       <msdata:Relationship name="FK_SavedPayments_AspNetUsers_UserID" msdata:parent="AspNetUsers" msdata:child="SavedPayments" msdata:parentkey="Id" msdata:childkey="UserID" msprop:Generator_UserChildTable="SavedPayments" msprop:Generator_ChildPropName="GetSavedPaymentsRows" msprop:Generator_UserRelationName="FK_SavedPayments_AspNetUsers_UserID" msprop:Generator_RelationVarName="relationFK_SavedPayments_AspNetUsers_UserID" msprop:Generator_UserParentTable="AspNetUsers" msprop:Generator_ParentPropName="AspNetUsersRow" />
+      <msdata:Relationship name="MembershipTypes_MembershipDues" msdata:parent="MembershipTypes" msdata:child="MembershipDues" msdata:parentkey="MembershipTypeID" msdata:childkey="MembershipTypeID" msprop:Generator_UserChildTable="MembershipDues" msprop:Generator_ChildPropName="GetMembershipDuesRows" msprop:Generator_UserRelationName="MembershipTypes_MembershipDues" msprop:Generator_ParentPropName="MembershipTypesRow" msprop:Generator_RelationVarName="relationMembershipTypes_MembershipDues" msprop:Generator_UserParentTable="MembershipTypes" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

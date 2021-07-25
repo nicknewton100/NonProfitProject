@@ -16,10 +16,31 @@ namespace NonProfitProject.Models
         public User User { get; set; }
         public int ReceiptID { get; set; }
         public Receipts Receipt { get; set; }
-        public decimal MemAmount { get; set; }
+        public string MembershipTypeID { get; set; }
+        public MembershipType MembershipType { get; set; }
         public DateTime MemStartDate { get; set; }
         public DateTime MemEndDate { get; set; }
         public DateTime MemRenewalDate { get; set; }
         public bool MemActive { get; set; }
+
+        public static DateTime? GetConsecutiveDate(List<MembershipDues> membershipDues)
+        {
+            membershipDues.OrderBy(md => new { md.MemStartDate, md.MemRenewalDate });
+            DateTime? consecutiveMember = null;
+            if (membershipDues.Last().MemActive)
+            {
+                string membershipType = membershipDues.Last().MembershipType.Name;
+                for (int i = membershipDues.Count - 1; i >= 0; i--)
+                {
+                    if(i == 0 || membershipDues[i].MemStartDate.Date != membershipDues?[i -1].MemRenewalDate.Date && membershipDues[i].MembershipType.Name == membershipDues?[i - 1].MembershipType.Name)
+                    {
+                        consecutiveMember = membershipDues[i].MemStartDate;
+                        break;
+                    }
+                }
+                return consecutiveMember;
+            }
+            return null;
+        }
     }
 }
