@@ -64,7 +64,7 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.9243in</Width>
+                  <Width>1.93263in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.71806in</Width>
@@ -223,7 +223,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.09722in</Size>
+                    <Size>1.68055in</Size>
                     <CellContents>
                       <Textbox Name="Textbox3">
                         <CanGrow>true</CanGrow>
@@ -275,7 +275,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>2.09722in</Size>
+                    <Size>1.68055in</Size>
                     <CellContents>
                       <Textbox Name="EmpID">
                         <CanGrow>true</CanGrow>
@@ -315,7 +315,7 @@
             <Top>0.22167in</Top>
             <Left>0.38416in</Left>
             <Height>0.5in</Height>
-            <Width>5.73958in</Width>
+            <Width>5.33125in</Width>
             <Style>
               <Border>
                 <Style>Solid</Style>
