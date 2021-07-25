@@ -11,11 +11,12 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://kit.fontawesome.com/deab61ee00.js" crossorigin="anonymous"></script>
+
 }
 
 
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark box-shadow fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-light box-shadow fixed-top">
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/NonPawFitAnimalRescue_2.png" alt="Non-Paw-Fit Animal Rescue" title="Non-Paw-Fit Animal Rescue" height="50" /></a>
 
@@ -26,18 +27,22 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="EventCalendar" asp-action="Index">Events</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="EventCalendar" asp-action="Index">Events</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="News" asp-action="Index">News</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">News</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="Donate" asp-action="Index">Donate</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Donate" asp-action="Index">Donate</a>
                     </li>
                 </ul>
+                <a href="javascript:void()"
+                   class="btn btn-outline-info btn-lg ml-auto font-weight-bold"
+                   id="theme-toggler"
+                   onclick="toggleTheme()">Theme</a>
             </div>
             <div>
                 @if (signInManager.IsSignedIn(User))

@@ -11,6 +11,7 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://kit.fontawesome.com/deab61ee00.js" crossorigin="anonymous"></script>
+    <script src="~/js/index.js"></script>
 }
 
 
@@ -22,6 +23,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/dashboard.css" />
+    <link id="dark-theme-style" rel="stylesheet" />
 
 </head>
 <body>
@@ -33,6 +35,10 @@
                 <form method="post" asp-area="" asp-action="Logout" asp-controller="Account">
                     <button type="submit" class="btn btn-dark">Logout</button>
                 </form>
+                    <a href="javascript:void()"
+       class="btn btn-outline-info btn-lg ml-auto font-weight-bold"
+       id="theme-toggler"
+       onclick="toggleTheme()">Theme</a>
             </div>
         </div>
     </div>
@@ -88,6 +94,9 @@
 
         </ul>
     </div>
+    <div>
+    </div>
+
 
     <div class="main" style="padding: 0 0 5rem 5rem; ">
         @RenderBody()
