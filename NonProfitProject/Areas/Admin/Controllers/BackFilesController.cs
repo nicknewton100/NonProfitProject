@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.Hosting;
 using AspNetCore.Reporting;
 using NonProfitProject.Models;
 using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
@@ -97,7 +100,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Print()
         {
-            var employee = context.Employees.ToList();
+            var employee = context.Employees.Include(e => e.User).ToList();
             DataTable dt = new DataTable();
             dt = getData(employee);
 
@@ -111,23 +114,34 @@ namespace NonProfitProject.Areas.Admin.Controllers
             localReport.AddDataSource("dsEmployee", dt);
             //localReport.AddDataSource("dsUsers",context)
             var result = localReport.Execute(RenderType.Pdf,extension ,parameters, mimetype);
-
             return File(result.MainStream, "application/pdf");
         }
 
         public DataTable getData(List<Employees> context)
         {
             var dt = new DataTable();
-            dt.Columns.Add("EmpID");
-            dt.Columns.Add("UserID");
-            dt.Columns.Add("Position");
+            dt.Columns.Add("Number");
+            dt.Columns.Add("EmpPosition");
+            dt.Columns.Add("EmpName");
+            dt.Columns.Add("EmpEmail");
+            dt.Columns.Add("EmpPhone");
+            dt.Columns.Add("EmpAddress");
+            dt.Columns.Add("EmpHireDate");
+            dt.Columns.Add("EmpReleaseDate");
             DataRow row;
+            int number = 0;
             foreach(var i in context)
             {
+                number += 1;
                 row = dt.NewRow();
-                row["EmpID"] = i.EmpID;
-                row["UserID"] = i.UserID;
-                row["Position"] = i.Position;
+                row["Number"] = number;
+                row["EmpPosition"] = i.Position;
+                row["EmpName"] = i.User.UserFirstName + " " + i.User.UserLastName;
+                row["EmpEmail"] = i.User.Email;
+                row["EmpPhone"] = i.User?.PhoneNumber ?? "Null";
+                row["EmpAddress"] = String.Format("{0}, {1}{2}, {3} {4}", i.User.UserAddr1.Replace(".", "").TrimEnd(), i.User.UserAddr2 == "" ? i.User.UserAddr2 + ", " : "", i.User.UserCity, i.User.UserState, i.User.UserPostalCode);
+                row["EmpHireDate"] = i.HireDate.ToShortDateString();
+                row["EmpReleaseDate"] = i.ReleaseDate.HasValue ? i.ReleaseDate.Value.ToShortDateString() : "Null";
                 dt.Rows.Add(row);
             }
             return dt;
