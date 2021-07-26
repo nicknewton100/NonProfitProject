@@ -7,15 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Reports\rptDonorContact.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\rptEmployeeContact.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
     <PackageReference Include="bootstrap" Version="5.0.1" />
     <PackageReference Include="iTextSharp" Version="5.5.13.2" />
@@ -80,6 +71,12 @@
     </Content>
     <Content Update="wwwroot\img\myPupper.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Reports\rptDonorContact.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Reports\rptEmployeeContact.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
