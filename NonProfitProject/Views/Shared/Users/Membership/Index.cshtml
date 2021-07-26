@@ -1,9 +1,41 @@
-﻿
+﻿@model NonProfitProject.Models.MembershipDues
 @{
     ViewData["Title"] = "Manage Membership";
     ViewData["Title2"] = "Profile";
-    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";  
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+
 }
-<head>
-    <script type="text/javascript" src="~/js/UserValidation.js"></script>
-</head>
+
+
+<div class="container">
+    <div class="card-header-pills"><h1 class="fa fa-address-card"> @ViewData["Title"]</h1></div>
+    <div class="row">
+        <div style="margin:1rem;">
+            <!--Needs Action-->
+            <a class="btn-lg btn-dark text-decoration-none" asp-action="">Edit Membership</a>
+        </div>
+        <div class="justify-content-center" style="margin:1rem;">
+            <!--Needs Action-->
+            <a class="btn-lg btn-dark text-decoration-none" asp-action="">Become a Member</a>
+        </div>
+    </div>
+    <div>
+        <form style="font-size:large">
+            <input type="hidden" asp-for="User" />
+            <div class="row">
+                <div class="card w-auto" style="margin:0.5rem;padding:0.25rem;">
+                    <div class="card-body">
+                        <h4>Membership Information</h4>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col-auto"><p>Membership Type:  @Model.MembershipType</p> </div>
+                            <div class="col-auto"><p>Start Date:  @Model.MemStartDate</p></div>
+                            <div class="col-auto"><p>End Date:  @Model.MemEndDate</p></div>
+                            <div class="col-auto"><p>Renewal Date: @Model.MemRenewalDate</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
