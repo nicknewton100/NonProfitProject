@@ -23,11 +23,11 @@ namespace NonProfitProject.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class BackFilesController : Controller
+    public class BackupController : Controller
     {
         private IWebHostEnvironment webHostEnvironment;
         private NonProfitContext context;
-        public BackFilesController(IWebHostEnvironment webHostEnvironment, NonProfitContext context)
+        public BackupController(IWebHostEnvironment webHostEnvironment, NonProfitContext context)
         {
             this.webHostEnvironment = webHostEnvironment;
             this.context = context;
@@ -44,7 +44,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             try
             {
-                string directory = @"..\\Backup";
+                string directory = @"..\\BackupFiles\\Database";
                 if (!Directory.Exists(directory))
                 {
                     Directory.CreateDirectory(directory);
@@ -84,7 +84,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             string path = Environment.CurrentDirectory.ToString(); ;
 
-            string directory = @"..\\Backup";
+            string directory = @"..\\BackupFiles\\Application";
 
             if (!Directory.Exists(directory))
             {
