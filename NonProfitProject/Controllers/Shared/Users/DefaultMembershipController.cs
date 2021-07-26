@@ -27,7 +27,8 @@ namespace NonProfitProject.Controllers.Shared.Users
             {
                 return RedirectToAction("SignUp");
             }
-            return View();
+            var userMembership = context.MembershipDues.Include(md => md.MembershipType).Where(md => md.UserID == currentUser.Id).OrderBy(md => md.MemDuesID).Last();
+            return View(userMembership);
         }
         [HttpGet]
         public IActionResult SignUp()
@@ -53,7 +54,7 @@ namespace NonProfitProject.Controllers.Shared.Users
 
             var sessionModel = HttpContext.Session.GetObject<SignupMembershipViewModel>("SignupMembershipModel");
 
-            if (sessionModel == null)
+            if (sessionModel == null || sessionModel.PaymentViewModel == null)
             {
                 HttpContext.Session.SetObject("SignupMembershipModel", membershipViewModel);
                 return RedirectToAction("Payment");
