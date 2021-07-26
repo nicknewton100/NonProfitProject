@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NonProfitProject.Areas.Admin.Models.ViewModels;
@@ -15,10 +16,13 @@ namespace NonProfitProject.Areas.Admin.Controllers
     [Area("Admin")]
     public class MembershipHistoryController : Controller
     {
-        NonProfitContext context;
-        public MembershipHistoryController(NonProfitContext context)
+        private NonProfitContext context;
+        private UserManager<User> userManager;
+
+        public MembershipHistoryController(NonProfitContext context, UserManager<User> userManager)
         {
             this.context = context;
+            this.userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -46,6 +50,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 StartDate = membership.MembershipDue.MemStartDate,
                 EndDate = membership.MembershipDue.MemEndDate,
                 RenewalDate = membership.MembershipDue.MemRenewalDate,
+                CancelDate = membership.MembershipDue.MemCancelDate,
+                Active = membership.MembershipDue.MemActive,
                 CardholderName = membership.InvoicePayment.CardholderName,
                 CardNumber = membership.InvoicePayment.Last4Digits.ToString(),
                 CardType = membership.InvoicePayment.CardType,
@@ -137,7 +143,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 }
                 context.Receipts.Update(currentMembership);
                 context.SaveChanges();
-                TempData["DonationChanges"] = String.Format("The Donation with Receipt ID {0} has been updated", currentMembership.ReceiptID);
+                TempData["MembershipDueChanges"] = String.Format("The Membership Due with Receipt ID {0} has been updated", currentMembership.ReceiptID);
                 return RedirectToAction("Index");
             }
             return View();
@@ -146,15 +152,41 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            var receipt = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Where(r => r.ReceiptID == id && r.Donation == null).FirstOrDefault();
+            var receipt = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.MembershipDue).Where(r => r.ReceiptID == id && r.Donation == null).FirstOrDefault();
             if (receipt == null)
             {
-                TempData["DonationChanges"] = String.Format("The Donation with Receipt ID {0} does not exist", id);
+                TempData["MembershipDueChanges"] = String.Format("The Membership Due with Receipt ID {0} does not exist", id);
                 return RedirectToAction("Index");
             }
             context.Receipts.Remove(receipt);
             context.SaveChanges();
-            TempData["DonationChanges"] = String.Format("The Donation with Receipt ID {0} has been deleted", id);
+            TempData["MembershipDueChanges"] = String.Format("The Membership Due with Receipt ID {0} has been deleted", id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CancelMembership(int id)
+        {
+            var receipt = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.MembershipDue).Where(r => r.ReceiptID == id && r.Donation == null && r.MembershipDue.MemActive).FirstOrDefault();
+            if (receipt == null)
+            {
+                TempData["MembershipDueChanges"] = String.Format("The Membership Due with Receipt ID {0} does not exist", id);
+                return RedirectToAction("Index");
+            }
+            receipt.MembershipDue.MemActive = false;
+            receipt.MembershipDue.MemCancelDate = DateTime.UtcNow;
+            var user = context.Users.Where(u => u.Id == receipt.MembershipDue.UserID).FirstOrDefault();
+            if(user != null)
+            {
+                var result = await userManager.RemoveFromRoleAsync(user, "Member");
+                if (!await userManager.IsInRoleAsync(user, "Admin"))
+                {
+                    await userManager.AddToRoleAsync(user, "User");
+                }
+            }
+            context.Receipts.Update(receipt);
+            context.SaveChanges();
+            TempData["MembershipDueChanges"] = String.Format("The Membership Due with Receipt ID {0} has been canceled", id);
             return RedirectToAction("Index");
         }
     }

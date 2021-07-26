@@ -26,37 +26,67 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var donation in Model)
+                    @if(Model.Count == 0)
                     {
                         <tr>
-                            <td scope="row">@donation.ReceiptID</td>
-                            <td scope="row">@donation.User.UserName</td>
-                            <td>@donation.MembershipDue.MembershipType.Name</td>
-                            <td>@donation.MembershipDue.MemStartDate.ToShortDateString()</td>
-                            <td>@donation.MembershipDue.MemEndDate.ToShortDateString()</td>
-                            <td>@donation.MembershipDue.MemRenewalDate.ToShortDateString()</td>
+                            <td style="overflow:visible;overflow-wrap:normal;margin:auto;">
+                                <h5>There are no membership dues</h5>
+                            </td>
+                            
+                        </tr>
+                        
+                    }
+                    @foreach (var due in Model)
+                    {
+                        <tr>
+                            <td scope="row">@due.ReceiptID</td>
+                            <td scope="row">@due.User.UserName</td>
+                            <td>@due.MembershipDue.MembershipType.Name</td>
+                            <td>@due.MembershipDue.MemStartDate.ToShortDateString()</td>
+                            <td>@due.MembershipDue.MemEndDate.ToShortDateString()</td>
+                            <td>@due.MembershipDue.MemRenewalDate.ToShortDateString()</td>
                             <td>@{
-                                    if (donation.MembershipDue.MemActive) { 
+                                if (due.MembershipDue.MemActive)
+                                {
                                         <p>Yes</p>
+                                }
+                                else
+                                {
+                                        @if (due.MembershipDue.MemCancelDate != null)
+                                        {
+                                            <p>No - Canceled</p>
+                                        }
+                                        else
+                                        {
+                                            <p>No</p>
+                                        }
+
                                     }
-                                    else { 
-                                        <p>No</p>
-                                    }
-                                 }
+                                }
                             </td>
                             <td>
-                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","MembershipHistory",new {id = donation.ReceiptID })'">Details</button>
+                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","MembershipHistory",new {id = due.ReceiptID })'">Details</button>
                             </td>
                             <td>
-                                <form method="post" asp-action="Delete" asp-route-id="@donation.ReceiptID">
-                                    <button type="submit" class="btn btn-dark">Delete</button>
-                                </form>
+                                @if (due.MembershipDue.MemActive)
+                                {
+                                    <form method="post" asp-action="CancelMembership" asp-route-id="@due.ReceiptID">
+                                        <button type="submit" class="btn btn-danger">Cancel Membership</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form method="post" asp-action="Delete" asp-route-id="@due.ReceiptID">
+                                        <button type="submit" class="btn btn-dark">Delete</button>
+                                    </form>
+                                }
+                                
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
-        <h5 class="text-primary">@TempData["DonationChanges"]?.ToString()</h5>
+        <h5 class="text-primary">@TempData["MembershipDueChanges"]?.ToString()</h5>
     </div>
 </div>

@@ -209,8 +209,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 {
                     TempData.Clear();
                     user.MembershipDues.Last().MemActive = false;
-                    user.MembershipDues.Last().MemEndDate = DateTime.UtcNow;
-                    user.MembershipDues.Last().MemRenewalDate = DateTime.UtcNow;
+                    user.MembershipDues.Last().MemCancelDate = DateTime.UtcNow;
                 }
                 ModelState.Remove("MembershipType");
                 ModelState.Remove("LastRenewalDate");

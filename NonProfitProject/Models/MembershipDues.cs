@@ -22,6 +22,7 @@ namespace NonProfitProject.Models
         public DateTime MemEndDate { get; set; }
         public DateTime MemRenewalDate { get; set; }
         public bool MemActive { get; set; }
+        public DateTime? MemCancelDate { get; set; }
 
         public static DateTime? GetConsecutiveDate(List<MembershipDues> membershipDues)
         {
@@ -32,7 +33,7 @@ namespace NonProfitProject.Models
                 string membershipType = membershipDues.Last().MembershipType.Name;
                 for (int i = membershipDues.Count - 1; i >= 0; i--)
                 {
-                    if(i == 0 || membershipDues[i].MemStartDate.Date != membershipDues?[i -1].MemRenewalDate.Date && membershipDues[i].MembershipType.Name == membershipDues?[i - 1].MembershipType.Name)
+                    if(i == 0 || membershipDues[i].MemStartDate.Date != membershipDues?[i -1].MemRenewalDate.Date || membershipDues[i].MemStartDate.Date != membershipDues?[i - 1].MemCancelDate.Value.Date && membershipDues[i].MembershipType.Name == membershipDues?[i - 1].MembershipType.Name)
                     {
                         consecutiveMember = membershipDues[i].MemStartDate;
                         break;

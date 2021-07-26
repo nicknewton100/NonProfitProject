@@ -24,6 +24,10 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [Required(ErrorMessage = "Please assign Renewal Date")]
         [DataType(DataType.Date)]
         public DateTime RenewalDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? CancelDate { get; set; }
+
+        public bool Active { get; set; }
 
         //personal information
         public string FirstName { get; set; }
