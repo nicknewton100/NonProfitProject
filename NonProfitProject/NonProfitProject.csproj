@@ -7,13 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Reports\rptDonorContact.rdlc" />
-    <Content Remove="wwwroot\Reports\rptEmployeeContact.rdlc" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="wwwroot\Reports\rptDonorContact.rdlc" />
-    <EmbeddedResource Include="wwwroot\Reports\rptEmployeeContact.rdlc" />
+    <Content Include="Reports\rptDonorContact.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\rptEmployeeContact.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -92,6 +91,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>DataSet.Designer.cs</LastGenOutput>
       <Generator>MSDataSetGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ReportDataSet\DataSet.xss">
       <DependentUpon>DataSet.xsd</DependentUpon>
