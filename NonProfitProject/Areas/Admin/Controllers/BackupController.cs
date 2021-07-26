@@ -106,7 +106,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
 
             string mimetype = "";
             int extension = 1;
-            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptEmployee.rdlc";
+            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptEmployeeContact.rdlc";
             
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("prm", "RDLC Report");

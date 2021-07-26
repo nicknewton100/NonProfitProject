@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Reports\rptEmployee.rdlc" />
+    <Content Remove="wwwroot\Reports\rptDonorContact.rdlc" />
+    <Content Remove="wwwroot\Reports\rptEmployeeContact.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="wwwroot\Reports\rptEmployee.rdlc" />
+    <EmbeddedResource Include="wwwroot\Reports\rptDonorContact.rdlc" />
+    <EmbeddedResource Include="wwwroot\Reports\rptEmployeeContact.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
