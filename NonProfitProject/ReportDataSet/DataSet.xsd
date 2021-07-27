@@ -152,6 +152,7 @@
               <xs:element name="CommMemEmail" msprop:Generator_ColumnVarNameInTable="columnCommMemEmail" msprop:Generator_ColumnPropNameInRow="CommMemEmail" msprop:Generator_ColumnPropNameInTable="CommMemEmailColumn" msprop:Generator_UserColumnName="CommMemEmail" type="xs:string" minOccurs="0" />
               <xs:element name="CommMemPhone" msprop:Generator_ColumnVarNameInTable="columnCommMemPhone" msprop:Generator_ColumnPropNameInRow="CommMemPhone" msprop:Generator_ColumnPropNameInTable="CommMemPhoneColumn" msprop:Generator_UserColumnName="CommMemPhone" type="xs:string" minOccurs="0" />
               <xs:element name="CommMemAddress" msprop:Generator_ColumnVarNameInTable="columnCommMemAddress" msprop:Generator_ColumnPropNameInRow="CommMemAddress" msprop:Generator_ColumnPropNameInTable="CommMemAddressColumn" msprop:Generator_UserColumnName="CommMemAddress" type="xs:string" minOccurs="0" />
+              <xs:element name="Number" msprop:Generator_ColumnVarNameInTable="columnNumber" msprop:Generator_ColumnPropNameInRow="Number" msprop:Generator_ColumnPropNameInTable="NumberColumn" msprop:Generator_UserColumnName="Number" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

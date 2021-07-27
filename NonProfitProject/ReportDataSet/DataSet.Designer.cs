@@ -3255,6 +3255,8 @@ namespace NonProfitProject.ReportDataSet {
             
             private global::System.Data.DataColumn columnCommMemAddress;
             
+            private global::System.Data.DataColumn columnNumber;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public Committee_Contact_InformationDataTable() {
@@ -3338,6 +3340,14 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn NumberColumn {
+                get {
+                    return this.columnNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3373,7 +3383,7 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Committee_Contact_InformationRow AddCommittee_Contact_InformationRow(string CommName, string CommPosition, string CommMemName, string CommMemEmail, string CommMemPhone, string CommMemAddress) {
+            public Committee_Contact_InformationRow AddCommittee_Contact_InformationRow(string CommName, string CommPosition, string CommMemName, string CommMemEmail, string CommMemPhone, string CommMemAddress, string Number) {
                 Committee_Contact_InformationRow rowCommittee_Contact_InformationRow = ((Committee_Contact_InformationRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         CommName,
@@ -3381,7 +3391,8 @@ namespace NonProfitProject.ReportDataSet {
                         CommMemName,
                         CommMemEmail,
                         CommMemPhone,
-                        CommMemAddress};
+                        CommMemAddress,
+                        Number};
                 rowCommittee_Contact_InformationRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCommittee_Contact_InformationRow);
                 return rowCommittee_Contact_InformationRow;
@@ -3410,6 +3421,7 @@ namespace NonProfitProject.ReportDataSet {
                 this.columnCommMemEmail = base.Columns["CommMemEmail"];
                 this.columnCommMemPhone = base.Columns["CommMemPhone"];
                 this.columnCommMemAddress = base.Columns["CommMemAddress"];
+                this.columnNumber = base.Columns["Number"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3427,6 +3439,8 @@ namespace NonProfitProject.ReportDataSet {
                 base.Columns.Add(this.columnCommMemPhone);
                 this.columnCommMemAddress = new global::System.Data.DataColumn("CommMemAddress", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCommMemAddress);
+                this.columnNumber = new global::System.Data.DataColumn("Number", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNumber);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5351,6 +5365,23 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Number {
+                get {
+                    try {
+                        return ((string)(this[this.tableCommittee_Contact_Information.NumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Number\' in table \'Committee Contact Information\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableCommittee_Contact_Information.NumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsCommNameNull() {
                 return this.IsNull(this.tableCommittee_Contact_Information.CommNameColumn);
             }
@@ -5419,6 +5450,18 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetCommMemAddressNull() {
                 this[this.tableCommittee_Contact_Information.CommMemAddressColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsNumberNull() {
+                return this.IsNull(this.tableCommittee_Contact_Information.NumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetNumberNull() {
+                this[this.tableCommittee_Contact_Information.NumberColumn] = global::System.Convert.DBNull;
             }
         }
         

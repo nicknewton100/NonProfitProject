@@ -229,6 +229,46 @@ namespace NonProfitProject.Areas.Admin.Controllers
 
 
         [HttpPost]
+        public IActionResult CommitteeMemberReport()
+        {
+            var CommMem = context.CommitteeMembers.Include(cm => cm.committee).Include(cm => cm.employee).ThenInclude(e => e.User).OrderBy(cm => cm.committee.CommitteeName + " " + cm.employee.User.UserLastName + ", " + cm.employee.User.UserFirstName).ToList();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Number");
+            dt.Columns.Add("CommName");
+            dt.Columns.Add("CommPosition");
+            dt.Columns.Add("CommMemName");
+            dt.Columns.Add("CommMemEmail");
+            dt.Columns.Add("CommMemPhone");
+            dt.Columns.Add("CommMemAddress");
+            DataRow row;
+            int number = 0;
+            foreach (var i in CommMem)
+            {
+                number += 1;
+                row = dt.NewRow();
+                row["Number"] = number;
+                row["CommName"] = i.committee.CommitteeName.Replace(" Committee", "");
+                row["CommPosition"] = i.CommitteePosition;
+                row["CommMemName"] = i.employee.User.UserLastName + ", " + i.employee.User.UserFirstName;
+                row["CommMemEmail"] = i.employee.User.Email;
+                row["CommMemPhone"] = i.employee.User.PhoneNumber == null ? "Null" : i.employee.User.PhoneNumber;
+                row["CommMemAddress"] = String.Format("{0}, {1}{2}, {3} {4}", i.employee.User.UserAddr1.Replace(".", "").TrimEnd(), i.employee.User.UserAddr2 == "" ? i.employee.User.UserAddr2 + ", " : "", i.employee.User.UserCity, i.employee.User.UserState, i.employee.User.UserPostalCode);
+                dt.Rows.Add(row);
+            }
+            string mimetype = "";
+            int extension = 1;
+            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptCommitteeMemberContact.rdlc";
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("prm", "RDLC Report");
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("dsCommitteeMemberInformation", dt);
+            //localReport.AddDataSource("dsUsers",context)
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+            return File(result.MainStream, "application/pdf");
+        }
+
+        [HttpPost]
         public IActionResult DonationReport()
         {
             var donations = context.Receipts.Include(r => r.User).Include(r => r.InvoiceDonorInformation).Include(r => r.InvoicePayment).Include(r => r.Donation).Where(r => !context.MembershipDues.Any(md => md.ReceiptID == r.ReceiptID)).ToList();
