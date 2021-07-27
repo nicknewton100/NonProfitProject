@@ -63,6 +63,10 @@ namespace NonProfitProject.Controllers
                         {
                             return RedirectToAction("Index", "Home", new { area = "Employee" });
                         }
+                        else if (await userManager.IsInRoleAsync(currentUser, "Member"))
+                        {
+                            return RedirectToAction("Index", "Home", new { area = "Member" });
+                        }
                         else if (await userManager.IsInRoleAsync(currentUser, "User"))
                         {
                             return RedirectToAction("Index", "Home", new { area = "Users" });
