@@ -12,7 +12,7 @@
     <Shape ID="DesignTable:Members Contact Information" ZOrder="7" X="740" Y="289" Height="194" Width="287" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="190" />
     <Shape ID="DesignTable:Donor Contact Information" ZOrder="6" X="15" Y="384" Height="171" Width="264" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="167" />
     <Shape ID="DesignTable:Event Information" ZOrder="1" X="191" Y="204" Height="148" Width="198" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="144" />
-    <Shape ID="DesignTable:Membership Dues Finacial Report" ZOrder="2" X="458" Y="6" Height="263" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="259" />
+    <Shape ID="DesignTable:Membership Dues Finacial Report" ZOrder="2" X="458" Y="6" Height="286" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="282" />
     <Shape ID="DesignTable:Finacial Summary" ZOrder="4" X="523" Y="293" Height="148" Width="194" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="144" />
     <Shape ID="DesignTable:Committee Contact Information" ZOrder="3" X="147" Y="11" Height="171" Width="299" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="167" />
   </Shapes>

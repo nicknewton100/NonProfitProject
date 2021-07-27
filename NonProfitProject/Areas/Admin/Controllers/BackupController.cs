@@ -241,7 +241,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
             dt.Columns.Add("DonationDate");
 
             DataRow row;
-            decimal total = 0.00m;
             foreach (var i in donations)
             {
                 row = dt.NewRow();
@@ -252,7 +251,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 row["DonationCardNumber"] = "xxxx-xxxx-xxxx-" + i.InvoicePayment.Last4Digits.ToString();
                 row["DonationDate"] = i.Date.ToShortDateString();
                 dt.Rows.Add(row);
-                total += i.Total;
             }
 
             string mimetype = "";
@@ -263,6 +261,71 @@ namespace NonProfitProject.Areas.Admin.Controllers
             parameters.Add("prm", "RDLC Report");
             LocalReport localReport = new LocalReport(path);
             localReport.AddDataSource("dsDonation", dt);
+            //localReport.AddDataSource("dsUsers",context)
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+            return File(result.MainStream, "application/pdf");
+        }
+
+
+        [HttpPost]
+        public IActionResult MembershipDuesReport()
+        {
+            var donations = context.Receipts.Include(r => r.User).Include(r => r.InvoicePayment).Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Where(r => !context.Donations.Any(md => md.ReceiptID == r.ReceiptID)).ToList();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ReceiptID");
+            dt.Columns.Add("MemName");
+            dt.Columns.Add("MemEmail");
+            dt.Columns.Add("Memtype");
+            dt.Columns.Add("MemAmount");
+            dt.Columns.Add("MemStartDate");
+            dt.Columns.Add("MemEndDate");
+            dt.Columns.Add("MemBillingDate");
+            dt.Columns.Add("MemStatus");
+            dt.Columns.Add("MemCancelDate");
+            dt.Columns.Add("MemCardNumber");
+
+            DataRow row;
+            foreach (var i in donations)
+            {
+                row = dt.NewRow();
+                row["ReceiptID"] = i.ReceiptID;
+                row["MemName"] = i.User.UserLastName + ", " + i.User.UserFirstName;
+                row["MemEmail"] = i.User.Email;
+                row["MemType"] = i.MembershipDue.MembershipType.Name;
+                row["MemAmount"] = i.Total;
+                row["MemStartDate"] = i.MembershipDue.MemStartDate.ToShortDateString();
+                row["MemEndDate"] = i.MembershipDue.MemEndDate.ToShortDateString();
+                row["MemBillingDate"] = i.MembershipDue.MemRenewalDate.ToShortDateString();
+                if (i.MembershipDue.MemActive)
+                {
+                    row["MemStatus"] = "Active";
+                    row["MemCancelDate"] = "Null";
+                }
+                else
+                {
+                    if(i.MembershipDue.MemCancelDate != null)
+                    {
+                        row["MemStatus"] = "Canceled";
+                        row["MemCancelDate"] = i.MembershipDue.MemCancelDate.Value.ToShortDateString();
+                    }
+                    else
+                    {
+                        row["MemStatus"] = "Expired";
+                        row["MemCancelDate"] = "Null";
+                    }
+                }
+                row["MemCardNumber"] = "xxxx-xxxx-xxxx-" + i.InvoicePayment.Last4Digits.ToString();
+                dt.Rows.Add(row);
+            }
+
+            string mimetype = "";
+            int extension = 1;
+            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptMembershipDues.rdlc";
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("prm", "RDLC Report");
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("dsMemberDues", dt);
             //localReport.AddDataSource("dsUsers",context)
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
             return File(result.MainStream, "application/pdf");

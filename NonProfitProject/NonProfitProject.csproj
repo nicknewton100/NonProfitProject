@@ -72,6 +72,9 @@
     <Content Update="wwwroot\img\myPupper.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\Reports\rptMembershipDues.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\Reports\rptDonorContact.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

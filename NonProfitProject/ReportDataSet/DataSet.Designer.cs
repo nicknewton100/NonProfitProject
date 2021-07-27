@@ -2555,7 +2555,7 @@ namespace NonProfitProject.ReportDataSet {
             
             private global::System.Data.DataColumn columnMemName;
             
-            private global::System.Data.DataColumn columnMemUsername;
+            private global::System.Data.DataColumn columnMemEmail;
             
             private global::System.Data.DataColumn columnMemType;
             
@@ -2569,11 +2569,11 @@ namespace NonProfitProject.ReportDataSet {
             
             private global::System.Data.DataColumn columnMemCancelDate;
             
-            private global::System.Data.DataColumn columnMemActive;
-            
-            private global::System.Data.DataColumn columnMemTotal;
+            private global::System.Data.DataColumn columnMemStatus;
             
             private global::System.Data.DataColumn columnReceiptID;
+            
+            private global::System.Data.DataColumn columnMemCardNumber;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -2618,9 +2618,9 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn MemUsernameColumn {
+            public global::System.Data.DataColumn MemEmailColumn {
                 get {
-                    return this.columnMemUsername;
+                    return this.columnMemEmail;
                 }
             }
             
@@ -2674,17 +2674,9 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn MemActiveColumn {
+            public global::System.Data.DataColumn MemStatusColumn {
                 get {
-                    return this.columnMemActive;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn MemTotalColumn {
-                get {
-                    return this.columnMemTotal;
+                    return this.columnMemStatus;
                 }
             }
             
@@ -2693,6 +2685,14 @@ namespace NonProfitProject.ReportDataSet {
             public global::System.Data.DataColumn ReceiptIDColumn {
                 get {
                     return this.columnReceiptID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn MemCardNumberColumn {
+                get {
+                    return this.columnMemCardNumber;
                 }
             }
             
@@ -2733,20 +2733,20 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Membership_Dues_Finacial_ReportRow AddMembership_Dues_Finacial_ReportRow(string MemName, string MemUsername, string MemType, string MemAmount, string MemStartDate, string MemEndDate, string MemBillingDate, string MemCancelDate, string MemActive, string MemTotal, string ReceiptID) {
+            public Membership_Dues_Finacial_ReportRow AddMembership_Dues_Finacial_ReportRow(string MemName, string MemEmail, string MemType, double MemAmount, System.DateTime MemStartDate, string MemEndDate, string MemBillingDate, string MemCancelDate, string MemStatus, string ReceiptID, string MemCardNumber) {
                 Membership_Dues_Finacial_ReportRow rowMembership_Dues_Finacial_ReportRow = ((Membership_Dues_Finacial_ReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         MemName,
-                        MemUsername,
+                        MemEmail,
                         MemType,
                         MemAmount,
                         MemStartDate,
                         MemEndDate,
                         MemBillingDate,
                         MemCancelDate,
-                        MemActive,
-                        MemTotal,
-                        ReceiptID};
+                        MemStatus,
+                        ReceiptID,
+                        MemCardNumber};
                 rowMembership_Dues_Finacial_ReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMembership_Dues_Finacial_ReportRow);
                 return rowMembership_Dues_Finacial_ReportRow;
@@ -2770,16 +2770,16 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
                 this.columnMemName = base.Columns["MemName"];
-                this.columnMemUsername = base.Columns["MemUsername"];
+                this.columnMemEmail = base.Columns["MemEmail"];
                 this.columnMemType = base.Columns["MemType"];
                 this.columnMemAmount = base.Columns["MemAmount"];
                 this.columnMemStartDate = base.Columns["MemStartDate"];
                 this.columnMemEndDate = base.Columns["MemEndDate"];
                 this.columnMemBillingDate = base.Columns["MemBillingDate"];
                 this.columnMemCancelDate = base.Columns["MemCancelDate"];
-                this.columnMemActive = base.Columns["MemActive"];
-                this.columnMemTotal = base.Columns["MemTotal"];
+                this.columnMemStatus = base.Columns["MemStatus"];
                 this.columnReceiptID = base.Columns["ReceiptID"];
+                this.columnMemCardNumber = base.Columns["MemCardNumber"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2787,13 +2787,13 @@ namespace NonProfitProject.ReportDataSet {
             private void InitClass() {
                 this.columnMemName = new global::System.Data.DataColumn("MemName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMemName);
-                this.columnMemUsername = new global::System.Data.DataColumn("MemUsername", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMemUsername);
+                this.columnMemEmail = new global::System.Data.DataColumn("MemEmail", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMemEmail);
                 this.columnMemType = new global::System.Data.DataColumn("MemType", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMemType);
-                this.columnMemAmount = new global::System.Data.DataColumn("MemAmount", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnMemAmount = new global::System.Data.DataColumn("MemAmount", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMemAmount);
-                this.columnMemStartDate = new global::System.Data.DataColumn("MemStartDate", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnMemStartDate = new global::System.Data.DataColumn("MemStartDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMemStartDate);
                 this.columnMemEndDate = new global::System.Data.DataColumn("MemEndDate", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMemEndDate);
@@ -2801,12 +2801,12 @@ namespace NonProfitProject.ReportDataSet {
                 base.Columns.Add(this.columnMemBillingDate);
                 this.columnMemCancelDate = new global::System.Data.DataColumn("MemCancelDate", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMemCancelDate);
-                this.columnMemActive = new global::System.Data.DataColumn("MemActive", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMemActive);
-                this.columnMemTotal = new global::System.Data.DataColumn("MemTotal", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMemTotal);
+                this.columnMemStatus = new global::System.Data.DataColumn("MemStatus", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMemStatus);
                 this.columnReceiptID = new global::System.Data.DataColumn("ReceiptID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnReceiptID);
+                this.columnMemCardNumber = new global::System.Data.DataColumn("MemCardNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMemCardNumber);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4777,18 +4777,18 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string MemUsername {
+            public string MemEmail {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemUsernameColumn]));
+                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemEmailColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemUsername\' in table \'Membership Dues Finacial Report\' is " +
-                                "DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemEmail\' in table \'Membership Dues Finacial Report\' is DBN" +
+                                "ull.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemUsernameColumn] = value;
+                    this[this.tableMembership_Dues_Finacial_Report.MemEmailColumn] = value;
                 }
             }
             
@@ -4811,10 +4811,10 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string MemAmount {
+            public double MemAmount {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemAmountColumn]));
+                        return ((double)(this[this.tableMembership_Dues_Finacial_Report.MemAmountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'MemAmount\' in table \'Membership Dues Finacial Report\' is DB" +
@@ -4828,10 +4828,10 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string MemStartDate {
+            public System.DateTime MemStartDate {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemStartDateColumn]));
+                        return ((global::System.DateTime)(this[this.tableMembership_Dues_Finacial_Report.MemStartDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'MemStartDate\' in table \'Membership Dues Finacial Report\' is" +
@@ -4896,35 +4896,18 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string MemActive {
+            public string MemStatus {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemActiveColumn]));
+                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemStatusColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemActive\' in table \'Membership Dues Finacial Report\' is DB" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemStatus\' in table \'Membership Dues Finacial Report\' is DB" +
                                 "Null.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemActiveColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string MemTotal {
-                get {
-                    try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemTotalColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemTotal\' in table \'Membership Dues Finacial Report\' is DBN" +
-                                "ull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemTotalColumn] = value;
+                    this[this.tableMembership_Dues_Finacial_Report.MemStatusColumn] = value;
                 }
             }
             
@@ -4947,6 +4930,23 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string MemCardNumber {
+                get {
+                    try {
+                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemCardNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemCardNumber\' in table \'Membership Dues Finacial Report\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMembership_Dues_Finacial_Report.MemCardNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMemNameNull() {
                 return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemNameColumn);
             }
@@ -4959,14 +4959,14 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsMemUsernameNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemUsernameColumn);
+            public bool IsMemEmailNull() {
+                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemEmailColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetMemUsernameNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemUsernameColumn] = global::System.Convert.DBNull;
+            public void SetMemEmailNull() {
+                this[this.tableMembership_Dues_Finacial_Report.MemEmailColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5043,26 +5043,14 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsMemActiveNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemActiveColumn);
+            public bool IsMemStatusNull() {
+                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemStatusColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetMemActiveNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemActiveColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsMemTotalNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemTotalColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetMemTotalNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemTotalColumn] = global::System.Convert.DBNull;
+            public void SetMemStatusNull() {
+                this[this.tableMembership_Dues_Finacial_Report.MemStatusColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5075,6 +5063,18 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetReceiptIDNull() {
                 this[this.tableMembership_Dues_Finacial_Report.ReceiptIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsMemCardNumberNull() {
+                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemCardNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetMemCardNumberNull() {
+                this[this.tableMembership_Dues_Finacial_Report.MemCardNumberColumn] = global::System.Convert.DBNull;
             }
         }
         
