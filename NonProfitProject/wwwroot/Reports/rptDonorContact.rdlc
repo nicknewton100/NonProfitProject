@@ -11,38 +11,30 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dsEmployee">
+    <DataSet Name="dsDonorInformation">
       <Query>
         <DataSourceName>DataSet</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="EmpPosition">
-          <DataField>EmpPosition</DataField>
+        <Field Name="DonorName">
+          <DataField>DonorName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="EmpName">
-          <DataField>EmpName</DataField>
+        <Field Name="DonorEmail">
+          <DataField>DonorEmail</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="EmpEmail">
-          <DataField>EmpEmail</DataField>
+        <Field Name="DonorPhone">
+          <DataField>DonorPhone</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="EmpPhone">
-          <DataField>EmpPhone</DataField>
+        <Field Name="DonorAddress">
+          <DataField>DonorAddress</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="EmpAddress">
-          <DataField>EmpAddress</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EmpHireDate">
-          <DataField>EmpHireDate</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EmpReleaseDate">
-          <DataField>EmpReleaseDate</DataField>
+        <Field Name="DonorJoinDate">
+          <DataField>DonorJoinDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Number">
@@ -53,7 +45,7 @@
       <rd:DataSetInfo>
         <rd:DataSetName>DataSet</rd:DataSetName>
         <rd:SchemaPath>D:\derek\Documents\Nicholas Newton Summer 2021\NonProfitProject - Nicholas Newton\NonProfitProject\ReportDataSet\DataSet.xsd</rd:SchemaPath>
-        <rd:TableName>Employee Contact Information</rd:TableName>
+        <rd:TableName>Donor Contact Information</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -68,22 +60,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.51323in</Width>
+                  <Width>2.11457in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.212in</Width>
+                  <Width>2.64827in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.87754in</Width>
+                  <Width>1.4246in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.24039in</Width>
+                  <Width>2.67789in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.06091in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.1119in</Width>
+                  <Width>1.22452in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -240,7 +229,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox27">
+                        <Textbox Name="DonorJoinDate1">
                           <CanGrow>true</CanGrow>
                           <CanShrink>true</CanShrink>
                           <KeepTogether>true</KeepTogether>
@@ -248,7 +237,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Hire Date</Value>
+                                  <Value>Join Date</Value>
                                   <Style>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -261,44 +250,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox27</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox29">
-                          <CanGrow>true</CanGrow>
-                          <CanShrink>true</CanShrink>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Release Date</Value>
-                                  <Style>
-                                    <FontSize>11pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>None</TextDecoration>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox29</rd:DefaultName>
+                          <rd:DefaultName>DonorJoinDate1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -319,7 +271,7 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="EmpName">
+                        <Textbox Name="DonorName">
                           <CanGrow>true</CanGrow>
                           <CanShrink>true</CanShrink>
                           <KeepTogether>true</KeepTogether>
@@ -327,16 +279,16 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!EmpName.Value</Value>
+                                  <Value>=Fields!DonorName.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>EmpName</rd:DefaultName>
+                          <rd:DefaultName>DonorName</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -351,7 +303,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="EmpEmail">
+                        <Textbox Name="DonorEmail">
                           <CanGrow>true</CanGrow>
                           <CanShrink>true</CanShrink>
                           <KeepTogether>true</KeepTogether>
@@ -359,16 +311,16 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!EmpEmail.Value</Value>
+                                  <Value>=Fields!DonorEmail.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>EmpEmail</rd:DefaultName>
+                          <rd:DefaultName>DonorEmail</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -383,7 +335,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="EmpPhone">
+                        <Textbox Name="DonorPhone">
                           <CanGrow>true</CanGrow>
                           <CanShrink>true</CanShrink>
                           <KeepTogether>true</KeepTogether>
@@ -391,16 +343,16 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!EmpPhone.Value</Value>
+                                  <Value>=Fields!DonorPhone.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>EmpPhone</rd:DefaultName>
+                          <rd:DefaultName>DonorPhone</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -415,7 +367,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="EmpAddress">
+                        <Textbox Name="DonorAddress">
                           <CanGrow>true</CanGrow>
                           <CanShrink>true</CanShrink>
                           <KeepTogether>true</KeepTogether>
@@ -423,16 +375,16 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!EmpAddress.Value</Value>
+                                  <Value>=Fields!DonorAddress.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>EmpAddress</rd:DefaultName>
+                          <rd:DefaultName>DonorAddress</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -447,55 +399,23 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="EmpHireDate">
+                        <Textbox Name="DonorJoinDate">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!EmpHireDate.Value</Value>
+                                  <Value>=Fields!DonorJoinDate.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>EmpHireDate</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>10pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="EmpReleaseDate">
-                          <CanGrow>true</CanGrow>
-                          <CanShrink>true</CanShrink>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!EmpReleaseDate.Value</Value>
-                                  <Style>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>EmpReleaseDate</rd:DefaultName>
+                          <rd:DefaultName>DonorJoinDate</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -519,16 +439,15 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.6214in</Size>
+                    <Size>0.54483in</Size>
                     <CellContents>
-                      <Textbox Name="Textbox14">
+                      <Textbox Name="Textbox2">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
@@ -537,7 +456,7 @@
                               <TextRun>
                                 <Value />
                                 <Style>
-                                  <FontSize>12pt</FontSize>
+                                  <FontSize>11pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                   <TextDecoration>None</TextDecoration>
                                 </Style>
@@ -548,7 +467,7 @@
                             </Style>
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Textbox14</rd:DefaultName>
+                        <rd:DefaultName>Textbox2</rd:DefaultName>
                         <Style>
                           <Border>
                             <Style>Solid</Style>
@@ -563,48 +482,7 @@
                     </CellContents>
                   </TablixHeader>
                   <TablixMembers>
-                    <TablixMember>
-                      <TablixHeader>
-                        <Size>1in</Size>
-                        <CellContents>
-                          <Textbox Name="Textbox3">
-                            <CanGrow>true</CanGrow>
-                            <KeepTogether>true</KeepTogether>
-                            <Paragraphs>
-                              <Paragraph>
-                                <TextRuns>
-                                  <TextRun>
-                                    <Value>Position</Value>
-                                    <Style>
-                                      <FontSize>11pt</FontSize>
-                                      <FontWeight>Bold</FontWeight>
-                                      <TextDecoration>None</TextDecoration>
-                                    </Style>
-                                  </TextRun>
-                                </TextRuns>
-                                <Style>
-                                  <TextAlign>Center</TextAlign>
-                                </Style>
-                              </Paragraph>
-                            </Paragraphs>
-                            <rd:DefaultName>Textbox3</rd:DefaultName>
-                            <Style>
-                              <Border>
-                                <Style>Solid</Style>
-                              </Border>
-                              <BackgroundColor>Silver</BackgroundColor>
-                              <PaddingLeft>2pt</PaddingLeft>
-                              <PaddingRight>2pt</PaddingRight>
-                              <PaddingTop>2pt</PaddingTop>
-                              <PaddingBottom>2pt</PaddingBottom>
-                            </Style>
-                          </Textbox>
-                        </CellContents>
-                      </TablixHeader>
-                      <TablixMembers>
-                        <TablixMember />
-                      </TablixMembers>
-                    </TablixMember>
+                    <TablixMember />
                   </TablixMembers>
                 </TablixMember>
                 <TablixMember>
@@ -619,7 +497,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>0.6214in</Size>
+                    <Size>0.54483in</Size>
                     <CellContents>
                       <Textbox Name="Number1">
                         <CanGrow>true</CanGrow>
@@ -629,7 +507,9 @@
                             <TextRuns>
                               <TextRun>
                                 <Value>=Fields!Number.Value</Value>
-                                <Style />
+                                <Style>
+                                  <FontSize>11pt</FontSize>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style />
@@ -649,63 +529,17 @@
                     </CellContents>
                   </TablixHeader>
                   <TablixMembers>
-                    <TablixMember>
-                      <Group Name="EmpPosition">
-                        <GroupExpressions>
-                          <GroupExpression>=Fields!EmpPosition.Value</GroupExpression>
-                        </GroupExpressions>
-                      </Group>
-                      <SortExpressions>
-                        <SortExpression>
-                          <Value>=Fields!EmpPosition.Value</Value>
-                        </SortExpression>
-                      </SortExpressions>
-                      <TablixHeader>
-                        <Size>1in</Size>
-                        <CellContents>
-                          <Textbox Name="EmpPosition">
-                            <CanGrow>true</CanGrow>
-                            <KeepTogether>true</KeepTogether>
-                            <Paragraphs>
-                              <Paragraph>
-                                <TextRuns>
-                                  <TextRun>
-                                    <Value>=Fields!EmpPosition.Value</Value>
-                                    <Style>
-                                      <FontSize>9pt</FontSize>
-                                    </Style>
-                                  </TextRun>
-                                </TextRuns>
-                                <Style />
-                              </Paragraph>
-                            </Paragraphs>
-                            <rd:DefaultName>EmpPosition</rd:DefaultName>
-                            <Style>
-                              <Border>
-                                <Style>Solid</Style>
-                              </Border>
-                              <PaddingLeft>10pt</PaddingLeft>
-                              <PaddingRight>2pt</PaddingRight>
-                              <PaddingTop>2pt</PaddingTop>
-                              <PaddingBottom>2pt</PaddingBottom>
-                            </Style>
-                          </Textbox>
-                        </CellContents>
-                      </TablixHeader>
-                      <TablixMembers>
-                        <TablixMember />
-                      </TablixMembers>
-                    </TablixMember>
+                    <TablixMember />
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
-            <DataSetName>dsEmployee</DataSetName>
+            <DataSetName>dsDonorInformation</DataSetName>
             <Top>0.17755in</Top>
             <Left>0.20865in</Left>
             <Height>0.5in</Height>
-            <Width>10.63737in</Width>
+            <Width>10.63468in</Width>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -741,7 +575,7 @@
           </Border>
         </Style>
       </Body>
-      <Width>11.13072in</Width>
+      <Width>11in</Width>
       <Page>
         <PageHeader>
           <Height>1.8507in</Height>
@@ -806,7 +640,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Employee Contact Information</Value>
+                      <Value>Donor Contact Information</Value>
                       <Style>
                         <FontSize>30pt</FontSize>
                       </Style>
