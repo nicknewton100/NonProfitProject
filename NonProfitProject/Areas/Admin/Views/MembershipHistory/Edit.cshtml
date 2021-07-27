@@ -15,7 +15,25 @@
                 <input type="hidden" asp-for="ReceiptID">
                 <div class="card w-75" style="margin:0.5rem;padding:0.25rem;">
                     <div class="card-body">
-                            Membership Due for: @Model.Username
+                        Membership Due for: @Model.Username
+                        <br />
+                        @{
+                            if (Model.Active)
+                            {
+                                @: Membership Status: Active
+                            }
+                            else
+                            {
+                                @if (Model.CancelDate != null)
+                                {
+                                    @:Membership Status: Canceled</p>
+                                }
+                                else
+                                {
+                                    @:Membership Status: Expired
+                                }
+                            }
+                        }
                         <br />
                         <br />
                         <h4>Edit Receipt Information</h4>

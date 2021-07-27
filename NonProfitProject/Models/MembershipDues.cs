@@ -26,6 +26,10 @@ namespace NonProfitProject.Models
 
         public static DateTime? GetConsecutiveDate(List<MembershipDues> membershipDues)
         {
+            if(membershipDues.Count == 0)
+            {
+                return null;
+            }
             membershipDues.OrderBy(md => new { md.MemStartDate, md.MemRenewalDate });
             DateTime? consecutiveMember = null;
             if (membershipDues.Last().MemActive)

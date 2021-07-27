@@ -1283,6 +1283,8 @@ namespace NonProfitProject.ReportDataSet {
             
             private global::System.Data.DataColumn columnDonationDate;
             
+            private global::System.Data.DataColumn columnReceiptID;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public Donation_Financial_ReportDataTable() {
@@ -1366,6 +1368,14 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ReceiptIDColumn {
+                get {
+                    return this.columnReceiptID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1401,7 +1411,7 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Donation_Financial_ReportRow AddDonation_Financial_ReportRow(string DonationName, string DonationEmail, string DonationAmount, string DonationCardNumber, string DonationTotal, string DonationDate) {
+            public Donation_Financial_ReportRow AddDonation_Financial_ReportRow(string DonationName, string DonationEmail, double DonationAmount, string DonationCardNumber, string DonationTotal, string DonationDate, string ReceiptID) {
                 Donation_Financial_ReportRow rowDonation_Financial_ReportRow = ((Donation_Financial_ReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         DonationName,
@@ -1409,7 +1419,8 @@ namespace NonProfitProject.ReportDataSet {
                         DonationAmount,
                         DonationCardNumber,
                         DonationTotal,
-                        DonationDate};
+                        DonationDate,
+                        ReceiptID};
                 rowDonation_Financial_ReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDonation_Financial_ReportRow);
                 return rowDonation_Financial_ReportRow;
@@ -1438,6 +1449,7 @@ namespace NonProfitProject.ReportDataSet {
                 this.columnDonationCardNumber = base.Columns["DonationCardNumber"];
                 this.columnDonationTotal = base.Columns["DonationTotal"];
                 this.columnDonationDate = base.Columns["DonationDate"];
+                this.columnReceiptID = base.Columns["ReceiptID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1447,7 +1459,7 @@ namespace NonProfitProject.ReportDataSet {
                 base.Columns.Add(this.columnDonationName);
                 this.columnDonationEmail = new global::System.Data.DataColumn("DonationEmail", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDonationEmail);
-                this.columnDonationAmount = new global::System.Data.DataColumn("DonationAmount", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDonationAmount = new global::System.Data.DataColumn("DonationAmount", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDonationAmount);
                 this.columnDonationCardNumber = new global::System.Data.DataColumn("DonationCardNumber", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDonationCardNumber);
@@ -1455,6 +1467,8 @@ namespace NonProfitProject.ReportDataSet {
                 base.Columns.Add(this.columnDonationTotal);
                 this.columnDonationDate = new global::System.Data.DataColumn("DonationDate", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDonationDate);
+                this.columnReceiptID = new global::System.Data.DataColumn("ReceiptID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReceiptID);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1592,7 +1606,7 @@ namespace NonProfitProject.ReportDataSet {
             
             private global::System.Data.DataColumn columnMemType;
             
-            private global::System.Data.DataColumn columnMemSince;
+            private global::System.Data.DataColumn columnMemJoinDate;
             
             private global::System.Data.DataColumn columnMemEmail;
             
@@ -1653,9 +1667,9 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn MemSinceColumn {
+            public global::System.Data.DataColumn MemJoinDateColumn {
                 get {
-                    return this.columnMemSince;
+                    return this.columnMemJoinDate;
                 }
             }
             
@@ -1728,12 +1742,12 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Members_Contact_InformationRow AddMembers_Contact_InformationRow(string MemName, string MemType, string MemSince, string MemEmail, string MemPhone, string MemAddress, string Number) {
+            public Members_Contact_InformationRow AddMembers_Contact_InformationRow(string MemName, string MemType, string MemJoinDate, string MemEmail, string MemPhone, string MemAddress, string Number) {
                 Members_Contact_InformationRow rowMembers_Contact_InformationRow = ((Members_Contact_InformationRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         MemName,
                         MemType,
-                        MemSince,
+                        MemJoinDate,
                         MemEmail,
                         MemPhone,
                         MemAddress,
@@ -1762,7 +1776,7 @@ namespace NonProfitProject.ReportDataSet {
             internal void InitVars() {
                 this.columnMemName = base.Columns["MemName"];
                 this.columnMemType = base.Columns["MemType"];
-                this.columnMemSince = base.Columns["MemSince"];
+                this.columnMemJoinDate = base.Columns["MemJoinDate"];
                 this.columnMemEmail = base.Columns["MemEmail"];
                 this.columnMemPhone = base.Columns["MemPhone"];
                 this.columnMemAddress = base.Columns["MemAddress"];
@@ -1776,8 +1790,8 @@ namespace NonProfitProject.ReportDataSet {
                 base.Columns.Add(this.columnMemName);
                 this.columnMemType = new global::System.Data.DataColumn("MemType", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMemType);
-                this.columnMemSince = new global::System.Data.DataColumn("MemSince", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMemSince);
+                this.columnMemJoinDate = new global::System.Data.DataColumn("MemJoinDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMemJoinDate);
                 this.columnMemEmail = new global::System.Data.DataColumn("MemEmail", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMemEmail);
                 this.columnMemPhone = new global::System.Data.DataColumn("MemPhone", typeof(string), null, global::System.Data.MappingType.Element);
@@ -2559,6 +2573,8 @@ namespace NonProfitProject.ReportDataSet {
             
             private global::System.Data.DataColumn columnMemTotal;
             
+            private global::System.Data.DataColumn columnReceiptID;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public Membership_Dues_Finacial_ReportDataTable() {
@@ -2674,6 +2690,14 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ReceiptIDColumn {
+                get {
+                    return this.columnReceiptID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2709,7 +2733,7 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Membership_Dues_Finacial_ReportRow AddMembership_Dues_Finacial_ReportRow(string MemName, string MemUsername, string MemType, string MemAmount, string MemStartDate, string MemEndDate, string MemBillingDate, string MemCancelDate, string MemActive, string MemTotal) {
+            public Membership_Dues_Finacial_ReportRow AddMembership_Dues_Finacial_ReportRow(string MemName, string MemUsername, string MemType, string MemAmount, string MemStartDate, string MemEndDate, string MemBillingDate, string MemCancelDate, string MemActive, string MemTotal, string ReceiptID) {
                 Membership_Dues_Finacial_ReportRow rowMembership_Dues_Finacial_ReportRow = ((Membership_Dues_Finacial_ReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         MemName,
@@ -2721,7 +2745,8 @@ namespace NonProfitProject.ReportDataSet {
                         MemBillingDate,
                         MemCancelDate,
                         MemActive,
-                        MemTotal};
+                        MemTotal,
+                        ReceiptID};
                 rowMembership_Dues_Finacial_ReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMembership_Dues_Finacial_ReportRow);
                 return rowMembership_Dues_Finacial_ReportRow;
@@ -2754,6 +2779,7 @@ namespace NonProfitProject.ReportDataSet {
                 this.columnMemCancelDate = base.Columns["MemCancelDate"];
                 this.columnMemActive = base.Columns["MemActive"];
                 this.columnMemTotal = base.Columns["MemTotal"];
+                this.columnReceiptID = base.Columns["ReceiptID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2779,6 +2805,8 @@ namespace NonProfitProject.ReportDataSet {
                 base.Columns.Add(this.columnMemActive);
                 this.columnMemTotal = new global::System.Data.DataColumn("MemTotal", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMemTotal);
+                this.columnReceiptID = new global::System.Data.DataColumn("ReceiptID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReceiptID);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2912,7 +2940,7 @@ namespace NonProfitProject.ReportDataSet {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class Finacial_SummaryDataTable : global::System.Data.TypedTableBase<Finacial_SummaryRow> {
             
-            private global::System.Data.DataColumn columnReceiptID;
+            private global::System.Data.DataColumn columnReceiptD;
             
             private global::System.Data.DataColumn columnAmount;
             
@@ -2957,9 +2985,9 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn ReceiptIDColumn {
+            public global::System.Data.DataColumn ReceiptDColumn {
                 get {
-                    return this.columnReceiptID;
+                    return this.columnReceiptD;
                 }
             }
             
@@ -3032,10 +3060,10 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Finacial_SummaryRow AddFinacial_SummaryRow(string ReceiptID, string Amount, string Date, string Description, string Total) {
+            public Finacial_SummaryRow AddFinacial_SummaryRow(string ReceiptD, string Amount, string Date, string Description, string Total) {
                 Finacial_SummaryRow rowFinacial_SummaryRow = ((Finacial_SummaryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        ReceiptID,
+                        ReceiptD,
                         Amount,
                         Date,
                         Description,
@@ -3062,7 +3090,7 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnReceiptID = base.Columns["ReceiptID"];
+                this.columnReceiptD = base.Columns["ReceiptD"];
                 this.columnAmount = base.Columns["Amount"];
                 this.columnDate = base.Columns["Date"];
                 this.columnDescription = base.Columns["Description"];
@@ -3072,8 +3100,8 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnReceiptID = new global::System.Data.DataColumn("ReceiptID", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnReceiptID);
+                this.columnReceiptD = new global::System.Data.DataColumn("ReceiptD", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReceiptD);
                 this.columnAmount = new global::System.Data.DataColumn("Amount", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAmount);
                 this.columnDate = new global::System.Data.DataColumn("Date", typeof(string), null, global::System.Data.MappingType.Element);
@@ -3992,10 +4020,10 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string DonationAmount {
+            public double DonationAmount {
                 get {
                     try {
-                        return ((string)(this[this.tableDonation_Financial_Report.DonationAmountColumn]));
+                        return ((double)(this[this.tableDonation_Financial_Report.DonationAmountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DonationAmount\' in table \'Donation Financial Report\' is DBN" +
@@ -4055,6 +4083,22 @@ namespace NonProfitProject.ReportDataSet {
                 }
                 set {
                     this[this.tableDonation_Financial_Report.DonationDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ReceiptID {
+                get {
+                    try {
+                        return ((string)(this[this.tableDonation_Financial_Report.ReceiptIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ReceiptID\' in table \'Donation Financial Report\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDonation_Financial_Report.ReceiptIDColumn] = value;
                 }
             }
             
@@ -4129,6 +4173,18 @@ namespace NonProfitProject.ReportDataSet {
             public void SetDonationDateNull() {
                 this[this.tableDonation_Financial_Report.DonationDateColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsReceiptIDNull() {
+                return this.IsNull(this.tableDonation_Financial_Report.ReceiptIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetReceiptIDNull() {
+                this[this.tableDonation_Financial_Report.ReceiptIDColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -4179,18 +4235,18 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string MemSince {
+            public string MemJoinDate {
                 get {
                     try {
-                        return ((string)(this[this.tableMembers_Contact_Information.MemSinceColumn]));
+                        return ((string)(this[this.tableMembers_Contact_Information.MemJoinDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemSince\' in table \'Members Contact Information\' is DBNull." +
-                                "", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemJoinDate\' in table \'Members Contact Information\' is DBNu" +
+                                "ll.", e);
                     }
                 }
                 set {
-                    this[this.tableMembers_Contact_Information.MemSinceColumn] = value;
+                    this[this.tableMembers_Contact_Information.MemJoinDateColumn] = value;
                 }
             }
             
@@ -4287,14 +4343,14 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsMemSinceNull() {
-                return this.IsNull(this.tableMembers_Contact_Information.MemSinceColumn);
+            public bool IsMemJoinDateNull() {
+                return this.IsNull(this.tableMembers_Contact_Information.MemJoinDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetMemSinceNull() {
-                this[this.tableMembers_Contact_Information.MemSinceColumn] = global::System.Convert.DBNull;
+            public void SetMemJoinDateNull() {
+                this[this.tableMembers_Contact_Information.MemJoinDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4874,6 +4930,23 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ReceiptID {
+                get {
+                    try {
+                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.ReceiptIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ReceiptID\' in table \'Membership Dues Finacial Report\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tableMembership_Dues_Finacial_Report.ReceiptIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMemNameNull() {
                 return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemNameColumn);
             }
@@ -4991,6 +5064,18 @@ namespace NonProfitProject.ReportDataSet {
             public void SetMemTotalNull() {
                 this[this.tableMembership_Dues_Finacial_Report.MemTotalColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsReceiptIDNull() {
+                return this.IsNull(this.tableMembership_Dues_Finacial_Report.ReceiptIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetReceiptIDNull() {
+                this[this.tableMembership_Dues_Finacial_Report.ReceiptIDColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -5009,17 +5094,17 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string ReceiptID {
+            public string ReceiptD {
                 get {
                     try {
-                        return ((string)(this[this.tableFinacial_Summary.ReceiptIDColumn]));
+                        return ((string)(this[this.tableFinacial_Summary.ReceiptDColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ReceiptID\' in table \'Finacial Summary\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ReceiptD\' in table \'Finacial Summary\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableFinacial_Summary.ReceiptIDColumn] = value;
+                    this[this.tableFinacial_Summary.ReceiptDColumn] = value;
                 }
             }
             
@@ -5089,14 +5174,14 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsReceiptIDNull() {
-                return this.IsNull(this.tableFinacial_Summary.ReceiptIDColumn);
+            public bool IsReceiptDNull() {
+                return this.IsNull(this.tableFinacial_Summary.ReceiptDColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetReceiptIDNull() {
-                this[this.tableFinacial_Summary.ReceiptIDColumn] = global::System.Convert.DBNull;
+            public void SetReceiptDNull() {
+                this[this.tableFinacial_Summary.ReceiptDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

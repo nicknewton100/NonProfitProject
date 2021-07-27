@@ -75,6 +75,12 @@
     <Content Update="wwwroot\Reports\rptDonorContact.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\Reports\rptDonation.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Reports\rptMemberContact.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\Reports\rptEmployeeContact.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

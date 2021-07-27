@@ -20,17 +20,17 @@
                         @{
                             if (Model.Active)
                             {
-                                @: Active: Yes
+                                @: Membership Status: Active
                             }
                             else
                             {
                                 @if (Model.CancelDate != null)
                                 {
-                                    @:Active: No - Canceled</p>
+                                    @:Membership Status: Canceled</p>
                                 }
                                 else
                                 {
-                                    @:Active: No
+                                    @:Membership Status: Expired
                                 }
                             }
                          }
@@ -53,7 +53,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group w-auto">
-                                <div class="col-auto"><label>Membership Status: </label></div>
+                                <div class="col-auto"><label>Membership Type: </label></div>
                                 <div class="col-auto">
                                     <select asp-for="MembershipType" class="form-control" disabled>
                                         <option value="Basic">Basic</option>

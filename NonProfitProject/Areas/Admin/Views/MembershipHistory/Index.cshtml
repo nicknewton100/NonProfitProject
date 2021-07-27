@@ -20,7 +20,7 @@
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
                         <th scope="col">Billing Date</th>
-                        <th scope="col">Active Membership</th>
+                        <th scope="col">Membership Status</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
@@ -48,17 +48,17 @@
                             <td>@{
                                 if (due.MembershipDue.MemActive)
                                 {
-                                        <p>Yes</p>
+                                        <p>Active</p>
                                 }
                                 else
                                 {
                                         @if (due.MembershipDue.MemCancelDate != null)
                                         {
-                                            <p>No - Canceled</p>
+                                            <p>Canceled</p>
                                         }
                                         else
                                         {
-                                            <p>No</p>
+                                            <p>Expired</p>
                                         }
 
                                     }

@@ -180,5 +180,92 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
             return File(result.MainStream, "application/pdf");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> MemberReport()
+        {
+            var users = await userManager.GetUsersInRoleAsync("Member");
+            var members = context.Users.Where(u => users.Contains(u) && context.MembershipDues.Any(md => md.UserID == u.Id)).Include(u => u.MembershipDues).ThenInclude(md => md.MembershipType).OrderBy(u => u.UserLastName + ", " + u.UserFirstName).AsNoTracking().ToList();
+
+            var membersNull = context.Users.Where(u => users.Contains(u) && !context.MembershipDues.Any(md => md.UserID == u.Id)).Include(u => u.MembershipDues).ThenInclude(md => md.MembershipType).OrderBy(u => u.UserLastName + ", " + u.UserFirstName).AsNoTracking().ToList();
+            members.AddRange(membersNull);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Number");
+            dt.Columns.Add("MemName");
+            dt.Columns.Add("MemType");
+            dt.Columns.Add("MemJoinDate");
+            dt.Columns.Add("MemEmail");
+            dt.Columns.Add("MemPhone");
+            dt.Columns.Add("MemAddress");
+            
+            DataRow row;
+            int number = 0;
+            foreach (var i in members)
+            {
+                number += 1;
+                row = dt.NewRow();
+                row["Number"] = number;
+                row["MemName"] = i.UserLastName + ", " + i.UserFirstName;
+                row["MemType"] = i.MembershipDues.Count() == 0 ? "Null" : i.MembershipDues.Last().MembershipType.Name;
+                row["MemJoinDate"] = MembershipDues.GetConsecutiveDate(i.MembershipDues.ToList())?.ToShortDateString() ?? "Null";
+                row["MemEmail"] = i.Email;
+                row["MemPhone"] = i.PhoneNumber == null ? "Null" : i.PhoneNumber;
+                row["MemAddress"] = String.Format("{0}, {1}{2}, {3} {4}", i.UserAddr1.Replace(".", "").TrimEnd(), i.UserAddr2 == "" ? i.UserAddr2 + ", " : "", i.UserCity, i.UserState, i.UserPostalCode);
+                
+                dt.Rows.Add(row);
+            }
+            string mimetype = "";
+            int extension = 1;
+            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptMemberContact.rdlc";
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("prm", "RDLC Report");
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("dsMemberInformation", dt);
+            //localReport.AddDataSource("dsUsers",context)
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+            return File(result.MainStream, "application/pdf");
+        }
+
+
+        [HttpPost]
+        public IActionResult DonationReport()
+        {
+            var donations = context.Receipts.Include(r => r.User).Include(r => r.InvoiceDonorInformation).Include(r => r.InvoicePayment).Include(r => r.Donation).Where(r => !context.MembershipDues.Any(md => md.ReceiptID == r.ReceiptID)).ToList();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ReceiptID");
+            dt.Columns.Add("DonationName");
+            dt.Columns.Add("DonationEmail");
+            dt.Columns.Add("DonationAmount");
+            dt.Columns.Add("DonationCardNumber");
+            dt.Columns.Add("DonationDate");
+
+            DataRow row;
+            decimal total = 0.00m;
+            foreach (var i in donations)
+            {
+                row = dt.NewRow();
+                row["ReceiptID"] = i.ReceiptID;
+                row["DonationName"] = i.InvoiceDonorInformation.LastName + ", " + i.InvoiceDonorInformation.FirstName;
+                row["DonationEmail"] = i.InvoiceDonorInformation.Email;
+                row["DonationAmount"] = i.Total;
+                row["DonationCardNumber"] = "xxxx-xxxx-xxxx-" + i.InvoicePayment.Last4Digits.ToString();
+                row["DonationDate"] = i.Date.ToShortDateString();
+                dt.Rows.Add(row);
+                total += i.Total;
+            }
+
+            string mimetype = "";
+            int extension = 1;
+            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptDonation.rdlc";
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("prm", "RDLC Report");
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("dsDonation", dt);
+            //localReport.AddDataSource("dsUsers",context)
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+            return File(result.MainStream, "application/pdf");
+        }
     }
 }
