@@ -36,7 +36,7 @@
                             <td>@user.Email</td>
                             <td>@user.UserCreationDate.ToString("MM/dd/yyyy")</td>
                             <td>
-                                <button type="button" class="btn btn-dark" onclick="location.href = '@Url.Action("Details","Member",new {id = user.Id })'">Details</button>
+                                <button type="button" class="btn btn-outline-dark" onclick="location.href = '@Url.Action("Details","Member",new {id = user.Id })'">Details</button>
                             </td>
                             <td>
                                 <form method="post" asp-action="RemoveMember" asp-route-id="@user.Id">

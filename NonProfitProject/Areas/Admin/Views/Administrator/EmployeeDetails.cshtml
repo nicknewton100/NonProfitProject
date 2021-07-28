@@ -1,0 +1,255 @@
+﻿@model NonProfitProject.Models.Employees
+@{
+    ViewData["Title"] = "Employee Details";
+    ViewData["Title2"] = "Admin";
+    Layout = "_AdminLayout";
+}
+
+<head>
+    <script type="text/javascript" src="~/js/UserValidation.js"></script>
+</head>
+<div class="container">
+    <div class="card-header-pills"><h1 class="fas fa-user-edit">  @ViewData["Title"]</h1></div>
+    <h5 class="text-primary">@TempData["AdminChanges"]?.ToString()</h5>
+    <div class="row">
+        <div class="card w-auto" style="margin:0.5rem;padding:0.25rem;">
+            <div class="card-body">
+                <h4>Personal Information</h4>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-auto"><label>First Name: </label></div>
+                        <div class="col-auto">
+                            <input class="form-control" value="@Model.User.UserFirstName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-auto"><label>Last Name: </label></div>
+                        <div class="col-auto">
+                            <input asp-for="@Model.User.UserLastName" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-auto"><label>Phone: </label></div>
+                        <div class="col-auto">
+                            <input class="form-control" value="@Model.User.PhoneNumber" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-auto"><label>Birth Date: </label></div>
+                        <div class="col-auto">
+                            <input asp-for="@Model.User.UserBirthDate" class="form-control" type="date" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-auto"><label for="gender">Gender: </label></div>
+                        <div class="col-auto">
+                            <select asp-for="@Model.User.UserGender" class="form-control">
+                                <option></option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Prefer Not to Say">Prefer Not to Say</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+                <h4>Address Information</h4>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="form-group w-50">
+                        <div class="col-auto"><label>Address 1: </label></div>
+                        <div class="col-auto">
+                            <input class="form-control" value="@Model.User.UserAddr1" />
+                        </div>
+                    </div>
+                    <div class="form-group w-50">
+                        <div class="col-auto"><label>Address 2: </label></div>
+                        <div class="col-auto">
+                            <input class="form-control" value="@Model.User.UserAddr2" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-auto"><label>City: </label></div>
+                        <div class="col-auto">
+                            <input class="form-control" value="@Model.User.UserCity" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-auto"><label>State: </label></div>
+                        <div class="col-auto">
+                            <select asp-for="@Model.User.UserState" class="form-control">
+                                <option></option>
+                                <option value="Alaska">Alaska</option>
+                                <option value="Alabama">Alabama</option>
+                                <option value="Arkansas">Arkansas</option>
+                                <option value="Arizona">Arizona</option>
+                                <option value="California">California</option>
+                                <option value="Colorado">Colorado</option>
+                                <option value="Connecticut">Connecticut</option>
+                                <option value="District of Columbia">District of Columbia</option>
+                                <option value="Delaware">Delaware</option>
+                                <option value="Florida">Florida</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Hawaii">Hawaii</option>
+                                <option value="Iowa">Iowa</option>
+                                <option value="Idaho">Idaho</option>
+                                <option value="Illinois">Illinois</option>
+                                <option value="Indiana">Indiana</option>
+                                <option value="Kansas">Kansas</option>
+                                <option value="Kentucky">Kentucky</option>
+                                <option value="Louisiana">Louisiana</option>
+                                <option value="Massachusetts">Massachusetts</option>
+                                <option value="Maryland">Maryland</option>
+                                <option value="Maine">Maine</option>
+                                <option value="Michigan">Michigan</option>
+                                <option value="Michigan">Minnesota</option>
+                                <option value="Missouri">Missouri</option>
+                                <option value="Mississippi">Mississippi</option>
+                                <option value="Montana">Montana</option>
+                                <option value="North Carolina">North Carolina</option>
+                                <option value="North Dakota">North Dakota</option>
+                                <option value="Nebraska">Nebraska</option>
+                                <option value="New Hampshire">New Hampshire</option>
+                                <option value="New Jersey">New Jersey</option>
+                                <option value="New Mexico">New Mexico</option>
+                                <option value="Nevada">Nevada</option>
+                                <option value="New York">New York</option>
+                                <option value="Ohio">Ohio</option>
+                                <option value="Oklahoma">Oklahoma</option>
+                                <option value="Oregon">Oregon</option>
+                                <option value="Pennsylvania">Pennsylvania</option>
+                                <option value="Puerto Rico">Puerto Rico</option>
+                                <option value="Rhode Island">Rhode Island</option>
+                                <option value="South Carolina">South Carolina</option>
+                                <option value="South Dakota">South Dakota</option>
+                                <option value="Tennessee">Tennessee</option>
+                                <option value="Texas">Texas</option>
+                                <option value="Utah">Utah</option>
+                                <option value="Virginia">Virginia</option>
+                                <option value="Vermont">Vermont</option>
+                                <option value="Washington">Washington</option>
+                                <option value="Wisconsin">Wisconsin</option>
+                                <option value="West Virginia">West Virginia</option>
+                                <option value="Wyoming">Wyoming</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-auto"><label>Postal Code: </label></div>
+                        <div class="col-auto">
+                            <input class="form-control" value="@Model.User.UserPostalCode"/>
+                        </div>
+                    </div>
+                </div>
+                <h4>Job Information</h4>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="form-group">
+                        <!--POSITION-->
+                        <div class="col-auto"><label>Position: </label></div>
+                        <div class="col-auto">
+                            <input asp-for="Position" class="form-control" data-val="false" />
+                            <span asp-validation-for="Position" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!--SALARY-->
+                        <div class="col-auto"><label>Salary: </label></div>
+                        <div class="col-auto">
+                            <input asp-for="Salary" class="form-control" />
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <!--HIRE DATE-->
+                            <div class="col-auto"><label>Hire Date: </label></div>
+                            <div class="col-auto">
+                                <input class="form-control" value="@Model.HireDate" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--RELEASE DATE-->
+                            <div class="col-auto"><label>Release Date: </label></div>
+                            <div class="col-auto">
+                                <input class="form-control" value="@Model.ReleaseDate" />
+                            </div>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <!--COMMITTEE-->
+                        <div class="col-auto"><label>Committee: </label></div>
+                        <div class="col-auto">
+                            @if (Model.CommitteeMembers != null)
+                            {
+                                <input asp-for="@Model.CommitteeMembers.committee.CommitteeName" class="form-control" />
+                            }
+                            else
+                            {
+                                <input class="form-control" value="N/A" />
+                            }
+                        </div>
+                    </div>
+                    @if(Model.CommitteeMembers != null)
+                    {
+                        <div class="form-group" id="CommitteePosition">
+                            <!--COMMITTEE POSITION-->
+                            <div class="col-auto"><label>Committee Position: </label></div>
+                            <div class="col-auto">
+                            <input asp-for="@Model.CommitteeMembers.CommitteePosition" class="form-control" />
+                        </div>
+                    </div>
+                    }
+                    
+                </div>
+                <br />
+
+                <h4>Login Information</h4>
+                <div class="dropdown-divider"></div>
+                <div id="LoginInformation">
+                    <div class="row">
+                        <div class="form-group">
+                            <!--USERNAME-->
+                            <div class="col-auto"><label>Username: </label></div>
+                            <div class="col-auto">
+                                <input class="form-control" value="@Model.User.UserName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group w-50">
+                            <!--EMAIL ADDRESS-->
+                            <div class="col-auto"><label>Email Address: </label></div>
+                            <div class="col-auto">
+                                <input class="form-control" value="@Model.User.Email" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                <br /><br />
+                <div class="row">
+                    <form method="post" asp-action="Add" asp-route-id="@Model.EmpID">
+                        <button type="submit" class="btn btn-outline-dark">Add Administrator</button>
+                    </form>
+                    <a class="btn btn-dark" asp-action="Add">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<script>
+    var inputs, index, selects;
+    inputs = document.getElementsByTagName('input');
+    selects = document.getElementsByTagName('select');
+    for (var index = 0; index < inputs.length; ++index) {
+        inputs[index].disabled = true;
+    }
+    for (var index = 0; index < selects.length; ++index) {
+        selects[index].disabled = true;
+    }
+</script>

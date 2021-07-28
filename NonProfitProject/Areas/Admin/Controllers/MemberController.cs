@@ -26,7 +26,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             this.context = context;
             this.userManager = userManager;
         }
-
+        [Route("~/[area]/[controller]s")]
         public async Task<IActionResult> Index()
         {
             var member = await userManager.GetUsersInRoleAsync("Member");

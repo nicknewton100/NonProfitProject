@@ -1,0 +1,64 @@
+﻿@model List<NonProfitProject.Models.Employees>
+@{
+    ViewData["Title"] = "Administrator List";
+    ViewData["Title2"] = "Admin";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+}
+<div class="container">
+    <div class="container">
+        <div class="card-header-pills"><h1 class="fas fa-handshake"> Administrators</h1></div>
+        <a class="btn btn-outline-dark" asp-action="Add">Add Administrator</a>
+    </div>
+    <br />
+    <div class="container" style="font-size:medium;">
+        <div class="card">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Position</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var empl in Model)
+                    {
+                    <tr>
+                        <td>@empl.User.UserFirstName</td>
+                        <td>@empl.User.UserLastName</td>
+                        <td>@empl.User.Email</td>
+                        <td>@empl.User.PhoneNumber</td>
+                        <td>@empl.Position</td>
+                        <td>
+                            <div class="row ">
+                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","Administrator",new {id = empl.EmpID })'">Details</button>
+                                <form method="post" asp-action="RemoveAdministrator" asp-route-id="@empl.EmpID">
+                                    <button type="button" class="btn btn-danger" onclick="RemoveAdminUser(this)">Remove Administrator</button>
+                                </form>
+                            </div>     
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <h5 class="text-primary">@TempData["AdminChanges"]?.ToString()</h5>
+    </div>
+</div>
+<script type="text/javascript">
+    function RemoveAdminUser(e) {
+        Swal.fire({
+            title: 'Are you sure you want to remove this Administrator?',
+            showDenyButton: true,
+            confirmButtonText: `Yes`,
+            denyButtonText: `No`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                e.form.submit();
+            }
+        })
+    }
+</script>
