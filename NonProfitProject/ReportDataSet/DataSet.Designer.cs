@@ -38,7 +38,7 @@ namespace NonProfitProject.ReportDataSet {
         
         private Membership_Dues_Finacial_ReportDataTable tableMembership_Dues_Finacial_Report;
         
-        private Finacial_SummaryDataTable tableFinacial_Summary;
+        private Financial_SummaryDataTable tableFinancial_Summary;
         
         private Committee_Contact_InformationDataTable tableCommittee_Contact_Information;
         
@@ -91,8 +91,8 @@ namespace NonProfitProject.ReportDataSet {
                 if ((ds.Tables["Membership Dues Finacial Report"] != null)) {
                     base.Tables.Add(new Membership_Dues_Finacial_ReportDataTable(ds.Tables["Membership Dues Finacial Report"]));
                 }
-                if ((ds.Tables["Finacial Summary"] != null)) {
-                    base.Tables.Add(new Finacial_SummaryDataTable(ds.Tables["Finacial Summary"]));
+                if ((ds.Tables["Financial Summary"] != null)) {
+                    base.Tables.Add(new Financial_SummaryDataTable(ds.Tables["Financial Summary"]));
                 }
                 if ((ds.Tables["Committee Contact Information"] != null)) {
                     base.Tables.Add(new Committee_Contact_InformationDataTable(ds.Tables["Committee Contact Information"]));
@@ -189,9 +189,9 @@ namespace NonProfitProject.ReportDataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public Finacial_SummaryDataTable Finacial_Summary {
+        public Financial_SummaryDataTable Financial_Summary {
             get {
-                return this.tableFinacial_Summary;
+                return this.tableFinancial_Summary;
             }
         }
         
@@ -293,8 +293,8 @@ namespace NonProfitProject.ReportDataSet {
                 if ((ds.Tables["Membership Dues Finacial Report"] != null)) {
                     base.Tables.Add(new Membership_Dues_Finacial_ReportDataTable(ds.Tables["Membership Dues Finacial Report"]));
                 }
-                if ((ds.Tables["Finacial Summary"] != null)) {
-                    base.Tables.Add(new Finacial_SummaryDataTable(ds.Tables["Finacial Summary"]));
+                if ((ds.Tables["Financial Summary"] != null)) {
+                    base.Tables.Add(new Financial_SummaryDataTable(ds.Tables["Financial Summary"]));
                 }
                 if ((ds.Tables["Committee Contact Information"] != null)) {
                     base.Tables.Add(new Committee_Contact_InformationDataTable(ds.Tables["Committee Contact Information"]));
@@ -374,10 +374,10 @@ namespace NonProfitProject.ReportDataSet {
                     this.tableMembership_Dues_Finacial_Report.InitVars();
                 }
             }
-            this.tableFinacial_Summary = ((Finacial_SummaryDataTable)(base.Tables["Finacial Summary"]));
+            this.tableFinancial_Summary = ((Financial_SummaryDataTable)(base.Tables["Financial Summary"]));
             if ((initTable == true)) {
-                if ((this.tableFinacial_Summary != null)) {
-                    this.tableFinacial_Summary.InitVars();
+                if ((this.tableFinancial_Summary != null)) {
+                    this.tableFinancial_Summary.InitVars();
                 }
             }
             this.tableCommittee_Contact_Information = ((Committee_Contact_InformationDataTable)(base.Tables["Committee Contact Information"]));
@@ -410,8 +410,8 @@ namespace NonProfitProject.ReportDataSet {
             base.Tables.Add(this.tableEvent_Information);
             this.tableMembership_Dues_Finacial_Report = new Membership_Dues_Finacial_ReportDataTable();
             base.Tables.Add(this.tableMembership_Dues_Finacial_Report);
-            this.tableFinacial_Summary = new Finacial_SummaryDataTable();
-            base.Tables.Add(this.tableFinacial_Summary);
+            this.tableFinancial_Summary = new Financial_SummaryDataTable();
+            base.Tables.Add(this.tableFinancial_Summary);
             this.tableCommittee_Contact_Information = new Committee_Contact_InformationDataTable();
             base.Tables.Add(this.tableCommittee_Contact_Information);
         }
@@ -460,7 +460,7 @@ namespace NonProfitProject.ReportDataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeFinacial_Summary() {
+        private bool ShouldSerializeFinancial_Summary() {
             return false;
         }
         
@@ -547,7 +547,7 @@ namespace NonProfitProject.ReportDataSet {
         public delegate void Membership_Dues_Finacial_ReportRowChangeEventHandler(object sender, Membership_Dues_Finacial_ReportRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void Finacial_SummaryRowChangeEventHandler(object sender, Finacial_SummaryRowChangeEvent e);
+        public delegate void Financial_SummaryRowChangeEventHandler(object sender, Financial_SummaryRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void Committee_Contact_InformationRowChangeEventHandler(object sender, Committee_Contact_InformationRowChangeEvent e);
@@ -2938,9 +2938,9 @@ namespace NonProfitProject.ReportDataSet {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class Finacial_SummaryDataTable : global::System.Data.TypedTableBase<Finacial_SummaryRow> {
+        public partial class Financial_SummaryDataTable : global::System.Data.TypedTableBase<Financial_SummaryRow> {
             
-            private global::System.Data.DataColumn columnReceiptD;
+            private global::System.Data.DataColumn columnReceiptID;
             
             private global::System.Data.DataColumn columnAmount;
             
@@ -2948,12 +2948,10 @@ namespace NonProfitProject.ReportDataSet {
             
             private global::System.Data.DataColumn columnDescription;
             
-            private global::System.Data.DataColumn columnTotal;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Finacial_SummaryDataTable() {
-                this.TableName = "Finacial Summary";
+            public Financial_SummaryDataTable() {
+                this.TableName = "Financial Summary";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -2961,7 +2959,7 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal Finacial_SummaryDataTable(global::System.Data.DataTable table) {
+            internal Financial_SummaryDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -2978,16 +2976,16 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected Finacial_SummaryDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected Financial_SummaryDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn ReceiptDColumn {
+            public global::System.Data.DataColumn ReceiptIDColumn {
                 get {
-                    return this.columnReceiptD;
+                    return this.columnReceiptID;
                 }
             }
             
@@ -3017,14 +3015,6 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn TotalColumn {
-                get {
-                    return this.columnTotal;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3034,49 +3024,48 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Finacial_SummaryRow this[int index] {
+            public Financial_SummaryRow this[int index] {
                 get {
-                    return ((Finacial_SummaryRow)(this.Rows[index]));
+                    return ((Financial_SummaryRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event Finacial_SummaryRowChangeEventHandler Finacial_SummaryRowChanging;
+            public event Financial_SummaryRowChangeEventHandler Financial_SummaryRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event Finacial_SummaryRowChangeEventHandler Finacial_SummaryRowChanged;
+            public event Financial_SummaryRowChangeEventHandler Financial_SummaryRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event Finacial_SummaryRowChangeEventHandler Finacial_SummaryRowDeleting;
+            public event Financial_SummaryRowChangeEventHandler Financial_SummaryRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event Finacial_SummaryRowChangeEventHandler Finacial_SummaryRowDeleted;
+            public event Financial_SummaryRowChangeEventHandler Financial_SummaryRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddFinacial_SummaryRow(Finacial_SummaryRow row) {
+            public void AddFinancial_SummaryRow(Financial_SummaryRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Finacial_SummaryRow AddFinacial_SummaryRow(string ReceiptD, string Amount, string Date, string Description, string Total) {
-                Finacial_SummaryRow rowFinacial_SummaryRow = ((Finacial_SummaryRow)(this.NewRow()));
+            public Financial_SummaryRow AddFinancial_SummaryRow(string ReceiptID, double Amount, string Date, string Description) {
+                Financial_SummaryRow rowFinancial_SummaryRow = ((Financial_SummaryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        ReceiptD,
+                        ReceiptID,
                         Amount,
                         Date,
-                        Description,
-                        Total};
-                rowFinacial_SummaryRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowFinacial_SummaryRow);
-                return rowFinacial_SummaryRow;
+                        Description};
+                rowFinancial_SummaryRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowFinancial_SummaryRow);
+                return rowFinancial_SummaryRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                Finacial_SummaryDataTable cln = ((Finacial_SummaryDataTable)(base.Clone()));
+                Financial_SummaryDataTable cln = ((Financial_SummaryDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -3084,58 +3073,55 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new Finacial_SummaryDataTable();
+                return new Financial_SummaryDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnReceiptD = base.Columns["ReceiptD"];
+                this.columnReceiptID = base.Columns["ReceiptID"];
                 this.columnAmount = base.Columns["Amount"];
                 this.columnDate = base.Columns["Date"];
                 this.columnDescription = base.Columns["Description"];
-                this.columnTotal = base.Columns["Total"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnReceiptD = new global::System.Data.DataColumn("ReceiptD", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnReceiptD);
-                this.columnAmount = new global::System.Data.DataColumn("Amount", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnReceiptID = new global::System.Data.DataColumn("ReceiptID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReceiptID);
+                this.columnAmount = new global::System.Data.DataColumn("Amount", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAmount);
                 this.columnDate = new global::System.Data.DataColumn("Date", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDate);
                 this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescription);
-                this.columnTotal = new global::System.Data.DataColumn("Total", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTotal);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Finacial_SummaryRow NewFinacial_SummaryRow() {
-                return ((Finacial_SummaryRow)(this.NewRow()));
+            public Financial_SummaryRow NewFinancial_SummaryRow() {
+                return ((Financial_SummaryRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new Finacial_SummaryRow(builder);
+                return new Financial_SummaryRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(Finacial_SummaryRow);
+                return typeof(Financial_SummaryRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.Finacial_SummaryRowChanged != null)) {
-                    this.Finacial_SummaryRowChanged(this, new Finacial_SummaryRowChangeEvent(((Finacial_SummaryRow)(e.Row)), e.Action));
+                if ((this.Financial_SummaryRowChanged != null)) {
+                    this.Financial_SummaryRowChanged(this, new Financial_SummaryRowChangeEvent(((Financial_SummaryRow)(e.Row)), e.Action));
                 }
             }
             
@@ -3143,8 +3129,8 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.Finacial_SummaryRowChanging != null)) {
-                    this.Finacial_SummaryRowChanging(this, new Finacial_SummaryRowChangeEvent(((Finacial_SummaryRow)(e.Row)), e.Action));
+                if ((this.Financial_SummaryRowChanging != null)) {
+                    this.Financial_SummaryRowChanging(this, new Financial_SummaryRowChangeEvent(((Financial_SummaryRow)(e.Row)), e.Action));
                 }
             }
             
@@ -3152,8 +3138,8 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.Finacial_SummaryRowDeleted != null)) {
-                    this.Finacial_SummaryRowDeleted(this, new Finacial_SummaryRowChangeEvent(((Finacial_SummaryRow)(e.Row)), e.Action));
+                if ((this.Financial_SummaryRowDeleted != null)) {
+                    this.Financial_SummaryRowDeleted(this, new Financial_SummaryRowChangeEvent(((Financial_SummaryRow)(e.Row)), e.Action));
                 }
             }
             
@@ -3161,14 +3147,14 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.Finacial_SummaryRowDeleting != null)) {
-                    this.Finacial_SummaryRowDeleting(this, new Finacial_SummaryRowChangeEvent(((Finacial_SummaryRow)(e.Row)), e.Action));
+                if ((this.Financial_SummaryRowDeleting != null)) {
+                    this.Financial_SummaryRowDeleting(this, new Financial_SummaryRowChangeEvent(((Financial_SummaryRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveFinacial_SummaryRow(Finacial_SummaryRow row) {
+            public void RemoveFinancial_SummaryRow(Financial_SummaryRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -3195,7 +3181,7 @@ namespace NonProfitProject.ReportDataSet {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "Finacial_SummaryDataTable";
+                attribute2.FixedValue = "Financial_SummaryDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -5095,46 +5081,46 @@ namespace NonProfitProject.ReportDataSet {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class Finacial_SummaryRow : global::System.Data.DataRow {
+        public partial class Financial_SummaryRow : global::System.Data.DataRow {
             
-            private Finacial_SummaryDataTable tableFinacial_Summary;
+            private Financial_SummaryDataTable tableFinancial_Summary;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal Finacial_SummaryRow(global::System.Data.DataRowBuilder rb) : 
+            internal Financial_SummaryRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableFinacial_Summary = ((Finacial_SummaryDataTable)(this.Table));
+                this.tableFinancial_Summary = ((Financial_SummaryDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string ReceiptD {
+            public string ReceiptID {
                 get {
                     try {
-                        return ((string)(this[this.tableFinacial_Summary.ReceiptDColumn]));
+                        return ((string)(this[this.tableFinancial_Summary.ReceiptIDColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ReceiptD\' in table \'Finacial Summary\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ReceiptID\' in table \'Financial Summary\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableFinacial_Summary.ReceiptDColumn] = value;
+                    this[this.tableFinancial_Summary.ReceiptIDColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string Amount {
+            public double Amount {
                 get {
                     try {
-                        return ((string)(this[this.tableFinacial_Summary.AmountColumn]));
+                        return ((double)(this[this.tableFinancial_Summary.AmountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Amount\' in table \'Finacial Summary\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Amount\' in table \'Financial Summary\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableFinacial_Summary.AmountColumn] = value;
+                    this[this.tableFinancial_Summary.AmountColumn] = value;
                 }
             }
             
@@ -5143,14 +5129,14 @@ namespace NonProfitProject.ReportDataSet {
             public string Date {
                 get {
                     try {
-                        return ((string)(this[this.tableFinacial_Summary.DateColumn]));
+                        return ((string)(this[this.tableFinancial_Summary.DateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'Finacial Summary\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'Financial Summary\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableFinacial_Summary.DateColumn] = value;
+                    this[this.tableFinancial_Summary.DateColumn] = value;
                 }
             }
             
@@ -5159,91 +5145,63 @@ namespace NonProfitProject.ReportDataSet {
             public string Description {
                 get {
                     try {
-                        return ((string)(this[this.tableFinacial_Summary.DescriptionColumn]));
+                        return ((string)(this[this.tableFinancial_Summary.DescriptionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Description\' in table \'Finacial Summary\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Description\' in table \'Financial Summary\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableFinacial_Summary.DescriptionColumn] = value;
+                    this[this.tableFinancial_Summary.DescriptionColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string Total {
-                get {
-                    try {
-                        return ((string)(this[this.tableFinacial_Summary.TotalColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Total\' in table \'Finacial Summary\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableFinacial_Summary.TotalColumn] = value;
-                }
+            public bool IsReceiptIDNull() {
+                return this.IsNull(this.tableFinancial_Summary.ReceiptIDColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsReceiptDNull() {
-                return this.IsNull(this.tableFinacial_Summary.ReceiptDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetReceiptDNull() {
-                this[this.tableFinacial_Summary.ReceiptDColumn] = global::System.Convert.DBNull;
+            public void SetReceiptIDNull() {
+                this[this.tableFinancial_Summary.ReceiptIDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsAmountNull() {
-                return this.IsNull(this.tableFinacial_Summary.AmountColumn);
+                return this.IsNull(this.tableFinancial_Summary.AmountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetAmountNull() {
-                this[this.tableFinacial_Summary.AmountColumn] = global::System.Convert.DBNull;
+                this[this.tableFinancial_Summary.AmountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsDateNull() {
-                return this.IsNull(this.tableFinacial_Summary.DateColumn);
+                return this.IsNull(this.tableFinancial_Summary.DateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetDateNull() {
-                this[this.tableFinacial_Summary.DateColumn] = global::System.Convert.DBNull;
+                this[this.tableFinancial_Summary.DateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsDescriptionNull() {
-                return this.IsNull(this.tableFinacial_Summary.DescriptionColumn);
+                return this.IsNull(this.tableFinancial_Summary.DescriptionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetDescriptionNull() {
-                this[this.tableFinacial_Summary.DescriptionColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsTotalNull() {
-                return this.IsNull(this.tableFinacial_Summary.TotalColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetTotalNull() {
-                this[this.tableFinacial_Summary.TotalColumn] = global::System.Convert.DBNull;
+                this[this.tableFinancial_Summary.DescriptionColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5707,22 +5665,22 @@ namespace NonProfitProject.ReportDataSet {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class Finacial_SummaryRowChangeEvent : global::System.EventArgs {
+        public class Financial_SummaryRowChangeEvent : global::System.EventArgs {
             
-            private Finacial_SummaryRow eventRow;
+            private Financial_SummaryRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Finacial_SummaryRowChangeEvent(Finacial_SummaryRow row, global::System.Data.DataRowAction action) {
+            public Financial_SummaryRowChangeEvent(Financial_SummaryRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Finacial_SummaryRow Row {
+            public Financial_SummaryRow Row {
                 get {
                     return this.eventRow;
                 }

@@ -132,14 +132,13 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Finacial_x0020_Summary" msprop:Generator_TableClassName="Finacial_SummaryDataTable" msprop:Generator_TableVarName="tableFinacial_Summary" msprop:Generator_RowChangedName="Finacial_SummaryRowChanged" msprop:Generator_TablePropName="Finacial_Summary" msprop:Generator_RowDeletingName="Finacial_SummaryRowDeleting" msprop:Generator_RowChangingName="Finacial_SummaryRowChanging" msprop:Generator_RowEvHandlerName="Finacial_SummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="Finacial_SummaryRowDeleted" msprop:Generator_RowClassName="Finacial_SummaryRow" msprop:Generator_UserTableName="Finacial Summary" msprop:Generator_RowEvArgName="Finacial_SummaryRowChangeEvent">
+        <xs:element name="Financial_x0020_Summary" msprop:Generator_TableClassName="Financial_SummaryDataTable" msprop:Generator_TableVarName="tableFinancial_Summary" msprop:Generator_RowChangedName="Financial_SummaryRowChanged" msprop:Generator_TablePropName="Financial_Summary" msprop:Generator_RowDeletingName="Financial_SummaryRowDeleting" msprop:Generator_RowChangingName="Financial_SummaryRowChanging" msprop:Generator_RowEvHandlerName="Financial_SummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="Financial_SummaryRowDeleted" msprop:Generator_RowClassName="Financial_SummaryRow" msprop:Generator_UserTableName="Financial Summary" msprop:Generator_RowEvArgName="Financial_SummaryRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ReceiptD" msprop:Generator_ColumnVarNameInTable="columnReceiptD" msprop:Generator_ColumnPropNameInRow="ReceiptD" msprop:Generator_ColumnPropNameInTable="ReceiptDColumn" msprop:Generator_UserColumnName="ReceiptD" type="xs:string" minOccurs="0" />
-              <xs:element name="Amount" msprop:Generator_ColumnVarNameInTable="columnAmount" msprop:Generator_ColumnPropNameInRow="Amount" msprop:Generator_ColumnPropNameInTable="AmountColumn" msprop:Generator_UserColumnName="Amount" type="xs:string" minOccurs="0" />
+              <xs:element name="ReceiptID" msprop:Generator_ColumnVarNameInTable="columnReceiptID" msprop:Generator_ColumnPropNameInRow="ReceiptID" msprop:Generator_ColumnPropNameInTable="ReceiptIDColumn" msprop:Generator_UserColumnName="ReceiptID" type="xs:string" minOccurs="0" />
+              <xs:element name="Amount" msprop:Generator_ColumnVarNameInTable="columnAmount" msprop:Generator_ColumnPropNameInRow="Amount" msprop:Generator_ColumnPropNameInTable="AmountColumn" msprop:Generator_UserColumnName="Amount" type="xs:double" minOccurs="0" />
               <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:string" minOccurs="0" />
               <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" type="xs:string" minOccurs="0" />
-              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

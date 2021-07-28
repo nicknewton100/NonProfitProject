@@ -370,5 +370,39 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
             return File(result.MainStream, "application/pdf");
         }
+
+        [HttpPost]
+        public IActionResult FinancialSummaryReport()
+        {
+            var receipt = context.Receipts.ToList();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ReceiptID");
+            dt.Columns.Add("Amount");
+            dt.Columns.Add("Date");
+            dt.Columns.Add("Description");
+
+            DataRow row;
+            foreach (var i in receipt)
+            {
+                row = dt.NewRow();
+                row["ReceiptID"] = i.ReceiptID;
+                row["Amount"] = i.Total;
+                row["Date"] = i.Date.ToShortDateString();
+                row["Description"] = i.Description;
+                dt.Rows.Add(row);
+            }
+
+            string mimetype = "";
+            int extension = 1;
+            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptFinancialSummary.rdlc";
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("prm", "RDLC Report");
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("dsFinancialSummary", dt);
+            //localReport.AddDataSource("dsUsers",context)
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+            return File(result.MainStream, "application/pdf");
+        }
     }
 }
