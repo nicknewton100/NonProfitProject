@@ -25,7 +25,7 @@ MIN-HEIGHT PUSHES STARTING HTML LOWER. 750px WAS JUST ENOUGH TO PUSH THE STOCKPH
 }
 /*IS USING*/
 .parallax3 {
-    /*The image used */ background-image: url("../img/myPupper.jpg");
+    /*The image used */ background-image: url("../img/AnimalPics/myPupper.jpg");
     /* Set a specific height */ min-height: 550px;
     /*Create the parallax scrolling effect */
     background-attachment: fixed;
