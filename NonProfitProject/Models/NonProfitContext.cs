@@ -215,8 +215,6 @@ namespace NonProfitProject.Models
             {
                 await roleManager.CreateAsync(new IdentityRole("Admin"));
             }
-            
-
             // if username doesn't exist, create it and add to role -- Creates Beau's account --
             if (await userManager.FindByNameAsync("BeauSanders") == null)
             {
@@ -244,6 +242,7 @@ namespace NonProfitProject.Models
                         sqlConnection.Open();
                         SqlCommand sqlcmd = new SqlCommand(String.Format("INSERT INTO Employees(EmpID,UserID, Position, Salary, HireDate,ReleaseDate,FinishedAccountSetup) VALUES('ZaPGaxy4Q-HSL9-LS0d-3Sjh-AIwyn3Bss2SL','{0}','IT Administrator', 123000.00, '{1}', Null, 1)", account.Id, DateTime.UtcNow), sqlConnection);
                         sqlcmd.ExecuteNonQuery();
+                        await userManager.AddToRoleAsync(account, "Employee");
                     }
                 }
             }
