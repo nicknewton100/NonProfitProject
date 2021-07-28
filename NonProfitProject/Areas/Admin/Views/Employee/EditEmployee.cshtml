@@ -17,12 +17,14 @@
 <div class="container">
     <div class="card-header-pills">
         <h1 class="fa fa-address-card">  @ViewData["Title"]</h1>
-        @if (Model.Terminated)
+        @if (!String.IsNullOrEmpty(Model.Id))
         {
-            <form asp-action="ReHireEmployee" method="post" asp-route-id="@Model.Id">
-                <button type="button" class="btn btn-success" onclick="ReHire(this)">Re-Hire</button>
-            </form>
-            <script>
+            @if (Model.Terminated)
+            {
+                <form asp-action="ReHireEmployee" method="post" asp-route-id="@Model.Id">
+                    <button type="button" class="btn btn-success" onclick="ReHire(this)">Re-Hire</button>
+                </form>
+                <script>
                 function ReHire(e) {
                     Swal.fire({
                         title: 'Are you sure want to re-hire @Model.Firstname @Model.Lastname?',
@@ -36,14 +38,14 @@
                     }
                     })
                 }
-            </script>
-        }
-        else
-        {
-            <form asp-action="TerminateEmployee" method="post" asp-route-id="@Model.Id">
-                <button type="button" class="btn btn-danger" onclick="Terminate(this)">Terminate</button>
-            </form>
-            <script>
+                </script>
+            }
+            else
+            {
+                <form asp-action="TerminateEmployee" method="post" asp-route-id="@Model.Id">
+                    <button type="button" class="btn btn-danger" onclick="Terminate(this)">Terminate</button>
+                </form>
+                <script>
                 function Terminate(e) {
                     Swal.fire({
                         title: 'Are you sure want to terminate @Model.Firstname @Model.Lastname?',
@@ -57,7 +59,8 @@
                     }
                     })
                 }
-            </script>
+                </script>
+            }
         }
     </div>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
