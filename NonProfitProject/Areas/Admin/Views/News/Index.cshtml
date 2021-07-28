@@ -29,7 +29,7 @@
                     <div class="card-footer">
                             <div class="row justify-content-between">
                                 <div class="col-auto">
-                                    <a class="card-link text-primary"aspaction="EditNews"asprouteid="@news.NewsID">Edit<a>
+                                    <a class="card-link text-primary" asp-action="EditNews" asp-route-id="@news.NewsID">Edit</a>
                                 </div>
                                 <div class="col-auto">
                                     <form method="post" asp-action="Delete" asp-route-id="@news.NewsID">
