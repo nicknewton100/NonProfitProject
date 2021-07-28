@@ -5,62 +5,77 @@
     Layout = "_HomePage";
 }
 
+<style>
+    .bg-image {
+        background-position:center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        max-height: 65rem;
+        position:fixed;
+    }
+</style>
 
-<div class="container" style="margin-top:5.5rem; ">
-    <div class="card-header-pills">
-        <h1>@ViewData["Title"]</h1>
-    </div>
+<img class="img-fluid bg-image" src="~/img/AnimalPics/pexels-johann-1254140.jpg" />
 
-    <div class="card-body">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <form method="post" asp-action="LogIn" asp-route-returnUrl=" ">
-            <div class="row">
-                <div class="offset-sm-2 col-sm-4">
-                    <span asp-validation-for="Username" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-2"><label>Email or Username: </label></div>
-                <div class="col-sm-4">
-                    <input asp-for="Username" class="form-control" />
-                </div>
+<div class="container">
+    <div><br /><br /><br /><br /><br /></div>
+    <div class="row justify-content-end" style="margin-right: 5rem;">
+        <div class="card col-4">
+            <div class="card-body">
+                <h1>@ViewData["Title"]</h1>
+                <br />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <form method="post" asp-action="LogIn" asp-route-returnUrl=" ">
+                    <div class="row">
+                        <div class="col-auto">
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="font-size:x-large;">
+                        <div class="col-auto"><label>Email or Username: </label></div>
+                        <div class="col-auto">
+                            <input asp-for="Username" class="form-control" />
+                        </div>
 
-            </div>
-            <div class="row">
-                <div class="offset-sm-2 col-sm-4">
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-2"><label>Password: </label></div>
-                <div class="col-sm-4">
-                    <input id="password" asp-for="Password" class="form-control" />
-                </div>
-                <div>
-                    <input type="checkbox" name="ShowPassword" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'">
-                    <label for="ShowPassword"> Show Password</label>
-                </div>
-            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto" >
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="font-size:x-large;">
+                        <div class="col-auto"><label>Password: </label></div>
+                        <div class="col-auto">
+                            <input id="password" asp-for="Password" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto">
+                            <input type="checkbox" name="ShowPassword" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'">
+                            <label for="ShowPassword"> Show Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto">
+                            <input type="checkbox" title="Remember Me" asp-for="RememberMe" />  <label>Remember Me</label>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="font-size:x-large;">
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-lg btn-primary">Log In</button>
+                        </div>
 
-            <div class="form-group row">
-
-                <div class="offset-sm-2 col-sm-4">
-                    <input type="checkbox" title="Remember Me" asp-for="RememberMe" />  <label>Remember Me</label>
-                </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto">
+                            <p>
+                                Not registered?
+                                <a asp-action="Register">Register as a new user</a>
+                            </p>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="row">
-                <div class="offset-2 col-sm-4">
-                    <button type="submit" class="btn btn-primary">Log In</button>
-                </div>
-
-            </div>
-            <div class="form-group row">
-                <div class="offset-2 col-sm-4">
-                    <p>Not registered?
-                        <a asp-action="Register">Register as a new user</a></p>
-                    
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>

@@ -79,3 +79,14 @@ body {
     width: 250px;
     height: 50px;
 }
+
+/*https://www.w3schools.com/howto/howto_css_form_on_image.asp*/
+.loginBgImage {
+    /*The image used*/ background-image: src("../img/AnimalPics/pexels-johann-1254140.jpg");
+    /* Set a specific height */ min-height: 300px;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
