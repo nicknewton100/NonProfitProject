@@ -32,86 +32,86 @@
                         <tr>
                             <td>
                                 @President.CommitteePosition<button type="button" data-toggle="modal" data-target="#Modal-@President.employee.EmpID" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;"></button>
-                            <div class="modal fade" id="Modal-@President.employee.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <form method="post" asp-action="EditPosition" asp-route-id="@President.EmpID" asp-route-position="">
-                                            <div class="modal-header justify-content-center">
-                                                <h5 class="modal-title" id="exampleModalLabel">Assign Position</h5>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row justify-content-center">
-                                                    <input asp-for="@President.CommitteePosition" class="form-control w-50" />
+                                <div class="modal fade" id="Modal-@President.employee.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form method="post" asp-action="EditPosition" asp-route-id="@President.EmpID" asp-route-position="">
+                                                <div class="modal-header justify-content-center">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Assign Position</h5>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-dark">Edit Position</button>
-                                                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Cancel</button>
-                                            </div>
-                                        </form>
+                                                <div class="modal-body">
+                                                    <div class="row justify-content-center">
+                                                        <input asp-for="@President.CommitteePosition" class="form-control w-50" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-dark">Edit Position</button>
+                                                    <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>@President.employee.User.UserFirstName</td>
-                        <td>@President.employee.User.UserLastName</td>
-                        <td>@President.employee.User.Email</td>
-                        <td>@President.employee.User.PhoneNumber</td>
-                        <td>
-                            <div class="row">
-                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","Committee",new {id = President.EmpID, name = Model.CommitteeName})'">Details</button>
-                                <form asp-action="RemoveMember" method="post" asp-route-id="@President.employee.EmpID">
-                                    <button type="submit" class="btn btn-dark">Remove From Committee</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    Model.committeeMembers.Remove(President);
-                }
-                var VicePresident = Model.committeeMembers?.Where(cm => cm.CommitteePosition == "Vice President").FirstOrDefault();
-                if (VicePresident != null)
-                {
-                    <tr>
-                        <td>
-                            @VicePresident.CommitteePosition
-                            <button type="button" data-toggle="modal" data-target="#Modal-@VicePresident.employee.EmpID" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;"></button>
-                            <div class="modal fade" id="Modal-@VicePresident.employee.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <form method="post" asp-action="EditPosition" asp-route-id="@VicePresident.employee.EmpID">
-                                            <div class="modal-header justify-content-center">
-                                                <h5 class="modal-title" id="exampleModalLabel">Assign Position</h5>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row justify-content-center">
-                                                    <input asp-for="@VicePresident.CommitteePosition" class="form-control w-50" />
+                            </td>
+                            <td>@President.employee.User.UserFirstName</td>
+                            <td>@President.employee.User.UserLastName</td>
+                            <td>@President.employee.User.Email</td>
+                            <td>@President.employee.User.PhoneNumber</td>
+                            <td>
+                                <div class="row">
+                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","Committee",new {id = President.EmpID, name = Model.CommitteeName})'">Details</button>
+                                    <form asp-action="RemoveMember" method="post" asp-route-id="@President.employee.EmpID">
+                                        <button type="button" class="btn btn-dark" onclick="RemoveMember(this)">Remove From Committee</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        Model.committeeMembers.Remove(President);
+                    }
+                    var VicePresident = Model.committeeMembers?.Where(cm => cm.CommitteePosition == "Vice President").FirstOrDefault();
+                    if (VicePresident != null)
+                    {
+                        <tr>
+                            <td>
+                                @VicePresident.CommitteePosition
+                                <button type="button" data-toggle="modal" data-target="#Modal-@VicePresident.employee.EmpID" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;"></button>
+                                <div class="modal fade" id="Modal-@VicePresident.employee.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form method="post" asp-action="EditPosition" asp-route-id="@VicePresident.employee.EmpID">
+                                                <div class="modal-header justify-content-center">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Assign Position</h5>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-dark">Edit Position</button>
-                                                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Cancel</button>
-                                            </div>
-                                        </form>
+                                                <div class="modal-body">
+                                                    <div class="row justify-content-center">
+                                                        <input asp-for="@VicePresident.CommitteePosition" class="form-control w-50" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-dark">Edit Position</button>
+                                                    <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </td>
-                        <td>@VicePresident.employee.User.UserFirstName</td>
-                        <td>@VicePresident.employee.User.UserLastName</td>
-                        <td>@VicePresident.employee.User.Email</td>
-                        <td>@VicePresident.employee.User.PhoneNumber</td>
-                        <td>
-                            <div class="row">
-                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","Committee",new {id = VicePresident.EmpID, name = Model.CommitteeName})'">Details</button>
-                                <form asp-action="RemoveMember" method="post" asp-route-id="@VicePresident.employee.EmpID">
-                                    <button type="submit" class="btn btn-dark">Remove From Committee</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    Model.committeeMembers.Remove(VicePresident);
-                }
+                            </td>
+                            <td>@VicePresident.employee.User.UserFirstName</td>
+                            <td>@VicePresident.employee.User.UserLastName</td>
+                            <td>@VicePresident.employee.User.Email</td>
+                            <td>@VicePresident.employee.User.PhoneNumber</td>
+                            <td>
+                                <div class="row">
+                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","Committee",new {id = VicePresident.EmpID, name = Model.CommitteeName})'">Details</button>
+                                    <form asp-action="RemoveMember" method="post" asp-route-id="@VicePresident.employee.EmpID">
+                                        <button type="submit" class="btn btn-dark" onclick="RemoveMember(this)">Remove From Committee</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        Model.committeeMembers.Remove(VicePresident);
+                    }
                 }
                 @foreach (var member in Model.committeeMembers)
                 {
@@ -148,15 +148,16 @@
                             <div class="row">
                                 <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","Committee",new {id = member.EmpID, name = Model.CommitteeName})'">Details</button>
                                 <form asp-action="RemoveMember" method="post" asp-route-id="@member.employee.EmpID">
-                                    <button type="submit" class="btn btn-dark">Remove From Committee</button>
+                                    <button type="button" class="btn btn-dark" onclick="RemoveMember(this)">Remove From Committee</button>
                                 </form>
                             </div>
                         </td>
                     </tr>
                 }
             </tbody>
-        </table>
+        </table>    
     </div>
+    <h5 class="text-primary">@TempData["CommitteeMemberChanges"]?.ToString()</h5>
     <div class="container" style="margin:1rem 0;">
         <div class="d-flex flex-row-reverse">
             <a class="btn btn-dark" asp-controller="Committee" asp-action="Index">Back</a>
@@ -172,5 +173,18 @@
         let substring = attr.substring(0, attr.length - split[split.length - 2].length - 1);
         _form.setAttribute("action", substring + input.value.replace(' ', '%20') + '/');
         //_form.submit();
+    }
+    function RemoveMember(e) {
+        Swal.fire({
+            title: 'Are you sure want to remove this member?',
+            showDenyButton: true,
+            confirmButtonText: `Yes`,
+            denyButtonText: `No`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                e.form.submit();
+            }
+        })
     }
 </script>

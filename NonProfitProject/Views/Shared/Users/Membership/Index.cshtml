@@ -12,11 +12,9 @@
     <div class="row">
         <div style="margin:1rem;">
             <!--Needs Action-->
-            <a class="btn-lg btn-dark text-decoration-none" asp-action="">Edit Membership</a>
-        </div>
-        <div class="justify-content-center" style="margin:1rem;">
-            <!--Needs Action-->
-            <a class="btn-lg btn-dark text-decoration-none" asp-action="">Become a Member</a>
+            <form asp-action="CancelMembership" method="post" name="CancelMembershipForm">
+                <button type="button" class="btn btn-dark text-decoration-none" onclick="CancelMembership()">Cancel Membership</button>
+            </form>
         </div>
     </div>
     <div>
@@ -38,4 +36,19 @@
             </div>
         </form>
     </div>
+    <script type="text/javascript">
+    function CancelMembership() {
+        Swal.fire({
+            title: 'Are you sure you want to cancel membership?',
+            showDenyButton: true,
+            confirmButtonText: `Yes`,
+            denyButtonText: `No`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                document.CancelMembershipForm.submit();
+            }
+        })
+    }
+    </script>
 </div>

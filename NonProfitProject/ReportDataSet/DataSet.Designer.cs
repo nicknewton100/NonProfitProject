@@ -2260,6 +2260,8 @@ namespace NonProfitProject.ReportDataSet {
             
             private global::System.Data.DataColumn columnEventAddress;
             
+            private global::System.Data.DataColumn columnNumber;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public Event_InformationDataTable() {
@@ -2335,6 +2337,14 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn NumberColumn {
+                get {
+                    return this.columnNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2370,14 +2380,15 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Event_InformationRow AddEvent_InformationRow(string EventName, string EventStartDate, string EventEndDate, string EventDescription, string EventAddress) {
+            public Event_InformationRow AddEvent_InformationRow(string EventName, string EventStartDate, string EventEndDate, string EventDescription, string EventAddress, string Number) {
                 Event_InformationRow rowEvent_InformationRow = ((Event_InformationRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         EventName,
                         EventStartDate,
                         EventEndDate,
                         EventDescription,
-                        EventAddress};
+                        EventAddress,
+                        Number};
                 rowEvent_InformationRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowEvent_InformationRow);
                 return rowEvent_InformationRow;
@@ -2405,6 +2416,7 @@ namespace NonProfitProject.ReportDataSet {
                 this.columnEventEndDate = base.Columns["EventEndDate"];
                 this.columnEventDescription = base.Columns["EventDescription"];
                 this.columnEventAddress = base.Columns["EventAddress"];
+                this.columnNumber = base.Columns["Number"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2420,6 +2432,8 @@ namespace NonProfitProject.ReportDataSet {
                 base.Columns.Add(this.columnEventDescription);
                 this.columnEventAddress = new global::System.Data.DataColumn("EventAddress", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEventAddress);
+                this.columnNumber = new global::System.Data.DataColumn("Number", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNumber);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4685,6 +4699,22 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Number {
+                get {
+                    try {
+                        return ((string)(this[this.tableEvent_Information.NumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Number\' in table \'Event Information\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEvent_Information.NumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsEventNameNull() {
                 return this.IsNull(this.tableEvent_Information.EventNameColumn);
             }
@@ -4741,6 +4771,18 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetEventAddressNull() {
                 this[this.tableEvent_Information.EventAddressColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsNumberNull() {
+                return this.IsNull(this.tableEvent_Information.NumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetNumberNull() {
+                this[this.tableEvent_Information.NumberColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -112,6 +112,7 @@
               <xs:element name="EventEndDate" msprop:Generator_ColumnVarNameInTable="columnEventEndDate" msprop:Generator_ColumnPropNameInRow="EventEndDate" msprop:Generator_ColumnPropNameInTable="EventEndDateColumn" msprop:Generator_UserColumnName="EventEndDate" type="xs:string" minOccurs="0" />
               <xs:element name="EventDescription" msprop:Generator_ColumnVarNameInTable="columnEventDescription" msprop:Generator_ColumnPropNameInRow="EventDescription" msprop:Generator_ColumnPropNameInTable="EventDescriptionColumn" msprop:Generator_UserColumnName="EventDescription" type="xs:string" minOccurs="0" />
               <xs:element name="EventAddress" msprop:Generator_ColumnVarNameInTable="columnEventAddress" msprop:Generator_ColumnPropNameInRow="EventAddress" msprop:Generator_ColumnPropNameInTable="EventAddressColumn" msprop:Generator_UserColumnName="EventAddress" type="xs:string" minOccurs="0" />
+              <xs:element name="Number" msprop:Generator_ColumnVarNameInTable="columnNumber" msprop:Generator_ColumnPropNameInRow="Number" msprop:Generator_ColumnPropNameInTable="NumberColumn" msprop:Generator_UserColumnName="Number" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -404,5 +404,43 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
             return File(result.MainStream, "application/pdf");
         }
+
+        [HttpPost]
+        public IActionResult EventInformationReport()
+        {
+            var events = context.Events.Where(e => e.EventStartDate > DateTime.UtcNow).OrderBy(e => e.EventStartDate);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Number");
+            dt.Columns.Add("EventName");
+            dt.Columns.Add("EventStartDate");
+            dt.Columns.Add("EventEndDate");
+            dt.Columns.Add("EventDescription");
+            dt.Columns.Add("EventAddress");
+            DataRow row;
+            int number = 0;
+            foreach (var i in events)
+            {
+                number += 1;
+                row = dt.NewRow();
+                row["Number"] = number;
+                row["EventName"] = i.EventName;
+                row["EventStartDate"] = i.EventStartDate;
+                row["EventEndDate"] = i.EventEndDate;
+                row["EventDescription"] = i.EventDescription;
+                row["EventAddress"] = String.Format("{0}, {1}{2}, {3} {4}", i.EventAddr1.Replace(".", "").TrimEnd(), i.EventAddr2 == "" ? i.EventAddr2 + ", " : "", i.EventCity, i.EventState, i.EventPostalCode);
+                dt.Rows.Add(row);
+            }
+            string mimetype = "";
+            int extension = 1;
+            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptEventInformation.rdlc";
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("prm", "RDLC Report");
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("dsEventInformation", dt);
+            //localReport.AddDataSource("dsUsers",context)
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+            return File(result.MainStream, "application/pdf");
+        }
     }
 }

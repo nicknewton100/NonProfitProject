@@ -41,7 +41,7 @@
                                 <div class="row ">
                                     <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","Donor",new {id = user.Id })'">Details</button>
                                     <form method="post" asp-action="Delete" asp-route-id="@user.Id">
-                                        <button type="submit" class="btn btn-dark">Delete</button>
+                                        <button type="button" class="btn btn-dark" onclick="DeleteDonor(this)">Delete</button>
                                     </form>
                                 </div>
                             </td>
@@ -54,4 +54,19 @@
         <h5 class="text-primary">@TempData["DonorChanges"]?.ToString()</h5>
     </div>
 </div>
+<script type="text/javascript">
+    function DeleteDonor(e) {
+        Swal.fire({
+            title: 'Are you sure you want to delete this Donor?',
+            showDenyButton: true,
+            confirmButtonText: `Yes`,
+            denyButtonText: `No`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                e.form.submit();
+            }
+        })
+    }
+</script>
 

@@ -75,7 +75,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             member.CommitteePosition = position;
             context.CommitteeMembers.Update(member);
             context.SaveChanges();
-            TempData["MemberChanges"] = String.Format("{0} has been removed from the committee", member.employee.User.UserFirstName + " " + member.employee.User.UserLastName);
+            TempData["CommitteeMemberChanges"] = String.Format("{0}'s position has been updated", member.employee.User.UserFirstName + " " + member.employee.User.UserLastName);
             return RedirectToAction("Details", new { name = name });
         }
 
@@ -88,7 +88,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             {
                 return RedirectToAction("Index");
             }
-            TempData["MemberChanges"] = String.Format("{0} has been removed from the committee", employee.User.UserFirstName + " " + employee.User.UserLastName);
+            TempData["CommitteeMemberChanges"] = String.Format("{0} has been removed from the committee", employee.User.UserFirstName + " " + employee.User.UserLastName);
             context.CommitteeMembers.Remove(employee.CommitteeMembers);
             context.SaveChanges();
             

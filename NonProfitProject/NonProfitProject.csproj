@@ -75,6 +75,9 @@
     <Content Update="wwwroot\Reports\rptCommitteeMemberContact.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\Reports\rptEventInformation.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\Reports\rptMembershipDues.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

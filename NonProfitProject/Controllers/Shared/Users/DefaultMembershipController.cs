@@ -188,5 +188,24 @@ namespace NonProfitProject.Controllers.Shared.Users
             HttpContext.Session.Remove("SignupMembershipModel");
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> CancelMembership()
+        {
+            var membership = context.MembershipDues.Where(md => md.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier) && md.MemActive == true).OrderBy(md => md.MemDuesID).LastOrDefault();
+            if(membership == null)
+            {
+                TempData["MembershipManagment"] = String.Format("A membership asssociated with ID {0} is invalid", membership.MemDuesID);
+                return RedirectToAction("Index");
+            }
+            membership.MemCancelDate = DateTime.UtcNow;
+            membership.MemActive = false;
+            var user = await userManager.GetUserAsync(User);
+            await userManager.RemoveFromRoleAsync(user, "Member");
+            if (!await userManager.IsInRoleAsync(user, "Admin"))
+            {
+                await userManager.AddToRoleAsync(user, "User");
+            }
+            return RedirectToAction("Signup");
+        }
     }
 }
