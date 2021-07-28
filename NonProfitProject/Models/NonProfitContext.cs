@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace NonProfitProject.Models
 {
@@ -203,7 +205,7 @@ namespace NonProfitProject.Models
                 .HasPrincipalKey<Employees>(e => e.EmpID);
         }
 
-        public static async Task CreateAdminUser(IServiceProvider serviceProvider)
+        public static async Task CreateAdminUser(IServiceProvider serviceProvider, IConfiguration _configuration )
         {
             UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
             RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -213,6 +215,7 @@ namespace NonProfitProject.Models
             {
                 await roleManager.CreateAsync(new IdentityRole("Admin"));
             }
+            
 
             // if username doesn't exist, create it and add to role -- Creates Beau's account --
             if (await userManager.FindByNameAsync("BeauSanders") == null)
@@ -235,6 +238,13 @@ namespace NonProfitProject.Models
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(user, "Admin");
+                    using (SqlConnection sqlConnection = new SqlConnection(_configuration.GetConnectionString("NonProfitContext")))
+                    {
+                        var account = await userManager.FindByNameAsync("BeauSanders");
+                        sqlConnection.Open();
+                        SqlCommand sqlcmd = new SqlCommand(String.Format("INSERT INTO Employees(EmpID,UserID, Position, Salary, HireDate,ReleaseDate,FinishedAccountSetup) VALUES('ZaPGaxy4Q-HSL9-LS0d-3Sjh-AIwyn3Bss2SL','{0}','IT Administrator', 123000.00, '{1}', Null, 1)", account.Id, DateTime.UtcNow), sqlConnection);
+                        sqlcmd.ExecuteNonQuery();
+                    }
                 }
             }
             if(await userManager.FindByNameAsync("BankdTechSolutionsAdmin") == null)

@@ -121,7 +121,7 @@ namespace NonProfitProject
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-            NonProfitContext.CreateAdminUser(app.ApplicationServices).Wait();
+            NonProfitContext.CreateAdminUser(app.ApplicationServices,Configuration).Wait();
         }
     }
 }
