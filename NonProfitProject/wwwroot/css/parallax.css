@@ -3,7 +3,7 @@
 MIN-HEIGHT PUSHES STARTING HTML LOWER. 750px WAS JUST ENOUGH TO PUSH THE STOCKPHOTOS OFF SCREEN TO START THE EFFECT
 
 */
-
+/*DID NOT USE*/
 .parallax {
     /*The image used*/ background-image: url("../img/Non-Profit.png ");
     /*Set a specific height*/ min-height: 550px;
@@ -13,7 +13,7 @@ MIN-HEIGHT PUSHES STARTING HTML LOWER. 750px WAS JUST ENOUGH TO PUSH THE STOCKPH
     background-repeat: no-repeat;
     background-size: contain;
 }
-
+/*DID NOT USE*/
 .parallax2 {
     /*The image used */ background-image: url("../img/can_you_turn_your_business_into_a_nonprofit.jpg");
     /* Set a specific height */ min-height: 550px;
@@ -23,6 +23,7 @@ MIN-HEIGHT PUSHES STARTING HTML LOWER. 750px WAS JUST ENOUGH TO PUSH THE STOCKPH
     background-repeat: no-repeat;
     background-size: contain;
 }
+/*IS USING*/
 .parallax3 {
     /*The image used */ background-image: url("../img/myPupper.jpg");
     /* Set a specific height */ min-height: 550px;
