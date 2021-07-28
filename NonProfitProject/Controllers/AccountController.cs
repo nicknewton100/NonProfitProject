@@ -98,7 +98,6 @@ namespace NonProfitProject.Controllers
 
             if (ModelState.IsValid)
             {
-                
                 var user = new User
                 {
                     UserName = model.Username,
@@ -115,7 +114,8 @@ namespace NonProfitProject.Controllers
                     ReceiveWeeklyNewsletter = model.ReceiveWeeklyNewsletter,
                     UserCreationDate = DateTime.UtcNow,
                     UserLastActivity = DateTime.UtcNow,
-                    AccountDisabled = false
+                    AccountDisabled = false,
+                    PhoneNumber = model.PhoneNumber
                 };
 
                 var result = await userManager.CreateAsync(user, model.Password);

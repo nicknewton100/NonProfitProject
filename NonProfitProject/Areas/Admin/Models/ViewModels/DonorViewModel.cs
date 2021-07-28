@@ -46,7 +46,7 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [Required(ErrorMessage = "Please enter donor's Email Address")]
         [StringLength(60)]
         [DataType(DataType.EmailAddress)]
-        [Compare("EmailConfirmed", ErrorMessage = "Employee's email does not match")]
+        [Compare("EmailConfirmed", ErrorMessage = "Donor's email does not match")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Please confirm donor's Email Address")]
         [StringLength(60)]
@@ -55,7 +55,7 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         [Required(ErrorMessage = "Please enter donor's Temporary Password")]
         [StringLength(60)]
         [DataType(DataType.Password)]
-        [Compare("TemporaryPasswordConfirmed", ErrorMessage = "Employee's password does not match")]
+        [Compare("TemporaryPasswordConfirmed", ErrorMessage = "Donor's password does not match")]
         public string TemporaryPassword { get; set; }
         [Required(ErrorMessage = "Please confirm donor's Temporary Password")]
         [StringLength(60)]

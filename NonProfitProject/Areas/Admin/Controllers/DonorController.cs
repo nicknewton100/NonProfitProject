@@ -62,7 +62,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
                     ReceiveWeeklyNewsletter = false,
                     UserCreationDate = DateTime.UtcNow,
                     UserLastActivity = DateTime.UtcNow,
-                    AccountDisabled = false
+                    AccountDisabled = false,
+                    PhoneNumber = model.PhoneNumber
                 };
 
                 var result = await userManager.CreateAsync(user, model.TemporaryPassword);
