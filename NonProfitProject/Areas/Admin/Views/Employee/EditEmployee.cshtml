@@ -15,7 +15,51 @@
     <script type="text/javascript" src="~/js/UserValidation.js"></script>
 </head>
 <div class="container">
-    <div class="card-header-pills"><h1 class="fa fa-address-card">  @ViewData["Title"]</h1></div>
+    <div class="card-header-pills">
+        <h1 class="fa fa-address-card">  @ViewData["Title"]</h1>
+        @if (Model.Terminated)
+        {
+            <form asp-action="ReHireEmployee" method="post" asp-route-id="@Model.Id">
+                <button type="button" class="btn btn-success" onclick="ReHire(this)">Re-Hire</button>
+            </form>
+            <script>
+                function ReHire(e) {
+                    Swal.fire({
+                        title: 'Are you sure want to re-hire @Model.Firstname @Model.Lastname?',
+                        showDenyButton: true,
+                        confirmButtonText: `Yes`,
+                        denyButtonText: `No`,
+                    }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        e.form.submit();
+                    }
+                    })
+                }
+            </script>
+        }
+        else
+        {
+            <form asp-action="TerminateEmployee" method="post" asp-route-id="@Model.Id">
+                <button type="button" class="btn btn-danger" onclick="Terminate(this)">Terminate</button>
+            </form>
+            <script>
+                function Terminate(e) {
+                    Swal.fire({
+                        title: 'Are you sure want to terminate @Model.Firstname @Model.Lastname?',
+                        showDenyButton: true,
+                        confirmButtonText: `Yes`,
+                        denyButtonText: `No`,
+                    }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        e.form.submit();
+                    }
+                    })
+                }
+            </script>
+        }
+    </div>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div>
         <form asp-action="AddEmployee" method="post" style="font-size:medium">
@@ -236,7 +280,7 @@
                                         <input asp-for="Username" class="form-control" id="Username" data-val="false" />
                                         <span asp-validation-for="Username" class="text-danger"></span>
                                     </div>
-                                </div>                                
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="form-group w-50">
@@ -257,7 +301,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                
+
                                 <div class="form-group DetailsDisable w-50">
                                     <!--TEMPORARY PASSWORD-->
                                     <div class="col-auto"><label>Temporary Password: </label></div>
@@ -280,7 +324,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-12">
                                 @{
@@ -365,12 +409,12 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
-               
+
         </form>
-    </div>   
-    
+    </div>
+
     <script>
         function AddingToCommittee() {
             var selectCommittee = document.getElementById("SelectCommittee");

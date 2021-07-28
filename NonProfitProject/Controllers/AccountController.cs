@@ -48,13 +48,18 @@ namespace NonProfitProject.Controllers
                 var result = await signInManager.PasswordSignInAsync(model.Username, model.Password, isPersistent: model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var currentUser = await userManager.FindByNameAsync(model.Username);
+                    if(currentUser.AccountDisabled == true)
+                    {
+                        await signInManager.SignOutAsync();
+                        return RedirectToAction("AccountDisabled");
+                    }
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
                         return Redirect(model.ReturnUrl);
                     }
                     else
-                    {
-                        var currentUser = await userManager.FindByNameAsync(model.Username);
+                    {  
                         if (await userManager.IsInRoleAsync(currentUser, "Admin"))
                         {
                             return RedirectToAction("Index", "Home", new { area = "Admin" });
@@ -142,6 +147,11 @@ namespace NonProfitProject.Controllers
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AccountDisabled()
+        {
+            return View();
         }
 
     }

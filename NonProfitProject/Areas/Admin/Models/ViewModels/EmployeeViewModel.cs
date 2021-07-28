@@ -78,5 +78,7 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
         public string CommitteePosition { get; set; }
         //this holds the committiee names
         public SelectList AllCommittees { get; set; }
+
+        public bool Terminated { get; set; }
     }
 }

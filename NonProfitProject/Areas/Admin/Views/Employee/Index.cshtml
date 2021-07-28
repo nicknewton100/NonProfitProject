@@ -52,9 +52,18 @@
                                 
                             </td>
                             <td>
-                                <form method="post" asp-action="DeleteEmployee" asp-route-id="@empl.EmpID">
-                                    <button type="button" class="btn btn-dark deleteEmp" onclick="DeleteEmployee(this)">Delete</button>
-                                </form>
+                                @if (empl.User.AccountDisabled)
+                                {
+                                    <form method="post" asp-action="DeleteEmployee" asp-route-id="@empl.EmpID">
+                                        <button type="button" class="btn btn-dark deleteEmp" onclick="DeleteEmployee(this)">Delete</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-action="TerminateEmployee" method="post" asp-route-id="@empl.EmpID">
+                                        <button type="button" class="btn btn-danger" onclick="Terminate(this)">Terminate</button>
+                                    </form>
+                                }
                             </td>
                         </tr>
                     }
@@ -82,6 +91,19 @@
             }
         })
     }
+    function Terminate(e) {
+                    Swal.fire({
+                        title: 'Are you sure want to terminate this employee?',
+                        showDenyButton: true,
+                        confirmButtonText: `Yes`,
+                        denyButtonText: `No`,
+                    }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        e.form.submit();
+                    }
+                    })
+                }
 </script>
 
 

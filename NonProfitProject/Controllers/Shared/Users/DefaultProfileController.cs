@@ -10,6 +10,7 @@ using NonProfitProject.Models.ViewModels.Shared.Users;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using NonProfitProject.Code.Security;
+using System.Globalization;
 
 namespace NonProfitProject.Controllers.Shared.Users
 {
@@ -34,6 +35,13 @@ namespace NonProfitProject.Controllers.Shared.Users
             {
                 model.userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 ModelState.AddModelError("", "ERROR - Invalid UserID");    
+            }
+            if(model.NewPassword != null || model.NewPasswordConfirmed != null)
+            { 
+                if (!model.NewPassword.Equals(model.NewPasswordConfirmed))
+                {
+                ModelState.AddModelError("NewPassword", "Passwords do not match");
+                }
             }
             if (ModelState.IsValid)
             {
@@ -62,7 +70,7 @@ namespace NonProfitProject.Controllers.Shared.Users
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Password is incorrect");
+                    ModelState.AddModelError("CurrentPassword", "Password is incorrect");
                 }
             }
             return View(model);
@@ -101,6 +109,10 @@ namespace NonProfitProject.Controllers.Shared.Users
             if (checkSavedPayments != null)
             {
                 ModelState.AddModelError("", "Error - This card has already been added");
+            }
+            if (DateTime.ParseExact(model.CardExpDate,"MM/yy", CultureInfo.InvariantCulture) < DateTime.UtcNow)
+            {
+                ModelState.AddModelError("CardExpDate", "This payment method has expired");
             }
             if (ModelState.IsValid)
             {

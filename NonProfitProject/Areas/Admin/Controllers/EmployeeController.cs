@@ -96,7 +96,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 ReleaseDate = Employee.ReleaseDate,
                 CommitteeName = context.Committees?.Where(c => c.CommitteesID == (Employee.CommitteeMembers == null ? 0 : (Employee.CommitteeMembers.CommitteeID))).Select(c => c.CommitteeName).FirstOrDefault() ?? "",
                 CommitteePosition = Employee.CommitteeMembers?.CommitteePosition ?? "",
-                AllCommittees = new SelectList(context.Committees.Select(c => c.CommitteeName).ToList(), "CommitteeName") 
+                AllCommittees = new SelectList(context.Committees.Select(c => c.CommitteeName).ToList(), "CommitteeName"),
+                Terminated = Employee.User.AccountDisabled
             };
             return View("EditEmployee",employeeViewModel);
         }
@@ -265,7 +266,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View("EditEmployee", model);
         }
         [HttpPost]
-        public async Task<IActionResult> DeleteEmployeeAsync(string id)
+        public async Task<IActionResult> DeleteEmployee(string id)
         {
             var employee = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).AsNoTracking().FirstOrDefault(e => e.EmpID == id);
             if(employee.CommitteeMembers != null)
@@ -317,6 +318,46 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             context.CommitteeMembers.Remove(member);
             context.SaveChanges();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TerminateEmployee(string id)
+        {
+            var employee = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).AsNoTracking().FirstOrDefault(e => e.EmpID == id);
+            if(employee == null)
+            {
+                TempData["EmployeeChanges"] = String.Format("Employee with ID {0} does not exist", id);
+            }
+            if (employee.CommitteeMembers != null)
+            {
+                DeleteCommitteeMember(employee.CommitteeMembers);
+            }
+            employee.User.AccountDisabled = true;
+            employee.ReleaseDate = DateTime.UtcNow;
+            context.Employees.Update(employee);
+            context.SaveChanges();
+            await userManager.RemoveFromRoleAsync(employee.User, "Employee"); ;
+            await userManager.AddToRoleAsync(employee.User, "User");
+            TempData["EmployeeChanges"] = String.Format("{0} has been terminated", employee.User.UserFirstName + " " + employee.User.UserLastName);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ReHireEmployee(string id)
+        {
+            var employee = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).FirstOrDefault(e => e.EmpID == id);
+            if (employee == null)
+            {
+                TempData["EmployeeChanges"] = String.Format("Employee with ID {0} does not exist", id);
+            }employee.User.AccountDisabled = false;
+            employee.ReleaseDate = null;
+            context.Employees.Update(employee);
+            context.SaveChanges();
+            await userManager.RemoveFromRoleAsync(employee.User, "User");
+            await userManager.AddToRoleAsync(employee.User, "Employee");
+            
+            TempData["EmployeeChanges"] = String.Format("{0} has been re-hired", employee.User.UserFirstName + " " + employee.User.UserLastName);
+            return RedirectToAction("Index");
         }
     }
 }

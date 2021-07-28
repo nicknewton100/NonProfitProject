@@ -25,7 +25,6 @@ namespace NonProfitProject.Models.ViewModels.Shared.Users
         
         [StringLength(60)]
         [DataType(DataType.Password)]
-        [Compare("NewPasswordConfirmed")]
         public string NewPassword { get; set; }
         [StringLength(60)]
         [DataType(DataType.Password)]

@@ -10,6 +10,7 @@ using NonProfitProject.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -108,6 +109,10 @@ namespace NonProfitProject.Controllers
             {
                 TempData["SessionTimeout"] = "Session has timed out - Please re-enter Donation Information";
                 return RedirectToAction("Index");
+            }
+            if (DateTime.ParseExact(model.ExpDate, "MM/yy", CultureInfo.InvariantCulture) < DateTime.UtcNow)
+            {
+                ModelState.AddModelError("ExpDate", "This payment method has expired");
             }
             if (ModelState.IsValid)
             {
