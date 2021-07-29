@@ -442,5 +442,45 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
             return File(result.MainStream, "application/pdf");
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AdministratorReport()
+        {
+            var admin = await userManager.GetUsersInRoleAsync("Admin");
+            var employee = context.Employees.Include(e => e.User).Where(e => admin.Contains(e.User)).OrderBy(e => e.User.UserLastName + ", " + e.User.UserFirstName).ToList();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Number");
+            dt.Columns.Add("AdminName");
+            dt.Columns.Add("AdminEmail");
+            dt.Columns.Add("AdminPhone");
+            dt.Columns.Add("AdminAddress");
+            dt.Columns.Add("AdminPosition");
+            DataRow row;
+            int number = 0;
+            foreach (var i in employee)
+            {
+                number += 1;
+                row = dt.NewRow();
+                row["Number"] = number;                
+                row["AdminName"] = i.User.UserLastName + ", " + i.User.UserFirstName;
+                row["AdminEmail"] = i.User.Email;
+                row["AdminPhone"] = i.User?.PhoneNumber ?? "Null";
+                row["AdminAddress"] = String.Format("{0}, {1}{2}, {3} {4}", i.User.UserAddr1.Replace(".", "").TrimEnd(), i.User.UserAddr2 == "" ? i.User.UserAddr2 + ", " : "", i.User.UserCity, i.User.UserState, i.User.UserPostalCode);
+                row["AdminPosition"] = i.Position;
+                dt.Rows.Add(row);
+            }
+            string mimetype = "";
+            int extension = 1;
+            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptAdministratorContact.rdlc";
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("prm", "RDLC Report");
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("dsAdministratorInformation", dt);
+            //localReport.AddDataSource("dsUsers",context)
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+            return File(result.MainStream, "application/pdf");
+        }
     }
 }

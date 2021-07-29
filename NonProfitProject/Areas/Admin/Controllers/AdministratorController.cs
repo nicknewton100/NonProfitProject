@@ -53,13 +53,13 @@ namespace NonProfitProject.Areas.Admin.Controllers
         public async Task<IActionResult> Add()
         {
             var admins = await userManager.GetUsersInRoleAsync("Admin");
-            var employees = context.Employees.Include(e => e.User).Where(e => !admins.Contains(e.User)).ToList();
+            var employees = context.Employees.Include(e => e.User).Where(e => !admins.Contains(e.User) && e.User.AccountDisabled == false).ToList();
             return View(employees);
         }
         [HttpPost]
         public async Task<IActionResult> Add(string id)
         {
-            var employee = context.Employees.Include(e => e.User).Where(e => e.EmpID == id).FirstOrDefault();
+            var employee = context.Employees.Include(e => e.User).Where(e => e.EmpID == id && e.User.AccountDisabled == false).FirstOrDefault();
             if (employee == null || await userManager?.IsInRoleAsync(employee.User, "User"))
             {
                 TempData["AdminChanges"] = String.Format("The Employee with ID \"{0}\" does not exist", id);
