@@ -235,10 +235,25 @@
                         @if (ViewBag!.Action == "MemberDetails")
                         {
                             <form method="post" asp-action="RemoveMember" asp-route-id="@Model.EmpID">
-                                <button type="submit" class="btn-lg btn-outline-dark mr-1">Remove from @sessionModel.Committee.CommitteeName</button>
+                                <button type="button" class="btn-lg btn-outline-dark mr-1" onclick="RemoveMember(this)">Remove from @sessionModel.Committee.CommitteeName</button>
                             </form>
                             <br />
                             <button type="button" class="btn-lg btn-dark " onclick="location.href = '@Url.Action("Details","Committee",new {name = sessionModel.Committee.CommitteeName })'">Back</button>
+                            <script>
+                                function RemoveMember(e) {
+                                    Swal.fire({
+                                        title: 'Are you sure want to remove this member?',
+                                        showDenyButton: true,
+                                        confirmButtonText: `Yes`,
+                                        denyButtonText: `No`,
+                                    }).then((result) => {
+                                        /* Read more about isConfirmed, isDenied below */
+                                        if (result.isConfirmed) {
+                                            e.form.submit();
+                                        }
+                                    })
+                                }
+                            </script>
                         }
                         else
                         {
@@ -254,5 +269,6 @@
         </div>
     </div>
 </div>
+
 
 

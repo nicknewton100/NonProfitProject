@@ -34,12 +34,12 @@
                     <th>@events.EventDescription</th>
                     <th>
                         <form method="get" asp-action="EditEvent" asp-route-id="@events.EventID">
-                            <button type="submit" class="btn btn-dark">Edit</button>
+                            <button type="submit" class="btn btn-outline-dark">Edit</button>
                         </form>
                     </th>
                     <th>
                         <form method="post" asp-action="delete" asp-route-id="@events.EventID">
-                            <button type="button" class="btn btn-dark" onclick="DeleteEvent(this)">delete</button>
+                            <button type="button" class="btn btn-dark" onclick="DeleteEvent(this)">Delete</button>
                         </form>
                     </th>
                 </tr>

@@ -4,4 +4,5 @@ Git Hub repository link
 https://github.com/thomasonbd/NonProfitProject
 
 Use of Bootstrap
+Use of SweetAlert2 confirmation boxes
 

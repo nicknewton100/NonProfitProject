@@ -408,7 +408,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult EventInformationReport()
         {
-            var events = context.Events.Where(e => e.EventStartDate > DateTime.UtcNow).OrderBy(e => e.EventStartDate);
+            var events = context.Events.Where(e => e.EventEndDate > DateTime.UtcNow).OrderBy(e => e.EventStartDate);
             DataTable dt = new DataTable();
             dt.Columns.Add("Number");
             dt.Columns.Add("EventName");
