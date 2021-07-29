@@ -91,6 +91,13 @@ namespace NonProfitProject.Controllers.Shared.Users
             }
             return View();
         }
+
+        public IActionResult ManagePayment()
+        {
+            return View();
+        }
+
+
         [HttpGet]
         public IActionResult AddPayment()
         {
