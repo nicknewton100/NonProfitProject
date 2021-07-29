@@ -1,0 +1,15 @@
+﻿@model DonationViewModel
+@{
+    ViewData["Title"] = "Thank You";
+    Layout = "_HomePage";
+    @using NonProfitProject.Models.ViewModels;
+}
+<div class="container" style=" margin-top: 5.5rem; display: flex; justify-content: center; align-items: center; vertical-align:middle;">
+    <div class="text-md-center" style="margin:auto; width:50%;position: absolute; bottom: 50%;">
+        
+        <h1 class="text-success"><i class="fas fa-check"></i><br />Thank You, @Model.FirstName</h1>
+        <h3>Your donation of $@Model.DonationAmount has been processed</h3>
+        <h3>100 percent of your money will be used to help rescue animals all around the world</h3>
+    </div>
+</div>
+

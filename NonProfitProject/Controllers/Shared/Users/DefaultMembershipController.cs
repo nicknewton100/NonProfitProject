@@ -93,6 +93,14 @@ namespace NonProfitProject.Controllers.Shared.Users
             {
                 ModelState.AddModelError("ExpDate", "This payment method has expired");
             }
+            if (model.CardNumber.Length != 19)
+            {
+                ModelState.AddModelError("CardNumber", "This payment is incomplete");
+            }
+            if (model.CVV.Length != 3)
+            {
+                ModelState.AddModelError("CVV", "CVV requires 3 digits");
+            }
             if (ModelState.IsValid)
             {
                 sessionModel.PaymentViewModel = model;
