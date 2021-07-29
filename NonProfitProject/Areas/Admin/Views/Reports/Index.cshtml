@@ -4,17 +4,83 @@
     Layout = "_AdminLayout";
 }
 
+<style>
+    .report-btns {
+        font-size: 5rem;
+        border-radius: 75%;
+        padding: 2rem;
+        border: 1rem double white;
+    }
+</style>
 
 <div class="container">
     <div class="container">
         <div class="card-header-pills"><h1 class="fas fa-scroll"> Reports</h1></div>
-        <a class="btn btn-outline-dark" asp-area="Admin" asp-controller="#" asp-action="#">
-            Create a Report
-        </a>
     </div>
     <br />
-
-    <div class="container">
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-    </div>
+    <div class="row text-center">
+        <!--DONORS BUTTON TO GENERATE A REPORT-->
+        <div class="col col-lg-2" style="margin:0.5rem 1rem;">
+            <form method="post" asp-action="DonorReport">
+                <button class="btn btn-lg btn-dark fas fa-user report-btns" type="submit"></button>
+            </form>
+            <p class="text-center" style="font-size:small;">Generate Donor Report</p>
+        </div>
+        <!--EMPLOYEES BUTTON TO GENERATE A REPORT-->
+        <div class="col col-lg-2" style="margin:0.5rem 1rem;">
+            <form method="post" asp-action="EmployeeReport">
+                <button class="btn btn-lg btn-dark fas fa-user-tie report-btns" type="submit"></button>
+            </form>
+            <p class="text-center" style="font-size:small;">Generate Employee Report</p>
+        </div>
+        <!--MEMBERS BUTTON TO GENERATE A REPORT-->
+        <div class="col col-lg-2" style="margin:0.5rem 1rem;">
+            <form method="post" asp-action="MemberReport">
+                <button class="btn btn-lg btn-dark fas fa-id-card-alt report-btns" type="submit"></button>
+            </form>
+            <p class="text-center" style="font-size:small;">Generate Member Report</p>
+        </div>
+        <!--ADMIN CONTACT BUTTON TO GENERATE A REPORT-->
+        <div class="col col-lg-2" style="margin:0.5rem 1rem;">
+            <form method="post" asp-action="AdministratorReport">
+                <button class="btn btn-lg btn-dark fas fa-user-shield report-btns" type="submit"></button>
+            </form>
+            <p class="text-center" style="font-size:small;">Generate Admin Contact Report</p>
+        </div>
+        <!--COMMITTEE MEMBERS BUTTON TO GENERATE A REPORT-->
+        <div class="col col-lg-2" style="margin:0.5rem 1rem;">
+            <form method="post" asp-action="CommitteeMemberReport">
+                <button class="btn btn-lg btn-dark fas fa-users report-btns" type="submit"></button>
+            </form>
+            <p class="text-center" style="font-size:small;">Generate Committee Members Report</p>
+        </div>
+        <!--DONATIONS BUTTON TO GENERATE A REPORT-->
+        <div class="col col-lg-2" style="margin:0.5rem 1rem;">
+            <form method="post" asp-action="DonationReport">
+                <button class="btn btn-lg btn-dark fas fa-hand-holding-usd report-btns" type="submit"></button>
+            </form>
+            <p class="text-center" style="font-size:small;">Generate Donation Report</p>
+        </div>
+        <!--MEMBERSHIP DUES BUTTON TO GENERATE A REPORT-->
+        <div class="col col-lg-2" style="margin:0.5rem 1rem;">
+            <form method="post" asp-action="MembershipDuesReport">
+                <button class="btn btn-lg btn-dark far fa-sticky-note report-btns" type="submit"></button>
+            </form>
+            <p class="text-center" style="font-size:small;">Generate Membership Dues Report</p>
+        </div>
+        <!--FINANCIAL SUMMARY BUTTON TO GENERATE A REPORT-->
+        <div class="col col-lg-2" style="margin:0.5rem 1rem;">
+            <form method="post" asp-action="FinancialSummaryReport">
+                <button class="btn btn-lg btn-dark fas fa-file-invoice-dollar report-btns" type="submit"></button>
+            </form>
+            <p class="text-center" style="font-size:small;">Generate Financial Summary Report</p>
+        </div>
+        <!--EVENT BUTTON TO GENERATE A REPORT-->
+        <div class="col col-lg-2" style="margin:0.5rem 1rem;">
+            <form method="post" asp-action="EventInformationReport">
+                <button class="btn btn-lg btn-dark far fa-calendar-alt report-btns" type="submit"></button>
+            </form>
+            <p class="text-center" style="font-size:small;">Generate Event Report</p>
+        </div>
+    </div>        
 </div>
