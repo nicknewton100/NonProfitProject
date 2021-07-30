@@ -1479,7 +1479,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(CDbl(Fields!MemAmount.Value))</Value>
+                                  <Value>=Parameters!MembershipTotal.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Heavy</FontWeight>
@@ -1507,7 +1507,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -1888,6 +1887,11 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="MembershipTotal">
+      <DataType>Float</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1898,6 +1902,11 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>prm</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>MembershipTotal</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
@@ -1919,5 +1928,5 @@ B0SHJP+GBQFBfaSRu01RCCp08PBqiIdDdUKVpHiDs+kqKHqtctZyJ1uPBxXhMdX14r24l34pr2Ggc8Dm
     </EmbeddedImage>
   </EmbeddedImages>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
-  <rd:ReportID>bfbd35b6-42a3-467b-940c-8c92888092f5</rd:ReportID>
+  <rd:ReportID>bfbd35b6-42a3-467b-940c-8c92888092f9</rd:ReportID>
 </Report>

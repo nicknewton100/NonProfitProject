@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
-  <AutoRefresh>0</AutoRefresh>
+  <AutoRefresh>1</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSet">
       <ConnectionProperties>
@@ -773,7 +773,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(CDbl(Fields!DonationAmount.Value))</Value>
+                                  <Value>=Variables!Total.Value</Value>
                                   <Style>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Heavy</FontWeight>
@@ -1029,7 +1029,6 @@
         <PageHeader>
           <Height>1.8507in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
-          <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
             <Textbox Name="prm">
               <CanGrow>true</CanGrow>
@@ -1177,6 +1176,11 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="DonationTotal">
+      <DataType>Float</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1187,6 +1191,11 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>prm</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>DonationTotal</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
@@ -1207,6 +1216,11 @@ B0SHJP+GBQFBfaSRu01RCCp08PBqiIdDdUKVpHiDs+kqKHqtctZyJ1uPBxXhMdX14r24l34pr2Ggc8Dm
 4vXi9bqCI5Nu1OJiBMFopuojxjqTj7iIiZ3SjgBGSFQiJun84Po4r06dOupIERjqePTo5bkurhFw8eIG5vtwHRRi45qooK9fwzWzra+TbdQ1vG6cp+Ee8TtQ95cZdq4FtzmrUmmXt7AV5X3Hi8ZruBd8Z6IQuC6unfsEqHO47Lkf3FeiqnkNr8Vh4L6/hUAi4e4pKf9VCnqiMCWlrEkFJCXFh1RAUlI8saz/A0mml48ZK1jAAAAAAElFTkSuQmCC</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
+  <Variables>
+    <Variable Name="Total">
+      <Value>=Parameters!DonationTotal.Value</Value>
+    </Variable>
+  </Variables>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
-  <rd:ReportID>bfbd35b6-42a3-467b-940c-8c92888092f5</rd:ReportID>
+  <rd:ReportID>bfbd35b6-42a3-467b-940c-8c92888092f3</rd:ReportID>
 </Report>

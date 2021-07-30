@@ -20,6 +20,10 @@ using Microsoft.EntityFrameworkCore;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Identity;
+using FastReport;
+using FastReport.Web;
+using FastReport.Export;
+using FastReport.Export.PdfSimple;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {   //If admin, shows this page
@@ -31,7 +35,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
         private IWebHostEnvironment webHostEnvironment;
         private NonProfitContext context;
         private UserManager<NonProfitProject.Models.User> userManager;
-        private static LocalReport localReport;
         private static ReportResult result;
         public ReportsController(IWebHostEnvironment webHostEnvironment, NonProfitContext context, UserManager<NonProfitProject.Models.User> userManager)
         {
@@ -82,7 +85,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("prm", "RDLC Report");
-            localReport = new LocalReport(path);
+            var localReport = new LocalReport(path);
             localReport.AddDataSource("dsEmployee", dt);
             //localReport.AddDataSource("dsUsers",context)
             
@@ -122,7 +125,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("prm", "RDLC Report");
-            localReport = new LocalReport(path);
+            var localReport = new LocalReport(path);
             localReport.AddDataSource("dsDonorInformation", dt);
             //localReport.AddDataSource("dsUsers",context)
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
@@ -168,7 +171,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("prm", "RDLC Report");
-            localReport = new LocalReport(path);
+            var localReport  = new LocalReport(path);
             localReport.AddDataSource("dsMemberInformation", dt);
             //localReport.AddDataSource("dsUsers",context)
             result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
@@ -209,7 +212,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("prm", "RDLC Report");
-            localReport = new LocalReport(path);
+            var localReport  = new LocalReport(path);
             localReport.AddDataSource("dsCommitteeMemberInformation", dt);
             //localReport.AddDataSource("dsUsers",context)
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
@@ -217,7 +220,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult DonationReport()
+        public IActionResult DonationReportAsync()
         {
             result = null;
             var donations = context.Receipts.Include(r => r.User).Include(r => r.InvoiceDonorInformation).Include(r => r.InvoicePayment).Include(r => r.Donation).Where(r => !context.MembershipDues.Any(md => md.ReceiptID == r.ReceiptID)).ToList();
@@ -229,6 +232,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             dt.Columns.Add("DonationCardNumber");
             dt.Columns.Add("DonationDate");
             DataRow row;
+            decimal total = 0;
             foreach (var i in donations)
             {
                 row = dt.NewRow();
@@ -239,19 +243,38 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 row["DonationCardNumber"] = "xxxx-xxxx-xxxx-" + i.InvoicePayment.Last4Digits.ToString();
                 row["DonationDate"] = i.Date.ToShortDateString();
                 dt.Rows.Add(row);
+                total += i.Total;
             }
 
-            string mimetype = "";
-            int extension = 1;
-            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptDonation.rdlc";
+            string mimetype = "a";
+            int extension = 2;
+            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\frxDonations.frx";
             
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            /*Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("prm", "RDLC Report");
-            localReport = new LocalReport(path);
+            parameters.Add("DonationTotal", total.ToString());
+            var localReport  = new LocalReport(path);
             localReport.AddDataSource("dsDonation", dt);
             //localReport.AddDataSource("dsUsers",context)
             result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
-            return File(result.MainStream, "application/pdf");
+            ReportResponse reportResponse = new ReportResponse();
+            reportResponse.Data.
+            return File(result.MainStream, "application/pdf");*/
+            WebReport webreport = new WebReport();
+            webreport.Report.Load(path);
+            webreport.Report.RegisterData(dt,"Donation Financial Report");
+            webreport.Report.GetDataSource("Donation Financial Report").Enabled = true;
+           // dataSet.ReadXml()
+            if (webreport.Report.Prepare())
+            {
+                MemoryStream stream = new MemoryStream();
+                webreport.Report.Export(new PDFSimpleExport(), stream);
+                stream.Position = 0;
+                return File(stream, "application/pdf");
+            }
+
+            return RedirectToAction("Index");
+            
         }
 
 
@@ -273,6 +296,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             dt.Columns.Add("MemCardNumber");
 
             DataRow row;
+            decimal total = 0;
             foreach (var i in meembershipdues)
             {
                 row = dt.NewRow();
@@ -304,19 +328,34 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 }
                 row["MemCardNumber"] = "xxxx-xxxx-xxxx-" + i.InvoicePayment.Last4Digits.ToString();
                 dt.Rows.Add(row);
+                total += i.Total;
             }
 
             string mimetype = "";
             int extension = 1;
-            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptMembershipDues.rdlc";
-
+            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\frxMembershipDues.frx";
+            /*
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("prm", "RDLC Report");
-            localReport = new LocalReport(path);
+            parameters.Add("MembershipTotal", total.ToString());
+            var localReport  = new LocalReport(path);
             localReport.AddDataSource("dsMemberDues", dt);
             //localReport.AddDataSource("dsUsers",context)
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
-            return File(result.MainStream, "application/pdf");
+            return File(result.MainStream, "application/pdf");*/
+            WebReport webreport = new WebReport();
+            webreport.Report.Load(path);
+            webreport.Report.RegisterData(dt, "Membership Dues Financial Report");
+            webreport.Report.GetDataSource("Membership Dues Financial Report").Enabled = true;
+            // dataSet.ReadXml()
+            if (webreport.Report.Prepare())
+            {
+                MemoryStream stream = new MemoryStream();
+                webreport.Report.Export(new PDFSimpleExport(), stream);
+                stream.Position = 0;
+                return File(stream, "application/pdf");
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -330,6 +369,9 @@ namespace NonProfitProject.Areas.Admin.Controllers
             dt.Columns.Add("Description");
 
             DataRow row;
+            decimal total = 0;
+            decimal totalDonation = 0;
+            decimal totalMembership = 0;
             foreach (var i in receipt)
             {
                 row = dt.NewRow();
@@ -338,6 +380,15 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 row["Date"] = i.Date.ToShortDateString();
                 row["Description"] = i.Description;
                 dt.Rows.Add(row);
+                total += i.Total;
+                if (i.Description.Equals("Donation"))
+                {
+                    totalDonation += i.Total;
+                }
+                else
+                {
+                    totalMembership += i.Total;
+                }
             }
 
             string mimetype = "";
@@ -346,7 +397,10 @@ namespace NonProfitProject.Areas.Admin.Controllers
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("prm", "RDLC Report");
-            localReport = new LocalReport(path);
+            parameters.Add("DonationTotal", totalDonation.ToString());
+            parameters.Add("MembershipTotal", totalMembership.ToString());
+            parameters.Add("Total", total.ToString());
+            var localReport  = new LocalReport(path);
             localReport.AddDataSource("dsFinancialSummary", dt);
             //localReport.AddDataSource("dsUsers",context)
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
@@ -384,7 +438,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("prm", "RDLC Report");
-            localReport = new LocalReport(path);
+            var localReport  = new LocalReport(path);
             localReport.AddDataSource("dsEventInformation", dt);
             //localReport.AddDataSource("dsUsers",context)
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
@@ -424,7 +478,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("prm", "RDLC Report");
-            localReport = new LocalReport(path);
+            var localReport  = new LocalReport(path);
             localReport.AddDataSource("dsAdministratorInformation", dt);
             //localReport.AddDataSource("dsUsers",context)
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);

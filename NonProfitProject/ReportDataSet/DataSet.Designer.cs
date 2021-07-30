@@ -36,7 +36,7 @@ namespace NonProfitProject.ReportDataSet {
         
         private Event_InformationDataTable tableEvent_Information;
         
-        private Membership_Dues_Finacial_ReportDataTable tableMembership_Dues_Finacial_Report;
+        private Membership_Dues_Financial_ReportDataTable tableMembership_Dues_Financial_Report;
         
         private Financial_SummaryDataTable tableFinancial_Summary;
         
@@ -90,8 +90,8 @@ namespace NonProfitProject.ReportDataSet {
                 if ((ds.Tables["Event Information"] != null)) {
                     base.Tables.Add(new Event_InformationDataTable(ds.Tables["Event Information"]));
                 }
-                if ((ds.Tables["Membership Dues Finacial Report"] != null)) {
-                    base.Tables.Add(new Membership_Dues_Finacial_ReportDataTable(ds.Tables["Membership Dues Finacial Report"]));
+                if ((ds.Tables["Membership Dues Financial Report"] != null)) {
+                    base.Tables.Add(new Membership_Dues_Financial_ReportDataTable(ds.Tables["Membership Dues Financial Report"]));
                 }
                 if ((ds.Tables["Financial Summary"] != null)) {
                     base.Tables.Add(new Financial_SummaryDataTable(ds.Tables["Financial Summary"]));
@@ -184,9 +184,9 @@ namespace NonProfitProject.ReportDataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public Membership_Dues_Finacial_ReportDataTable Membership_Dues_Finacial_Report {
+        public Membership_Dues_Financial_ReportDataTable Membership_Dues_Financial_Report {
             get {
-                return this.tableMembership_Dues_Finacial_Report;
+                return this.tableMembership_Dues_Financial_Report;
             }
         }
         
@@ -305,8 +305,8 @@ namespace NonProfitProject.ReportDataSet {
                 if ((ds.Tables["Event Information"] != null)) {
                     base.Tables.Add(new Event_InformationDataTable(ds.Tables["Event Information"]));
                 }
-                if ((ds.Tables["Membership Dues Finacial Report"] != null)) {
-                    base.Tables.Add(new Membership_Dues_Finacial_ReportDataTable(ds.Tables["Membership Dues Finacial Report"]));
+                if ((ds.Tables["Membership Dues Financial Report"] != null)) {
+                    base.Tables.Add(new Membership_Dues_Financial_ReportDataTable(ds.Tables["Membership Dues Financial Report"]));
                 }
                 if ((ds.Tables["Financial Summary"] != null)) {
                     base.Tables.Add(new Financial_SummaryDataTable(ds.Tables["Financial Summary"]));
@@ -386,10 +386,10 @@ namespace NonProfitProject.ReportDataSet {
                     this.tableEvent_Information.InitVars();
                 }
             }
-            this.tableMembership_Dues_Finacial_Report = ((Membership_Dues_Finacial_ReportDataTable)(base.Tables["Membership Dues Finacial Report"]));
+            this.tableMembership_Dues_Financial_Report = ((Membership_Dues_Financial_ReportDataTable)(base.Tables["Membership Dues Financial Report"]));
             if ((initTable == true)) {
-                if ((this.tableMembership_Dues_Finacial_Report != null)) {
-                    this.tableMembership_Dues_Finacial_Report.InitVars();
+                if ((this.tableMembership_Dues_Financial_Report != null)) {
+                    this.tableMembership_Dues_Financial_Report.InitVars();
                 }
             }
             this.tableFinancial_Summary = ((Financial_SummaryDataTable)(base.Tables["Financial Summary"]));
@@ -432,8 +432,8 @@ namespace NonProfitProject.ReportDataSet {
             base.Tables.Add(this.tableDonor_Contact_Information);
             this.tableEvent_Information = new Event_InformationDataTable();
             base.Tables.Add(this.tableEvent_Information);
-            this.tableMembership_Dues_Finacial_Report = new Membership_Dues_Finacial_ReportDataTable();
-            base.Tables.Add(this.tableMembership_Dues_Finacial_Report);
+            this.tableMembership_Dues_Financial_Report = new Membership_Dues_Financial_ReportDataTable();
+            base.Tables.Add(this.tableMembership_Dues_Financial_Report);
             this.tableFinancial_Summary = new Financial_SummaryDataTable();
             base.Tables.Add(this.tableFinancial_Summary);
             this.tableCommittee_Contact_Information = new Committee_Contact_InformationDataTable();
@@ -480,7 +480,7 @@ namespace NonProfitProject.ReportDataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeMembership_Dues_Finacial_Report() {
+        private bool ShouldSerializeMembership_Dues_Financial_Report() {
             return false;
         }
         
@@ -576,7 +576,7 @@ namespace NonProfitProject.ReportDataSet {
         public delegate void Event_InformationRowChangeEventHandler(object sender, Event_InformationRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void Membership_Dues_Finacial_ReportRowChangeEventHandler(object sender, Membership_Dues_Finacial_ReportRowChangeEvent e);
+        public delegate void Membership_Dues_Financial_ReportRowChangeEventHandler(object sender, Membership_Dues_Financial_ReportRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void Financial_SummaryRowChangeEventHandler(object sender, Financial_SummaryRowChangeEvent e);
@@ -2600,7 +2600,7 @@ namespace NonProfitProject.ReportDataSet {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class Membership_Dues_Finacial_ReportDataTable : global::System.Data.TypedTableBase<Membership_Dues_Finacial_ReportRow> {
+        public partial class Membership_Dues_Financial_ReportDataTable : global::System.Data.TypedTableBase<Membership_Dues_Financial_ReportRow> {
             
             private global::System.Data.DataColumn columnMemName;
             
@@ -2626,8 +2626,8 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Membership_Dues_Finacial_ReportDataTable() {
-                this.TableName = "Membership Dues Finacial Report";
+            public Membership_Dues_Financial_ReportDataTable() {
+                this.TableName = "Membership Dues Financial Report";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -2635,7 +2635,7 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal Membership_Dues_Finacial_ReportDataTable(global::System.Data.DataTable table) {
+            internal Membership_Dues_Financial_ReportDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -2652,7 +2652,7 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected Membership_Dues_Finacial_ReportDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected Membership_Dues_Financial_ReportDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -2756,34 +2756,34 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Membership_Dues_Finacial_ReportRow this[int index] {
+            public Membership_Dues_Financial_ReportRow this[int index] {
                 get {
-                    return ((Membership_Dues_Finacial_ReportRow)(this.Rows[index]));
+                    return ((Membership_Dues_Financial_ReportRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event Membership_Dues_Finacial_ReportRowChangeEventHandler Membership_Dues_Finacial_ReportRowChanging;
+            public event Membership_Dues_Financial_ReportRowChangeEventHandler Membership_Dues_Financial_ReportRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event Membership_Dues_Finacial_ReportRowChangeEventHandler Membership_Dues_Finacial_ReportRowChanged;
+            public event Membership_Dues_Financial_ReportRowChangeEventHandler Membership_Dues_Financial_ReportRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event Membership_Dues_Finacial_ReportRowChangeEventHandler Membership_Dues_Finacial_ReportRowDeleting;
+            public event Membership_Dues_Financial_ReportRowChangeEventHandler Membership_Dues_Financial_ReportRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event Membership_Dues_Finacial_ReportRowChangeEventHandler Membership_Dues_Finacial_ReportRowDeleted;
+            public event Membership_Dues_Financial_ReportRowChangeEventHandler Membership_Dues_Financial_ReportRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddMembership_Dues_Finacial_ReportRow(Membership_Dues_Finacial_ReportRow row) {
+            public void AddMembership_Dues_Financial_ReportRow(Membership_Dues_Financial_ReportRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Membership_Dues_Finacial_ReportRow AddMembership_Dues_Finacial_ReportRow(string MemName, string MemEmail, string MemType, double MemAmount, System.DateTime MemStartDate, string MemEndDate, string MemBillingDate, string MemCancelDate, string MemStatus, string ReceiptID, string MemCardNumber) {
-                Membership_Dues_Finacial_ReportRow rowMembership_Dues_Finacial_ReportRow = ((Membership_Dues_Finacial_ReportRow)(this.NewRow()));
+            public Membership_Dues_Financial_ReportRow AddMembership_Dues_Financial_ReportRow(string MemName, string MemEmail, string MemType, double MemAmount, System.DateTime MemStartDate, string MemEndDate, string MemBillingDate, string MemCancelDate, string MemStatus, string ReceiptID, string MemCardNumber) {
+                Membership_Dues_Financial_ReportRow rowMembership_Dues_Financial_ReportRow = ((Membership_Dues_Financial_ReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         MemName,
                         MemEmail,
@@ -2796,15 +2796,15 @@ namespace NonProfitProject.ReportDataSet {
                         MemStatus,
                         ReceiptID,
                         MemCardNumber};
-                rowMembership_Dues_Finacial_ReportRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowMembership_Dues_Finacial_ReportRow);
-                return rowMembership_Dues_Finacial_ReportRow;
+                rowMembership_Dues_Financial_ReportRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowMembership_Dues_Financial_ReportRow);
+                return rowMembership_Dues_Financial_ReportRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                Membership_Dues_Finacial_ReportDataTable cln = ((Membership_Dues_Finacial_ReportDataTable)(base.Clone()));
+                Membership_Dues_Financial_ReportDataTable cln = ((Membership_Dues_Financial_ReportDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -2812,7 +2812,7 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new Membership_Dues_Finacial_ReportDataTable();
+                return new Membership_Dues_Financial_ReportDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2860,28 +2860,28 @@ namespace NonProfitProject.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Membership_Dues_Finacial_ReportRow NewMembership_Dues_Finacial_ReportRow() {
-                return ((Membership_Dues_Finacial_ReportRow)(this.NewRow()));
+            public Membership_Dues_Financial_ReportRow NewMembership_Dues_Financial_ReportRow() {
+                return ((Membership_Dues_Financial_ReportRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new Membership_Dues_Finacial_ReportRow(builder);
+                return new Membership_Dues_Financial_ReportRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(Membership_Dues_Finacial_ReportRow);
+                return typeof(Membership_Dues_Financial_ReportRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.Membership_Dues_Finacial_ReportRowChanged != null)) {
-                    this.Membership_Dues_Finacial_ReportRowChanged(this, new Membership_Dues_Finacial_ReportRowChangeEvent(((Membership_Dues_Finacial_ReportRow)(e.Row)), e.Action));
+                if ((this.Membership_Dues_Financial_ReportRowChanged != null)) {
+                    this.Membership_Dues_Financial_ReportRowChanged(this, new Membership_Dues_Financial_ReportRowChangeEvent(((Membership_Dues_Financial_ReportRow)(e.Row)), e.Action));
                 }
             }
             
@@ -2889,8 +2889,8 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.Membership_Dues_Finacial_ReportRowChanging != null)) {
-                    this.Membership_Dues_Finacial_ReportRowChanging(this, new Membership_Dues_Finacial_ReportRowChangeEvent(((Membership_Dues_Finacial_ReportRow)(e.Row)), e.Action));
+                if ((this.Membership_Dues_Financial_ReportRowChanging != null)) {
+                    this.Membership_Dues_Financial_ReportRowChanging(this, new Membership_Dues_Financial_ReportRowChangeEvent(((Membership_Dues_Financial_ReportRow)(e.Row)), e.Action));
                 }
             }
             
@@ -2898,8 +2898,8 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.Membership_Dues_Finacial_ReportRowDeleted != null)) {
-                    this.Membership_Dues_Finacial_ReportRowDeleted(this, new Membership_Dues_Finacial_ReportRowChangeEvent(((Membership_Dues_Finacial_ReportRow)(e.Row)), e.Action));
+                if ((this.Membership_Dues_Financial_ReportRowDeleted != null)) {
+                    this.Membership_Dues_Financial_ReportRowDeleted(this, new Membership_Dues_Financial_ReportRowChangeEvent(((Membership_Dues_Financial_ReportRow)(e.Row)), e.Action));
                 }
             }
             
@@ -2907,14 +2907,14 @@ namespace NonProfitProject.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.Membership_Dues_Finacial_ReportRowDeleting != null)) {
-                    this.Membership_Dues_Finacial_ReportRowDeleting(this, new Membership_Dues_Finacial_ReportRowChangeEvent(((Membership_Dues_Finacial_ReportRow)(e.Row)), e.Action));
+                if ((this.Membership_Dues_Financial_ReportRowDeleting != null)) {
+                    this.Membership_Dues_Financial_ReportRowDeleting(this, new Membership_Dues_Financial_ReportRowChangeEvent(((Membership_Dues_Financial_ReportRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveMembership_Dues_Finacial_ReportRow(Membership_Dues_Finacial_ReportRow row) {
+            public void RemoveMembership_Dues_Financial_ReportRow(Membership_Dues_Financial_ReportRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -2941,7 +2941,7 @@ namespace NonProfitProject.ReportDataSet {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "Membership_Dues_Finacial_ReportDataTable";
+                attribute2.FixedValue = "Membership_Dues_Financial_ReportDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -5142,15 +5142,15 @@ namespace NonProfitProject.ReportDataSet {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class Membership_Dues_Finacial_ReportRow : global::System.Data.DataRow {
+        public partial class Membership_Dues_Financial_ReportRow : global::System.Data.DataRow {
             
-            private Membership_Dues_Finacial_ReportDataTable tableMembership_Dues_Finacial_Report;
+            private Membership_Dues_Financial_ReportDataTable tableMembership_Dues_Financial_Report;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal Membership_Dues_Finacial_ReportRow(global::System.Data.DataRowBuilder rb) : 
+            internal Membership_Dues_Financial_ReportRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableMembership_Dues_Finacial_Report = ((Membership_Dues_Finacial_ReportDataTable)(this.Table));
+                this.tableMembership_Dues_Financial_Report = ((Membership_Dues_Financial_ReportDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5158,15 +5158,15 @@ namespace NonProfitProject.ReportDataSet {
             public string MemName {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemNameColumn]));
+                        return ((string)(this[this.tableMembership_Dues_Financial_Report.MemNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemName\' in table \'Membership Dues Finacial Report\' is DBNu" +
-                                "ll.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemName\' in table \'Membership Dues Financial Report\' is DBN" +
+                                "ull.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemNameColumn] = value;
+                    this[this.tableMembership_Dues_Financial_Report.MemNameColumn] = value;
                 }
             }
             
@@ -5175,15 +5175,15 @@ namespace NonProfitProject.ReportDataSet {
             public string MemEmail {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemEmailColumn]));
+                        return ((string)(this[this.tableMembership_Dues_Financial_Report.MemEmailColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemEmail\' in table \'Membership Dues Finacial Report\' is DBN" +
-                                "ull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemEmail\' in table \'Membership Dues Financial Report\' is DB" +
+                                "Null.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemEmailColumn] = value;
+                    this[this.tableMembership_Dues_Financial_Report.MemEmailColumn] = value;
                 }
             }
             
@@ -5192,15 +5192,15 @@ namespace NonProfitProject.ReportDataSet {
             public string MemType {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemTypeColumn]));
+                        return ((string)(this[this.tableMembership_Dues_Financial_Report.MemTypeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemType\' in table \'Membership Dues Finacial Report\' is DBNu" +
-                                "ll.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemType\' in table \'Membership Dues Financial Report\' is DBN" +
+                                "ull.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemTypeColumn] = value;
+                    this[this.tableMembership_Dues_Financial_Report.MemTypeColumn] = value;
                 }
             }
             
@@ -5209,15 +5209,15 @@ namespace NonProfitProject.ReportDataSet {
             public double MemAmount {
                 get {
                     try {
-                        return ((double)(this[this.tableMembership_Dues_Finacial_Report.MemAmountColumn]));
+                        return ((double)(this[this.tableMembership_Dues_Financial_Report.MemAmountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemAmount\' in table \'Membership Dues Finacial Report\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemAmount\' in table \'Membership Dues Financial Report\' is D" +
+                                "BNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemAmountColumn] = value;
+                    this[this.tableMembership_Dues_Financial_Report.MemAmountColumn] = value;
                 }
             }
             
@@ -5226,15 +5226,15 @@ namespace NonProfitProject.ReportDataSet {
             public System.DateTime MemStartDate {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableMembership_Dues_Finacial_Report.MemStartDateColumn]));
+                        return ((global::System.DateTime)(this[this.tableMembership_Dues_Financial_Report.MemStartDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemStartDate\' in table \'Membership Dues Finacial Report\' is" +
-                                " DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemStartDate\' in table \'Membership Dues Financial Report\' i" +
+                                "s DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemStartDateColumn] = value;
+                    this[this.tableMembership_Dues_Financial_Report.MemStartDateColumn] = value;
                 }
             }
             
@@ -5243,15 +5243,15 @@ namespace NonProfitProject.ReportDataSet {
             public string MemEndDate {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemEndDateColumn]));
+                        return ((string)(this[this.tableMembership_Dues_Financial_Report.MemEndDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemEndDate\' in table \'Membership Dues Finacial Report\' is D" +
-                                "BNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemEndDate\' in table \'Membership Dues Financial Report\' is " +
+                                "DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemEndDateColumn] = value;
+                    this[this.tableMembership_Dues_Financial_Report.MemEndDateColumn] = value;
                 }
             }
             
@@ -5260,15 +5260,15 @@ namespace NonProfitProject.ReportDataSet {
             public string MemBillingDate {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemBillingDateColumn]));
+                        return ((string)(this[this.tableMembership_Dues_Financial_Report.MemBillingDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemBillingDate\' in table \'Membership Dues Finacial Report\' " +
-                                "is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemBillingDate\' in table \'Membership Dues Financial Report\'" +
+                                " is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemBillingDateColumn] = value;
+                    this[this.tableMembership_Dues_Financial_Report.MemBillingDateColumn] = value;
                 }
             }
             
@@ -5277,15 +5277,15 @@ namespace NonProfitProject.ReportDataSet {
             public string MemCancelDate {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemCancelDateColumn]));
+                        return ((string)(this[this.tableMembership_Dues_Financial_Report.MemCancelDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemCancelDate\' in table \'Membership Dues Finacial Report\' i" +
-                                "s DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemCancelDate\' in table \'Membership Dues Financial Report\' " +
+                                "is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemCancelDateColumn] = value;
+                    this[this.tableMembership_Dues_Financial_Report.MemCancelDateColumn] = value;
                 }
             }
             
@@ -5294,15 +5294,15 @@ namespace NonProfitProject.ReportDataSet {
             public string MemStatus {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemStatusColumn]));
+                        return ((string)(this[this.tableMembership_Dues_Financial_Report.MemStatusColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemStatus\' in table \'Membership Dues Finacial Report\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemStatus\' in table \'Membership Dues Financial Report\' is D" +
+                                "BNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemStatusColumn] = value;
+                    this[this.tableMembership_Dues_Financial_Report.MemStatusColumn] = value;
                 }
             }
             
@@ -5311,15 +5311,15 @@ namespace NonProfitProject.ReportDataSet {
             public string ReceiptID {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.ReceiptIDColumn]));
+                        return ((string)(this[this.tableMembership_Dues_Financial_Report.ReceiptIDColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ReceiptID\' in table \'Membership Dues Finacial Report\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ReceiptID\' in table \'Membership Dues Financial Report\' is D" +
+                                "BNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.ReceiptIDColumn] = value;
+                    this[this.tableMembership_Dues_Financial_Report.ReceiptIDColumn] = value;
                 }
             }
             
@@ -5328,148 +5328,148 @@ namespace NonProfitProject.ReportDataSet {
             public string MemCardNumber {
                 get {
                     try {
-                        return ((string)(this[this.tableMembership_Dues_Finacial_Report.MemCardNumberColumn]));
+                        return ((string)(this[this.tableMembership_Dues_Financial_Report.MemCardNumberColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MemCardNumber\' in table \'Membership Dues Finacial Report\' i" +
-                                "s DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MemCardNumber\' in table \'Membership Dues Financial Report\' " +
+                                "is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMembership_Dues_Finacial_Report.MemCardNumberColumn] = value;
+                    this[this.tableMembership_Dues_Financial_Report.MemCardNumberColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMemNameNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemNameColumn);
+                return this.IsNull(this.tableMembership_Dues_Financial_Report.MemNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetMemNameNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemNameColumn] = global::System.Convert.DBNull;
+                this[this.tableMembership_Dues_Financial_Report.MemNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMemEmailNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemEmailColumn);
+                return this.IsNull(this.tableMembership_Dues_Financial_Report.MemEmailColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetMemEmailNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemEmailColumn] = global::System.Convert.DBNull;
+                this[this.tableMembership_Dues_Financial_Report.MemEmailColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMemTypeNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemTypeColumn);
+                return this.IsNull(this.tableMembership_Dues_Financial_Report.MemTypeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetMemTypeNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemTypeColumn] = global::System.Convert.DBNull;
+                this[this.tableMembership_Dues_Financial_Report.MemTypeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMemAmountNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemAmountColumn);
+                return this.IsNull(this.tableMembership_Dues_Financial_Report.MemAmountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetMemAmountNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemAmountColumn] = global::System.Convert.DBNull;
+                this[this.tableMembership_Dues_Financial_Report.MemAmountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMemStartDateNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemStartDateColumn);
+                return this.IsNull(this.tableMembership_Dues_Financial_Report.MemStartDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetMemStartDateNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemStartDateColumn] = global::System.Convert.DBNull;
+                this[this.tableMembership_Dues_Financial_Report.MemStartDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMemEndDateNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemEndDateColumn);
+                return this.IsNull(this.tableMembership_Dues_Financial_Report.MemEndDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetMemEndDateNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemEndDateColumn] = global::System.Convert.DBNull;
+                this[this.tableMembership_Dues_Financial_Report.MemEndDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMemBillingDateNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemBillingDateColumn);
+                return this.IsNull(this.tableMembership_Dues_Financial_Report.MemBillingDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetMemBillingDateNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemBillingDateColumn] = global::System.Convert.DBNull;
+                this[this.tableMembership_Dues_Financial_Report.MemBillingDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMemCancelDateNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemCancelDateColumn);
+                return this.IsNull(this.tableMembership_Dues_Financial_Report.MemCancelDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetMemCancelDateNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemCancelDateColumn] = global::System.Convert.DBNull;
+                this[this.tableMembership_Dues_Financial_Report.MemCancelDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMemStatusNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemStatusColumn);
+                return this.IsNull(this.tableMembership_Dues_Financial_Report.MemStatusColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetMemStatusNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemStatusColumn] = global::System.Convert.DBNull;
+                this[this.tableMembership_Dues_Financial_Report.MemStatusColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsReceiptIDNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.ReceiptIDColumn);
+                return this.IsNull(this.tableMembership_Dues_Financial_Report.ReceiptIDColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetReceiptIDNull() {
-                this[this.tableMembership_Dues_Finacial_Report.ReceiptIDColumn] = global::System.Convert.DBNull;
+                this[this.tableMembership_Dues_Financial_Report.ReceiptIDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMemCardNumberNull() {
-                return this.IsNull(this.tableMembership_Dues_Finacial_Report.MemCardNumberColumn);
+                return this.IsNull(this.tableMembership_Dues_Financial_Report.MemCardNumberColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetMemCardNumberNull() {
-                this[this.tableMembership_Dues_Finacial_Report.MemCardNumberColumn] = global::System.Convert.DBNull;
+                this[this.tableMembership_Dues_Financial_Report.MemCardNumberColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -6215,22 +6215,22 @@ namespace NonProfitProject.ReportDataSet {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class Membership_Dues_Finacial_ReportRowChangeEvent : global::System.EventArgs {
+        public class Membership_Dues_Financial_ReportRowChangeEvent : global::System.EventArgs {
             
-            private Membership_Dues_Finacial_ReportRow eventRow;
+            private Membership_Dues_Financial_ReportRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Membership_Dues_Finacial_ReportRowChangeEvent(Membership_Dues_Finacial_ReportRow row, global::System.Data.DataRowAction action) {
+            public Membership_Dues_Financial_ReportRowChangeEvent(Membership_Dues_Financial_ReportRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Membership_Dues_Finacial_ReportRow Row {
+            public Membership_Dues_Financial_ReportRow Row {
                 get {
                     return this.eventRow;
                 }

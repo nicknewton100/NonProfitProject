@@ -34,7 +34,7 @@ namespace NonProfitProject.Code
         //Cancels newsletter subscription
         Task IHostedService.StartAsync(CancellationToken cancellationToken)
         {
-            timer = new Timer(o => RenewMembership(), null, TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(25));
+            timer = new Timer(o => RenewMembership(), null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(25));
             return Task.CompletedTask;
         }
         //Cancels newsletter subscription
@@ -62,6 +62,7 @@ namespace NonProfitProject.Code
                 foreach (var due in membershipDues)
                 {
                     due.MemActive = false;
+                    due.Receipt.Total = due.MembershipType.Amount;
                     context.MembershipDues.Update(due);
 
                     Receipts receipt = new Receipts()

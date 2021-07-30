@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/29/2021 18:41:20" ReportInfo.Modified="07/30/2021 01:40:59" ReportInfo.CreatorVersion="2021.3.21.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <XmlDataConnection Name="Connection" ConnectionString="rijcmlqDrprwlB72xT3vrpPZhEPLh8TgcKaNwSXz30m7ttjJZf/lZBUrlwKwaxkZZDD0h3F7zYDFZJyveHCtErRceoBAXlKEMlo9H2dHTAQC8dyjKxmkQm8J/JJjZ/QfJlCx+OXQ4tu7hKjpHI3X4giZIJ1JiDrwvJIYhUBZMrTWEBV4HN8bNfXg1LnxTo2X8OgtBnePYgNxI0seTUwnvkuT/y4zyRvc5wpHka2JonAY2Q7+rlMeAK6OMx+0NqhQdKHEyjT4NyL4zHcgpQaSaRNO12y3HWOY5Vi0QJZRpqHbYmhHaknsxXfSAcYGsP1DBUyHZcQDe0oME4W4q1jhgrOfj+qYFzKvT6LRc8FOhCJyZ0Rge4=">
+      <TableDataSource Name="Donation Financial Report" DataType="System.Int32" Enabled="true" TableName="Donation Financial Report">
+        <Column Name="DonationName" DataType="System.String"/>
+        <Column Name="DonationEmail" DataType="System.String"/>
+        <Column Name="DonationAmount" DataType="System.Double"/>
+        <Column Name="DonationCardNumber" DataType="System.String"/>
+        <Column Name="DonationTotal" DataType="System.String"/>
+        <Column Name="DonationDate" DataType="System.String"/>
+        <Column Name="ReceiptID" DataType="System.String"/>
+      </TableDataSource>
+    </XmlDataConnection>
+    <Total Name="Total" Expression="[Donation Financial Report.DonationAmount]" Evaluator="Data1" ResetOnReprint="true"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9" FirstPageSource="15" OtherPagesSource="15" LastPageSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="189" PrintOn="FirstPage">
+      <TextObject Name="Text1" Left="311.85" Top="132.3" Width="425.25" Height="28.35" Text="Donation Financial Information" HorzAlign="Center" Font="Arial, 22pt"/>
+      <PictureObject Name="Picture1" Left="434.7" Top="9.45" Width="170.1" Height="85.05" ImageFormat="Png" Image="iVBORw0KGgoAAAANSUhEUgAAAMgAAABgCAYAAABYFz0dAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOvQAADr0BR/uQrQAAGaRJREFUeF7tnQW03UQTx3F315bi7u7uUNyd4sVdC7RIcXeHUooULVC8uJTi7m7FXfOdX9jp27tvkptNNq+Xr/s/Z05770tyN8n+d2dmZ2ZHSiIiIjIRCRIRkYNIkIiIHESCRETkIBKkJvz222/JgAEDkt69eycnnnhicssttyQ//vij+Ws4fPDBB8nll1+e9OzZMznrrLOSIUOGmL9EhEAkSA3o169fMvXUUycjjTRSg4w//vjJYYcdlvz888/myPJ48803k65duyajjDJKu99Zeumlk9dff90cGVEFkSCBcdJJJ7XrsK7MPvvsyRtvvGHO8EefPn2SccYZR722yMQTT5wMHjzYnBFRFpEgAXH33XcnI488stphXZl88smTV1991ZxZHBdccEHh35h++umTb7/91pwZUQaRIIHw559/JjPPPLPaUbOkS5cuyddff22u0BwDBw5MRh11VPVaWbLffvuZsyPKIBIkEK6//nq1gzaTTTbZxFwhH0OHDk2mnHJK9Rp5Mt544yXff/+9uUqELyJBAmH99ddXO2gRuffee81VsrHbbrup5xaRa665xlwlwheRIAHwzz//pEax1jmLyOKLL26upOP9999PRh99dPXcIrLjjjuaK0X4IhIkAD788EO1Y/rIU089Za7WHgcffLB6TlFZdNFFzZUifBEJEgBPPPGE2jF9pHv37uZqjWB2mm666dRziso000xjrhbhi0iQALj//vvVjukjM8wwg7laI5599ln1eB9B/Ysoh0iQABg0aJDaMX0FVc3FGWecoR7rI5NNNpm5WoQvIkEC4OWXX1Y7pq/ccccd5optwMDWjvURVu4jyiESJACIrdJionzl3HPPNVdsw8orr6we6yNrrbWWuVqELyJBAmHOOedUO6ePHHfcceZqbVhooYXUY33kiCOOMFeL8EUkSCDsvvvuauf0kV69epmrtWHBBRdUj/WR++67z1wtwheRIIFAnJTWOX3k7LPPNldrwworrKAeW1QmnXTS5I8//jBXi/BFJEgg/PXXX0mnTp3UTlpUbrvtNnO1Nmy33XbqsUVlr732MleKKINIkIA47bTT1E5aVD766CNzpTaQ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"/>
+      <TextObject Name="Text2" Left="434.7" Top="103.95" Width="170.1" Height="18.9" Text="RDLC Report" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+    </ReportTitleBand>
+    <ColumnHeaderBand Name="ColumnHeader1" Top="193" Width="1047.06" Height="22.06">
+      <TableObject Name="Table2" Left="18.9" Width="1011.65" Height="22.06" Border.Lines="All" GrowToBottom="true" CanBreak="false">
+        <TableColumn Name="Column7" Width="97.9"/>
+        <TableColumn Name="Column8" Width="211.13"/>
+        <TableColumn Name="Column9" Width="286.7"/>
+        <TableColumn Name="Column10" Width="97.73"/>
+        <TableColumn Name="Column11" Width="230"/>
+        <TableColumn Name="Column12" Width="88.19"/>
+        <TableRow Name="Row2" Height="22.06">
+          <TableCell Name="Cell15" Border.Lines="All" Fill.Color="Silver" Text="Receipt ID" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          <TableCell Name="Cell16" Border.Lines="All" Fill.Color="Silver" Text="Name" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          <TableCell Name="Cell17" Border.Lines="All" Fill.Color="Silver" Text="Email" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          <TableCell Name="Cell18" Border.Lines="All" Fill.Color="Silver" Text="Date" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          <TableCell Name="Cell19" Border.Lines="All" Fill.Color="Silver" Text="Card Number" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          <TableCell Name="Cell20" Border.Lines="All" Fill.Color="Silver" Text="Amount&#13;&#10;" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+    </ColumnHeaderBand>
+    <DataBand Name="Data1" Top="219.06" Width="1047.06" Height="22.06" DataSource="Donation Financial Report" RowCount="15" KeepTogether="true" KeepDetail="true" ParentIdColumn="Donation Financial Report.ReceiptID">
+      <TableObject Name="Table1" Left="18.9" Width="1011.75" Height="22.06" Border.Lines="All" GrowToBottom="true" CanBreak="false">
+        <TableColumn Name="Column1" Width="97.9"/>
+        <TableColumn Name="Column2" Width="211.13"/>
+        <TableColumn Name="Column3" Width="286.7"/>
+        <TableColumn Name="Column4" Width="97.73"/>
+        <TableColumn Name="Column5" Width="230.01"/>
+        <TableColumn Name="Column6" Width="88.28"/>
+        <TableRow Name="Row1" Height="22.06">
+          <TableCell Name="Cell1" Border.Lines="All" Text="[Donation Financial Report.ReceiptID]" Font="Arial, 11pt"/>
+          <TableCell Name="Cell2" Border.Lines="All" Text="[Donation Financial Report.DonationName]" Font="Arial, 11pt"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="[Donation Financial Report.DonationEmail]" Font="Arial, 11pt"/>
+          <TableCell Name="Cell10" Border.Lines="All" Text="[Donation Financial Report.DonationDate]" Font="Arial, 11pt"/>
+          <TableCell Name="Cell12" Border.Lines="All" Text="[Donation Financial Report.DonationCardNumber]" Font="Arial, 11pt"/>
+          <TableCell Name="Cell14" Border.Lines="All" Text="$[Donation Financial Report.DonationAmount]" Font="Arial, 11pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="245.12" Width="1047.06" Height="40.96">
+      <TableObject Name="Table3" Left="18.9" Width="1011.75" Height="40.96" GrowToBottom="true" CanBreak="false">
+        <TableColumn Name="Column13" Width="97.9"/>
+        <TableColumn Name="Column14" Width="201.68"/>
+        <TableColumn Name="Column15" Width="277.25"/>
+        <TableColumn Name="Column16" Width="97.73"/>
+        <TableColumn Name="Column17" Width="248.91"/>
+        <TableColumn Name="Column18" Width="88.28"/>
+        <TableRow Name="Row3" Height="22.06">
+          <TableCell Name="Cell21" Font="Arial, 10pt"/>
+          <TableCell Name="Cell22" Font="Arial, 10pt"/>
+          <TableCell Name="Cell23" Font="Arial, 10pt"/>
+          <TableCell Name="Cell24" Font="Arial, 10pt"/>
+          <TableCell Name="Cell25" Font="Arial, 10pt"/>
+          <TableCell Name="Cell26" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row4">
+          <TableCell Name="Cell27" Border.Lines="Top" Fill.Color="Gainsboro" Text="Total" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell28" Border.Lines="Top" Fill.Color="Gainsboro" Font="Arial, 10pt"/>
+          <TableCell Name="Cell29" Border.Lines="Top" Fill.Color="Gainsboro" Font="Arial, 10pt"/>
+          <TableCell Name="Cell30" Border.Lines="Top" Fill.Color="Gainsboro" Font="Arial, 10pt"/>
+          <TableCell Name="Cell31" Border.Lines="Top" Fill.Color="Gainsboro" Font="Arial, 10pt"/>
+          <TableCell Name="Cell32" Border.Lines="Top" Fill.Color="Gainsboro" Text="$[Total]" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+    </ReportSummaryBand>
+  </ReportPage>
+</Report>
