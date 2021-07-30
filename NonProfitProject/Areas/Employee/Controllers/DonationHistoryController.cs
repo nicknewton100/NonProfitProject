@@ -37,6 +37,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             if (!isDonationCommitee() || MyDonations == "true")
             {
                 receipts = receipts.Where(r => r.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
+                ViewBag.FinancialEmployee = isDonationCommitee();
                 ViewBag.Donations = "You have not made any donations yet";
             }
             return View(receipts);
