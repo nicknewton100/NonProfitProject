@@ -35,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Employee\Data\" />
     <Folder Include="Areas\Employee\Models\ViewModels\" />
     <Folder Include="Areas\Users\Data\" />
     <Folder Include="Areas\Users\Models\ViewModels\" />

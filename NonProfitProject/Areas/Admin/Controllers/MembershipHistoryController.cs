@@ -179,7 +179,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             if(user != null)
             {
                 var result = await userManager.RemoveFromRoleAsync(user, "Member");
-                if (!await userManager.IsInRoleAsync(user, "Admin"))
+                if (!await userManager.IsInRoleAsync(user, "Admin") && !await userManager.IsInRoleAsync(user, "Employee"))
                 {
                     await userManager.AddToRoleAsync(user, "User");
                 }

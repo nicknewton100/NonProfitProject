@@ -9,6 +9,8 @@ using NonProfitProject.Models;
 using System.Security.Claims;
 using System.Web;
 using NonProfitProject.Code;
+using Microsoft.EntityFrameworkCore;
+using NonProfitProject.Areas.Employee.Data;
 
 namespace NonProfitProject.Controllers
 {
@@ -66,6 +68,7 @@ namespace NonProfitProject.Controllers
                         }
                         else if (await userManager.IsInRoleAsync(currentUser, "Employee"))
                         {
+                            CommitteeName.Get(context, User.FindFirstValue(ClaimTypes.NameIdentifier), HttpContext);
                             return RedirectToAction("Index", "Home", new { area = "Employee" });
                         }
                         else
@@ -141,6 +144,7 @@ namespace NonProfitProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
+            
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }

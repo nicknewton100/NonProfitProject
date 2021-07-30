@@ -13,7 +13,7 @@ using NonProfitProject.Controllers.Shared.Users;
 
 namespace NonProfitProject.Areas.Users.Controllers
 {
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "User,Member")]
     [Area("Users")]
     public class DonationHistoryController : Controller
     {

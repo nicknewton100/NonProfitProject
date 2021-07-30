@@ -2,6 +2,8 @@
     Layout = "_Layout";
 
     @using Microsoft.AspNetCore.Identity;
+    @using Microsoft.AspNetCore.Http;
+    var committeeName = Context.Session.GetString("CommitteeName");
 
 }
 
@@ -64,12 +66,22 @@
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Employee" asp-controller="DonationHistory" asp-action="Index">Donation History</a>
             </li>
+            @if(committeeName == "Fundrasing Committee")
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="Employee" asp-controller="DonationHistory" asp-action="Index">Membership History</a>
+                </li>
+            }
+            
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Employee" asp-controller="Home" asp-action="Index">Resources</a>
             </li>
             <li class="dropdown-divider"></li>
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Employee" asp-controller="Profile" asp-action="Index">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="Employee" asp-controller="Membership" asp-action="Index">Membership</a>
             </li>
 
         </ul>

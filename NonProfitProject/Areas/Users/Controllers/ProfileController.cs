@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace NonProfitProject.Areas.Users.Controllers
 {
     //If its not admin, dont allow use of the controller
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "User,Member")]
     [Area("Users")]
     public class ProfileController : DefaultProfileController
     {

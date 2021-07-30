@@ -9,26 +9,29 @@ using System.Threading.Tasks;
 using NonProfitProject.Areas.Admin.Models.ViewModels;
 using NonProfitProject.Code.Security;
 using System.Security.Claims;
+using NonProfitProject.Areas.Employee.Data;
+using Microsoft.AspNetCore.Http;
+using NonProfitProject.Areas.Employee.Controllers.DefaultControllers;
 
 namespace NonProfitProject.Areas.Employee.Controllers
 {
     [Authorize(Roles = "Employee")]
     [Area("Employee")]
-    public class DonationHistoryController : Controller
+    public class DonationHistoryController : DefaultEmployeeController
     {
         private NonProfitContext context;
-        public DonationHistoryController(NonProfitContext context)
+        public DonationHistoryController(NonProfitContext context) : base(context)
         {
             this.context = context;
         }
         public bool isDonationCommitee()
         {
-            var employee = context.CommitteeMembers.Include(cm => cm.employee).ThenInclude(e => e.User).Include(cm => cm.committee).Where(cm => cm.committee.CommitteeName == "Fundrasing Committee" && cm.employee.User.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).FirstOrDefault();
-            if(employee == null)
+            var name = CommitteeName.Get(context, User.FindFirstValue(ClaimTypes.NameIdentifier), HttpContext);
+            if (name == "Fundrasing Committee")
             {
-                return false;
-            }
-            return true;
+                return true;
+            } 
+            return false;
         }
         [HttpGet]
         public IActionResult Index(string MyDonations)

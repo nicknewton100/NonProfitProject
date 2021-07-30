@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using NonProfitProject.Models;
 using NonProfitProject.Controllers.Shared.Users;
+using NonProfitProject.Areas.Employee.Data;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Http;
 
 namespace NonProfitProject.Areas.Employee.Controllers
 {
@@ -20,6 +24,11 @@ namespace NonProfitProject.Areas.Employee.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.context = context;
+        }
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            base.OnActionExecuting(context);
+            HttpContext.Session.SetString("CommitteeName", CommitteeName.Get(this.context, User.FindFirstValue(ClaimTypes.NameIdentifier), HttpContext));
         }
     }
 }

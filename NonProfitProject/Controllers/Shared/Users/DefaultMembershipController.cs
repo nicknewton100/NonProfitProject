@@ -189,6 +189,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             context.SaveChanges();
             var user = await userManager.GetUserAsync(User);
             await userManager.AddToRoleAsync(user, "Member");
+            await userManager.RemoveFromRoleAsync(user, "User");
             EmailManager email = new EmailManager(context);
             var message = email.CreateSimpleMessage(String.Format("{0} Membership for Non-Paw-Fit Animal Rescue",sessionModel.Membership.MembershipType), String.Format("Thank you, {0}, for becoming a {1} member of the Non-Paw-Fit Animal Rescue Foundation! You're continual efforts to create a better life for all animals will not go unnoticed. \n\n    Receipt Information: \n        Receipt ID: {2} \n        Total: {3:C} \n        Date: {4} \n\n    Membership Information: \n        Membership ID: {5} \n        Membership purchase: {1} \n        Payment per Month: {6:C} \n        Membership for User: {7} \n        Start Date: {8} \n        End Date: {9} \n        Renewal Date: {10} \n\n    Card Information: \n        CardHolder Name: {11} \n        Card Type: {12} \n        Card Number: xxxx-xxxx-xxxx-{13} \n        Expiration Date: {14} \n    Billing Information \n        Name: {15} \n        Address 1: {16} \n        Address 2: {17} \n        City: {18} \n        State: {19} \n        Postal Code: {20}", receipt.User.UserFirstName + " " + receipt.User.UserLastName, sessionModel.Membership.MembershipType.Name , receipt.ReceiptID, receipt.Total, receipt.Date, receipt.MembershipDue.MembershipTypeID, sessionModel.Membership.MembershipType.Amount, receipt.User.UserName, receipt.MembershipDue.MemStartDate, receipt.MembershipDue.MemEndDate, receipt.MembershipDue.MemRenewalDate, receipt.InvoicePayment.CardholderName, receipt.InvoicePayment.CardType, receipt.InvoicePayment.Last4Digits, receipt.InvoicePayment.ExpDate, receipt.InvoicePayment.BillingFirstName + " " + receipt.InvoicePayment.BillingLastName, receipt.InvoicePayment.BillingAddr1, receipt.InvoicePayment.BillingAddr2, receipt.InvoicePayment.BillingCity, receipt.InvoicePayment.BillingState, receipt.InvoicePayment.BillingPostalCode));
 
@@ -214,7 +215,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             membership.MemActive = false;
             var user = await userManager.GetUserAsync(User);
             await userManager.RemoveFromRoleAsync(user, "Member");
-            if (!await userManager.IsInRoleAsync(user, "Admin"))
+            if (!await userManager.IsInRoleAsync(user, "Admin") && !await userManager.IsInRoleAsync(user, "Employee"))
             {
                 await userManager.AddToRoleAsync(user, "User");
             }
