@@ -222,7 +222,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult DonationReportAsync()
         {
-            result = null;
             var donations = context.Receipts.Include(r => r.User).Include(r => r.InvoiceDonorInformation).Include(r => r.InvoicePayment).Include(r => r.Donation).Where(r => !context.MembershipDues.Any(md => md.ReceiptID == r.ReceiptID)).ToList();
             DataTable dt = new DataTable();
             dt.Columns.Add("ReceiptID");
@@ -232,7 +231,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
             dt.Columns.Add("DonationCardNumber");
             dt.Columns.Add("DonationDate");
             DataRow row;
-            decimal total = 0;
             foreach (var i in donations)
             {
                 row = dt.NewRow();
@@ -243,28 +241,13 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 row["DonationCardNumber"] = "xxxx-xxxx-xxxx-" + i.InvoicePayment.Last4Digits.ToString();
                 row["DonationDate"] = i.Date.ToShortDateString();
                 dt.Rows.Add(row);
-                total += i.Total;
             }
 
-            string mimetype = "a";
-            int extension = 2;
             var path = $"{webHostEnvironment.WebRootPath}\\Reports\\frxDonations.frx";
-            
-            /*Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("prm", "RDLC Report");
-            parameters.Add("DonationTotal", total.ToString());
-            var localReport  = new LocalReport(path);
-            localReport.AddDataSource("dsDonation", dt);
-            //localReport.AddDataSource("dsUsers",context)
-            result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
-            ReportResponse reportResponse = new ReportResponse();
-            reportResponse.Data.
-            return File(result.MainStream, "application/pdf");*/
             WebReport webreport = new WebReport();
             webreport.Report.Load(path);
             webreport.Report.RegisterData(dt,"Donation Financial Report");
             webreport.Report.GetDataSource("Donation Financial Report").Enabled = true;
-           // dataSet.ReadXml()
             if (webreport.Report.Prepare())
             {
                 MemoryStream stream = new MemoryStream();
@@ -296,7 +279,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
             dt.Columns.Add("MemCardNumber");
 
             DataRow row;
-            decimal total = 0;
             foreach (var i in meembershipdues)
             {
                 row = dt.NewRow();
@@ -328,26 +310,12 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 }
                 row["MemCardNumber"] = "xxxx-xxxx-xxxx-" + i.InvoicePayment.Last4Digits.ToString();
                 dt.Rows.Add(row);
-                total += i.Total;
             }
-
-            string mimetype = "";
-            int extension = 1;
             var path = $"{webHostEnvironment.WebRootPath}\\Reports\\frxMembershipDues.frx";
-            /*
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("prm", "RDLC Report");
-            parameters.Add("MembershipTotal", total.ToString());
-            var localReport  = new LocalReport(path);
-            localReport.AddDataSource("dsMemberDues", dt);
-            //localReport.AddDataSource("dsUsers",context)
-            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
-            return File(result.MainStream, "application/pdf");*/
             WebReport webreport = new WebReport();
             webreport.Report.Load(path);
             webreport.Report.RegisterData(dt, "Membership Dues Financial Report");
             webreport.Report.GetDataSource("Membership Dues Financial Report").Enabled = true;
-            // dataSet.ReadXml()
             if (webreport.Report.Prepare())
             {
                 MemoryStream stream = new MemoryStream();
@@ -369,9 +337,6 @@ namespace NonProfitProject.Areas.Admin.Controllers
             dt.Columns.Add("Description");
 
             DataRow row;
-            decimal total = 0;
-            decimal totalDonation = 0;
-            decimal totalMembership = 0;
             foreach (var i in receipt)
             {
                 row = dt.NewRow();
@@ -380,31 +345,20 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 row["Date"] = i.Date.ToShortDateString();
                 row["Description"] = i.Description;
                 dt.Rows.Add(row);
-                total += i.Total;
-                if (i.Description.Equals("Donation"))
-                {
-                    totalDonation += i.Total;
-                }
-                else
-                {
-                    totalMembership += i.Total;
-                }
             }
-
-            string mimetype = "";
-            int extension = 1;
-            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\rptFinancialSummary.rdlc";
-
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("prm", "RDLC Report");
-            parameters.Add("DonationTotal", totalDonation.ToString());
-            parameters.Add("MembershipTotal", totalMembership.ToString());
-            parameters.Add("Total", total.ToString());
-            var localReport  = new LocalReport(path);
-            localReport.AddDataSource("dsFinancialSummary", dt);
-            //localReport.AddDataSource("dsUsers",context)
-            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
-            return File(result.MainStream, "application/pdf");
+            var path = $"{webHostEnvironment.WebRootPath}\\Reports\\frxFinancialSummary.frx";
+            WebReport webreport = new WebReport();
+            webreport.Report.Load(path);
+            webreport.Report.RegisterData(dt, "Financial Summary");
+            webreport.Report.GetDataSource("Financial Summary").Enabled = true;
+            if (webreport.Report.Prepare())
+            {
+                MemoryStream stream = new MemoryStream();
+                webreport.Report.Export(new PDFSimpleExport(), stream);
+                stream.Position = 0;
+                return File(stream, "application/pdf");
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
