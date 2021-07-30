@@ -6,7 +6,7 @@
 }
 
 <div class="container">
-    <div class="card-header">
+    <div class="card-header-pills">
         <h1> Welcome</h1>
     </div>
     <br />
@@ -18,7 +18,17 @@
             <h1 class="card-header fas fa-laptop-code"></h1>
             <div class="card-body">
                 <h3 class="card-title">Website</h3>
-                <p class="card-text">View the homepage of the website</p>
+                <div class="card-text">
+                    <p>
+                        Go to the homepage of the website
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>About Us</li>
+                        <li>Events</li>
+                        <li>News</li>
+                        <li>Donate</li>
+                    </ul>
+                </div>
             </div>
         </a>
         <a class="card w-25 btn btn-outline-dark" style="margin:0.5rem;" asp-area="Admin" asp-controller="Event" asp-action="Index">
@@ -26,7 +36,15 @@
             <h1 class="card-header far fa-calendar-alt"></h1>
             <div class="card-body">
                 <h3 class="card-title">Events</h3>
-                <p class="card-text">View the list of events on the calendar</p>
+                <div class="card-text">
+                    <p>
+                        Go view the list of events on the calendar that the committee planned for the organization.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>Add or Edit Events</li>
+                        <li>Delete Events</li>
+                    </ul>
+                </div>
             </div>
         </a>
         <a class="card w-25 btn btn-outline-dark" style="margin:0.5rem;" asp-area="Admin" asp-controller="News" asp-action="Index">
@@ -34,7 +52,15 @@
             <h1 class="card-header far fa-newspaper"></h1>
             <div class="card-body">
                 <h3 class="card-title">News</h3>
-                <p class="card-text">View news articles about the organization</p>
+                <div class="card-text">
+                    <p>
+                        Go view the list news articles that are related to the organization.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>Add or Edit News</li>
+                        <li>Delete News</li>
+                    </ul>
+                </div>
             </div>
         </a>
         <a class="card w-25 btn btn-outline-dark" style="margin:0.5rem;" asp-area="Admin" asp-controller="Donor" asp-action="Index">
@@ -42,8 +68,16 @@
 
             <h1 class="card-header fas fa-user"></h1>
             <div class="card-body">
-                <h3 class="card-title">Users</h3>
-                <p class="card-text">Go to...</p>
+                <h3 class="card-title">Donors</h3>
+                <div class="card-text">
+                    <p>
+                        Go view the list of all the donors who donated to the organization.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>Add or Edit Donor Users</li>
+                        <li>Delete Donor Users</li>
+                    </ul>
+                </div>
             </div>
         </a>
         <a class="card w-25 btn btn-outline-dark" style="margin:0.5rem;" asp-area="Admin" asp-controller="Employee" asp-action="Index">
@@ -52,7 +86,32 @@
             <h1 class="card-header fas fa-id-card-alt"></h1>
             <div class="card-body">
                 <h3 class="card-title">Employees</h3>
-                <p class="card-text">Go to...</p>
+                <div class="card-text">
+                    <p>
+                        Go view the list of all the employees who are part of the organization.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>Add or Edit Employee</li>
+                        <li>Delete Employee</li>
+                    </ul>
+                </div>
+            </div>
+        </a>
+        <a class="card w-25 btn btn-outline-dark" style="margin:0.5rem;" asp-area="Admin" asp-controller="Member" asp-action="Index">
+            <!--MEMBERS ICON AND LINK TO THE LIST OF COMMITTEES TO DELETE, ADD, EDIT OR UPDATE-->
+
+            <h1 class="card-header fas fa-handshake"></h1>
+            <div class="card-body">
+                <h3 class="card-title">Members</h3>
+                <div class="card-text">
+                    <p>
+                        Go view the list of donors who are became members of the organization.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>Add or Edit Members</li>
+                        <li>Delete or Remove Members</li>
+                    </ul>
+                </div>
             </div>
         </a>
         <a class="card w-25 btn btn-outline-dark" style="margin:0.5rem;" asp-area="Admin" asp-controller="Committee" asp-action="Index">
@@ -61,35 +120,44 @@
             <h1 class="card-header fas fa-users"></h1>
             <div class="card-body">
                 <h3 class="card-title">Board Committees</h3>
-                <p class="card-text">Go to...</p>
+                <div class="card-text">
+                    <p>
+                        Go view the list of the different board committees and the employees who are part of each committee.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>Add or Edit Board Committee</li>
+                        <li>Delete Board Committee</li>
+                    </ul>
+                </div>
             </div>
         </a>
         <!--COMMENT OUT SINCE IT IS UNNECESSARY FOR THE TIME BEING-->
         <!--<a class="card w-25 btn btn-outline-dark" style="margin:0.5rem;" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard3">-->
-            <!--EDIT WEB PAGES ICON AND LINK TO BE ABLE TO EDIT THE WEB PAGES AND ADD INFORMATION TO THE WEB-->
-            <!--<h1 class="card-header fas fa-edit"></h1>
-            <div class="card-body">
-                <h3 class="card-title">Edit Web Pages</h3>
-                <p class="card-text">Go to...</p>
-            </div>
-        </a>-->
+        <!--EDIT WEB PAGES ICON AND LINK TO BE ABLE TO EDIT THE WEB PAGES AND ADD INFORMATION TO THE WEB-->
+        <!--<h1 class="card-header fas fa-edit"></h1>
+        <div class="card-body">
+            <h3 class="card-title">Edit Web Pages</h3>
+            <p class="card-text">Go to...</p>
+        </div>
+    </a>-->
         <a class="card w-25 btn btn-outline-dark" style="margin:0.5rem;" asp-area="Admin" asp-controller="Reports" asp-action="Index">
             <!--REPORTS ICON AND LINK TO THE SECTION TO CREATE REPORTS-->
 
             <h1 class="card-header far fa-flag"></h1>
             <div class="card-body">
                 <h3 class="card-title">Reports</h3>
-                <p class="card-text">Create and download reports</p>
+                <p class="card-text">Go to the section for the administrator to download different reports.</p>
             </div>
         </a>
-        <a class="card w-25 btn btn-outline-dark" style="margin:0.5rem;" asp-area="Admin" asp-controller="Home" asp-action="Index">
-            <!--HELP DESK ICON AND LINK TO HELP SECTION WITH HELP DOCUMENTS AND CONTACT LINK TO EMAIL THE HELP-->
-            <h1 class="card-header fas fa-info-circle"></h1>
-            <div class="card-body">
-                <h3 class="card-title">Help Desk</h3>
-                <p class="card-text">Go to...</p>
-            </div>
-        </a>
+        <!--COMMENT OUT SINCE IT IS UNNECESSARY FOR THE TIME BEING-->
+        <!--<a class="card w-25 btn btn-outline-dark" style="margin:0.5rem;" asp-area="Admin" asp-controller="Home" asp-action="Index">-->
+        <!--HELP DESK ICON AND LINK TO HELP SECTION WITH HELP DOCUMENTS AND CONTACT LINK TO EMAIL THE HELP-->
+        <!--<h1 class="card-header fas fa-info-circle"></h1>
+        <div class="card-body">
+            <h3 class="card-title">Help Desk</h3>
+            <p class="card-text"></p>
+        </div>
+    </a>-->
 
     </div>
 </div>
