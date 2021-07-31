@@ -79,6 +79,16 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 return View(model);
             }
         }
+        public IActionResult Details(int id)
+        {
+            var Event = context.Events.Find(id);
+            if (Event == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(Event);
+        }
+
         [HttpPost]
         public IActionResult Delete(int id)
         {

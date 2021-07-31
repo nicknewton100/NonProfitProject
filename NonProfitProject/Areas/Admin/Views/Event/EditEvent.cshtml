@@ -9,10 +9,10 @@
     <script type="text/javascript" src="~/js/UserValidation.js"></script>
 </head>
 <div class="container">
-    <div class="row justify-content-center" >
-        <div class="card w-75">
+    <div class="card-header-pills"><h1 class="far fa-calendar-alt"> @ViewData["Title"]</h1></div>
+    <div class="row" >
+        <div class="card w-auto">
             <div class="card-body">
-                <div class="card-header-pills"><h1>@ViewData["Title"]</h1></div>
                 <div asp-validation-summary="All" class="text-danger" style="font-size:small;"></div>
                 <form method="post" asp-action="EditEvent">
                     <div class="row form-group justify-content-start">
