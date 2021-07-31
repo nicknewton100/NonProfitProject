@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NonProfitProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,18 @@ namespace NonProfitProject.Areas.Users.Controllers
     [Area("Users")]
     public class EventController : Controller
     {
+        private NonProfitContext context;
+        public EventController(NonProfitContext context)
+        {
+            this.context = context;
+        }
+        //Shows Events
+        [Route("~/[area]/[controller]s")]
         public IActionResult Index()
         {
-            return View();
+            //queries event information 
+            var events = context.Events.OrderBy(e => e.EventStartDate).ToList();
+            return View(events);
         }
     }
 }
