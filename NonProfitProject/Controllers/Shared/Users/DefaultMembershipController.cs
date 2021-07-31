@@ -28,8 +28,13 @@ namespace NonProfitProject.Controllers.Shared.Users
             {
                 return RedirectToAction("SignUp");
             }
-            var userMembership = context.MembershipDues.Include(md => md.MembershipType).Where(md => md.UserID == currentUser.Id).OrderBy(md => md.MemDuesID).Last();
-            return View(userMembership);
+            var userMembership = context.MembershipDues.Include(md => md.MembershipType).Where(md => md.UserID == currentUser.Id).OrderBy(md => md.MemDuesID).ToList();
+            if(userMembership.Count() != 0)
+            {
+                return View(userMembership.Last());
+            }
+            return View();
+            
         }
         [HttpGet]
         public IActionResult SignUp()
@@ -39,6 +44,10 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpPost]
         public async Task<IActionResult> Signup(string name)
         {
+            if (!User.IsInRole("Member"))
+            {
+                return RedirectToAction("Index");
+            }
             var memType = context.MembershipTypes.Where(mt => mt.Name == name).FirstOrDefault();
             if(memType == null)
             {
@@ -72,6 +81,10 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpGet]
         public IActionResult Payment()
         {
+            if (!User.IsInRole("Member"))
+            {
+                return RedirectToAction("Index");
+            }
             if (HttpContext.Session.GetObject<SignupMembershipViewModel>("SignupMembershipModel") == null)
             {
                 return RedirectToAction("Index");
@@ -83,6 +96,10 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpPost]
         public IActionResult Payment(DonationPaymentViewModel model)
         {
+            if (!User.IsInRole("Member"))
+            {
+                return RedirectToAction("Index");
+            }
             var sessionModel = HttpContext.Session.GetObject<SignupMembershipViewModel>("SignupMembershipModel");
             if (sessionModel == null)
             {
@@ -112,6 +129,10 @@ namespace NonProfitProject.Controllers.Shared.Users
 
         public IActionResult CheckOut()
         {
+            if (!User.IsInRole("Member"))
+            {
+                return RedirectToAction("Index");
+            }
             var sessionModel = HttpContext.Session.GetObject<SignupMembershipViewModel>("SignupMembershipModel");
             if (sessionModel == null)
             {
@@ -124,6 +145,10 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpPost]
         public async Task<IActionResult> PlaceOrder()
         {
+            if (!User.IsInRole("Member"))
+            {
+                return RedirectToAction("Index");
+            }
             var sessionModel = HttpContext.Session.GetObject<SignupMembershipViewModel>("SignupMembershipModel");
             if (sessionModel == null)
             {

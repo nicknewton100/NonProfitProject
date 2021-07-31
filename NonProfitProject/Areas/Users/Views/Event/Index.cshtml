@@ -6,21 +6,24 @@
 }
 
 <div class="container" style="margin-left: 3em;">
+    <h1 class="fa fa-calendar" aria-hidden="true">  Events and Meetings</h1>
+    <br />
+    <br />
     @foreach(var events in Model)
     {
         @if(events.EventAddr2 != "")
         {
             events.EventAddr2 = " " + events.EventAddr2;
         }
-        <div class="card w-50">
+        <div class="card w-75">
             <div class="card-header">
-                <h2>@events.EventName</h2>
+                <h3>@events.EventName</h3>
             </div>
             <div class="row">
                 
             </div>
             <div class="card-body" style="font-size:medium;">
-                <h3 style="margin-bottom:10px;">Details</h3>
+                <h4 style="margin-bottom:10px;">Details</h4>
                 @if (events.EventStartDate.Date == events.EventEndDate.Date)
                 {
                     <p style=""><i class="fas fa-clock" style="margin-right: 1em;"></i>@events.EventStartDate.ToLocalTime().ToString("D") &nbsp&nbsp  @events.EventStartDate.ToLocalTime().ToString("t") - @events.EventEndDate.ToLocalTime().ToString("t")</p>
