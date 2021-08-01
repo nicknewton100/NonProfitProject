@@ -68,7 +68,7 @@ namespace NonProfitProject.Controllers
                         }
                         else if (await userManager.IsInRoleAsync(currentUser, "Employee"))
                         {
-                            CommitteeName.Get(context, User.FindFirstValue(ClaimTypes.NameIdentifier), HttpContext);
+                            CommitteeStatus.GetName(context, User.FindFirstValue(ClaimTypes.NameIdentifier));
                             return RedirectToAction("Index", "Home", new { area = "Employee" });
                         }
                         else

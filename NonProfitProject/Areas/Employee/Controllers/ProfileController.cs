@@ -28,7 +28,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
-            HttpContext.Session.SetString("CommitteeName", CommitteeName.Get(this.context, User.FindFirstValue(ClaimTypes.NameIdentifier), HttpContext));
+            HttpContext.Session.SetString("CommitteeName", CommitteeStatus.GetName(this.context, User.FindFirstValue(ClaimTypes.NameIdentifier)));
         }
     }
 }

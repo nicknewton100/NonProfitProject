@@ -40,12 +40,15 @@
                                     <div class="row">
                                         <div class="col-auto">
                                             <div class="row">
-                                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("EmployeeDetails","Committee",new {id = empl.EmpID, name = sessionModel.Committee.CommitteeName })'">Details</button>
+                                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("EmployeeDetails","MyCommittee",new {id = empl.EmpID, name = sessionModel.Committee.CommitteeName })'">Details</button>
                                                 <form method="post" asp-action="AddMembers" asp-route-id="@empl.EmpID">
                                                     <button type="button" class="btn btn-dark " onclick="SetPosition(this)">Add to Committee</button>
-                                                    <input asp-for="CommitteePosition" class="form-control w-50" hidden />
+                                                    <input id="CommitteePosition-@empl.EmpID" asp-for="CommitteePosition" class="form-control w-50" hidden />
                                                 </form>
                                             </div>
+                                        </div>
+                                        <!--POP UP MODAL IS FIXED-->
+                                        
                                     </div>
                                 </td>
                             </tr>
@@ -57,12 +60,12 @@
     </div>
     <div class="container" style="margin:1rem 0;">
         <div class="d-flex flex-row-reverse">
-            <a class="btn btn-danger" asp-controller="Committee" asp-action="Details" asp-route-name="@sessionModel.Committee.CommitteeName">Cancel</a>
+            <a class="btn btn-danger" asp-controller="MyCommittee" asp-action="Index" asp-route-name="@sessionModel.Committee.CommitteeName">Cancel</a>
         </div>
     </div>
 </div>
 <script>
-    function SetPosition() {
+    function SetPosition(e) {
         Swal.fire({
             title: 'Set Committee Position',
             input: 'text',

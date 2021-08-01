@@ -3,15 +3,23 @@
     ViewData["Title"] = ViewBag.Action + "Committee";
     ViewData["Title2"] = "Admin";
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+    @using Microsoft.AspNetCore.Http;
+    var position = Context.Session.GetString("CommitteePosition");
+    bool canEdit = false;
+    if(position == "President" || position == "Vice President") {
+        canEdit = true;
+    }
 }
 
 <div class="container">
     <h1>@Model.CommitteeName</h1>
     <h6>Founded on @Model.CommitteeCreationDate.ToShortDateString()</h6>
     <h6>@Model.CommitteeDescription</h6>
-    <div style="margin: 1rem 0;">
-        <a class="btn btn-outline-dark" asp-action="AddMembers" asp-route-name="@Model.CommitteeName">Add Members</a>
-    </div>
+    @if(canEdit) { 
+        <div style="margin: 1rem 0;">
+            <a class="btn btn-outline-dark" asp-action="AddMembers" asp-route-name="@Model.CommitteeName">Add Members</a>
+        </div>
+    }
     <div class="card" style="font-size:medium;">
         <table class="table">
             <thead class="thead-dark">
@@ -21,7 +29,8 @@
                     <th scope="col">Last</th>
                     <th scope="col">Email Address</th>
                     <th scope="col" class="w-25">Phone</th>
-                    <th scope="col"></th>
+                    <th scope="col"></th> 
+                    
                 </tr>
             </thead>
             <tbody>
@@ -31,10 +40,13 @@
                     {
                         <tr>
                             <td>
-                                <form method="post" asp-action="EditPosition" asp-route-id="@President.EmpID" asp-route-name="@President.committee.CommitteeName" asp-route-position="@President.CommitteePosition">
+                                
                                     @President.CommitteePosition
+                                @if (position == "President") { 
+                                    <form method="post" asp-action="EditPosition" asp-route-id="@President.EmpID" asp-route-name="@President.committee.CommitteeName" asp-route-position="@President.CommitteePosition">
                                     <button type="button" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;" onclick="ChangePosition(this)"></button>
                                 </form>
+                                }
                             </td>
                             <td>@President.employee.User.UserFirstName</td>
                             <td>@President.employee.User.UserLastName</td>
@@ -43,9 +55,11 @@
                             <td>
                                 <div class="row">
                                     <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","MyCommittee",new {id = President.EmpID, name = Model.CommitteeName})'">Details</button>
-                                    <form asp-action="RemoveMember" method="post" asp-route-id="@President.employee.EmpID">
+                                    @if (canEdit) { 
+                                        <form asp-action="RemoveMember" method="post" asp-route-id="@President.employee.EmpID">
                                         <button type="button" class="btn btn-dark" onclick="RemoveMember(this)">Remove From Committee</button>
                                     </form>
+                                    }
                                 </div>
                             </td>
                         </tr>
@@ -56,11 +70,13 @@
                     {
                         <tr>
                             <td>
-                                <form method="post" asp-action="EditPosition" asp-route-id="@VicePresident.EmpID" asp-route-name="@VicePresident.committee.CommitteeName" asp-route-position="@VicePresident.CommitteePosition">
-                                    @VicePresident.CommitteePosition
-                                    <button type="button" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;" onclick="ChangePosition(this)"></button>
-                                </form>
-
+                                @VicePresident.CommitteePosition
+                                @if (canEdit)
+                                {
+                                    <form method="post" asp-action="EditPosition" asp-route-id="@VicePresident.EmpID" asp-route-name="@VicePresident.committee.CommitteeName" asp-route-position="@VicePresident.CommitteePosition">
+                                        <button type="button" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;" onclick="ChangePosition(this)"></button>
+                                    </form>
+                                }
                             </td>
                             <td>@VicePresident.employee.User.UserFirstName</td>
                             <td>@VicePresident.employee.User.UserLastName</td>
@@ -68,10 +84,13 @@
                             <td>@VicePresident.employee.User.PhoneNumber</td>
                             <td>
                                 <div class="row">
-                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","Committee",new {id = VicePresident.EmpID, name = Model.CommitteeName})'">Details</button>
-                                    <form asp-action="RemoveMember" method="post" asp-route-id="@VicePresident.employee.EmpID">
-                                        <button type="submit" class="btn btn-dark" onclick="RemoveMember(this)">Remove From Committee</button>
-                                    </form>
+                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","MyCommittee",new {id = VicePresident.EmpID, name = Model.CommitteeName})'">Details</button>
+                                    @if (canEdit)
+                                    {
+                                        <form asp-action="RemoveMember" method="post" asp-route-id="@VicePresident.employee.EmpID">
+                                            <button type="submit" class="btn btn-dark" onclick="RemoveMember(this)">Remove From Committee</button>
+                                        </form>
+                                    }
                                 </div>
                             </td>
                         </tr>
@@ -82,10 +101,13 @@
                 {
                     <tr>
                         <td>
-                            <form method="post" asp-action="EditPosition" asp-route-id="@member.EmpID" asp-route-name="@member.committee.CommitteeName" asp-route-position="@member.CommitteePosition">
-                                @member.CommitteePosition
-                                <button type="button" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;" onclick="ChangePosition(this)"></button>
-                            </form>
+                            @member.CommitteePosition
+                            @if (canEdit)
+                            {
+                                <form method="post" asp-action="EditPosition" asp-route-id="@member.EmpID" asp-route-name="@member.committee.CommitteeName" asp-route-position="@member.CommitteePosition">
+                                    <button type="button" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;" onclick="ChangePosition(this)"></button>
+                                </form>
+                            }
                         </td>
                         <td>@member.employee.User.UserFirstName</td>
                         <td>@member.employee.User.UserLastName</td>
@@ -93,10 +115,13 @@
                         <td>@member.employee.User.PhoneNumber</td>
                         <td>
                             <div class="row">
-                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","Committee",new {id = member.EmpID, name = Model.CommitteeName})'">Details</button>
-                                <form asp-action="RemoveMember" method="post" asp-route-id="@member.employee.EmpID">
-                                    <button type="button" class="btn btn-dark" onclick="RemoveMember(this)">Remove From Committee</button>
-                                </form>
+                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","MyCommittee",new {id = member.EmpID, name = Model.CommitteeName})'">Details</button>
+                                @if (canEdit)
+                                {
+                                    <form asp-action="RemoveMember" method="post" asp-route-id="@member.employee.EmpID">
+                                        <button type="button" class="btn btn-dark" onclick="RemoveMember(this)">Remove From Committee</button>
+                                    </form>
+                                }
                             </div>
                         </td>
                     </tr>
@@ -105,11 +130,6 @@
         </table>    
     </div>
     <h5 class="text-primary">@TempData["CommitteeMemberChanges"]?.ToString()</h5>
-    <div class="container" style="margin:1rem 0;">
-        <div class="d-flex flex-row-reverse">
-            <a class="btn btn-dark" asp-controller="Committee" asp-action="Index">Back</a>
-        </div>
-    </div>
 </div>
 <script type="text/javascript">
     function setAction(e, id) {
