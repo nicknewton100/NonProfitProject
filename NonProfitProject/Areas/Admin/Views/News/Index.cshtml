@@ -20,8 +20,8 @@
                         <div class="card-title">
                           <p style="font-size:18px;">@news.NewsHeader</p>
                         </div>
-                        <p style="margin: 0px; color: darkgray;">Published: @news.NewsPublishDate.ToString("F")</p>
-                        <p style="margin:0px;color:darkgray;">Last updated: @news.NewsLastUpdated.ToString("F")</p>
+                        <p style="margin: 0px; color: darkgray;">Published: @news.NewsPublishDate.ToString("f")</p>
+                        <p style="margin:0px;color:darkgray;">Last updated: @news.NewsLastUpdated.ToString("f")</p>
                         <p style="margin: 0px; color: darkgray; ">Written By: @news.CreatedBy</p>
                         <br />
                         <div class="card-text" id="newsBody">@Html.Raw(news.NewsBody)</div>

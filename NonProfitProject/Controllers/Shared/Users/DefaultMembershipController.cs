@@ -44,7 +44,7 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpPost]
         public async Task<IActionResult> Signup(string name)
         {
-            if (!User.IsInRole("Member"))
+            if (User.IsInRole("Member"))
             {
                 return RedirectToAction("Index");
             }
@@ -81,7 +81,7 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpGet]
         public IActionResult Payment()
         {
-            if (!User.IsInRole("Member"))
+            if (User.IsInRole("Member"))
             {
                 return RedirectToAction("Index");
             }
@@ -96,7 +96,7 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpPost]
         public IActionResult Payment(DonationPaymentViewModel model)
         {
-            if (!User.IsInRole("Member"))
+            if (User.IsInRole("Member"))
             {
                 return RedirectToAction("Index");
             }
@@ -129,7 +129,7 @@ namespace NonProfitProject.Controllers.Shared.Users
 
         public IActionResult CheckOut()
         {
-            if (!User.IsInRole("Member"))
+            if (User.IsInRole("Member"))
             {
                 return RedirectToAction("Index");
             }
@@ -145,7 +145,7 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpPost]
         public async Task<IActionResult> PlaceOrder()
         {
-            if (!User.IsInRole("Member"))
+            if (User.IsInRole("Member"))
             {
                 return RedirectToAction("Index");
             }
