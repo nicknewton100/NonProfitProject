@@ -6,49 +6,52 @@
 
 <div class="container">
     <div class="card-header-pills"><h1 class="far fa-calendar-alt"> Events & Meetings</h1></div>
-    <div class="container" style="font-size:small;">
-        <div>
-            <a button class="btn btn-outline-dark" asp-area="Admin" asp-controller="Event" asp-action="AddEvent">Add Event</a>
+    <br />
+    <br />
+    @foreach (var events in Model)
+    {
+        @if (events.EventAddr2 != "")
+        {
+            events.EventAddr2 = " " + events.EventAddr2;
+        }
+        <div class="card w-75">
+            <div class="card-header">
+                <h3>@events.EventName</h3>
+            </div>
+            <div class="row">
+
+            </div>
+            <div class="card-body" style="font-size:medium;">
+                <h4 style="margin-bottom:10px;">Details</h4>
+                @if (events.EventStartDate.Date == events.EventEndDate.Date)
+                {
+                    <p style=""><i class="fas fa-clock" style="margin-right: 1em;"></i>@events.EventStartDate.ToLocalTime().ToString("D") &nbsp&nbsp  @events.EventStartDate.ToLocalTime().ToString("t") - @events.EventEndDate.ToLocalTime().ToString("t")</p>
+                }
+                else
+                {
+                    <p><i class="fas fa-clock" style="margin-right:1em;"></i>@events.EventStartDate.ToLocalTime().ToString("f") - @events.EventEndDate.ToLocalTime().ToString("f")</p>
+                }
+                <p><i class="fas fa-map-marker" style="margin-right:1em;"></i>@events.EventAddr1@events.EventAddr2, @events.EventCity, @events.EventState @events.EventPostalCode</p>
+                <br />
+                <p>@events.EventDescription</p>
+            </div>
+            <div class="card-footer" style="font-size:small;">
+                <div class="row justify-content-between">
+                    <div class="col-auto">
+                        <a class="card-link text-primary" asp-action="EditEvent" asp-route-id="@events.EventID">Edit</a>
+                    </div>
+                    <div class="col-auto">
+                        <form method="post" asp-action="Delete" asp-route-id="@events.EventID">
+                            <button type="button" class="card-link text-danger" style="background:none !important;border:none;" onclick="DeleteEvent(this)">Delete</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
         </div>
         <br />
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col" hidden>#</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">End Date</th>
-                    <th scope="col">Event Title</th>
-                    <th scope="col">Event Information</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Event events in Model)
-                {
-                <tr>
-                    <th scope="row" hidden>@events.EventID </th>
-                    <th>@events.EventStartDate.ToString("d") <br /> @events.EventStartDate.ToShortTimeString()</th>
-                    <th>@events.EventEndDate.ToString("d") <br /> @events.EventEndDate.ToShortTimeString()</th>
-                    <th>@events.EventName</th>
-                    <th>@events.EventDescription</th>
-                    <th>
-                        <form method="get" asp-action="Details" asp-route-id="@events.EventID">
-                            <button type="submit" class="btn btn-outline-dark">Details</button>
-                        </form>
-                    </th>
-                    <th>
-                        <form method="post" asp-action="delete" asp-route-id="@events.EventID">
-                            <button type="button" class="btn btn-dark" onclick="DeleteEvent(this)">Delete</button>
-                        </form>
-                    </th>
-                </tr>
-                }
-            </tbody>
-        </table>
         <br />
-        <h5 class="text-primary">@TempData["EventChanges"]?.ToString()</h5>
-    </div>
+    }
 </div>
 <script type="text/javascript">
     function DeleteEvent(e) {
