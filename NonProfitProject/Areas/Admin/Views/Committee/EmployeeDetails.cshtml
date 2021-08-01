@@ -257,8 +257,8 @@
                         }
                         else
                         {
-                            <form method="post" asp-action="AddMembers" asp-route-id="@Model.EmpID">
-                                <button type="submit" class="btn-lg btn-outline-dark mr-1">Add to @sessionModel.Committee.CommitteeName</button>
+                            <form method="post" asp-action="AddMembers" asp-route-name="@sessionModel.Committee.CommitteeName" asp-route-id="@Model.EmpID" asp-route-position="@Model.Position">
+                                <button type="button" class="btn-lg btn-outline-dark mr-1" onclick="SetPosition(this)">Add to @sessionModel.Committee.CommitteeName</button>
                             </form>
                             <br />
                             <button type="button" class="btn-lg btn-dark" onclick="location.href = '@Url.Action("AddMembers","Committee",new {name = sessionModel.Committee.CommitteeName})'">Back</button>
@@ -269,6 +269,31 @@
         </div>
     </div>
 </div>
+<script>
+    function SetPosition(e) {
+        Swal.fire({
+            title: 'Set Committee Position',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showDenyButton: true,
+            confirmButtonText: `Add to @sessionModel.Committee.CommitteeName`,
+            denyButtonText: `Cancel`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                let input = result.value;
+                let _form = e.form;
+                let attr = _form.getAttribute("action");
+                let split = attr.split("/");
+                let substring = attr.substring(0, attr.length - split[split.length - 2].length - 1);
+                _form.setAttribute("action", substring + input.replace(' ', '%20') + '/');
+                e.form.submit();
+            }
+        })
+    }
+</script>
 
 
 

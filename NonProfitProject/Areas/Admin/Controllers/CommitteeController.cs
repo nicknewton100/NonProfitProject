@@ -107,8 +107,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
 
 
         [HttpPost]
-        [Route("~/[area]/[controller]/{name}/[action]/{id}")]
-        public IActionResult AddMembers(CommitteeMembers model, string id)
+        [Route("~/[area]/[controller]/{name}/[action]/{id}/{position}/")]
+        public IActionResult AddMembers(string id, string position)
         {
             var sessionmodel = HttpContext.Session.GetObject<CommitteeMemberViewModel>("CommitteeMemberModel");
             if (sessionmodel == null)
@@ -122,7 +122,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 {
                     CommitteeID = context.Committees.Where(c => c.CommitteeName == sessionmodel.Committee.CommitteeName).Select(c => c.CommitteesID).FirstOrDefault(),
                     EmpID = id,
-                    CommitteePosition = model.CommitteePosition
+                    CommitteePosition = position
                 };
                 context.CommitteeMembers.Add(committeeMember);
                 context.SaveChanges();

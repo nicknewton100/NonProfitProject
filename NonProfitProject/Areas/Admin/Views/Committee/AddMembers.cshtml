@@ -41,9 +41,8 @@
                                         <div class="col-auto">
                                             <div class="row">
                                                 <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("EmployeeDetails","Committee",new {id = empl.EmpID, name = sessionModel.Committee.CommitteeName })'">Details</button>
-                                                <form method="post" asp-action="AddMembers" asp-route-id="@empl.EmpID">
+                                                <form method="post" asp-action="AddMembers" asp-route-id="@empl.EmpID" asp-route-position="@empl.Position">
                                                     <button type="button" class="btn btn-dark " onclick="SetPosition(this)">Add to Committee</button>
-                                                    <input asp-for="CommitteePosition" class="form-control w-50" hidden />
                                                 </form>
                                             </div>
                                     </div>
@@ -62,7 +61,7 @@
     </div>
 </div>
 <script>
-    function SetPosition() {
+    function SetPosition(e) {
         Swal.fire({
             title: 'Set Committee Position',
             input: 'text',
@@ -75,8 +74,12 @@
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                let child = e.form.children[1];
-                child.value = result.value;
+                let input = result.value;
+                let _form = e.form;
+                let attr = _form.getAttribute("action");
+                let split = attr.split("/");
+                let substring = attr.substring(0, attr.length - split[split.length - 2].length - 1);
+                _form.setAttribute("action", substring + input.replace(' ', '%20') + '/');
                 e.form.submit();
             }
         })

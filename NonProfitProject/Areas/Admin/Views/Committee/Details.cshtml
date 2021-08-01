@@ -42,7 +42,7 @@
                             <td>@President.employee.User.PhoneNumber</td>
                             <td>
                                 <div class="row">
-                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","MyCommittee",new {id = President.EmpID, name = Model.CommitteeName})'">Details</button>
+                                    <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("MemberDetails","Committee",new {id = President.EmpID, name = Model.CommitteeName})'">Details</button>
                                     <form asp-action="RemoveMember" method="post" asp-route-id="@President.employee.EmpID">
                                         <button type="button" class="btn btn-dark" onclick="RemoveMember(this)">Remove From Committee</button>
                                     </form>
