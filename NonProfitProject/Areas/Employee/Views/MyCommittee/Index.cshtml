@@ -39,14 +39,17 @@
                     if (President != null)
                     {
                         <tr>
-                            <td>
-                                
-                                    @President.CommitteePosition
+                            <td>      
                                 @if (position == "President") { 
                                     <form method="post" asp-action="EditPosition" asp-route-id="@President.EmpID" asp-route-name="@President.committee.CommitteeName" asp-route-position="@President.CommitteePosition">
-                                    <button type="button" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;" onclick="ChangePosition(this)"></button>
-                                </form>
+                                        @President.CommitteePosition
+                                        <button type="button" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;" onclick="ChangePosition(this)"></button>
+                                    </form>
                                 }
+                                else
+                                {
+                                    @President.CommitteePosition
+                                }                                    
                             </td>
                             <td>@President.employee.User.UserFirstName</td>
                             <td>@President.employee.User.UserLastName</td>
@@ -70,12 +73,16 @@
                     {
                         <tr>
                             <td>
-                                @VicePresident.CommitteePosition
                                 @if (canEdit)
                                 {
                                     <form method="post" asp-action="EditPosition" asp-route-id="@VicePresident.EmpID" asp-route-name="@VicePresident.committee.CommitteeName" asp-route-position="@VicePresident.CommitteePosition">
+                                        @VicePresident.CommitteePosition
                                         <button type="button" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;" onclick="ChangePosition(this)"></button>
                                     </form>
+                                }
+                                else
+                                {
+                                    @VicePresident.CommitteePosition
                                 }
                             </td>
                             <td>@VicePresident.employee.User.UserFirstName</td>
@@ -101,12 +108,16 @@
                 {
                     <tr>
                         <td>
-                            @member.CommitteePosition
                             @if (canEdit)
                             {
                                 <form method="post" asp-action="EditPosition" asp-route-id="@member.EmpID" asp-route-name="@member.committee.CommitteeName" asp-route-position="@member.CommitteePosition">
+                                    @member.CommitteePosition
                                     <button type="button" class="fas fa-edit" style="margin-bottom:0px; background-color:transparent; outline:none; border: none;" onclick="ChangePosition(this)"></button>
                                 </form>
+                            }
+                            else
+                            {
+                                @member.CommitteePosition
                             }
                         </td>
                         <td>@member.employee.User.UserFirstName</td>

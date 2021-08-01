@@ -55,6 +55,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Areas\Employee\Views\Event\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="wwwroot\img\myPupper.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
