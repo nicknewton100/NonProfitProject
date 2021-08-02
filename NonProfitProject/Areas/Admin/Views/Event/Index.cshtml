@@ -84,16 +84,41 @@
             showDenyButton: true,
             confirmButtonText: `Send Email`,
             denyButtonText: `Cancel`,
+            preConfirm: (email) => {
+                var regex = @Html.Raw("/^([a-zA-Z0-9_.+-])+\\@(([a-zA-Z0-9-])+\\.)+([a-zA-Z0-9]{2,4})+$/");
+                if (!regex.test(email)) {
+                    Swal.showValidationMessage(
+                        'Email is Invalid'
+                    )
+                }
+            },
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                let input = result.value;
-                let _form = e.form;
-                let attr = _form.getAttribute("action");
-                let split = attr.split("/");
-                let substring = attr.substring(0, attr.length - split[split.length - 2].length - 1);
-                _form.setAttribute("action", substring + input.replace(' ', '%20') + '/');
-                e.form.submit();
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Email is Sending'
+                })
+                setTimeout(function () {
+                    let input = result.value;
+                    let _form = e.form;
+                    let attr = _form.getAttribute("action");
+                    let split = attr.split("/");
+                    let substring = attr.substring(0, attr.length - split[split.length - 2].length - 1);
+                    _form.setAttribute("action", substring + input.replace(' ', '%20') + '/');
+                    e.form.submit();
+                }, 3000);
             }
         })
     }
