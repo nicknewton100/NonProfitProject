@@ -25,5 +25,16 @@ namespace NonProfitProject.Areas.Users.Controllers
             var events = context.Events.OrderBy(e => e.EventStartDate).ToList();
             return View(events);
         }
+        [Route("~/[area]/[controller]s/{id}/{email}")]
+        [HttpPost]
+        public IActionResult Share(int id, string email)
+        {
+            var evnt = context.Events.Find(id);
+            if(evnt == null)
+            {
+                
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
