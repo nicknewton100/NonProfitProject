@@ -12,6 +12,12 @@ let calendar = new FullCalendar.Calendar(calendarEl, {
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
+    eventMouseEnter: function () {
+        document.body.style.cursor = "Pointer";
+    },
+    eventMouseLeave: function () {
+        document.body.style.cursor = "Default";
+    },
     eventClick: function (info) {
         var dateString;
         console.log(info.event.extendedProps.eventid)
