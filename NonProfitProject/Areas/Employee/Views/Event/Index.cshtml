@@ -28,7 +28,12 @@
         }
         <div class="card w-75">
             <div class="card-header">
-                <h3>@events.EventName</h3>
+                <div class="row justify-content-between">
+                    <h3 style="margin-left: 10px;">@events.EventName</h3>
+                    <form asp-action="Share" asp-route-id="@events.EventID" asp-route-email="email">
+                        <button type="button" class="fas fa-envelope" style="margin-right: 10px;padding:0; font-size: larger; background-color: transparent; outline: none; border: none;" onclick="Share(this)"></button>
+                    </form>
+                </div>
             </div>
             <div class="row">
 
@@ -77,6 +82,29 @@
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
+                e.form.submit();
+            }
+        })
+    }
+    function Share(e) {
+        Swal.fire({
+            title: 'Share',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showDenyButton: true,
+            confirmButtonText: `Send Email`,
+            denyButtonText: `Cancel`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                let input = result.value;
+                let _form = e.form;
+                let attr = _form.getAttribute("action");
+                let split = attr.split("/");
+                let substring = attr.substring(0, attr.length - split[split.length - 2].length - 1);
+                _form.setAttribute("action", substring + input.replace(' ', '%20') + '/');
                 e.form.submit();
             }
         })

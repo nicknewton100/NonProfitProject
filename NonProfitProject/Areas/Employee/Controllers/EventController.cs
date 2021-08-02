@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using NonProfitProject.Areas.Employee.Controllers.DefaultControllers;
 using NonProfitProject.Areas.Employee.Data;
 using System.Security.Claims;
+using NonProfitProject.Code;
+using System.ComponentModel.DataAnnotations;
 
 namespace NonProfitProject.Areas.Employee.Controllers
 {
@@ -123,6 +125,43 @@ namespace NonProfitProject.Areas.Employee.Controllers
                 TempData["EventChanges"] = String.Format("The Event \"{0}\" has been deleted", Event.EventName);
             }
             
+            return RedirectToAction("Index");
+        }
+        [Route("~/[area]/[controller]s/{id}/{email}")]
+        [HttpPost]
+        public IActionResult Share(int id, string email)
+        {
+            var evnt = context.Events.Find(id);
+            if (evnt != null)
+            {
+                var emailTester = new EmailAddressAttribute();
+                if (!emailTester.IsValid(email))
+                {
+                    TempData["Email"] = "Email Address Invalid";
+                    RedirectToAction("Index");
+                }
+                EmailManager emailManager = new EmailManager(context);
+                string datetime;
+                string address;
+                if (evnt.EventStartDate.Date == evnt.EventEndDate.Date)
+                {
+                    datetime = evnt.EventStartDate.ToString("D") + "   " + evnt.EventStartDate.ToString("t") + " - " + evnt.EventEndDate.ToString("t");
+                }
+                else
+                {
+                    datetime = evnt.EventStartDate.ToString("f") + " - " + evnt.EventEndDate.ToString("f");
+                }
+                if (evnt.EventAddr2 == null)
+                {
+                    address = evnt.EventAddr1 + ", " + evnt.EventCity + ", " + evnt.EventState + " " + evnt.EventPostalCode;
+                }
+                else
+                {
+                    address = evnt.EventAddr1 + " " + evnt.EventAddr2 + ", " + evnt.EventCity + ", " + evnt.EventState + " " + evnt.EventPostalCode;
+                }
+                string html = "<h1 style = \"text-align:center;\">" + evnt.EventName + "</h1><div style = \"font-size:medium;\"><h4 style = \"margin-bottom:10px;text-align:left;\"> Details </h4><p style = \"text-align:left;\" >" + datetime + "</p><p style = \"text-align:left;\" >" + address + "</p><br/><p style = \"text-align:left;\">" + evnt.EventDescription + "</p></div>";
+                emailManager.SendEmail(email, emailManager.CreateHTMLMessage(evnt.EventName, html));
+            }
             return RedirectToAction("Index");
         }
     }

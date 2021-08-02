@@ -20,8 +20,8 @@
             <div class="card-header">
                 <div class="row justify-content-between">
                     <h3 style="margin-left: 10px;">@events.EventName</h3>
-                    <form asp-action="Share" asp-route-id="@events.EventID" asp-route-email="">
-                        <button class="fas fa-share" style="margin-right: 10px;padding:0; font-size: larger; background-color: transparent; outline: none; border: none;" onclick="Share(this)"></button>
+                    <form asp-action="Share" asp-route-id="@events.EventID" asp-route-email="email">
+                        <button type="button" class="fas fa-envelope" style="margin-right: 10px;padding:0; font-size: larger; background-color: transparent; outline: none; border: none;" onclick="Share(this)"></button>
                     </form>
                 </div>
             </div>
@@ -50,7 +50,7 @@
 <script>
     function Share(e) {
         Swal.fire({
-            title: 'Share'
+            title: 'Share',
             input: 'text',
             inputAttributes: {
                 autocapitalize: 'off'

@@ -51,6 +51,18 @@ namespace NonProfitProject.Code
                 client.Disconnect(true);
             }
         }
+        public void SendEmail(string email, MimeMessage message)
+        {
+            message.To.Add(new MailboxAddress(email));
+            using (var client = new SmtpClient())
+            {
+                //connect to email server
+                client.Connect(smtpServer, smtpPort, false);
+                client.Authenticate(FromEmail, password);
+                client.Send(message);
+                client.Disconnect(true);
+            }
+        }
         public void SendEmail(List<User> users, MimeMessage message)
         {
             foreach(User u in users)
@@ -66,6 +78,17 @@ namespace NonProfitProject.Code
             message.Body = new TextPart("plain")
             {
                 Text = bodyText
+            };
+            return message;
+        }
+        public MimeMessage CreateHTMLMessage(string subject, string html)
+        {
+            MimeMessage message = new MimeMessage();
+            message.From.Add(new MailboxAddress(FromName, FromEmail));
+            message.Subject = subject;
+            message.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+            {
+                Text = html
             };
             return message;
         }
