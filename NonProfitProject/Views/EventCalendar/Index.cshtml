@@ -15,6 +15,7 @@
 
         </p>
     </div>
+    <!---->
     <!--Houses calendar-->
     <div id="calendar"></div>
     <!--Calendar scripts-->
@@ -25,4 +26,59 @@
         //references for function below: https://stackoverflow.com/questions/16361364/accessing-mvcs-model-property-from-javascript
         window.onload = setCalendar('@Json.Serialize(Model)');
     </script>
+    <form method="post" action="" id="email">
+    </form>
 </div>
+    @*
+        was used to send email
+    <script>
+        function Share(e) {
+            Swal.fire({
+                title: 'Share',
+                input: 'text',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showDenyButton: true,
+                confirmButtonText: `Send Email`,
+                denyButtonText: `Cancel`,
+                preConfirm: (email) => {
+                    var regex = @Html.Raw("/^([a-zA-Z0-9_.+-])+\\@(([a-zA-Z0-9-])+\\.)+([a-zA-Z0-9]{2,4})+$/");
+                    if (!regex.test(email)) {
+                        Swal.showValidationMessage(
+                            'Email is Invalid'
+                        )
+                    }
+                },
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Email is Sending'
+                    })
+                    setTimeout(function () {
+                        let emailForm = document.getElementById("email");
+                        let input = result.value;
+                        let _form = e.form;
+                        let attr = _form.getAttribute("action");
+                        let split = attr.split("/");
+                        let substring = attr.substring(0, attr.length - split[split.length - 2].length - 1);
+                        emailForm.setAttribute("action", substring + input.replace(' ', '%20') + '/');
+                        emailForm.submit();
+                    }, 2900);
+                }
+            })
+        }
+    </script>*@
