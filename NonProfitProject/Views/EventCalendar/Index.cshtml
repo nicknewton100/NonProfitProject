@@ -1,10 +1,11 @@
-﻿@model List<NonProfitProject.Models.ViewModels.CalendarViewModel>
+﻿@model List<Event>
 @{
     ViewData["Title"] = "Calendar";
     ViewData["Title2"] = "Non-Paw-Fit Animal Rescue";
     Layout = "_HomePage";
 
 }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <div class="container" style="margin-top:5.5rem; ">
     <div class="text-center">
         <h1 class="display-4" style="font-weight: bold">
@@ -22,6 +23,6 @@
     <script src="~/js/Calendar.js"></script>
     <script type="text/javascript">
         //references for function below: https://stackoverflow.com/questions/16361364/accessing-mvcs-model-property-from-javascript
-        window.onload(setCalendar('@Html.Raw(Json.Serialize(Model))'))
+        window.onload = setCalendar('@Json.Serialize(Model)');
     </script>
 </div>

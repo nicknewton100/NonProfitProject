@@ -56,9 +56,12 @@
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Employee" asp-controller="MyCommittee" asp-action="Index">My Board Committee</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Employee" asp-controller="News" asp-action="Index">News Articles</a>
-            </li>
+            @if (committeeName == "News Committee")
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="Employee" asp-controller="News" asp-action="Index">News Articles</a>
+                </li>
+            }
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Employee" asp-controller="Event" asp-action="Index">Calendar Events</a>
             </li>
