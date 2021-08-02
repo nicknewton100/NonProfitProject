@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NonProfitProject.Areas.Admin.Models.ViewModels;
 using NonProfitProject.Code;
 using NonProfitProject.Code.Security;
 using NonProfitProject.Models;
@@ -28,8 +29,9 @@ namespace NonProfitProject.Controllers.Shared.Users
             {
                 return RedirectToAction("SignUp");
             }
+            var receipts = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null && r.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).OrderBy(r => r.Date).ToList();
             var userMembership = context.MembershipDues.Include(md => md.MembershipType).Where(md => md.UserID == currentUser.Id).OrderBy(md => md.MemDuesID).ToList();          
-            if(userMembership.Count() != 0)
+            if(receipts.Count() != 0)
             {
                 var memberSince = MembershipDues.GetConsecutiveDate(userMembership);
                 TimeSpan timespan = (TimeSpan)(DateTime.UtcNow - memberSince);
@@ -43,12 +45,49 @@ namespace NonProfitProject.Controllers.Shared.Users
                     timespan.Minutes,
                     timespan.Seconds
                 };
-                return View(userMembership.Last());
-            }
-            
-            return View();
+            }           
+            return View(receipts);
             
         }
+
+        public IActionResult Details(int id)
+        {
+            var membership = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null && r.ReceiptID == id).OrderBy(r => r.Date).FirstOrDefault();
+            if (membership == null)
+            {
+                return RedirectToAction("Index");
+            }
+            EditMembershipDueViewModel model = new EditMembershipDueViewModel()
+            {
+                ReceiptID = membership.ReceiptID,
+                Username = membership.User.UserName,
+                Total = membership.MembershipDue.MembershipType.Amount,
+                FirstName = membership.User.UserFirstName,
+                LastName = membership.User.UserLastName,
+                Email = membership.User.Email,
+                Phone = membership.User.PhoneNumber,
+                MembershipType = membership.MembershipDue.MembershipType.Name,
+                StartDate = membership.MembershipDue.MemStartDate,
+                EndDate = membership.MembershipDue.MemEndDate,
+                RenewalDate = membership.MembershipDue.MemRenewalDate,
+                CancelDate = membership.MembershipDue.MemCancelDate,
+                Active = membership.MembershipDue.MemActive,
+                CardholderName = membership.InvoicePayment.CardholderName,
+                CardNumber = membership.InvoicePayment.Last4Digits.ToString(),
+                CardType = membership.InvoicePayment.CardType,
+                ExpDate = membership.InvoicePayment.ExpDate,
+                BillingFirstName = membership.InvoicePayment.BillingFirstName,
+                BillingLastName = membership.InvoicePayment.BillingLastName,
+                BillingAddr1 = membership.InvoicePayment.BillingAddr1,
+                BillingAddr2 = membership.InvoicePayment.BillingAddr2,
+                BillingCity = membership.InvoicePayment.BillingCity,
+                BillingState = membership.InvoicePayment.BillingState,
+                BillingPostalCode = membership.InvoicePayment.BillingPostalCode
+
+            };
+            return View(model);
+        }
+
         [HttpGet]
         public IActionResult SignUp()
         {           
