@@ -28,11 +28,24 @@ namespace NonProfitProject.Controllers.Shared.Users
             {
                 return RedirectToAction("SignUp");
             }
-            var userMembership = context.MembershipDues.Include(md => md.MembershipType).Where(md => md.UserID == currentUser.Id).OrderBy(md => md.MemDuesID).ToList();
+            var userMembership = context.MembershipDues.Include(md => md.MembershipType).Where(md => md.UserID == currentUser.Id).OrderBy(md => md.MemDuesID).ToList();          
             if(userMembership.Count() != 0)
             {
+                var memberSince = MembershipDues.GetConsecutiveDate(userMembership);
+                TimeSpan timespan = (TimeSpan)(DateTime.UtcNow - memberSince);
+                ViewBag.TimeSpan = new List<int>
+                {
+                    (int)Math.Floor(timespan.TotalDays / 365),
+                    (int)Math.Floor((timespan.TotalDays / 30) % 12),
+                    (int)Math.Floor((timespan.TotalDays / 365) % 30),
+                    //timespan.Days,
+                    timespan.Hours,
+                    timespan.Minutes,
+                    timespan.Seconds
+                };
                 return View(userMembership.Last());
             }
+            
             return View();
             
         }
@@ -166,9 +179,9 @@ namespace NonProfitProject.Controllers.Shared.Users
             {
                 UserID = User.FindFirstValue(ClaimTypes.NameIdentifier),
                 MembershipTypeID = sessionModel.Membership.MembershipType.MembershipTypeID,
-                MemStartDate = DateTime.UtcNow.Date,
-                MemEndDate = DateTime.UtcNow.AddMonths(1).Date,
-                MemRenewalDate = DateTime.UtcNow.AddMonths(1).Date,
+                MemStartDate = DateTime.UtcNow,
+                MemEndDate = DateTime.UtcNow.AddMonths(1),
+                MemRenewalDate = DateTime.UtcNow.AddMonths(1),
                 MemActive = true,
             };
             AesEncryption aes = new AesEncryption();

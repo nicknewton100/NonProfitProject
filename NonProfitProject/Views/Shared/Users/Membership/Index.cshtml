@@ -5,60 +5,131 @@
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
 
 }
-
-
 <div class="container">
-    <div class="card-header-pills"><h1 class="fa fa-address-card"> @ViewData["Title"]</h1></div>@if (Model == null)
+    <div class="card-header-pills"><h1 class="fa fa-address-card"> @ViewData["Title"]</h1></div>
+    Consecutive Member
+    <div class="row text-center">
+        <div class="border-right p-5">
+            <h2 id="years">@ViewBag.TimeSpan[0]</h2>
+            <p>Years</p>
+        </div>
+        <div class="border-right p-5">
+            <h2 id="months">@ViewBag.TimeSpan[1]</h2>
+            <p>Months</p>
+        </div>
+        <div class="border-right p-5">
+            <h2 id="days">@ViewBag.TimeSpan[2]</h2>
+            <p>Days</p>
+        </div>
+        <div class="border-right p-5">
+            <h2 id="hours">@ViewBag.TimeSpan[3]</h2>
+            <p>Hours</p>
+        </div>
+        <div class="border-right p-5">
+            <h2 id="minutes">@ViewBag.TimeSpan[4]</h2>
+            <p>Minutes</p>
+        </div>
+        <div class="border-right p-5">
+            <h2 id="seconds">@ViewBag.TimeSpan[5]</h2>
+            <p>Seconds</p>
+        </div>
+    </div>
+    @if (Model == null)
     {
         <h3>Lifetime Membership</h3>
     }
     else
     {
 
-    
-    <div class="row">
-        <div style="margin:1rem;">
+
+        <div class="row">
+            <div style="margin:1rem;">
 
 
-            <!--Needs Action-->
-            <form asp-action="CancelMembership" method="post" name="CancelMembershipForm">
-                <button type="button" class="btn btn-dark text-decoration-none" onclick="CancelMembership()">Cancel Membership</button>
-            </form>
+                <!--Needs Action-->
+                <form asp-action="CancelMembership" method="post" name="CancelMembershipForm">
+                    <button type="button" class="btn btn-dark text-decoration-none" onclick="CancelMembership()">Cancel Membership</button>
+                </form>
+            </div>
         </div>
-    </div>
-    <div>
-        <form style="font-size:large">
-            <input type="hidden" asp-for="User" />
-            <div class="row">
-                <div class="card w-auto" style="margin:0.5rem;padding:0.25rem;">
-                    <div class="card-body">
-                        <h4>Membership Information</h4>
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-auto"><p>Membership Type:  @Model.MembershipType.Name</p> </div>
-                            <div class="col-auto"><p>Start Date:  @Model.MemStartDate.ToShortDateString()</p></div>
-                            <div class="col-auto"><p>End Date:  @Model.MemEndDate.ToShortDateString()</p></div>
-                            <div class="col-auto"><p>Renewal Date: @Model.MemRenewalDate.ToShortDateString()</p></div>
+        <div>
+            <form style="font-size:large">
+                <input type="hidden" asp-for="User" />
+                <div class="row">
+                    <div class="card w-auto" style="margin:0.5rem;padding:0.25rem;">
+                        <div class="card-body">
+                            <h4>Membership Information</h4>
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                <div class="col-auto"><p>Membership Type:  @Model.MembershipType.Name</p> </div>
+                                <div class="col-auto"><p>Start Date:  @Model.MemStartDate.ToShortDateString()</p></div>
+                                <div class="col-auto"><p>End Date:  @Model.MemEndDate.ToShortDateString()</p></div>
+                                <div class="col-auto"><p>Renewal Date: @Model.MemRenewalDate.ToShortDateString()</p></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    <script type="text/javascript">
-        function CancelMembership() {
-            Swal.fire({
-                title: 'Are you sure you want to cancel membership?',
-                showDenyButton: true,
-                confirmButtonText: `Yes`,
-                denyButtonText: `No`,
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    document.CancelMembershipForm.submit();
-                }
-            })
-        }
-    </script>
+            </form>
+        </div>
+        <script type="text/javascript">
+            function CancelMembership() {
+                Swal.fire({
+                    title: 'Are you sure you want to cancel membership?',
+                    showDenyButton: true,
+                    confirmButtonText: `Yes`,
+                    denyButtonText: `No`,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        document.CancelMembershipForm.submit();
+                    }
+                })
+            }
+        </script>
     }
 </div>
+<script>
+    var yearsInput = document.getElementById("years");
+    var monthsInput = document.getElementById("months");
+    var daysInput = document.getElementById("days");
+    var hoursInput = document.getElementById("Hours");
+    var minutesInput = document.getElementById("minutes");
+    var secondsInput = document.getElementById("seconds");
+
+    var interval = setInterval(function ()
+    {
+        if (secondsInput.innerHTML == 59) {
+            secondsInput.innerHTML = 0;
+            if (minutesInput.innerHTML == 59) {
+                minutesInput.innerHTML = 0;
+                if (hoursInput.innerHTML == 23) {
+                    hoursInput.innerHTML = 0;
+                    if (daysInput.innerHTML == 29) {
+                        daysInput.innerHTML = 0;
+                        if (monthsInput.innerHTML == 11) {
+                            monthsInput.innerHTML = 0;
+                            yearsInput.innerHTML = parseInt(yearsInput.innerHTML) + 1;
+                        }
+                        else {
+                            monthsInput.innerHTML = parseInt(monthsInput.innerHTML) + 1;
+                        }
+                    }
+                    else {
+                        daysInput.innerHTML = parseInt(daysInput.innerHTML) + 1;
+                    }
+                }
+                else {
+                    hoursInput.innerHTML = parseInt(hoursInput.innerHTML) + 1;
+                }
+            }
+            else {
+                minutesInput.innerHTML = parseInt(minutesInput.innerHTML) + 1;
+            }
+            
+        }
+        else {
+            secondsInput.innerHTML = parseInt(secondsInput.innerHTML) + 1;
+        }
+        
+    }, 1000)
+</script>
