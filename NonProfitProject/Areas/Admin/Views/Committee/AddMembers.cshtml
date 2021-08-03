@@ -1,6 +1,7 @@
 ﻿@model CommitteeMembers
 @{
     ViewData["Title"] = "Add Members";
+    ViewData["Title2"] = "Admin";
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
     @using NonProfitProject.Models.Extensions;
     var sessionModel = Context.Session.GetObject<NonProfitProject.Areas.Admin.Models.ViewModels.CommitteeMemberViewModel>("CommitteeMemberModel");

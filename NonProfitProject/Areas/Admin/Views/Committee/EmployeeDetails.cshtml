@@ -3,10 +3,12 @@
     if(ViewBag.Action == "MemberDetails")
     {
         ViewData["Title"] = "Member Details";
+        ViewData["Title2"] = "Admin";
     }
     else
     {
         ViewData["Title"] = "Employee Details";
+        ViewData["Title2"] = "Admin";
     }
 
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
