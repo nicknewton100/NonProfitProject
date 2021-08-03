@@ -9,6 +9,7 @@
 <div class="container">
     <div class="container">
         <div class="card-header-pills"><h1 class="fas fa-users"> @ViewData["Title"]</h1></div>
+        <a class="btn btn-outline-dark" asp-action="AddCommittee">Add Committee</a>
     </div>
     <br />
 
@@ -17,71 +18,107 @@
             @{
                 foreach (var committee in Model)
                 {
-                    <div class="card w-auto" style="margin:.5rem;">
-                        <a class="card-header btn btn-outline-dark" sp-area="Admin" asp-controller="Committee" asp-action="Details" asp-route-name="@committee.CommitteeName" style="font-size: xx-large; border:none"><h3 class="text-center">@committee.CommitteeName</h3></a>
-                        <div class="card-body">
-                            <div style="font-size:small;">
-                                <table class="table table-bordered">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">Position</th>
-                                            <th scope="col">First Name</th>
-                                            <th scope="col">Last Name</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @{
-                                            //used to only allow 5 people to show up on the committee preview page
-                                            int isLessThan5 = 0;
-
-                                            var President = committee.committeeMembers?.Where(cm => cm.CommitteePosition == "President").FirstOrDefault();
-                                            if (President != null)
-                                            {
-                                                <tr>
-                                                    <td>@President.CommitteePosition</td>
-                                                    <td>@President.employee.User.UserFirstName</td>
-                                                    <td>@President.employee.User.UserLastName</td>
-                                                </tr>
-                                                committee.committeeMembers.Remove(President);
-                                                isLessThan5 += 1;
-                                            }
-
-                                            var VicePresident = committee.committeeMembers?.Where(cm => cm.CommitteePosition == "Vice President").FirstOrDefault();
-                                            if (VicePresident != null)
-                                            {
-                                                <tr>
-                                                    <td>@VicePresident.CommitteePosition</td>
-                                                    <td>@VicePresident.employee.User.UserFirstName</td>
-                                                    <td>@VicePresident.employee.User.UserLastName</td>
-                                                </tr>
-                                                committee.committeeMembers.Remove(VicePresident);
-                                                isLessThan5 += 1;
-                                            }
-
-                                        }
-
-                                        @foreach (var member in committee.committeeMembers)
-                                        {
-                                            if (isLessThan5 >= 5)
-                                            {
-                                                break;
-                                            }
+                        <div class="card w-auto" style="margin:.5rem;">
+                            <a class="card-header btn btn-outline-dark" sp-area="Admin" asp-controller="Committee" asp-action="Details" asp-route-name="@committee.CommitteeName" style="font-size: xx-large; border:none"><h3 class="text-center">@committee.CommitteeName</h3></a>
+                            <div class="card-body">
+                                <div style="font-size:small;">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
                                             <tr>
-                                                <td>@member.CommitteePosition</td>
-                                                <td>@member.employee.User.UserFirstName</td>
-                                                <td>@member.employee.User.UserLastName</td>
+                                                <th scope="col">Position</th>
+                                                <th scope="col">First Name</th>
+                                                <th scope="col">Last Name</th>
                                             </tr>
-                                            isLessThan5 += 1;
-                                        }
+                                        </thead>
+                                        <tbody>
+                                            @if (committee.committeeMembers.Count() == 0)
+                                            {
+                                                <tr>
+                                                    <td colspan="3">No members in this committee</td>
+                                                </tr>
+                                            }
+                                            @{
+                                                //used to only allow 5 people to show up on the committee preview page
+                                                int isLessThan5 = 0;
 
-                                    </tbody>
-                                </table>
+                                                var President = committee.committeeMembers?.Where(cm => cm.CommitteePosition == "President").FirstOrDefault();
+                                                if (President != null)
+                                                {
+                                                    <tr>
+                                                        <td>@President.CommitteePosition</td>
+                                                        <td>@President.employee.User.UserFirstName</td>
+                                                        <td>@President.employee.User.UserLastName</td>
+                                                    </tr>
+                                                    committee.committeeMembers.Remove(President);
+                                                    isLessThan5 += 1;
+                                                }
+
+                                                var VicePresident = committee.committeeMembers?.Where(cm => cm.CommitteePosition == "Vice President").FirstOrDefault();
+                                                if (VicePresident != null)
+                                                {
+                                                    <tr>
+                                                        <td>@VicePresident.CommitteePosition</td>
+                                                        <td>@VicePresident.employee.User.UserFirstName</td>
+                                                        <td>@VicePresident.employee.User.UserLastName</td>
+                                                    </tr>
+                                                    committee.committeeMembers.Remove(VicePresident);
+                                                    isLessThan5 += 1;
+                                                }
+
+                                            }
+                                            @foreach (var member in committee.committeeMembers)
+                                            {
+                                                if (isLessThan5 >= 5)
+                                                {
+                                                    break;
+                                                }
+                                                <tr>
+                                                    <td>@member.CommitteePosition</td>
+                                                    <td>@member.employee.User.UserFirstName</td>
+                                                    <td>@member.employee.User.UserLastName</td>
+                                                </tr>
+                                                isLessThan5 += 1;
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer" style="font-size:small;">
+                                <div class="row justify-content-between">
+                                    <div class="col-auto">
+                                        <a class="card-link text-primary" asp-action="EditCommittee" asp-route-id="@committee.CommitteesID">Edit</a>
+                                    </div>
+                                    <div>
+                                        <a class="card-link text-secondary" asp-action="Details" asp-route-name="@committee.CommitteeName">Show Details</a>
+                                    </div>
+                                    <div class="col-auto">
+                                        <form method="post" asp-action="Delete" asp-route-id="@committee.CommitteesID">
+                                            <button type="button" class="card-link text-danger" style="background:none !important;border:none;" onclick="DeleteCommittee(this)">Delete</button>
+                                        </form>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 }
             }
         </div>
     </div>
     
 </div>
+<script>
+    function DeleteCommittee(e) {
+        Swal.fire({
+            title: 'Are you sure you want to delete this Committee?',
+            showDenyButton: true,
+            confirmButtonText: `Yes`,
+            denyButtonText: `No`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                e.form.submit();
+            }
+        })
+    }
+</script>

@@ -40,7 +40,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         public IActionResult Index()
         {
             //queries event information 
-            var events = context.Events.OrderBy(e => e.EventStartDate).ToList();
+            var events = context.Events.Where(e => e.EventEndDate > DateTime.Now).OrderBy(e => e.EventStartDate).ToList();
             return View(events);
         }
         public IActionResult AddEvent()

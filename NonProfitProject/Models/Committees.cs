@@ -12,9 +12,11 @@ namespace NonProfitProject.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CommitteesID { get; set; }
+        [Required(ErrorMessage = "Please assign committee name")]
         public string CommitteeName { get; set; }
+        [Required(ErrorMessage = "Please assign committee name")]
         public string CommitteeDescription { get; set; }
-        public DateTime CommitteeCreationDate { get; set; }
+        public DateTime? CommitteeCreationDate { get; set; }
         public ICollection<CommitteeMembers> committeeMembers { get; set; }
     }
 }

@@ -13,7 +13,7 @@
 
 <div class="container">
     <h1>@Model.CommitteeName</h1>
-    <h6>Founded on @Model.CommitteeCreationDate.ToShortDateString()</h6>
+    <h6>Founded on @Model.CommitteeCreationDate.Value.ToShortDateString()</h6>
     <h6>@Model.CommitteeDescription</h6>
     @if(canEdit) { 
         <div style="margin: 1rem 0;">
