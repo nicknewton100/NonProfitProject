@@ -37,7 +37,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var news = context.News.ToList();
+            var news = context.News.OrderByDescending(n => n.NewsPublishDate).ToList();
             return View(news);
         }
         [HttpGet]

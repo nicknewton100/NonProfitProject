@@ -26,7 +26,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            var receipts = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null).OrderBy(r => r.Date).ToList();
+            var receipts = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null).OrderByDescending(r => r.Date).ToList();
             return View(receipts);
         }
 
@@ -71,7 +71,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var membership = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null && r.ReceiptID == id).OrderBy(r => r.Date).FirstOrDefault();
+            var membership = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null && r.ReceiptID == id).OrderByDescending(r => r.Date).FirstOrDefault();
             if (membership == null)
             {
                 return RedirectToAction("Index");

@@ -29,7 +29,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             {
                 return RedirectToAction("SignUp");
             }
-            var receipts = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null && r.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).OrderBy(r => r.Date).ToList();
+            var receipts = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null && r.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).OrderByDescending(r => r.Date).ToList();
             var userMembership = context.MembershipDues.Include(md => md.MembershipType).Where(md => md.UserID == currentUser.Id).OrderBy(md => md.MemDuesID).ToList();          
             if(receipts.Count() != 0)
             {

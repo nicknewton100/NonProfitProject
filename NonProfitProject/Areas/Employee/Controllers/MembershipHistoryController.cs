@@ -42,7 +42,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var receipts = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null).OrderBy(r => r.Date).ToList();
+            var receipts = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null).OrderByDescending(r => r.Date).ToList();
             return View(receipts);
         }
 

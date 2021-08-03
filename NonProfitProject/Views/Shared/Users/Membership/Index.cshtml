@@ -13,7 +13,6 @@
     }
     else
     {
-
         <br />
         <div class="row text-center justify-content-center mb-3 mt-3">
             <div class="border-right p-5" style="padding-top:0 !important; padding-bottom:0 !important;">
@@ -41,11 +40,6 @@
                 <p>Seconds</p>
             </div>
         </div>
-        <div>
-            <form method="post" asp-action="CancelMembership" asp-route-id="@Model.Where(r => r.MembershipDue.MemActive == true).FirstOrDefault().ReceiptID">
-                <button type="button" class="btn btn-danger" onclick="CancelMembership(this)">Cancel Membership</button>
-            </form>
-        </div>
         <div style="font-size:medium;">
             <div class="card">
                 <table class="table">
@@ -58,6 +52,7 @@
                             <th scope="col">End Date</th>
                             <th scope="col">Billing Date</th>
                             <th scope="col">Membership Status</th>
+                            <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -103,6 +98,14 @@
                                 </td>
                                 <td>
                                     <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","Membership",new {id = due.ReceiptID })'">Details</button>
+                                </td>
+                                <td>
+                                    @if (due.MembershipDue.MemActive)
+                                    {
+                                        <form method="post" asp-action="CancelMembership" asp-route-id="@due.ReceiptID">
+                                            <button type="button" class="btn btn-danger" onclick="CancelMembership(this)">Cancel Membership</button>
+                                        </form>
+                                    }
                                 </td>
                             </tr>
                         }

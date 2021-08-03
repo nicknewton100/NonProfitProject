@@ -36,7 +36,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         [HttpGet]
         public IActionResult Index(string MyDonations)
         {
-            var receipts = context.Receipts.Include(r => r.Donation).Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.User).Where(r => r.MembershipDue == null).OrderBy(r => r.Date).ToList();
+            var receipts = context.Receipts.Include(r => r.Donation).Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.User).Where(r => r.MembershipDue == null).OrderByDescending(r => r.Date).ToList();
             if (!isFundrasingCommitee() || MyDonations == "true")
             {
                 receipts = receipts.Where(r => r.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();

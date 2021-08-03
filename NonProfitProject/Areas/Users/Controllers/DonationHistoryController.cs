@@ -24,7 +24,7 @@ namespace NonProfitProject.Areas.Users.Controllers
         }
         public IActionResult Index()
         {
-            var receipts = context.Receipts.Include(r => r.Donation).Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.User).Where(r => r.MembershipDue == null && r.User.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).OrderBy(r => r.Date).ToList();
+            var receipts = context.Receipts.Include(r => r.Donation).Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.User).Where(r => r.MembershipDue == null && r.User.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).OrderByDescending(r => r.Date).ToList();
             return View(receipts);
         }
         public IActionResult Details(int id)
