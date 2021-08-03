@@ -25,6 +25,12 @@
                 </tr>
             </thead>
             <tbody>
+                @if (Model.committeeMembers.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="6" class="text-center">No members in this committee</td>
+                    </tr>
+                }
                 @{
                     var President = Model.committeeMembers?.Where(cm => cm.CommitteePosition == "President").FirstOrDefault();
                     if (President != null)

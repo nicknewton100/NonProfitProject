@@ -22,7 +22,7 @@ namespace NonProfitProject.Code
         {
             this.context = context;
         }
-
+        //used to send weekly news letter to users however this was cut due to lack of time
         public void SendNewsletter()
         {
             List<User> users = new List<User>();
@@ -39,6 +39,7 @@ namespace NonProfitProject.Code
 
             SendEmail(users, message);
         }
+        //sends email to a user
         public void SendEmail(User user, MimeMessage message)
         {
             message.To.Add(new MailboxAddress(user.UserFirstName, user.Email));
@@ -51,6 +52,7 @@ namespace NonProfitProject.Code
                 client.Disconnect(true);
             }
         }
+        //sends a email to a email address
         public void SendEmail(string email, MimeMessage message)
         {
             message.To.Add(new MailboxAddress(email));
@@ -63,6 +65,7 @@ namespace NonProfitProject.Code
                 client.Disconnect(true);
             }
         }
+        //sends email to multiple users
         public void SendEmail(List<User> users, MimeMessage message)
         {
             foreach(User u in users)
@@ -70,6 +73,7 @@ namespace NonProfitProject.Code
                 SendEmail(u, message);
             }
         }
+        //creates simple, plain text messages
         public MimeMessage CreateSimpleMessage(string subject, string bodyText)
         {
             MimeMessage message = new MimeMessage();
@@ -81,6 +85,7 @@ namespace NonProfitProject.Code
             };
             return message;
         }
+        //creates a message that will be rendered in HTML
         public MimeMessage CreateHTMLMessage(string subject, string html)
         {
             MimeMessage message = new MimeMessage();

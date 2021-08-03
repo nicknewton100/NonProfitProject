@@ -7,7 +7,20 @@
 <div class="container">
     <div class="container">
         <div class="card-header-pills"><h1 class="fa fa-dollar-sign">  @ViewData["Title"]</h1></div>
+        @if (ViewBag.Action != "MyDonations")
+        {
+            <form method="get" asp-action="Index">
+                <input type="search" value="true" name="MyDonations" readonly hidden />
+                <button class="btn btn-primary" type="submit">My Donations</button>
+            </form>
+        }
+        else
+        {
+            <a class="btn btn-primary" asp-action="Index">All Donations</a>
+        }
+
     </div>
+
     <br />
     <div class="container" style="font-size:medium;">
         <div class="card">

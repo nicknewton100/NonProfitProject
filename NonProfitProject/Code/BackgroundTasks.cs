@@ -18,7 +18,6 @@ namespace NonProfitProject.Code
         private readonly ILogger<BackgroundTasks> logger;
         private NonProfitContext context;
         private Timer timer;
-        private EmailManager emailManager;
 
         public  BackgroundTasks(ILogger<BackgroundTasks> logger, NonProfitContext context)
         {
@@ -31,19 +30,19 @@ namespace NonProfitProject.Code
             timer?.Dispose();
         }
 
-        //Cancels newsletter subscription
+        //runs the RenewMembership() method every 30 minutes- waits 5 minutes after startup and then waits 30 minutes between each one.
         Task IHostedService.StartAsync(CancellationToken cancellationToken)
         {
             timer = new Timer(o => RenewMembership(), null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(25));
             return Task.CompletedTask;
         }
-        //Cancels newsletter subscription
+        //Cancels renew membership async method
         Task IHostedService.StopAsync(CancellationToken cancellationToken)
         {
-            logger.LogInformation("Weekly email has stopped working");
+            logger.LogInformation("Membership renew has stopped working");
             return Task.CompletedTask;
         }
-
+        //checks if the user has a membership that epires on this day and if it does, it will renew it if its active
         public void RenewMembership()
         {
             List<MembershipDues> membershipDues;
@@ -102,6 +101,5 @@ namespace NonProfitProject.Code
                 }
             }
         }
-        //Send email feature
     }
 }

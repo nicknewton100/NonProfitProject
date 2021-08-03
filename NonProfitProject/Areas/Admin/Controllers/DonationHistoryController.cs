@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NonProfitProject.Areas.Admin.Models.ViewModels;
 using NonProfitProject.Code.Security;
+using System.Security.Claims;
 
 namespace NonProfitProject.Areas.Admin.Controllers
 {
@@ -20,9 +21,15 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             this.context = context;
         }
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(string MyDonations)
         {
             var receipts = context.Receipts.Include(r => r.Donation).Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.User).Where(r => r.MembershipDue == null).OrderByDescending(r => r.Date).ToList();
+            if(MyDonations != null)
+            {
+                receipts = receipts.Where(r => r.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
+                ViewBag.Action = "MyDonations";
+            }
             return View(receipts);
         }
         public IActionResult Details(int id)

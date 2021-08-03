@@ -37,16 +37,20 @@ namespace NonProfitProject.Controllers.Shared.Users
                 TimeSpan timespan = (TimeSpan)(DateTime.UtcNow - memberSince);
                 ViewBag.TimeSpan = new List<int>
                 {
+                    //years
                     (int)Math.Floor(timespan.TotalDays / 365),
+                    //motnhs
                     (int)Math.Floor((timespan.TotalDays / 30) % 12),
-                    (int)Math.Floor((timespan.TotalDays / 365) % 30),
+                    //days
+                    (int)(timespan.Days) % 30,
                     //timespan.Days,
                     timespan.Hours,
                     timespan.Minutes,
                     timespan.Seconds
                 };
+                return View(receipts);
             }           
-            return View(receipts);
+            return View("LifetimeMembership");
             
         }
 

@@ -1,0 +1,20 @@
+﻿@model List<NonProfitProject.Models.Receipts>
+@{
+    ViewData["Title"] = "Manage Membership";
+    ViewData["Title2"] = "Profile";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+
+}
+<div class="container">
+    <div class="card-header-pills"><h1 class="fa fa-address-card"> @ViewData["Title"]</h1></div>
+    <div>
+        
+    </div>
+    
+</div>
+<div class="container" style=" margin-top: 5.5rem; display: flex; justify-content: center; align-items: center; vertical-align:middle;">
+    <div class="text-md-center" style="margin:auto; width:50%;position: absolute; bottom: 50%;">
+        <h1 style="font-family:fantasy;"> You have been granted a Lifetime Membership!</h1>
+        <h3>Use this gift wisely...</h3>
+    </div>
+</div>

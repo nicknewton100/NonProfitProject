@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace NonProfitProject.Models.Extensions
 {
+    //session extension method allows complex objects to be stored in the session. 
     public static class SessionExtensions
     {
         public static void SetObject<T>(this ISession session, string key, T value)

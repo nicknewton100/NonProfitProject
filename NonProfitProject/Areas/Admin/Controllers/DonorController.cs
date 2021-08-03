@@ -70,17 +70,9 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 //after successfully creating account, redirect user to homepage.
                 if (result.Succeeded)
                 {
-                    if (model.IsBecomingMember)
-                    {
-                        await userManager.AddToRoleAsync(user, "Member");
-                        return RedirectToAction("Index", "Member");
-                    }
-                    else
-                    {
-                        await userManager.AddToRoleAsync(user, "User");
-                        TempData["DonorChanges"] = String.Format("{0} has been created", user.UserFirstName + "" + user.UserLastName);
-                        return RedirectToAction("Index");
-                    }                                      
+                    await userManager.AddToRoleAsync(user, "User");
+                    TempData["DonorChanges"] = String.Format("{0} has been created", user.UserFirstName + "" + user.UserLastName);
+                    return RedirectToAction("Index");                                   
                 }
                 else
                 {

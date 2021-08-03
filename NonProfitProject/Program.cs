@@ -28,6 +28,7 @@ namespace NonProfitProject
                     webBuilder.UseStartup<Startup>().UseDefaultServiceProvider(options => options.ValidateScopes = false);
                 }).ConfigureServices(services =>
                 {
+                    //starts background tasks method on startup
                     services.AddHostedService<BackgroundTasks>();
                 });
     }

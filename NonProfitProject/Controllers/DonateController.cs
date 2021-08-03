@@ -112,7 +112,7 @@ namespace NonProfitProject.Controllers
             }
             if (DateTime.ParseExact(model.ExpDate, "MM/yy", CultureInfo.InvariantCulture) < DateTime.ParseExact(DateTime.UtcNow.ToString("MM/yy"), "MM/yy", CultureInfo.InvariantCulture))
             {
-                ModelState.AddModelError("ExpDate", "This payment method has expired");
+                ModelState.AddModelError("ExpDate", "Payment method has expired");
             }
             if(model.CardNumber.Length != 19)
             {

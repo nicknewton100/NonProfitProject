@@ -57,6 +57,7 @@ namespace NonProfitProject.Code.Security
             return cipher;
         }
         /////////////////////(string text, string key, string IV)
+        //encrypts text
         public string Encrypt(string text)
         {
             Aes cipher = CreateCipher(key);
@@ -68,7 +69,7 @@ namespace NonProfitProject.Code.Security
 
             return Convert.ToBase64String(cipherText);
         }
-
+        //decrypts encrypted text
         public string Decrypt(string encryptedText)
         {
             Aes cipher = CreateCipher(key);
