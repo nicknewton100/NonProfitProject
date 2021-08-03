@@ -51,7 +51,7 @@ namespace NonProfitProject.Controllers.Shared.Users
                 {
                     user.Email = model.Email;
                     user.UserName = model.Username;
-                    user.ReceiveWeeklyNewsletter = model.ReceiveWeeklyNewsletter;
+                    user.ReceiveWeeklyNewsletter = false;
                     if (model.NewPassword != null)
                     {
                         var result = await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
@@ -94,10 +94,21 @@ namespace NonProfitProject.Controllers.Shared.Users
 
         public IActionResult ManagePayments()
         {
-            return View();
+            var payments = context.SavedPayments.Where(sp => sp.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
+            return View(payments);
         }
-
-
+        [HttpPost]
+        public IActionResult DeletePayment(int id)
+        {
+            var payment = context.SavedPayments.Where(sp => sp.SavedPaymentID == id && sp.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).FirstOrDefault();
+            if(payment == null)
+            {
+                return RedirectToAction("ManagePayments");
+            }
+            context.SavedPayments.Remove(payment);
+            context.SaveChanges();
+            return RedirectToAction("ManagePayments");
+        }
         [HttpGet]
         public IActionResult AddPayment()
         {
@@ -150,7 +161,7 @@ namespace NonProfitProject.Controllers.Shared.Users
                 };
                 context.SavedPayments.Add(savedPaymentInformation);
                 context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ManagePayments");
             }
             return View(model);
         }
