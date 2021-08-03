@@ -4,11 +4,13 @@
 @{
     ViewData["Title"] = "Backup Download";
     ViewData["Title2"] = "Admin";
+
+    Layout = "_AdminLayout";
 }
 @TempData["Error"]?.ToString()
 
 
-<div class="card w-25" style="margin:2rem;padding:1rem;">
+<div class="card col-4" style="padding:2rem;">
     <div class="card-body">
         <div class="card-header-pills"><h4>Download Backup Zip File</h4></div>
         <ul>
