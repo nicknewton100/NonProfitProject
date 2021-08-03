@@ -2,15 +2,34 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Backup Download";
+    ViewData["Title2"] = "Admin";
 }
 @TempData["Error"]?.ToString()
-<form method="post" asp-action="Backup">
-    <button type="submit">Backup application</button>
-</form>
-<form method="post" asp-action="BackupDatabase">
-    <button type="submit">Backup database</button>
-</form>
-<form method="post" asp-action="EmployeeReport">
+
+
+<div class="card w-25" style="margin:2rem;padding:1rem;">
+    <div class="card-body">
+        <div class="card-header-pills"><h4>Download Backup Zip File</h4></div>
+        <ul>
+            <li>
+                <form method="post" asp-action="Backup">
+                    <button class="btn btn-link" type="submit">Backup application</button>
+                </form>
+            </li>
+            <li>
+                <form method="post" asp-action="BackupDatabase">
+                    <button class="btn btn-link" type="submit">Backup database</button>
+                </form>
+            </li>
+        </ul>
+        
+       <a class="btn btn-outline-dark" asp-area="Admin" asp-controller="Reports" asp-action="Index">Return to Reports</a>
+    </div>
+</div>
+
+
+@*<form method="post" asp-action="EmployeeReport">
     <button type="submit">Generate Employee Report</button>
 </form>
 <form method="post" asp-action="DonorReport">
@@ -36,4 +55,4 @@
 </form>
 <form method="post" asp-action="EventInformationReport">
     <button type="submit">Generate Event Report</button>
-</form>
+</form>*@
