@@ -19,17 +19,12 @@ namespace NonProfitProject.Controllers
         public IActionResult Index()
         {
             var events = context.Events.ToList();
-            List<CalendarViewModel> model = new List<CalendarViewModel>();
-            foreach(var e in events)
+            for(int i = 0; i < events.Count(); i++)
             {
-                model.Add(new CalendarViewModel
-                {
-                    EventName = e.EventName,
-                    EventStartDate = e.EventStartDate,
-                    EventEndDate = e.EventEndDate
-                });
+                var test = events[i].EventDescription.Replace(System.Environment.NewLine, " ");
+                events[i].EventDescription = test;
             }
-            return View(model);
+            return View(events);
         }
     }
 }

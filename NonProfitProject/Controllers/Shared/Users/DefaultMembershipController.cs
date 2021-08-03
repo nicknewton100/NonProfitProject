@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NonProfitProject.Areas.Admin.Models.ViewModels;
 using NonProfitProject.Code;
 using NonProfitProject.Code.Security;
 using NonProfitProject.Models;
@@ -28,9 +29,65 @@ namespace NonProfitProject.Controllers.Shared.Users
             {
                 return RedirectToAction("SignUp");
             }
-            var userMembership = context.MembershipDues.Include(md => md.MembershipType).Where(md => md.UserID == currentUser.Id).OrderBy(md => md.MemDuesID).Last();
-            return View(userMembership);
+            var receipts = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null && r.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).OrderByDescending(r => r.Date).ToList();
+            var userMembership = context.MembershipDues.Include(md => md.MembershipType).Where(md => md.UserID == currentUser.Id).OrderBy(md => md.MemDuesID).ToList();          
+            if(receipts.Count() != 0)
+            {
+                var memberSince = MembershipDues.GetConsecutiveDate(userMembership);
+                TimeSpan timespan = (TimeSpan)(DateTime.UtcNow - memberSince);
+                ViewBag.TimeSpan = new List<int>
+                {
+                    (int)Math.Floor(timespan.TotalDays / 365),
+                    (int)Math.Floor((timespan.TotalDays / 30) % 12),
+                    (int)Math.Floor((timespan.TotalDays / 365) % 30),
+                    //timespan.Days,
+                    timespan.Hours,
+                    timespan.Minutes,
+                    timespan.Seconds
+                };
+            }           
+            return View(receipts);
+            
         }
+
+        public IActionResult Details(int id)
+        {
+            var membership = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null && r.ReceiptID == id).OrderBy(r => r.Date).FirstOrDefault();
+            if (membership == null)
+            {
+                return RedirectToAction("Index");
+            }
+            EditMembershipDueViewModel model = new EditMembershipDueViewModel()
+            {
+                ReceiptID = membership.ReceiptID,
+                Username = membership.User.UserName,
+                Total = membership.MembershipDue.MembershipType.Amount,
+                FirstName = membership.User.UserFirstName,
+                LastName = membership.User.UserLastName,
+                Email = membership.User.Email,
+                Phone = membership.User.PhoneNumber,
+                MembershipType = membership.MembershipDue.MembershipType.Name,
+                StartDate = membership.MembershipDue.MemStartDate,
+                EndDate = membership.MembershipDue.MemEndDate,
+                RenewalDate = membership.MembershipDue.MemRenewalDate,
+                CancelDate = membership.MembershipDue.MemCancelDate,
+                Active = membership.MembershipDue.MemActive,
+                CardholderName = membership.InvoicePayment.CardholderName,
+                CardNumber = membership.InvoicePayment.Last4Digits.ToString(),
+                CardType = membership.InvoicePayment.CardType,
+                ExpDate = membership.InvoicePayment.ExpDate,
+                BillingFirstName = membership.InvoicePayment.BillingFirstName,
+                BillingLastName = membership.InvoicePayment.BillingLastName,
+                BillingAddr1 = membership.InvoicePayment.BillingAddr1,
+                BillingAddr2 = membership.InvoicePayment.BillingAddr2,
+                BillingCity = membership.InvoicePayment.BillingCity,
+                BillingState = membership.InvoicePayment.BillingState,
+                BillingPostalCode = membership.InvoicePayment.BillingPostalCode
+
+            };
+            return View(model);
+        }
+
         [HttpGet]
         public IActionResult SignUp()
         {           
@@ -39,6 +96,10 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpPost]
         public async Task<IActionResult> Signup(string name)
         {
+            if (User.IsInRole("Member"))
+            {
+                return RedirectToAction("Index");
+            }
             var memType = context.MembershipTypes.Where(mt => mt.Name == name).FirstOrDefault();
             if(memType == null)
             {
@@ -72,6 +133,10 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpGet]
         public IActionResult Payment()
         {
+            if (User.IsInRole("Member"))
+            {
+                return RedirectToAction("Index");
+            }
             if (HttpContext.Session.GetObject<SignupMembershipViewModel>("SignupMembershipModel") == null)
             {
                 return RedirectToAction("Index");
@@ -83,6 +148,10 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpPost]
         public IActionResult Payment(DonationPaymentViewModel model)
         {
+            if (User.IsInRole("Member"))
+            {
+                return RedirectToAction("Index");
+            }
             var sessionModel = HttpContext.Session.GetObject<SignupMembershipViewModel>("SignupMembershipModel");
             if (sessionModel == null)
             {
@@ -112,6 +181,10 @@ namespace NonProfitProject.Controllers.Shared.Users
 
         public IActionResult CheckOut()
         {
+            if (User.IsInRole("Member"))
+            {
+                return RedirectToAction("Index");
+            }
             var sessionModel = HttpContext.Session.GetObject<SignupMembershipViewModel>("SignupMembershipModel");
             if (sessionModel == null)
             {
@@ -124,6 +197,10 @@ namespace NonProfitProject.Controllers.Shared.Users
         [HttpPost]
         public async Task<IActionResult> PlaceOrder()
         {
+            if (User.IsInRole("Member"))
+            {
+                return RedirectToAction("Index");
+            }
             var sessionModel = HttpContext.Session.GetObject<SignupMembershipViewModel>("SignupMembershipModel");
             if (sessionModel == null)
             {
@@ -141,9 +218,9 @@ namespace NonProfitProject.Controllers.Shared.Users
             {
                 UserID = User.FindFirstValue(ClaimTypes.NameIdentifier),
                 MembershipTypeID = sessionModel.Membership.MembershipType.MembershipTypeID,
-                MemStartDate = DateTime.UtcNow.Date,
-                MemEndDate = DateTime.UtcNow.AddMonths(1).Date,
-                MemRenewalDate = DateTime.UtcNow.AddMonths(1).Date,
+                MemStartDate = DateTime.UtcNow,
+                MemEndDate = DateTime.UtcNow.AddMonths(1),
+                MemRenewalDate = DateTime.UtcNow.AddMonths(1),
                 MemActive = true,
             };
             AesEncryption aes = new AesEncryption();
@@ -189,6 +266,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             context.SaveChanges();
             var user = await userManager.GetUserAsync(User);
             await userManager.AddToRoleAsync(user, "Member");
+            await userManager.RemoveFromRoleAsync(user, "User");
             EmailManager email = new EmailManager(context);
             var message = email.CreateSimpleMessage(String.Format("{0} Membership for Non-Paw-Fit Animal Rescue",sessionModel.Membership.MembershipType), String.Format("Thank you, {0}, for becoming a {1} member of the Non-Paw-Fit Animal Rescue Foundation! You're continual efforts to create a better life for all animals will not go unnoticed. \n\n    Receipt Information: \n        Receipt ID: {2} \n        Total: {3:C} \n        Date: {4} \n\n    Membership Information: \n        Membership ID: {5} \n        Membership purchase: {1} \n        Payment per Month: {6:C} \n        Membership for User: {7} \n        Start Date: {8} \n        End Date: {9} \n        Renewal Date: {10} \n\n    Card Information: \n        CardHolder Name: {11} \n        Card Type: {12} \n        Card Number: xxxx-xxxx-xxxx-{13} \n        Expiration Date: {14} \n    Billing Information \n        Name: {15} \n        Address 1: {16} \n        Address 2: {17} \n        City: {18} \n        State: {19} \n        Postal Code: {20}", receipt.User.UserFirstName + " " + receipt.User.UserLastName, sessionModel.Membership.MembershipType.Name , receipt.ReceiptID, receipt.Total, receipt.Date, receipt.MembershipDue.MembershipTypeID, sessionModel.Membership.MembershipType.Amount, receipt.User.UserName, receipt.MembershipDue.MemStartDate, receipt.MembershipDue.MemEndDate, receipt.MembershipDue.MemRenewalDate, receipt.InvoicePayment.CardholderName, receipt.InvoicePayment.CardType, receipt.InvoicePayment.Last4Digits, receipt.InvoicePayment.ExpDate, receipt.InvoicePayment.BillingFirstName + " " + receipt.InvoicePayment.BillingLastName, receipt.InvoicePayment.BillingAddr1, receipt.InvoicePayment.BillingAddr2, receipt.InvoicePayment.BillingCity, receipt.InvoicePayment.BillingState, receipt.InvoicePayment.BillingPostalCode));
 
@@ -214,7 +292,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             membership.MemActive = false;
             var user = await userManager.GetUserAsync(User);
             await userManager.RemoveFromRoleAsync(user, "Member");
-            if (!await userManager.IsInRoleAsync(user, "Admin"))
+            if (!await userManager.IsInRoleAsync(user, "Admin") && !await userManager.IsInRoleAsync(user, "Employee"))
             {
                 await userManager.AddToRoleAsync(user, "User");
             }

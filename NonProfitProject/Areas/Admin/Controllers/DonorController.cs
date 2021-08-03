@@ -31,7 +31,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             //queries users that are not in the employee table
             //var users = context.Users.Where(u => !context.Employees.Any(e => u.Id == e.UserID || u.UserName == "One-TimeDonation")).OrderBy(u => u.UserLastName + ", " + u.UserFirstName).ToList();
 
-            var users = context.Users.Where(u => u.UserName != "One-TimeDonation" && user.Contains(u)).OrderBy(u => u.UserLastName + ", " + u.UserFirstName).ToList();
+            var users = context.Users.Where(u => u.UserName != "One-TimeDonation" && user.Contains(u) && !context.Employees.Any(e => e.UserID == u.Id)).OrderBy(u => u.UserLastName + ", " + u.UserFirstName).ToList();
             return View(users);
         }
 

@@ -1,0 +1,335 @@
+﻿@model NonProfitProject.Areas.Admin.Models.ViewModels.EditMembershipDueViewModel
+@{
+    ViewData["Title"] = "Membership Details";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+}
+<head>
+    <script type="text/javascript" src="~/js/UserValidation.js"></script>
+</head>
+<div class="container">
+    <div class="card-header-pills"><h1 class="fa fa-dollar-sign">  @ViewData["Title"]</h1></div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div>
+        <form asp-action="Edit" method="post" style="font-size:medium">
+            <div class="row">
+                <input type="hidden" asp-for="ReceiptID">
+                <div class="card w-75" style="margin:0.5rem;padding:0.25rem;">
+                    <div class="card-body">
+                        Membership Due for: @Model.Username
+                        <br />
+                        @{
+                            if (Model.Active)
+                            {
+                                @: Membership Status: Active
+                            }
+                            else
+                            {
+                                @if (Model.CancelDate != null)
+                                {
+                                    @:Membership Status: Canceled</p>
+                                }
+                                else
+                                {
+                                    @:Membership Status: Expired
+                                }
+                            }
+                        }
+                        <br />
+                        <br />
+                        <h4>Edit Receipt Information</h4>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="form-group w-auto">
+                                <div class="col-auto"><label>Receipt ID: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" value="@Model.ReceiptID" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group w-auto">
+                                <div class="col-auto"><label>Total: </label></div>
+                                <div class="col-auto">
+                                    <input id="total" class="form-control" value="$@Model.Total" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group w-auto">
+                                <div class="col-auto"><label>Membership Status: </label></div>
+                                <div class="col-auto">
+                                    <select asp-for="MembershipType" class="form-control" onchange="changeMembership(this)">
+                                        <option value="Basic">Basic</option>
+                                        <option value="Advanced">Advanced</option>
+                                        <option value="Premium">Premium</option>
+                                        <option value="Paw-fect">Paw-fect</option>
+                                    </select>
+                                    <span asp-validation-for="MembershipType" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-auto"><label>Membership Start Date: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="StartDate" class="form-control membership" />
+                                    <span asp-validation-for="StartDate" class="text-danger membership"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-auto"><label>Membership End Date: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="EndDate" class="form-control" />
+                                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-auto"><label>Next Billing Date: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="RenewalDate" class="form-control" />
+                                    <span asp-validation-for="RenewalDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Member Information</h4>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="form-group">
+                                <!--FIRST NAME-->
+                                <div class="col-auto"><label>First Name: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="FirstName" class="form-control" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <!--LAST NAME-->
+                                <div class="col-auto"><label>Last Name: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="LastName" class="form-control" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group w-50">
+                                <!--EMAIL ADDRESS-->
+                                <div class="col-auto"><label>Email Address: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="Email" class="form-control" id="Email" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group DetailsDisable w-25">
+                                <!--CONFIRM EMAIL ADDRESS-->
+                                <div class="col-auto"><label>Phone: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="Phone" class="form-control" id="EmailConfirmed" oninput="phoneNumberFormatter(this)">
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <h4>Edit Payment Information <input type="checkbox" onchange="changeCardInformation()" id="ChangeCardInformation" asp-for="isChangingCardInformation" /></h4>
+                        <div id="cardInformation">
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                <div class="form-group w-auto">
+                                    <!--ADDRESS 1-->
+                                    <div class="col-auto"><label>Carholder Name: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="CardholderName" class="form-control" />
+                                        <span asp-validation-for="CardholderName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group w-auto">
+                                    <!--ADDRESS 2-->
+                                    <div class="col-auto"><label>Card Type: </label></div>
+                                    <div class="col-auto">
+                                        <select asp-for="CardType" class="form-control">
+                                            <option></option>
+                                            <option value="Credit Card">Credit Card</option>
+                                            <option value="Debit Card">Debit Card</option>
+                                        </select>
+                                        <span asp-validation-for="CardType" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group w-25">
+                                    <div class="col-auto"><label>Card Number: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="CardNumber" class="form-control" oninput="cc_format(this)" />
+                                        <span asp-validation-for="CardNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group w-auto">
+                                    <div class="col-auto"><label>Expiration Date: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="ExpDate" class="form-control BillingInformation" oninput="card_expires_format(this)">
+                                        <span asp-validation-for="ExpDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group w-auto">
+                                    <div class="col-auto"><label>CVV: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="CVV" class="form-control BillingInformation" oninput="cvv_format(this)">
+                                        <span asp-validation-for="CVV" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <h4>Billing Information</h4>
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-auto"><label>First Name: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="BillingFirstName" class="form-control" />
+                                        <span asp-validation-for="BillingFirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-auto"><label>Last Name: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="BillingLastName" class="form-control" oninput="CheckDecimal(this)" />
+                                        <span asp-validation-for="BillingLastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group w-50">
+                                    <div class="col-auto"><label>Address 1: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="BillingAddr1" class="form-control" />
+                                        <span asp-validation-for="BillingAddr1" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group w-50">
+                                    <div class="col-auto"><label>Address 2: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="BillingAddr2" class="form-control" />
+                                        <span asp-validation-for="BillingAddr2" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-auto"><label>City: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="BillingCity" class="form-control" />
+                                        <span asp-validation-for="BillingCity" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-auto"><label>State: </label></div>
+                                    <div class="col-auto">
+                                        <select asp-for="BillingState" class="form-control BillingInformation">
+                                            <option></option>
+                                            <option value="Alaska">Alaska</option>
+                                            <option value="Alabama">Alabama</option>
+                                            <option value="Arkansas">Arkansas</option>
+                                            <option value="Arizona">Arizona</option>
+                                            <option value="California">California</option>
+                                            <option value="Colorado">Colorado</option>
+                                            <option value="Connecticut">Connecticut</option>
+                                            <option value="District of Columbia">District of Columbia</option>
+                                            <option value="Delaware">Delaware</option>
+                                            <option value="Florida">Florida</option>
+                                            <option value="Georgia">Georgia</option>
+                                            <option value="Hawaii">Hawaii</option>
+                                            <option value="Iowa">Iowa</option>
+                                            <option value="Idaho">Idaho</option>
+                                            <option value="Illinois">Illinois</option>
+                                            <option value="Indiana">Indiana</option>
+                                            <option value="Kansas">Kansas</option>
+                                            <option value="Kentucky">Kentucky</option>
+                                            <option value="Louisiana">Louisiana</option>
+                                            <option value="Massachusetts">Massachusetts</option>
+                                            <option value="Maryland">Maryland</option>
+                                            <option value="Maine">Maine</option>
+                                            <option value="Michigan">Michigan</option>
+                                            <option value="Michigan">Minnesota</option>
+                                            <option value="Missouri">Missouri</option>
+                                            <option value="Mississippi">Mississippi</option>
+                                            <option value="Montana">Montana</option>
+                                            <option value="North Carolina">North Carolina</option>
+                                            <option value="North Dakota">North Dakota</option>
+                                            <option value="Nebraska">Nebraska</option>
+                                            <option value="New Hampshire">New Hampshire</option>
+                                            <option value="New Jersey">New Jersey</option>
+                                            <option value="New Mexico">New Mexico</option>
+                                            <option value="Nevada">Nevada</option>
+                                            <option value="New York">New York</option>
+                                            <option value="Ohio">Ohio</option>
+                                            <option value="Oklahoma">Oklahoma</option>
+                                            <option value="Oregon">Oregon</option>
+                                            <option value="Pennsylvania">Pennsylvania</option>
+                                            <option value="Puerto Rico">Puerto Rico</option>
+                                            <option value="Rhode Island">Rhode Island</option>
+                                            <option value="South Carolina">South Carolina</option>
+                                            <option value="South Dakota">South Dakota</option>
+                                            <option value="Tennessee">Tennessee</option>
+                                            <option value="Texas">Texas</option>
+                                            <option value="Utah">Utah</option>
+                                            <option value="Virginia">Virginia</option>
+                                            <option value="Vermont">Vermont</option>
+                                            <option value="Washington">Washington</option>
+                                            <option value="Wisconsin">Wisconsin</option>
+                                            <option value="West Virginia">West Virginia</option>
+                                            <option value="Wyoming">Wyoming</option>
+                                        </select>
+                                        <span asp-validation-for="BillingState" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-auto"><label>Postal Code: </label></div>
+                                    <div class="col-auto">
+                                        <input asp-for="BillingPostalCode" class="form-control" oninput="postalcode_format(this)" />
+                                        <span asp-validation-for="BillingPostalCode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <br />
+                                <button type="submit" class="btn-lg btn-outline-dark">Save Changes</button>
+                            </div>
+                            <div class="col">
+                                <br />
+                                <button type="button" class="btn-lg btn-dark " onclick="location.href = '@Url.Action("Index","MembershipHistory")'">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    function changeCardInformation()
+    {
+        let e = document.getElementById("ChangeCardInformation");
+        if (!e.checked) {
+            document.getElementById("cardInformation").hidden = true;
+        }
+        else {
+            document.getElementById("cardInformation").hidden = false;
+        }
+    }
+    function changeMembership(e) {
+        var total = document.getElementById("total");
+        if (e.value == "Paw-fect") {
+            total.value = "$100.00";
+        }
+        else if (e.value == "Premium") {
+            total.value = "$50.00";
+        }
+        else if (e.value == "Advanced") {
+            total.value = "$20.00";
+        }
+        else if (e.value == "Basic") {
+            total.value = "$10.00"
+        }
+    }
+    window.onload(changeCardInformation(document.getElementById("ChangeCardInformation")));
+</script>

@@ -26,6 +26,7 @@
     <PackageReference Include="Microsoft.SqlServer.Scripting" Version="11.0.2100.61" />
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="161.46367.54" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Moment.js" Version="2.29.1" />
     <PackageReference Include="NETCore.Encrypt" Version="2.0.9" />
     <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
     <PackageReference Include="System.CodeDom" Version="5.0.0" />
@@ -35,10 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Employee\Data\" />
     <Folder Include="Areas\Employee\Models\ViewModels\" />
-    <Folder Include="Areas\Member\Data\" />
-    <Folder Include="Areas\Member\Models\ViewModels\" />
     <Folder Include="Areas\Users\Data\" />
     <Folder Include="Areas\Users\Models\ViewModels\" />
     <Folder Include="Controllers\Shared\Member\" />
@@ -58,19 +56,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Areas\Member\Views\Home\Index.cshtml">
+    <Content Update="Areas\Employee\Views\Event\Index.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="Areas\Member\Views\Shared\_MemberLayout.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\Member\Views\_ViewImports.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\Member\Views\_ViewStart.cshtml">
+    <Content Update="Areas\Employee\Views\News\Index.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

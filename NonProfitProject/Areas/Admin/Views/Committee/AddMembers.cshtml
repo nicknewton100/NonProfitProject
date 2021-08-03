@@ -39,32 +39,12 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-auto">
-                                            <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("EmployeeDetails","Committee",new {id = empl.EmpID, name = sessionModel.Committee.CommitteeName })'">Details</button>
-                                            <button type="button" class="btn btn-dark " data-toggle="modal" data-target="#Modal-@empl.EmpID">Add to Committee</button>
-                                        </div>
-                                        <!--POP UP MODAL IS FIXED-->
-                                        <div>
-                                            <div class="modal fade" id="Modal-@empl.EmpID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <form method="post" asp-action="AddMembers" asp-route-id="@empl.EmpID">
-                                                            <div class="modal-header justify-content-center">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Assign Position</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row justify-content-center">
-                                                                    <input asp-for="CommitteePosition" class="form-control w-50" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-dark">Add To @sessionModel.Committee.CommitteeName</button>
-                                                                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Cancel</button>
-                                                            </div>                                                               
-                                                        </form>
-                                                    </div>
-                                                </div>
+                                            <div class="row">
+                                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("EmployeeDetails","Committee",new {id = empl.EmpID, name = sessionModel.Committee.CommitteeName })'">Details</button>
+                                                <form method="post" asp-action="AddMembers" asp-route-id="@empl.EmpID" asp-route-position="@empl.Position">
+                                                    <button type="button" class="btn btn-dark " onclick="SetPosition(this)">Add to Committee</button>
+                                                </form>
                                             </div>
-                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -80,4 +60,29 @@
         </div>
     </div>
 </div>
+<script>
+    function SetPosition(e) {
+        Swal.fire({
+            title: 'Set Committee Position',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showDenyButton: true,
+            confirmButtonText: `Add to @sessionModel.Committee.CommitteeName`,
+            denyButtonText: `Cancel`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                let input = result.value;
+                let _form = e.form;
+                let attr = _form.getAttribute("action");
+                let split = attr.split("/");
+                let substring = attr.substring(0, attr.length - split[split.length - 2].length - 1);
+                _form.setAttribute("action", substring + input.replace(' ', '%20') + '/');
+                e.form.submit();
+            }
+        })
+    }
+</script>
 

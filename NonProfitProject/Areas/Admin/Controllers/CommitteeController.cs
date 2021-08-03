@@ -107,8 +107,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
 
 
         [HttpPost]
-        [Route("~/[area]/[controller]/{name}/[action]/{id}")]
-        public IActionResult AddMembers(CommitteeMembers model, string id)
+        [Route("~/[area]/[controller]/{name}/[action]/{id}/{position}/")]
+        public IActionResult AddMembers(string id, string position)
         {
             var sessionmodel = HttpContext.Session.GetObject<CommitteeMemberViewModel>("CommitteeMemberModel");
             if (sessionmodel == null)
@@ -122,7 +122,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 {
                     CommitteeID = context.Committees.Where(c => c.CommitteeName == sessionmodel.Committee.CommitteeName).Select(c => c.CommitteesID).FirstOrDefault(),
                     EmpID = id,
-                    CommitteePosition = model.CommitteePosition
+                    CommitteePosition = position
                 };
                 context.CommitteeMembers.Add(committeeMember);
                 context.SaveChanges();
@@ -147,20 +147,21 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View(employee);
         }
 
-
         public IActionResult AddCommittee()
         {
             ViewBag.Action = "Add";
-            return View("EditCommittee");
-        }       
-        
-        
+            return View("EditCommittee", new Committees());
+        }
         [HttpGet]
         public IActionResult EditCommittee(int id)
         {
             ViewBag.Action = "Edit";
-            var Committee = context.Committees.Find(id);
-            return View(Committee);
+            var Event = context.Committees.Find(id);
+            if (Event == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(Event);
         }
         [HttpPost]
         public IActionResult EditCommittee(Committees model)
@@ -170,15 +171,23 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 string addOrEdit;
                 if (model.CommitteesID == 0)
                 {
+                    model.CommitteeCreationDate = DateTime.Now;
                     context.Committees.Add(model);
                     addOrEdit = "added";
                 }
                 else
                 {
+                    var committee = context.Committees.Include(c => c.committeeMembers).Where(c => c.CommitteesID == model.CommitteesID).FirstOrDefault();
+                    if(committee == null)
+                    {
+                        ModelState.AddModelError("", "Committee with ID  \"" + model.CommitteesID + "\" does not exist");
+                        return View();
+                    }
+                    model.committeeMembers = committee.committeeMembers;
+                    model.CommitteeCreationDate = committee.CommitteeCreationDate;
                     context.Committees.Update(model);
                     addOrEdit = "updated";
                 }
-
                 context.SaveChanges();
                 TempData["CommitteeChanges"] = String.Format("The \"{0}\" has been {1}.", model.CommitteeName, addOrEdit);
                 return RedirectToAction("Index");
@@ -188,6 +197,22 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 ViewBag.Action = (model.CommitteesID == 0) ? "Add" : "Edit";
                 return View(model);
             }
+        }
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var committee = context.Committees.Include(c => c.committeeMembers).Where(c => c.CommitteesID == id).FirstOrDefault();
+            if (committee == null)
+            {
+                return RedirectToAction("Index");
+            }
+            foreach(var member in committee.committeeMembers)
+            {
+                context.CommitteeMembers.Remove(member);
+            }
+            context.Committees.Remove(committee);
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

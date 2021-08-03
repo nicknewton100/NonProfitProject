@@ -70,19 +70,6 @@
                             </div>
                         </div>
                     }
-                    //Executes this code if user is signed in and in member role
-                    else if (User.IsInRole("Member"))
-                    {
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome @User.Identity.Name</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-area="Member" asp-controller="Profile" asp-action="Index">Profile</a>
-                                <form class="dropdown-item bg-dark" method="post" asp-area="" asp-action="Logout" asp-controller="Account">
-                                    <button type="submit" class="btn btn-dark">Logout</button>
-                                </form>
-                            </div>
-                        </div>
-                    }
                     //Executes this code if user is signed in and not in admin role (regular site user)
                     else
                     {

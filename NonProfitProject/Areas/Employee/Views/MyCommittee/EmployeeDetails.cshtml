@@ -1,0 +1,317 @@
+﻿@model Employees
+@{
+    if (ViewBag.Action == "MemberDetails")
+    {
+        ViewData["Title"] = "Member Details";
+    }
+    else
+    {
+        ViewData["Title"] = "Employee Details";
+    }
+
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+    @using NonProfitProject.Models.Extensions;
+    var sessionModel = Context.Session.GetObject<NonProfitProject.Areas.Admin.Models.ViewModels.CommitteeMemberViewModel>("CommitteeMemberModel");
+
+    @using Microsoft.AspNetCore.Http;
+    var position = Context.Session.GetString("CommitteePosition");
+    bool canEdit = false;
+    if (position == "President" || position == "Vice President")
+    {
+        canEdit = true;
+    }
+}
+<head>
+    <script type="text/javascript" src="~/js/UserValidation.js"></script>
+</head>
+<div class="container">
+    <div class="card-header-pills"><h1 class="fa fa-address-card">  @ViewData["Title"]</h1></div>
+    <div>
+        <div class="row">
+            <input type="hidden" asp-for="EmpID">
+            <div class="card w-auto" style="margin:0.5rem;padding:0.25rem;">
+                <div class="card-body">
+                    <h4>Personal Information</h4>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                        <div class="form-group">
+                            <!--FIRST NAME-->
+                            <div class="col-auto"><label>First Name: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="User.UserFirstName" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--LAST NAME-->
+                            <div class="col-auto"><label>Last Name: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="User.UserLastName" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--BIRTH DATE-->
+                            <div class="col-auto"><label>Birth Date: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="User.UserBirthDate" class="form-control" type="date" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--BIRTH DATE-->
+                            <div class="col-auto"><label>Phone: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="User.PhoneNumber" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--GENDER-->
+                            <div class="col-auto"><label>Gender: </label></div>
+                            <div class="col-auto">
+                                <select class="form-control" asp-for="User.UserGender" disabled>
+                                    <option></option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Prefer Not to Say">Prefer Not to Say</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <h4>Address Information</h4>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                        <div class="form-group w-50">
+                            <!--ADDRESS 1-->
+                            <div class="col-auto"><label>Address 1: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="User.UserAddr1" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group w-50">
+                            <!--ADDRESS 2-->
+                            <div class="col-auto"><label>Address 2: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="User.UserAddr2" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <!--CITY-->
+                            <div class="col-auto"><label>City: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="User.UserCity" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--STATE-->
+                            <div class="col-auto"><label>State: </label></div>
+                            <div class="col-auto">
+                                <select asp-for="User.UserState" class="form-control" disabled>
+                                    <option></option>
+                                    <option value="Alaska">Alaska</option>
+                                    <option value="Alabama">Alabama</option>
+                                    <option value="Arkansas">Arkansas</option>
+                                    <option value="Arizona">Arizona</option>
+                                    <option value="California">California</option>
+                                    <option value="Colorado">Colorado</option>
+                                    <option value="Connecticut">Connecticut</option>
+                                    <option value="District of Columbia">District of Columbia</option>
+                                    <option value="Delaware">Delaware</option>
+                                    <option value="Florida">Florida</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Hawaii">Hawaii</option>
+                                    <option value="Iowa">Iowa</option>
+                                    <option value="Idaho">Idaho</option>
+                                    <option value="Illinois">Illinois</option>
+                                    <option value="Indiana">Indiana</option>
+                                    <option value="Kansas">Kansas</option>
+                                    <option value="Kentucky">Kentucky</option>
+                                    <option value="Louisiana">Louisiana</option>
+                                    <option value="Massachusetts">Massachusetts</option>
+                                    <option value="Maryland">Maryland</option>
+                                    <option value="Maine">Maine</option>
+                                    <option value="Michigan">Michigan</option>
+                                    <option value="Michigan">Minnesota</option>
+                                    <option value="Missouri">Missouri</option>
+                                    <option value="Mississippi">Mississippi</option>
+                                    <option value="Montana">Montana</option>
+                                    <option value="North Carolina">North Carolina</option>
+                                    <option value="North Dakota">North Dakota</option>
+                                    <option value="Nebraska">Nebraska</option>
+                                    <option value="New Hampshire">New Hampshire</option>
+                                    <option value="New Jersey">New Jersey</option>
+                                    <option value="New Mexico">New Mexico</option>
+                                    <option value="Nevada">Nevada</option>
+                                    <option value="New York">New York</option>
+                                    <option value="Ohio">Ohio</option>
+                                    <option value="Oklahoma">Oklahoma</option>
+                                    <option value="Oregon">Oregon</option>
+                                    <option value="Pennsylvania">Pennsylvania</option>
+                                    <option value="Puerto Rico">Puerto Rico</option>
+                                    <option value="Rhode Island">Rhode Island</option>
+                                    <option value="South Carolina">South Carolina</option>
+                                    <option value="South Dakota">South Dakota</option>
+                                    <option value="Tennessee">Tennessee</option>
+                                    <option value="Texas">Texas</option>
+                                    <option value="Utah">Utah</option>
+                                    <option value="Virginia">Virginia</option>
+                                    <option value="Vermont">Vermont</option>
+                                    <option value="Washington">Washington</option>
+                                    <option value="Wisconsin">Wisconsin</option>
+                                    <option value="West Virginia">West Virginia</option>
+                                    <option value="Wyoming">Wyoming</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-auto"><label>Postal Code: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="User.UserPostalCode" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <h4>Job Information</h4>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                        <div class="form-group">
+                            <!--POSITION-->
+                            <div class="col-auto"><label>Position: </label></div>
+                            <div class="col-auto">
+                                <input asp-for="Position" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--SALARY-->
+                            <div class="col-auto"><label>Salary: </label></div>
+                            <div class="col-auto">
+                                <input class="form-control" value="$@Model.Salary" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--HIRE DATE-->
+                            <div class="col-auto"><label>Hire Date: </label></div>
+                            <div class="col-auto">
+                                <input class="form-control" value="@Model.HireDate" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--RELEASE DATE-->
+                            <div class="col-auto"><label>Release Date: </label></div>
+                            <div class="col-auto">
+                                <input class="form-control" value="@Model.ReleaseDate" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    @if (ViewBag!.Action == "MemberDetails")
+                    {
+                        <div class="row">
+                            <div class="form-group">
+                                <!--COMMITTEE-->
+                                <div class="col-auto"><label>Committee: </label></div>
+                                <div class="col-auto">
+                                    <input class="form-control" value="@sessionModel.Committee.CommitteeName" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group" id="CommitteePosition">
+                                <!--COMMITTEE POSITION-->
+                                <div class="col-auto"><label>Committee Position: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="CommitteeMembers.CommitteePosition" class="form-control" disabled />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="row"></div>
+                    <br />
+                    <h4>Login Information</h4>
+                    <div class="dropdown-divider"></div>
+                    <div id="LoginInformation">
+                        <div class="row">
+                            <div class="form-group">
+                                <!--USERNAME-->
+                                <div class="col-auto"><label>Username: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="User.UserName" class="form-control" id="Username" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group w-50">
+                                <!--EMAIL ADDRESS-->
+                                <div class="col-auto"><label>Email Address: </label></div>
+                                <div class="col-auto">
+                                    <input asp-for="User.Email" class="form-control" id="Email" disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @if (ViewBag!.Action == "MemberDetails" && canEdit)
+                        {
+                            <form method="post" asp-action="RemoveMember" asp-route-id="@Model.EmpID">
+                                <button type="button" class="btn-lg btn-outline-dark mr-1" onclick="RemoveMember(this)">Remove from @sessionModel.Committee.CommitteeName</button>
+                            </form>
+                            <br />
+                            <button type="button" class="btn-lg btn-dark " onclick="location.href = '@Url.Action("Index", "MyCommittee", new { name = sessionModel.Committee.CommitteeName })'">Back</button>
+                            <script>
+                                function RemoveMember(e) {
+                                    Swal.fire({
+                                        title: 'Are you sure want to remove this member?',
+                                        showDenyButton: true,
+                                        confirmButtonText: `Yes`,
+                                        denyButtonText: `No`,
+                                    }).then((result) => {
+                                        /* Read more about isConfirmed, isDenied below */
+                                        if (result.isConfirmed) {
+                                            e.form.submit();
+                                        }
+                                    })
+                                }
+                            </script>
+                        }
+                        else if (canEdit)
+                        {
+                            <form method="post" asp-action="AddMembers" asp-route-name="@sessionModel.Committee.CommitteeName" asp-route-id="@Model.EmpID" asp-route-position="@Model.Position">
+                                <button type="button" class="btn-lg btn-outline-dark mr-1" onclick="SetPosition(this)">Add to @sessionModel.Committee.CommitteeName</button>
+                            </form>
+                            <br />
+                            <button type="button" class="btn-lg btn-dark" onclick="location.href = '@Url.Action("AddMembers", "MyCommittee", new { name = sessionModel.Committee.CommitteeName })'">Back</button>
+                        }
+                        else { 
+                            <button type="button" class="btn-lg btn-dark" onclick="location.href = '@Url.Action("Index", "MyCommittee", new { name = sessionModel.Committee.CommitteeName })'">Back</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function SetPosition(e) {
+        Swal.fire({
+            title: 'Set Committee Position',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showDenyButton: true,
+            confirmButtonText: `Add to @sessionModel.Committee.CommitteeName`,
+            denyButtonText: `Cancel`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                let input = result.value;
+                let _form = e.form;
+                let attr = _form.getAttribute("action");
+                let split = attr.split("/");
+                let substring = attr.substring(0, attr.length - split[split.length - 2].length - 1);
+                _form.setAttribute("action", substring + input.replace(' ', '%20') + '/');
+                e.form.submit();
+            }
+        })
+    }
+</script>
+
+
+

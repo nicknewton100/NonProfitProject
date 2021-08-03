@@ -1,11 +1,45 @@
-﻿@{
+﻿@model Committees
+@{
     ViewData["Title"] = ViewBag.Action + "Committee";
     ViewData["Title2"] = "Admin";
     Layout = "_AdminLayout";
 }
 
 <div class="container">
-    <h1>Committee Name</h1>
-    <h4>Committee Date of Creation</h4>
-    <h4>Committee Description</h4>
+    <div class="card-header-pills"><h1 class="fas fa-users"> @ViewData["Title"]</h1></div>
+    <br />
+    <div class="row">
+        <div class="card w-auto">
+            <div class="card-body">
+                <div asp-validation-summary="All" class="text-danger" style="font-size:small;"></div>
+                <form method="post" asp-action="EditCommittee">
+                    <div class="row form-group justify-content-start">
+                        <div class="col-auto"><label>Name</label></div>
+                        <div class="col-12">
+                            <span asp-validation-for="CommitteeName" class="text-danger" style="font-size:small;"></span>
+                            <input asp-for="CommitteeName" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row form-group justify-content-start">
+                        <div class="col-auto"><label>Description</label></div>
+                        <div class="col-12">
+                            <span asp-validation-for="CommitteeDescription" class="text-danger" style="font-size:small;"></span>
+                            <textarea asp-for="CommitteeDescription" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <input type="hidden" asp-for="CommitteesID" />
+                    @if (ViewBag.Action == "Edit")
+                    {
+                        <button type="submit" class="btn btn-dark">Edit Committee</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-dark">Add Committee</button>
+                    }
+
+                    <a asp-action="Index" class="btn btn-danger">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

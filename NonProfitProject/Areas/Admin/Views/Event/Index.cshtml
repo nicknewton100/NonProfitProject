@@ -6,49 +6,59 @@
 
 <div class="container">
     <div class="card-header-pills"><h1 class="far fa-calendar-alt"> Events & Meetings</h1></div>
-    <div class="container" style="font-size:small;">
-        <div>
-            <a button class="btn btn-outline-dark" asp-area="Admin" asp-controller="Event" asp-action="AddEvent">Add Event</a>
+    <a class="btn btn-dark" asp-action="AddEvent">Add Event</a>
+    <br />
+    <br />
+    <h5 class="text-primary">@TempData["EventChanges"]?.ToString()</h5>
+    @foreach (var events in Model)
+    {
+        @if (events.EventAddr2 != "")
+        {
+            events.EventAddr2 = " " + events.EventAddr2;
+        }
+        <div class="card w-75">
+            <div class="card-header">
+                <div class="row justify-content-between">
+                    <h3 style="margin-left: 10px;">@events.EventName</h3>
+                    <form asp-action="Share" asp-route-id="@events.EventID" asp-route-email="email">
+                        <button type="button" class="fas fa-envelope" style="margin-right: 10px;padding:0; font-size: larger; background-color: transparent; outline: none; border: none;" onclick="Share(this)"></button>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+
+            </div>
+            <div class="card-body" style="font-size:medium;">
+                <h4 style="margin-bottom:10px;">Details</h4>
+                @if (events.EventStartDate.Date == events.EventEndDate.Date)
+                {
+                    <p style=""><i class="fas fa-clock" style="margin-right: 1em;"></i>@events.EventStartDate.ToLocalTime().ToString("D") &nbsp&nbsp  @events.EventStartDate.ToLocalTime().ToString("t") - @events.EventEndDate.ToLocalTime().ToString("t")</p>
+                }
+                else
+                {
+                    <p><i class="fas fa-clock" style="margin-right:1em;"></i>@events.EventStartDate.ToLocalTime().ToString("f") - @events.EventEndDate.ToLocalTime().ToString("f")</p>
+                }
+                <p><i class="fas fa-map-marker" style="margin-right:1em;"></i>@events.EventAddr1@events.EventAddr2, @events.EventCity, @events.EventState @events.EventPostalCode</p>
+                <br />
+                <p>@events.EventDescription</p>
+            </div>
+            <div class="card-footer" style="font-size:small;">
+                <div class="row justify-content-between">
+                    <div class="col-auto">
+                        <a class="card-link text-primary" asp-action="EditEvent" asp-route-id="@events.EventID">Edit</a>
+                    </div>
+                    <div class="col-auto">
+                        <form method="post" asp-action="Delete" asp-route-id="@events.EventID">
+                            <button type="button" class="card-link text-danger" style="background:none !important;border:none;" onclick="DeleteEvent(this)">Delete</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
         </div>
         <br />
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col" hidden>#</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">End Date</th>
-                    <th scope="col">Event Title</th>
-                    <th scope="col">Event Information</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Event events in Model)
-                {
-                <tr>
-                    <th scope="row" hidden>@events.EventID </th>
-                    <th>@events.EventStartDate.ToString("d") <br /> @events.EventStartDate.ToShortTimeString()</th>
-                    <th>@events.EventEndDate.ToString("d") <br /> @events.EventEndDate.ToShortTimeString()</th>
-                    <th>@events.EventName</th>
-                    <th>@events.EventDescription</th>
-                    <th>
-                        <form method="get" asp-action="EditEvent" asp-route-id="@events.EventID">
-                            <button type="submit" class="btn btn-outline-dark">Edit</button>
-                        </form>
-                    </th>
-                    <th>
-                        <form method="post" asp-action="delete" asp-route-id="@events.EventID">
-                            <button type="button" class="btn btn-dark" onclick="DeleteEvent(this)">Delete</button>
-                        </form>
-                    </th>
-                </tr>
-                }
-            </tbody>
-        </table>
         <br />
-        <h5 class="text-primary">@TempData["EventChanges"]?.ToString()</h5>
-    </div>
+    }
 </div>
 <script type="text/javascript">
     function DeleteEvent(e) {
@@ -61,6 +71,54 @@
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 e.form.submit();
+            }
+        })
+    }
+    function Share(e) {
+        Swal.fire({
+            title: 'Share',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showDenyButton: true,
+            confirmButtonText: `Send Email`,
+            denyButtonText: `Cancel`,
+            preConfirm: (email) => {
+                var regex = @Html.Raw("/^([a-zA-Z0-9_.+-])+\\@(([a-zA-Z0-9-])+\\.)+([a-zA-Z0-9]{2,4})+$/");
+                if (!regex.test(email)) {
+                    Swal.showValidationMessage(
+                        'Email is Invalid'
+                    )
+                }
+            },
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Email is Sending'
+                })
+                setTimeout(function () {
+                    let input = result.value;
+                    let _form = e.form;
+                    let attr = _form.getAttribute("action");
+                    let split = attr.split("/");
+                    let substring = attr.substring(0, attr.length - split[split.length - 2].length - 1);
+                    _form.setAttribute("action", substring + input.replace(' ', '%20') + '/');
+                    e.form.submit();
+                }, 3000);
             }
         })
     }

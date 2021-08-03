@@ -21,7 +21,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            var news = context.News.ToList();
+            var news = context.News.OrderByDescending(n => n.NewsPublishDate).ToList();
             return View(news);
         }
         [HttpGet]

@@ -2,6 +2,8 @@
     Layout = "_Layout";
 
     @using Microsoft.AspNetCore.Identity;
+    @using Microsoft.AspNetCore.Http;
+    var committeeName = Context.Session.GetString("CommitteeName");
 
 }
 
@@ -52,24 +54,43 @@
                 <a class="nav-link text-white" asp-area=" " asp-controller="Home" asp-action="Index">Home Website</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Employee" asp-controller="Committee" asp-action="Index">My Board Committee</a>
+                <a class="nav-link text-white" asp-area="Employee" asp-controller="MyCommittee" asp-action="Index">My Board Committee</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Employee" asp-controller="News" asp-action="Index">News Articles</a>
-            </li>
+            @if (committeeName == "News Committee")
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="Employee" asp-controller="News" asp-action="Index">News Articles</a>
+                </li>
+            }
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Employee" asp-controller="Event" asp-action="Index">Calendar Events</a>
             </li>
+            @if (committeeName == "Fundrasing Committee")
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="Employee" asp-controller="DonationHistory" asp-action="Index">Donation History</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Employee" asp-controller="DonationHistory" asp-action="Index">Donation History</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="Employee" asp-controller="MembershipHistory" asp-action="Index">Membership History</a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="Employee" asp-controller="DonationHistory" asp-action="Index">My Donations</a>
+                </li>
+            }
+
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Employee" asp-controller="Home" asp-action="Index">Resources</a>
             </li>
             <li class="dropdown-divider"></li>
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Employee" asp-controller="Profile" asp-action="Index">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="Employee" asp-controller="Membership" asp-action="Index">Membership</a>
             </li>
 
         </ul>

@@ -1,13 +1,60 @@
-﻿
+﻿@model List<News>
 @{
     ViewData["Title"] = "News Articles";
     ViewData["Title2"] = "Employee";
-    Layout = "_EmployeeLayout";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
 }
-
 <div class="container">
-    <div class="card-header">
-        <h1> News will appear here</h1>
-    </div>
+    <div class="card-header-pills"><h1 class="far fa-newspaper"> News Articles</h1></div>
+    <a class="btn btn-outline-dark" asp-action="AddNews">Add News</a>
     <br />
+    <br />
+    <div class="container">
+        <div class="row" style="font-size:small">
+            @foreach (var news in Model)
+            {
+                <div class="card w-75" style="margin:0.25rem;">
+                    <div class="card-body">
+                        <h3 style="margin-bottom:0px;">@news.NewsTitle</h3>
+                        <div class="card-title">
+                          <p style="font-size:18px;">@news.NewsHeader</p>
+                        </div>
+                        <p style="margin: 0px; color: darkgray;">Published: @news.NewsPublishDate.ToString("f")</p>
+                        <p style="margin:0px;color:darkgray;">Last updated: @news.NewsLastUpdated.ToString("f")</p>
+                        <p style="margin: 0px; color: darkgray; ">Written By: @news.CreatedBy</p>
+                        <br />
+                        <div class="card-text" id="newsBody">@Html.Raw(news.NewsBody)</div>
+                    </div>
+                    <div class="card-footer">
+                            <div class="row justify-content-between">
+                                <div class="col-auto">
+                                    <a class="card-link text-primary" asp-action="EditNews" asp-route-id="@news.NewsID">Edit</a>
+                                </div>
+                                <div class="col-auto">
+                                    <form method="post" asp-action="Delete" asp-route-id="@news.NewsID">
+                                        <button type="button" class="card-link text-danger" style="background:none !important;border:none;" onclick="DeleteNews(this)">Delete</button>
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>
+<script type="text/javascript">
+    function DeleteNews(e) {
+        Swal.fire({
+            title: 'Are you sure you want to delete this news article?',
+            showDenyButton: true,
+            confirmButtonText: `Yes`,
+            denyButtonText: `No`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                e.form.submit();
+            }
+        })
+    }
+</script>

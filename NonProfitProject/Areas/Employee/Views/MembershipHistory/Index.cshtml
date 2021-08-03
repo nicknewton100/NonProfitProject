@@ -1,0 +1,122 @@
+﻿@model List<Receipts>
+@{
+    ViewData["Title"] = "Membership Dues History";
+    ViewData["Title2"] = "Admin";
+    Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
+}
+<div class="container">
+    <div class="container">
+        <div class="card-header-pills"><h1 class="fa fa-dollar-sign">  @ViewData["Title"]</h1></div>
+    </div>
+    <br />
+    <div class="container" style="font-size:medium;">
+        <div class="card">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="w-auto">Receipt ID</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Membership</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Billing Date</th>
+                        <th scope="col">Membership Status</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model.Count == 0)
+                    {
+                        <tr>
+                            <td style="overflow:visible;overflow-wrap:normal;margin:auto;">
+                                <h5>There are no membership dues</h5>
+                            </td>
+                            
+                        </tr>
+                        
+                    }
+                    @foreach (var due in Model)
+                    {
+                        <tr>
+                            <td scope="row">@due.ReceiptID</td>
+                            <td scope="row">@due.User.UserName</td>
+                            <td>@due.MembershipDue.MembershipType.Name</td>
+                            <td>@due.MembershipDue.MemStartDate.ToShortDateString()</td>
+                            <td>@due.MembershipDue.MemEndDate.ToShortDateString()</td>
+                            <td>@due.MembershipDue.MemRenewalDate.ToShortDateString()</td>
+                            <td>@{
+                                if (due.MembershipDue.MemActive)
+                                {
+                                        <p>Active</p>
+                                }
+                                else
+                                {
+                                        @if (due.MembershipDue.MemCancelDate != null)
+                                        {
+                                            <p>Canceled</p>
+                                        }
+                                        else
+                                        {
+                                            <p>Expired</p>
+                                        }
+
+                                    }
+                                }
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-dark mr-1" onclick="location.href = '@Url.Action("Details","MembershipHistory",new {id = due.ReceiptID })'">Details</button>
+                            </td>
+                            <td>
+                                @if (due.MembershipDue.MemActive)
+                                {
+                                    <form method="post" asp-action="CancelMembership" asp-route-id="@due.ReceiptID">
+                                        <button type="button" class="btn btn-danger" onclick="CancelMembership(this)">Cancel Membership</button>
+                                    </form>
+                                    <script type="text/javascript">
+                                        function CancelMembership(e) {
+                                            Swal.fire({
+                                                title: 'Are you sure you want to cancel this membership?',
+                                                showDenyButton: true,
+                                                confirmButtonText: `Yes`,
+                                                denyButtonText: `No`,
+                                            }).then((result) => {
+                                                /* Read more about isConfirmed, isDenied below */
+                                                if (result.isConfirmed) {
+                                                    e.form.submit();
+                                                }
+                                            })
+                                        }
+                                    </script>
+                                }
+                                else
+                                {
+                                    <form method="post" asp-action="Delete" asp-route-id="@due.ReceiptID">
+                                        <button type="button" class="btn btn-dark" onclick="DeleteMembership(this)">Delete</button>
+                                    </form>
+                                    <script type="text/javascript">
+                                        function DeleteMembership(e) {
+                                            Swal.fire({
+                                                title: 'Are you sure you want to delete this Membership Due?',
+                                                showDenyButton: true,
+                                                confirmButtonText: `Yes`,
+                                                denyButtonText: `No`,
+                                            }).then((result) => {
+                                                /* Read more about isConfirmed, isDenied below */
+                                                if (result.isConfirmed) {
+                                                    e.form.submit();
+                                                }
+                                            })
+                                        }
+                                    </script>
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <h5 class="text-primary">@TempData["MembershipDueChanges"]?.ToString()</h5>
+    </div>
+</div>

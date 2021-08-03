@@ -1,17 +1,70 @@
-﻿@{
+﻿@model List<SavedPaymentInformation>
+@{
     ViewData["Title"] = "Manage Payments";
     ViewData["Title2"] = "Profile";
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
 }
+<style>
+    p{
+        margin-bottom:2px;
+    }
+</style>
 <div class="container">
-    <div class="row">
-        <p>Cardholder Name</p>
-        <p>Card Number</p>
-        <p>Expiration Date</p>
+    <div class="container">
+        <div class="card-header-pills"><h1 class="fas fa-credit-card"> Manage Payment Methods</h1></div>
+        <a class="btn btn-dark" asp-action="AddPayment">Add Payment Method</a>
     </div>
-    <div class="row">
-        <p>Billing name</p>
-        <p> 1017 welcome rd, Williamston</p>
-        <p>South Carolina 29697</p>
+    <br />
+    <br />
+    <div class="container">
+        <div class="row">
+            @foreach (var payment in Model)
+            {
+                <div class="card mb-4" style="font-size:small;margin-right: 1em; width:45%;">
+                    <div class="card-body p-0">
+                        <div class="form-row mb-0">
+                            <div class="form-group p-0 mb-0" style="margin-left:2rem;">
+                                <h6 style="text-decoration:underline">Payment Method</h6>
+                                <p>@payment.CardType</p>
+                                <p>@payment.CardholderName</p>
+                                <p>xxxx-xxxx-xxxx-@payment.Last4Digits</p>
+                                <p>@payment.ExpDate</p>
+                            </div>
+                            <div class="form-group p-0 mb-0" style="margin-left:5rem;">
+                                <h6 style="text-decoration:underline">Billing Details</h6>
+                                <p>@payment.BillingFirstName @payment.BillingLastName</p>
+                                <p>@payment.BillingAddr1 @payment.BillingAddr2 @payment.BillingCity</p>
+                                <p>@payment.BillingState, @payment.BillingPostalCode</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="font-size:small;">
+                        <div class="row justify-content-end">
+                            <div class="col-auto">
+                                <form method="post" asp-action="DeletePayment" asp-route-id="@payment.SavedPaymentID">
+                                    <button type="button" class="card-link text-danger" style="background:none !important;border:none;" onclick="DeletePayment(this)">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+            }
+        </div>
     </div>
 </div>
+<script>
+    function DeletePayment(e){
+        Swal.fire({
+            title: 'Are you sure you want to remove this payment method?',
+            showDenyButton: true,
+            confirmButtonText: `Yes`,
+            denyButtonText: `No`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                e.form.submit();
+            }
+        })
+    }
+</script>
