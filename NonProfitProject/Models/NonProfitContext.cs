@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace NonProfitProject.Models
 {
+    //generates the database and is used to retreive items from the database
     public class NonProfitContext : IdentityDbContext<User>
     {
         public NonProfitContext(DbContextOptions<NonProfitContext> options) : base(options) { }
@@ -28,6 +29,7 @@ namespace NonProfitProject.Models
         public DbSet<MembershipDues> MembershipDues { get; set; }
         public DbSet<MembershipType> MembershipTypes { get; set; }
 
+        //inserts infoirmation into the table
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -205,6 +207,7 @@ namespace NonProfitProject.Models
                 .HasPrincipalKey<Employees>(e => e.EmpID);
         }
 
+        //creates admin user on startup if a user is doesnt exist
         public static async Task CreateAdminUser(IServiceProvider serviceProvider, IConfiguration _configuration )
         {
             UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
@@ -293,6 +296,7 @@ namespace NonProfitProject.Models
             }
             CreateDeafultUsers(serviceProvider);
         }
+        //creates some default users in the database on startup if they do not exist
         public static async void CreateDeafultUsers(IServiceProvider serviceProvider)
         {
             UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();

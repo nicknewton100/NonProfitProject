@@ -9,6 +9,7 @@ namespace NonProfitProject.Models
 {
     public class Receipts
     {
+        //holds Receipt table information
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ReceiptID { get; set; }

@@ -9,6 +9,8 @@ namespace NonProfitProject.Models
 {
     public class Donations
     {
+
+        //holds Donation table information
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonationID { get; set; }

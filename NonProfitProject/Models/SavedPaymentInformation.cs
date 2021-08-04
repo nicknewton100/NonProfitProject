@@ -9,6 +9,8 @@ namespace NonProfitProject.Models
 {
     public class SavedPaymentInformation
     {
+        //holds saved payments for individual users.
+
         //all sensitive data will be stored as encrypted values with datatype of string
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -9,6 +9,8 @@ namespace NonProfitProject.Models.ViewModels.Shared.Users
 {
     public class SavedPaymentViewModel
     {
+        //holds data and validation for account editing of payments
+
         [Required(ErrorMessage = "Please enter Cardholder Name")]
         public string CardholderName { get; set; }
         [Required(ErrorMessage = "Please select a Card type")]

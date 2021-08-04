@@ -8,6 +8,8 @@ namespace NonProfitProject.Models.ViewModels
 {
     public class DonationPaymentViewModel
     {
+        
+        //holds validation messsages and dat for donation payments
         [Required(ErrorMessage = "Please enter Cardholder Name")]
         public string CardholderName { get; set; }
         [Required(ErrorMessage = "Please select Card Type")]

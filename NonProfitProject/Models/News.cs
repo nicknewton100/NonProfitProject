@@ -8,6 +8,7 @@ namespace NonProfitProject.Models
 {
     public class News
     {
+        ////holds News table information
         public int NewsID { get; set; }
         [Required(ErrorMessage ="Title Text is Requied")]
         public string NewsTitle { get; set; }

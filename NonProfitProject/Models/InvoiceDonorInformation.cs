@@ -9,6 +9,7 @@ namespace NonProfitProject.Models
 {
     public class InvoiceDonorInformation
     {
+        //holds invoice donor information. This is done to allow the users to delete saved information or even their profile but holds the information for later use. Also allows non members to donate
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonorInfoID { get; set; }

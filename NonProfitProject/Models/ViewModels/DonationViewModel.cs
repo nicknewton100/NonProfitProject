@@ -8,6 +8,8 @@ namespace NonProfitProject.Models.ViewModels
 {
     public class DonationViewModel
     {
+        //holds donation information and personal information as well as validation
+        
         //donation information
         [Required(ErrorMessage = "Please select a Donation Amount")]
         public decimal DonationAmount { get; set; }

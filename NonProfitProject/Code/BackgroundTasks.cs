@@ -42,7 +42,7 @@ namespace NonProfitProject.Code
             logger.LogInformation("Membership renew has stopped working");
             return Task.CompletedTask;
         }
-        //checks if the user has a membership that epires on this day and if it does, it will renew it if its active
+        //checks if the user has a membership that expires on this day and if it does, it will renew it if its active
         public void RenewMembership()
         {
             List<MembershipDues> membershipDues;

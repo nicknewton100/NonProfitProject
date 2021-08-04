@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 
 namespace NonProfitProject.Models
 {
+    //holds event table information
     public class Event
     {
         [Key]

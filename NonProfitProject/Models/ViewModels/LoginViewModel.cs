@@ -8,6 +8,7 @@ namespace NonProfitProject.Models.ViewModels
 {       //This model is used for login viewpage
     public class LoginViewModel
     {
+        //holds login information data that has been posted and validation messages
         [Required(ErrorMessage = "Please enter a username. ")]
         [StringLength(60)]
         public string Username { get; set; }

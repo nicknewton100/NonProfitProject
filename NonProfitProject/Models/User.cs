@@ -9,9 +9,10 @@ using NonProfitProject.Models;
 
 namespace NonProfitProject.Models
 {
+    //inherits identity userr which already has some basic variables.
     public class User : IdentityUser
     {
-        
+        //holds all user information including password hash, username, email, firstname, lastname etc.
         public string UserFirstName { get; set; }
         public string UserLastName { get; set; }
         public string UserAddr1 { get; set; }

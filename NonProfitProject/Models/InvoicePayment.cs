@@ -9,6 +9,8 @@ namespace NonProfitProject.Models
 {
     public class InvoicePayment
     {
+        //this holds invoicepayment information so that when a user removes a saved card, it doesnt delete it out of the invoice payments
+        
         //all sensitive data will be stored as encrypted values with datatype of string
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

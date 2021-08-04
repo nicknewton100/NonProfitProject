@@ -9,6 +9,7 @@ namespace NonProfitProject.Models
 {
     public class Employees
     {
+        //holds employee table information
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string EmpID { get; set; }

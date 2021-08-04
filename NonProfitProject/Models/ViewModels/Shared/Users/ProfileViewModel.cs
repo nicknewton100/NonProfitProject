@@ -8,6 +8,7 @@ namespace NonProfitProject.Models.ViewModels.Shared.Users
 {
     public class ProfileViewModel
     {
+        //holds data that is displayed on profile page
         public string UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

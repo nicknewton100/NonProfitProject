@@ -41,6 +41,7 @@ namespace NonProfitProject
             services.AddControllersWithViews();           
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+            //creates new view page directories that the program searches through when looking for a view
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.AreaViewLocationFormats.Add("/Views/Shared/Employee/{1}/{0}" + RazorViewEngine.ViewExtension);
@@ -49,11 +50,10 @@ namespace NonProfitProject
             });
 
 
-
+            //adds the database connection string
             services.AddDbContext<NonProfitContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("NonProfitContext"))
             );
-
             //sets the password requirements
             services.AddIdentity<User, IdentityRole>(options =>
             {
@@ -110,11 +110,6 @@ namespace NonProfitProject
                     name: "employee",
                     areaName: "Employee",
                     pattern: "Employee/{controller=Home}/{action=Index}/{id?}");
-
-                endpoints.MapAreaControllerRoute(
-                    name: "member",
-                    areaName: "Member",
-                    pattern: "Member/{controller=Home}/{action=Index}/{id?}");
 
 
                 endpoints.MapControllerRoute(

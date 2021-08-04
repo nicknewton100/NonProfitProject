@@ -9,6 +9,8 @@ namespace NonProfitProject.Models
 {
     public class MembershipDues
     {
+        //used for membership dues table
+        
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MemDuesID { get; set; }

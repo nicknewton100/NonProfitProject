@@ -9,6 +9,8 @@ namespace NonProfitProject.Models.ViewModels
 {   //this model is used for register viewpage
     public class RegisterViewModel
     {
+        //holds user data that has been posted and validation messages
+        
         [Required(ErrorMessage = "Please enter your First Name")]
         [StringLength(60)]
         public string Firstname { get; set; }

@@ -9,6 +9,7 @@ namespace NonProfitProject.Models
 {
     public class CommitteeMembers
     {
+        //holds committee member table information
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CommitteeMbrID { get; set; }
