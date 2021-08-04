@@ -15,30 +15,33 @@
     <form class="align-items-center justify-content-center" asp-action="AddPayment">
         <div class="row">
             <div class="card w-auto">
+                <!--BILLING ADDRESS-->
                 <div class="card-header text-center">
                     <h3>Billing Address</h3>
                 </div>
                 <div class="card-body">
                     <div class="form-row" style="margin: 0 2rem; font-size:small;">
+                        <!--BILLING FIRST NAME-->
                         <div class="form-group col-md-6">
-                            
                             <label for="firstName">First Name</label>
                             <input asp-for="BillingFirstName" class="form-control BillingInformation" id="firstName" placeholder="First Name">
                             <span asp-validation-for="BillingFirstName" class="text-danger"></span>
                         </div>
+                        <!--BILLING LAST NAME-->
                         <div class="form-group col-md-6">
-                            
                             <label for="lastName">Last Name</label>
                             <input asp-for="BillingLastName" class="form-control BillingInformation" id="lastName" placeholder="Last Name">
                             <span asp-validation-for="BillingLastName" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-row" style="margin: 0 2rem; font-size:small;">
+                        <!--BILLING ADDRESS-->
                         <div class="form-group col-md-6">
                             <label for="inputAddress">Address</label>
                             <input asp-for="BillingAddr1" class="form-control BillingInformation" id="inputAddress" placeholder="1234 Main St">
                             <span asp-validation-for="BillingAddr1" class="text-danger"></span>
                         </div>
+                        <!--BILLING ADDRESS 2-->
                         <div class="form-group col-md-6">
                             <label for="inputAddress2">Address 2</label>
                             <input asp-for="BillingAddr2" class="form-control BillingInformation" id="inputAddress2" placeholder="Apartment, studio, or floor">
@@ -46,11 +49,13 @@
                         </div>
                     </div>
                     <div class="form-row" style="margin: 0 2rem; font-size:small;">
+                        <!--BILLING CITY-->
                         <div class="form-group col-md-3">
                             <label for="inputCity">City</label>
                             <input asp-for="BillingCity" class="form-control BillingInformation" id="inputCity">
                             <span asp-validation-for="BillingCity" class="text-danger"></span>
                         </div>
+                        <!--BILLING STATE-->
                         <div class="form-group col-md-4">
                             <label for="inputState">State</label>
                             <select asp-for="BillingState" class="form-control BillingInformation" style="pointer-events:none">
@@ -110,6 +115,7 @@
                             </select>
                             <span asp-validation-for="BillingState" class="text-danger"></span>
                         </div>
+                        <!--BILLING POSTAL CODE-->
                         <div class="form-group col-md-2">
                             <label for="inputPostalCode">Zip Code</label>
                             <input asp-for="BillingPostalCode" type="text" class="form-control BillingInformation" id="inputPostalCode" oninput="postalcode_format(this)">
@@ -120,6 +126,7 @@
                     <div class="dropdown-divider"></div>
 
                     <div class="form-row" style="margin: 0 2rem; font-size: small;">
+                        <!--USING ACCOUNT ADDRESS SELECTION-->
                         <div class="form-check">
                             <input asp-for="usingAccountAddress" class="form-check-input" type="checkbox" id="sameAddress" onchange="hideBillingInformation()" />
                             <label class="form-check-label" for="check1"> Use Account Address</label>
@@ -135,12 +142,14 @@
                 <div class="card-body">
                     <div class="form-row" style="margin-left: 2rem; font-size: small;">
                         <span asp-validation-for="CardType" class="text-danger"></span>
+                        <!--CREDIT CARD CHOICE-->
                         <div class="form-check">
                             <input asp-for="CardType" class="form-check-input" type="radio" value="Credit Card" id="CreditCard" />
                             <label class="fomr-check-label" for="CreditCard">Credit Card  <i class="far fa-credit-card"></i></label>
                         </div>
                     </div>
                     <div class="form-row" style="margin-left: 2rem; font-size: small;">
+                        <!--DEBIT CARD CHOICE-->
                         <div class="form-check">
                             <input asp-for="CardType" class="form-check-input" type="radio" value="Debit Card" id="DebitCard" />
                             <label class="fomr-check-label" for="DebitCard">Debit Card  <i class="fab fa-cc-visa"></i></label>
@@ -148,11 +157,13 @@
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="form-row" style="margin: 0 2rem; font-size: small;">
+                        <!--NAME ON CARD-->
                         <div class="form-group col-sm-auto">
                             <label for="nameCard">Name on Card</label>
                             <input asp-for="CardholderName" class="form-control" id="nameCard">
                             <span asp-validation-for="CardholderName" class="text-danger"></span>
                         </div>
+                        <!--CARD NUMBER-->
                         <div class="form-group col-sm-auto">
                             <label for="creditCardNumber">Card Number</label>
                             <input asp-for="CardNumber" class="form-control" id="creditCardNumber" oninput="this.value = cc_format(this.value)">
@@ -160,11 +171,13 @@
                         </div>
                     </div>
                     <div class="form-row" style="margin: 0 2rem; font-size: small;">
+                        <!--EXPIRATION DATE-->
                         <div class="form-group col-sm-auto">
                             <label for="expirationDate">Expiration Date</label>
                             <input asp-for="CardExpDate" type="text" class="form-control" id="expirationDate" oninput="card_expires_format(this)">
                             <span asp-validation-for="CardExpDate" class="text-danger"></span>
                         </div>
+                        <!--CVV-->
                         <div class="form-group col-sm-auto">
                             <label for="cvv">CVV</label>
                             <input asp-for="CardCVV" type="text" class="form-control" id="cvv" oninput="cvv_format(this)">
@@ -178,6 +191,7 @@
         <button type="submit" class="btn btn-dark">Add Payment</button>
         <a class="btn btn-danger" asp-action="ManagePayments">Cancel</a>
     </form>
+    <!--JAVASCRIPT FUNCTION USING SAME ADDRESS AS ACCOUNT ADDRESS-->
     <script>
         function hideBillingInformation() {
             var firstname = JSON.stringify(@Html.Raw(Json.Serialize(Model.AcctFirstName)));
