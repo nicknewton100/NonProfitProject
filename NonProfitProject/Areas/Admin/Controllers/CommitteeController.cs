@@ -41,7 +41,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             //creates session model
-            var CommitteeMemberModel = new CommitteeMemberViewModel() { Committee = context.Committees?.Where(c => c.CommitteeName == name).AsNoTracking().FirstOrDefault(), Employees = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID)).AsNoTracking().ToList() };
+            var CommitteeMemberModel = new CommitteeMemberViewModel() { Committee = context.Committees?.Where(c => c.CommitteeName == name).AsNoTracking().FirstOrDefault(), Employees = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID) && e.ReleaseDate == null).AsNoTracking().ToList() };
             HttpContext.Session.SetObject("CommitteeMemberModel", CommitteeMemberModel);
             return View(committee);
         }
