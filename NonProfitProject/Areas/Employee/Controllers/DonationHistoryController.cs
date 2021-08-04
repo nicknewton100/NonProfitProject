@@ -47,10 +47,6 @@ namespace NonProfitProject.Areas.Employee.Controllers
         }
         public IActionResult Details(int id)
         {
-            if (!isFundraisingCommitee())
-            {
-                return RedirectToAction("Index", "Home");
-            }
             var donation = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Include(r => r.User).Where(r => r.ReceiptID == id && r.MembershipDue == null).ToList();
 
             if (!isFundraisingCommitee())
