@@ -150,7 +150,7 @@
                 }
 
             }, 1000)
-            function CancelMembership() {
+            function CancelMembership(e) {
                 Swal.fire({
                     title: 'Are you sure you want to cancel membership?',
                     showDenyButton: true,
@@ -159,7 +159,7 @@
                 }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
-                        document.CancelMembershipForm.submit();
+                        e.form.submit();
                     }
                 })
             }
