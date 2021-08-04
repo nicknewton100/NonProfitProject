@@ -24,10 +24,10 @@ namespace NonProfitProject.Areas.Employee.Controllers
         {
             this.context = context;
         }
-        public bool isFundrasingCommitee()
+        public bool isFundraisingCommitee()
         {
             var name = CommitteeStatus.GetName(context, User.FindFirstValue(ClaimTypes.NameIdentifier));
-            if (name == "Fundrasing Committee")
+            if (name == "Fundraising Committee")
             {
                 return true;
             } 
@@ -37,23 +37,23 @@ namespace NonProfitProject.Areas.Employee.Controllers
         public IActionResult Index(string MyDonations)
         {
             var receipts = context.Receipts.Include(r => r.Donation).Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.User).Where(r => r.MembershipDue == null).OrderByDescending(r => r.Date).ToList();
-            if (!isFundrasingCommitee() || MyDonations == "true")
+            if (!isFundraisingCommitee() || MyDonations == "true")
             {
                 receipts = receipts.Where(r => r.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
-                ViewBag.FinancialEmployee = isFundrasingCommitee();
+                ViewBag.FinancialEmployee = isFundraisingCommitee();
                 ViewBag.Donations = "You have not made any donations yet";
             }
             return View(receipts);
         }
         public IActionResult Details(int id)
         {
-            if (!isFundrasingCommitee())
+            if (!isFundraisingCommitee())
             {
                 return RedirectToAction("Index", "Home");
             }
             var donation = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Include(r => r.User).Where(r => r.ReceiptID == id && r.MembershipDue == null).ToList();
 
-            if (!isFundrasingCommitee())
+            if (!isFundraisingCommitee())
             {
                 donation = donation.Where(d => d.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
             }
@@ -66,7 +66,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            if (!isFundrasingCommitee())
+            if (!isFundraisingCommitee())
             {
                 return RedirectToAction("Index");
             }
@@ -95,7 +95,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         [HttpPost]
         public IActionResult Edit(EditDonationViewModel model)
         {
-            if (!isFundrasingCommitee())
+            if (!isFundraisingCommitee())
             {
                 return RedirectToAction("Index");
             }
@@ -162,7 +162,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            if (!isFundrasingCommitee())
+            if (!isFundraisingCommitee())
             {
                 return RedirectToAction("Index", "Home");
             }

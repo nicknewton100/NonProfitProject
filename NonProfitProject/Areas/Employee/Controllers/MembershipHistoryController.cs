@@ -27,10 +27,10 @@ namespace NonProfitProject.Areas.Employee.Controllers
             this.context = context;
             this.userManager = userManager;
         }
-        public bool isFundrasingCommitee()
+        public bool isFundraisingCommitee()
         {
             var name = CommitteeStatus.GetName(context, User.FindFirstValue(ClaimTypes.NameIdentifier));
-            if (name == "Fundrasing Committee")
+            if (name == "Fundraising Committee")
             {
                 return true;
             }
@@ -38,7 +38,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         }
         public IActionResult Index()
         {
-            if (!isFundrasingCommitee())
+            if (!isFundraisingCommitee())
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -48,7 +48,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
 
         public IActionResult Details(int id)
         {
-            if (!isFundrasingCommitee())
+            if (!isFundraisingCommitee())
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -91,7 +91,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            if (!isFundrasingCommitee())
+            if (!isFundraisingCommitee())
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -120,7 +120,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         [HttpPost]
         public IActionResult Edit(EditMembershipDueViewModel model)
         {
-            if (!isFundrasingCommitee())
+            if (!isFundraisingCommitee())
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -180,7 +180,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            if (!isFundrasingCommitee())
+            if (!isFundraisingCommitee())
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -199,7 +199,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         [HttpPost]
         public async Task<IActionResult> CancelMembership(int id)
         {
-            if (!isFundrasingCommitee())
+            if (!isFundraisingCommitee())
             {
                 return RedirectToAction("Index", "Home");
             }

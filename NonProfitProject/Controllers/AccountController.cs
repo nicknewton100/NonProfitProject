@@ -144,8 +144,9 @@ namespace NonProfitProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            
             await signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
+            TempData.Clear();
             return RedirectToAction("Index", "Home");
         }
 

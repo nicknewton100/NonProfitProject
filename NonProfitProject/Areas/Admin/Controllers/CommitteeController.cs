@@ -177,7 +177,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 }
                 else
                 {
-                    var committee = context.Committees.Include(c => c.committeeMembers).Where(c => c.CommitteesID == model.CommitteesID).FirstOrDefault();
+                    var committee = context.Committees.Include(c => c.committeeMembers).Where(c => c.CommitteesID == model.CommitteesID).AsNoTracking().FirstOrDefault();
                     if(committee == null)
                     {
                         ModelState.AddModelError("", "Committee with ID  \"" + model.CommitteesID + "\" does not exist");
