@@ -18,6 +18,11 @@
     <br />
     <div class="container">
         <div class="row">
+            @if(Model.Count() == 0)
+            {
+                <div class="dropdown-divider"></div>
+                <h3 class="text-center">There are currently no saved payments</h3>
+            }
             @foreach (var payment in Model)
             {
                 <div class="card mb-4" style="font-size:small;margin-right: 1em; width:45%;">

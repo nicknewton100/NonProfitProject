@@ -143,7 +143,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             if (ModelState.IsValid)
             {
                 //sets receipt information
-                currentMembership.Total = model.Total;
+                currentMembership.Total = context.MembershipTypes.Where(mt => mt.Name == model.MembershipType).FirstOrDefault().Amount;
                 //sets membership due
                 currentMembership.MembershipDue.MembershipTypeID = context.MembershipTypes.Where(mt => mt.Name == model.MembershipType).FirstOrDefault().MembershipTypeID;
                 currentMembership.MembershipDue.MemStartDate = model.StartDate;
