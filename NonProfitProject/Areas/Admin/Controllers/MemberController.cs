@@ -37,8 +37,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveMember(string id)
         {
-            var user = context.Users.Where(u => u.Id == id).FirstOrDefault();
-
+            var user = context.Users.Include(u => u.MembershipDues).Where(u => u.Id == id).FirstOrDefault();
             if (user == null)
             {
                 TempData["MemberChanges"] = String.Format("The UserID \"{0}\" does not exist", id);
@@ -46,12 +45,21 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             else
             {
+                if(user.MembershipDues != null)
+                {
+                    user.MembershipDues.Last().MemCancelDate = DateTime.UtcNow;
+                    user.MembershipDues.Last().MemActive = false;
+                    context.MembershipDues.Update(user.MembershipDues.Last());
+                    context.SaveChanges();
+                }
+                
                 TempData["MemberChanges"] = String.Format("{0} is no longer a member", user.UserFirstName + " " + user.UserLastName);
                 var result = await userManager.RemoveFromRoleAsync(user, "Member");
                 if(!await userManager.IsInRoleAsync(user,"Admin"))
                 {
                     await userManager.AddToRoleAsync(user, "User");
                 }
+                
             }
             return RedirectToAction("Index");
         }
