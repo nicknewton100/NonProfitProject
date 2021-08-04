@@ -7,7 +7,14 @@
 }
 <div class="container">
     <div class="card-header-pills"><h1 class="fa fa-address-card"> @ViewData["Title"]</h1></div>
+    @if (Model == null)
+    {
+        <h3>Lifetime Membership</h3>
+    }
+    else
+    {
         <br />
+        <!--COUNTDOWN OF THE TIME MEMBERSHIP -->
         <div class="row text-center justify-content-center mb-3 mt-3">
             <div class="border-right p-5" style="padding-top:0 !important; padding-bottom:0 !important;">
                 <h2 id="years">@ViewBag.TimeSpan[0]</h2>
@@ -36,6 +43,7 @@
         </div>
         <div style="font-size:medium;">
             <div class="card">
+                <!--TABLE LIST OF MEMBERSHIP -->
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
@@ -107,6 +115,7 @@
                 </table>
             </div>
         </div>
+        <!--JAVASCRIPT USE FOR THE COUNTDOWN-->
         <script type="text/javascript">
             var yearsInput = document.getElementById("years");
             var monthsInput = document.getElementById("months");
