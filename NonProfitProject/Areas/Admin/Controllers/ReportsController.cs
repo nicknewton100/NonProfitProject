@@ -44,12 +44,13 @@ namespace NonProfitProject.Areas.Admin.Controllers
             this.userManager = userManager;
         }
 
-
+        //displays all reports
         public IActionResult Index()
         {
             return View();
         }
 
+        //generates employee report by creating data table and setting the data. then using RDLC report services to generate report
         [HttpPost]
         public IActionResult EmployeeReport()
         {
@@ -92,7 +93,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
             return File(result.MainStream, "application/pdf");
         }
-
+        //generates Donor report by creating data table and setting the data. then using RDLC report services to generate report
         [HttpPost]
         public async Task<IActionResult> DonorReport()
         {
@@ -131,7 +132,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
             return File(result.MainStream, "application/pdf");
         }
-
+        //generates member report by creating data table and setting the data. then using RDLC report services to generate report
         [HttpPost]
         public async Task<IActionResult> MemberReport()
         {
@@ -178,7 +179,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return File(result.MainStream, "application/pdf");
         }
 
-
+        //generates Committee Member report by creating data table and setting the data. then using RDLC report services to generate report
         [HttpPost]
         public IActionResult CommitteeMemberReport()
         {
@@ -218,7 +219,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
             return File(result.MainStream, "application/pdf");
         }
-
+        //generates donation report by creating datatable and sets the data and then uses the datatable to fill in information in the report using FastReport(was used instead of RDLC because issues were being cause by using the SUM function)
         [HttpPost]
         public IActionResult DonationReportAsync()
         {
@@ -260,7 +261,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             
         }
 
-
+        //generates Membership dues report by creating datatable and sets the data and then uses the datatable to fill in information in the report using FastReport(was used instead of RDLC because issues were being cause by using the SUM function)
         [HttpPost]
         public IActionResult MembershipDuesReport()
         {
@@ -325,7 +326,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        //generates Financial Summary report by creating datatable and sets the data and then uses the datatable to fill in information in the report using FastReport(was used instead of RDLC because issues were being cause by using the SUM function)
         [HttpPost]
         public IActionResult FinancialSummaryReport()
         {
@@ -361,6 +362,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        //generates Event Information report by creating data table and setting the data. then using RDLC report services to generate report
         [HttpPost]
         public IActionResult EventInformationReport()
         {
@@ -399,7 +401,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return File(result.MainStream, "application/pdf");
         }
 
-
+        //generates Admin report by creating data table and setting the data. then using RDLC report services to generate report
         [HttpPost]
         public async Task<IActionResult> AdministratorReport()
         {

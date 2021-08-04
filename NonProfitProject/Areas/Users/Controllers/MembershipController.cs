@@ -12,6 +12,7 @@ namespace NonProfitProject.Areas.Users.Controllers
 {
     [Authorize(Roles = "User,Member")]
     [Area("Users")]
+    //inherits DefaultMembershipController
     public class MembershipController : DefaultMembershipController
     {
         public MembershipController(NonProfitContext context, UserManager<User> userManager)

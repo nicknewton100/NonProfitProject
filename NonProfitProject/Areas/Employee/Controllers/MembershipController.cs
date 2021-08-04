@@ -16,6 +16,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
 {
     [Authorize(Roles = "Employee")]
     [Area("Employee")]
+    //inherits DefaultMembershipController
     public class MembershipController : DefaultMembershipController
     {
         
@@ -24,6 +25,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             this.context = context;
             this.userManager = userManager;
         }
+        //sets committee name on executing action
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);

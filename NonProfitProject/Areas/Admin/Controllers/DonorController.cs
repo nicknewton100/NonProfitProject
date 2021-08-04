@@ -23,24 +23,21 @@ namespace NonProfitProject.Areas.Admin.Controllers
             this.context = context;
             this.userManager = userManager;
         }
-        //Shows Users Table List
+        //Shows Users Table List that are not One-TimeDonation as this is the account that stores Non-authenticated user donations 
         [Route("~/[area]/[controller]s")]
         public async Task<IActionResult> Index()
         {
             var user = await userManager.GetUsersInRoleAsync("User");
-            //queries users that are not in the employee table
-            //var users = context.Users.Where(u => !context.Employees.Any(e => u.Id == e.UserID || u.UserName == "One-TimeDonation")).OrderBy(u => u.UserLastName + ", " + u.UserFirstName).ToList();
-
             var users = context.Users.Where(u => u.UserName != "One-TimeDonation" && user.Contains(u) && !context.Employees.Any(e => e.UserID == u.Id)).OrderBy(u => u.UserLastName + ", " + u.UserFirstName).ToList();
             return View(users);
         }
-
+        //shows the add donor view page
         [HttpGet]
         public IActionResult AddDonor()
         {
             return View();
         }
-
+        //adds the donor based on the information if its valid
         [HttpPost]
         public async Task<IActionResult> AddDonor(DonorViewModel model)
         {
@@ -84,7 +81,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return View();
         }
-
+        //deltes the donor based on routed id if it exists
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
@@ -101,7 +98,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        //shows deatils for the Donor if the donor exists
         [HttpGet]
         public IActionResult Details(string id)
         {
@@ -129,7 +126,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             };
             return View("EditDonor", model);
         }
-
+        //shows edit donor page based on id if the user exists
         [HttpGet]
         public IActionResult EditDonor(string id)
         {
@@ -157,7 +154,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             };
             return View(model);
         }
-
+        //makes chnages to the donor if the user exists. Also doesnt change login information unless the checkbox is checked
         [HttpPost]
         public async Task<IActionResult> EditDonor(DonorViewModel model)
         {
@@ -206,17 +203,9 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 var updateUser = await userManager.UpdateAsync(user);
                 if (updateUser.Succeeded)
                 {
-                    if (model.IsBecomingMember)
-                    {
-                        await userManager.AddToRoleAsync(user, "Member");
-                        return RedirectToAction("Index", "Member");
-                    }
-                    else
-                    {
-                        await userManager.AddToRoleAsync(user, "User");
-                        TempData["DonorChanges"] = String.Format("{0} has been updated", user.UserFirstName + " " + user.UserLastName);
-                        return RedirectToAction("Details", new {id = user.Id });
-                    }
+                    await userManager.AddToRoleAsync(user, "User");
+                    TempData["DonorChanges"] = String.Format("{0} has been updated", user.UserFirstName + " " + user.UserLastName);
+                    return RedirectToAction("Details", new {id = user.Id });
                 } 
             }
             ViewBag.Action = "Edit";

@@ -8,6 +8,8 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
 {
     public class EditMembershipDueViewModel
     {
+        //used for holding Membership due information and validation messages
+
         //receipt information
         public int ReceiptID { get; set; }
         public string Username { get; set; }

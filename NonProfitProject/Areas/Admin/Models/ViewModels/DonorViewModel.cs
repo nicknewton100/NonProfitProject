@@ -9,7 +9,7 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
 {
     public class DonorViewModel
     {
-        
+        //used for holding donor information and validation messages
         public string id { get; set; }
         [Required(ErrorMessage = "Please enter donor's First Name")]
         [StringLength(60)]

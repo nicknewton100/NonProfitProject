@@ -20,16 +20,19 @@ namespace NonProfitProject.Controllers
             _logger = logger;
         }
 
+        //displays home page
         public IActionResult Index()
         {
             return View();
         }
 
+        //displays privacy page
         public IActionResult Privacy()
         {
             return View();
         }
 
+        //displays about us
         public IActionResult AboutUs()
         {
             return View();

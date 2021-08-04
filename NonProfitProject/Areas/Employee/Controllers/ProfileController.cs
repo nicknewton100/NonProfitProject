@@ -25,6 +25,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             this.signInManager = signInManager;
             this.context = context;
         }
+        //sets committee name on action execute in session
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);

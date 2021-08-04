@@ -26,6 +26,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
             this.context = context;
             this.userManager = userManager;
         }
+
+        //gets all users that are in the member role 
         [Route("~/[area]/[controller]s")]
         public async Task<IActionResult> Index()
         {
@@ -33,7 +35,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var members = context.Users.Where(u => u.UserName != "One-TimeDonation" && member.Contains(u)).OrderBy(u => u.UserLastName + ", " + u.UserFirstName).Include(u => u.MembershipDues).ToList();
             return View(members);
         }
-
+        //removes member from role. If the member has membership dues that are active, it disables them and cancels the membership. Adds them to the user role if they are not an admin or employee
         [HttpPost]
         public async Task<IActionResult> RemoveMember(string id)
         {
@@ -55,7 +57,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 
                 TempData["MemberChanges"] = String.Format("{0} is no longer a member", user.UserFirstName + " " + user.UserLastName);
                 var result = await userManager.RemoveFromRoleAsync(user, "Member");
-                if(!await userManager.IsInRoleAsync(user,"Admin"))
+                if(!await userManager.IsInRoleAsync(user,"Admin") && !await userManager.IsInRoleAsync(user, "Employee"))
                 {
                     await userManager.AddToRoleAsync(user, "User");
                 }
@@ -63,7 +65,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        //displays all donors and allows them to add to member role
         [HttpGet]
         public async Task<IActionResult> AddMembers()
         {
@@ -71,7 +73,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var usersModel = context.Users.Where(u => u.UserName != "One-TimeDonation" && users.Contains(u)).OrderBy(u => u.UserLastName + ", " + u.UserFirstName).ToList();
             return View(users);
         }
-
+        // adds donors to the member role based on id 
         [HttpPost]
         public async Task<IActionResult> AddMembers(string id)
         {
@@ -91,7 +93,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View();
         }
 
-
+        //shows User details of donors who are not members yet
         public IActionResult DonorDetails(string id)
         {
             var user = context.Users.Find(id);
@@ -118,7 +120,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             };
             return View(model);
         }
-
+        //displays details about members
         public IActionResult Details(string id)
         {
             TempData.Clear();
@@ -159,7 +161,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View("EditMember", memberViewModel);
         }
         
-
+        //gets the member by id and displays it to allow the admin to edit
         [HttpGet]
         public IActionResult EditMember(string id)
         {
@@ -202,7 +204,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             
             return View(memberViewModel);
         }
-
+        //edits the member based on the chnages the user made to the model. Removes validation for membership if the membership type is null
         [HttpPost]
         public async Task<IActionResult> EditMember(MemberViewModel model)
         {

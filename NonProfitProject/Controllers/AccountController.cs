@@ -27,7 +27,7 @@ namespace NonProfitProject.Controllers
             this.context = context;
         }
 
-        //Login
+        //displays login page
         [HttpGet]
         public IActionResult LogIn(string returnURL = "")
         {
@@ -35,7 +35,7 @@ namespace NonProfitProject.Controllers
             return View();
         }
 
-        //Creates login verification feature for the user
+        //Creates login verification feature for the user and logs the user in if the information is correct. Can login with email or username
         [HttpPost]
         public async Task<IActionResult> LogIn(LoginViewModel model)
         {
@@ -81,13 +81,14 @@ namespace NonProfitProject.Controllers
             }
             return View();
         }
+        //displays register page
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        //Creates a new user
+        //Creates a new user based on the model if the email and username are not already in use. Also sets role and sends an email when signing up
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -140,7 +141,7 @@ namespace NonProfitProject.Controllers
 
             return View();
         }
-
+        //logs out and clears tempdata and session data
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
@@ -149,11 +150,12 @@ namespace NonProfitProject.Controllers
             TempData.Clear();
             return RedirectToAction("Index", "Home");
         }
-
+        //dsiplays account disabled if the user logs in and the account is disabled
         public IActionResult AccountDisabled()
         {
             return View();
         }
+        //displays access denied if the user doesnt have access
         public IActionResult AccessDenied()
         {
             return View();

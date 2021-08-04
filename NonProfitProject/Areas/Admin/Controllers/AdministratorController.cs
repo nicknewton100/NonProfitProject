@@ -23,6 +23,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             this.userManager = userManager;
         }
 
+        //shows index page for Administrative users. Queries all employees that are in the Admin role
         [Route("~/[area]/[controller]s")]
         public async Task<IActionResult> Index()
         {
@@ -30,7 +31,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var users = context.Employees.Include(e => e.User).Where(e => admins.Contains(e.User)).ToList();
             return View(users);
         }
-
+        //Removes administrator from the admin role if the employee exists
         [HttpPost]
         public async Task<IActionResult> RemoveAdministrator(string id)
         {
@@ -48,7 +49,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        //displays employees who could be added to the administrative role if their account is not disabled(terminated)
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -56,6 +57,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var employees = context.Employees.Include(e => e.User).Where(e => !admins.Contains(e.User) && e.User.AccountDisabled == false).ToList();
             return View(employees);
         }
+        //adds employee to admini role if the user exists
         [HttpPost]
         public async Task<IActionResult> Add(string id)
         {
@@ -69,7 +71,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             TempData["AdminChanges"] = String.Format("{0} is now an Administrator", employee.User.UserFirstName + " " + employee.User.UserLastName);
             return RedirectToAction("Add");
         }
-        
+        //displays employee details of the people who are not in the admin role
         public IActionResult EmployeeDetails(string id)
         {
             var employee = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).ThenInclude(cm => cm.committee).Where(e => e.EmpID == id).FirstOrDefault();
@@ -80,7 +82,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return View(employee);
         }
-
+        //displays details of the admin employees
         public async Task<IActionResult> Details(string id)
         {
             var employee = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).ThenInclude(cm => cm.committee).Where(e => e.EmpID == id).FirstOrDefault();

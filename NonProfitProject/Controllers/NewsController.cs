@@ -14,6 +14,7 @@ namespace NonProfitProject.Controllers
         {
             this.context = context;
         }
+        //displays all news based on when it was published. Newest first
         public IActionResult Index()
         {
             var news = context.News.OrderByDescending(n => n.NewsPublishDate).ToList();

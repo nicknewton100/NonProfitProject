@@ -11,6 +11,7 @@ namespace NonProfitProject.Areas.Users.Controllers
     [Area("Users")]
     public class HomeController : Controller
     {
+        //displays user dashboard
         public IActionResult Index()
         {
             return View();

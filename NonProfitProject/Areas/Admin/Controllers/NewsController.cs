@@ -19,18 +19,20 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             this.context = context;
         }
+        //shows news based on newest first
         public IActionResult Index()
         {
             var news = context.News.OrderByDescending(n => n.NewsPublishDate).ToList();
             return View(news);
         }
+        //goes to news page
         [HttpGet]
         public IActionResult AddNews()
         {
             ViewBag.Action = "Add";
             return View("EditNews", new News());
         }
-
+        //gets the news object based on id and sends it to the webpage
         [HttpGet]
         public IActionResult EditNews(int id)
         {
@@ -42,7 +44,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return View(news);
         }
-
+        //gets the posted news object and gets edits the news object based on the id
         [HttpPost]
         public IActionResult EditNews(News model)
         {
@@ -71,7 +73,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 }
 
                 context.SaveChanges();
-                TempData["EventChanges"] = String.Format("The Event \"{0}\" has been {1}.", model.NewsTitle, addOrEdit);
+                TempData["NewsChanges"] = String.Format("The News Article \"{0}\" has been {1}.", model.NewsTitle, addOrEdit);
                 return RedirectToAction("Index");
             }
             else
@@ -81,6 +83,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 return View(model);
             }
         }
+        //deltes the news article based on id
         [HttpPost]
         public IActionResult Delete(int id)
         {

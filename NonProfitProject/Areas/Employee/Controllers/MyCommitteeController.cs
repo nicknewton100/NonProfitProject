@@ -28,12 +28,14 @@ namespace NonProfitProject.Areas.Employee.Controllers
             this.context = context;
             this.userManager = userManager;
         }
+        //sets committee positio on action executing
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
             HttpContext.Session.SetString("CommitteePosition", CommitteeStatus.GetPosition(this.context, User.FindFirstValue(ClaimTypes.NameIdentifier)));
         }
 
+        //gets the current signed in employee's committee and displays the details which is held in session
         public async Task<IActionResult> Index()
         {
             
@@ -49,7 +51,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             return View(committee);
         }
 
-
+        //gets member details based on id
         [Route("~/[area]/[controller]/{name}/[action]/{id}")]
         public IActionResult MemberDetails(string id)
         {
@@ -66,6 +68,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             return View("EmployeeDetails", employee);
         }
 
+        //edits the position of the committee member based on the name of the committee, id and position
         [HttpPost]
         [Route("~/[area]/[controller]/[action]/{id}/{name}/{position}")]
         public IActionResult EditPosition(string id,string name, string position)
@@ -86,6 +89,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             return RedirectToAction("Index");
         }
 
+        //removes the memebr from the committee based on id
         [HttpPost]
         public IActionResult RemoveMember(string id)
         {
@@ -106,7 +110,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             return RedirectToAction("Index");
         }
 
-
+        //displays add members page which displays employees that are not in a committee
         [Route("~/[area]/[controller]/{name}/[action]")]
         [HttpGet]
         public IActionResult AddMembers(string name)
@@ -115,12 +119,12 @@ namespace NonProfitProject.Areas.Employee.Controllers
             {
                 return RedirectToAction("Index");
             }
-            var CommitteeMemberModel = new CommitteeMemberViewModel() { Committee = context.Committees?.Where(c => c.CommitteeName == name).AsNoTracking().FirstOrDefault(), Employees = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID) && e.ReleaseDate == null).AsNoTracking().ToList() };
+            var CommitteeMemberModel = new CommitteeMemberViewModel() { Committee = context.Committees?.Where(c => c.CommitteeName == name).AsNoTracking().FirstOrDefault(), Employees = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID) && e.ReleaseDate != null).AsNoTracking().ToList() };
             HttpContext.Session.SetObject("CommitteeMemberModel", CommitteeMemberModel);
             return View();
         }
 
-
+        //adds a employee to a committee based on the cmmittee name, position and id of the employee
         [HttpPost]
         [Route("~/[area]/[controller]/{name}/[action]/{id}/{position}")]
         public IActionResult AddMembers(string id, string position)
@@ -150,7 +154,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             return RedirectToAction("AddMembers", new { name = sessionmodel.Committee.CommitteeName, id = "" });
         }
 
-
+        //displays employee details for employees
         [Route("~/[area]/[controller]/{name}/AddMembers/[action]/{id}")]
         public IActionResult EmployeeDetails(string id)
         {

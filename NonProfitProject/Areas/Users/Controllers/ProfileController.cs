@@ -13,6 +13,7 @@ namespace NonProfitProject.Areas.Users.Controllers
     //If its not admin, dont allow use of the controller
     [Authorize(Roles = "User,Member")]
     [Area("Users")]
+    //inherits from the DefaultProfileController
     public class ProfileController : DefaultProfileController
     {
         public ProfileController(UserManager<User> userManager, SignInManager<User> signInManager, NonProfitContext context)

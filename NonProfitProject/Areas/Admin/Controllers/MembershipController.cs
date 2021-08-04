@@ -11,6 +11,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
+    //inherits DefaultMembershipController which is used for memberships in all areas
     public class MembershipController : NonProfitProject.Controllers.Shared.Users.DefaultMembershipController
     {    
         public MembershipController(NonProfitContext context, UserManager<User> userManager)

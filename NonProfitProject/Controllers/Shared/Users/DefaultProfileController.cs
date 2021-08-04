@@ -21,7 +21,7 @@ namespace NonProfitProject.Controllers.Shared.Users
         protected UserManager<User> userManager;
         protected SignInManager<User> signInManager;
 
-        //Edit login for user, if admin.
+        //Displays edit login page based on the currently logged in user
         [HttpGet]
         public async Task<IActionResult> EditLogin()
         {
@@ -29,6 +29,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             var EditLoginViewModel = new EditLoginViewModel { userID = user.Id, Email = user.Email, Username = user.UserName, ReceiveWeeklyNewsletter = user.ReceiveWeeklyNewsletter, CurrentPassword = "", NewPassword = "", NewPasswordConfirmed = "" };
             return View("EditLogin", EditLoginViewModel);
         }
+        //chnages the login information if it has been changes and changes password if new password has a value and the current password is correct
         public async Task<IActionResult> EditLogin(EditLoginViewModel model)
         {
             if(User.FindFirstValue(ClaimTypes.NameIdentifier) != model.userID)
@@ -75,7 +76,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             }
             return View(model);
         }
-
+        //displays users current personal information
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -91,12 +92,13 @@ namespace NonProfitProject.Controllers.Shared.Users
             }
             return View();
         }
-
+        //displays all users payment methods if they have any
         public IActionResult ManagePayments()
         {
             var payments = context.SavedPayments.Where(sp => sp.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
             return View(payments);
         }
+        //deletes payment method
         [HttpPost]
         public IActionResult DeletePayment(int id)
         {
@@ -109,6 +111,8 @@ namespace NonProfitProject.Controllers.Shared.Users
             context.SaveChanges();
             return RedirectToAction("ManagePayments");
         }
+
+        //displays add payment method page
         [HttpGet]
         public IActionResult AddPayment()
         {
@@ -116,6 +120,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             return View(new SavedPaymentViewModel() {AcctFirstName = user.UserFirstName, AcctLastName = user.UserLastName,AcctAddr1 = user.UserAddr1, AcctAddr2 = user.UserAddr2, AcctCity = user.UserCity, AcctState = user.UserState, AcctPostalCode = user.UserPostalCode, BillingPostalCode = null});
         }
         
+        //adds payment method based on model if the card doesnt already exists in their saved payments
         [HttpPost]
         public IActionResult AddPayment(SavedPaymentViewModel model)
         {

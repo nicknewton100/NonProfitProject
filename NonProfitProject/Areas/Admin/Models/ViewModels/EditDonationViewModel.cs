@@ -8,6 +8,8 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
 {
     public class EditDonationViewModel
     {
+        //used for holding Donation info and validation messages
+
         //receipt information
         public int ReceiptID { get; set; }
         public string Username { get; set; }

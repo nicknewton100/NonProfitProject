@@ -19,7 +19,7 @@ namespace NonProfitProject.Areas.Users.Controllers
         {
             this.context = context;
         }
-        //Shows Events
+        //Shows Events based on if the event hasnt already happened
         [Route("~/[area]/[controller]s")]
         public IActionResult Index()
         {
@@ -27,6 +27,8 @@ namespace NonProfitProject.Areas.Users.Controllers
             var events = context.Events.Where(e => e.EventEndDate > DateTime.Now).OrderBy(e => e.EventStartDate).ToList();
             return View(events);
         }
+
+        //allows the user to share event via email formatted in html
         [Route("~/[area]/[controller]s/{id}/{email}")]
         [HttpPost]
         public IActionResult Share(int id, string email)

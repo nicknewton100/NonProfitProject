@@ -22,11 +22,13 @@ namespace NonProfitProject.Areas.Users.Controllers
         {
             this.context = context;
         }
+        //displays personal donation history
         public IActionResult Index()
         {
             var receipts = context.Receipts.Include(r => r.Donation).Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.User).Where(r => r.MembershipDue == null && r.User.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).OrderByDescending(r => r.Date).ToList();
             return View(receipts);
         }
+        //shows details for the donation based on id if it exists
         public IActionResult Details(int id)
         {
             var donation = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Include(r => r.User).Where(r => r.ReceiptID == id && r.MembershipDue == null && r.User.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).FirstOrDefault();

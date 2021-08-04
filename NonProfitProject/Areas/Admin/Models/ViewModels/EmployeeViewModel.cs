@@ -9,6 +9,7 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
 {
     public class EmployeeViewModel
     {
+        //used for holding Employee information and validation messages
         public string Id { get; set; }
         
         [Required(ErrorMessage = "Please enter employee's First Name")]

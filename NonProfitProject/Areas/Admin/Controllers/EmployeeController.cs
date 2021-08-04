@@ -26,6 +26,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             this.context = context;
             this.userManager = userManager;
         }
+        //gets users that are in the employee table and sends them to the webpage
         [Route("~/[area]/[controller]s")]
         public IActionResult Index()
         {
@@ -33,11 +34,13 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var employees = context.Employees.Include(e => e.User).Include(e => e.CommitteeMembers).OrderBy(e => e.User.UserLastName + ", " + e.User.UserFirstName).ToList();
             return View(employees);
         }
+        //displays add employee page and gets a list of all committees so that it will be displayed in sleect statement in html
         public IActionResult AddEmployee()
         {
             TempData["Action"] = "Add";
             return View("EditEmployee", new EmployeeViewModel { BirthDate = null, AllCommittees = new SelectList(context.Committees.Select(c => c.CommitteeName).ToList(), "CommitteeName") });
         }
+        //displays edit employee page if the employee exists
         public IActionResult EditEmployee(string id)
         {
             TempData["Action"] = "Edit";
@@ -66,10 +69,15 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 EmailConfirmed = Employee.User.Email,
                 CommitteeName = context.Committees?.Where(c => c.CommitteesID == (Employee.CommitteeMembers == null ? 0 : (Employee.CommitteeMembers.CommitteeID))).Select(c => c.CommitteeName).FirstOrDefault() ?? "",
                 CommitteePosition = Employee.CommitteeMembers?.CommitteePosition ?? "",
-                AllCommittees = new SelectList(context.Committees.Select(c => c.CommitteeName).ToList(), "CommitteeName")
+                AllCommittees = new SelectList(context.Committees.Select(c => c.CommitteeName).ToList(), "CommitteeName"),
             };
+            if(Employee.ReleaseDate != null)
+            {
+                employeeViewModel.Terminated = true;
+            }
             return View(employeeViewModel);
         }
+        //displays details employee 
         public IActionResult Details(string id)
         {
             TempData["Action"] = "Details";
@@ -101,7 +109,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             };
             return View("EditEmployee",employeeViewModel);
         }
-
+        //adds the employee based on the reurn model to the database. Only sets the committee if it has a value else it gets rid of the validation
         [HttpPost]
         public async Task<IActionResult> AddEmployee(EmployeeViewModel model)
         {
@@ -265,6 +273,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return View("EditEmployee", model);
         }
+        //deletes employee based on id if the employee exists
         [HttpPost]
         public async Task<IActionResult> DeleteEmployee(string id)
         {
@@ -285,7 +294,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View();
             
         }
-
+        //is used to add a member to a committee if they set the information
         public void AddToCommittee(EmployeeViewModel model)
         {        
             CommitteeMembers committeeMember = context.CommitteeMembers?.Where(cm => cm.EmpID == model.Id).FirstOrDefault()  ?? null;
@@ -314,12 +323,13 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             context.SaveChanges();
         }
+        //deletes the committee member row associated with the user... is recreteade when added 
         public void DeleteCommitteeMember(CommitteeMembers member)
         {
             context.CommitteeMembers.Remove(member);
             context.SaveChanges();
         }
-
+        //terminates employee by disabling account and setting release date
         [HttpPost]
         public async Task<IActionResult> TerminateEmployee(string id)
         {
@@ -342,6 +352,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        //rehires employee by setting release date back to null and making the account disabled false
         [HttpPost]
         public async Task<IActionResult> ReHireEmployee(string id)
         {

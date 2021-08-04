@@ -42,6 +42,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View();
         }
         //credit https://weblogs.asp.net/shahar/generating-sql-backup-script-for-tables-amp-data-from-any-net-application-using-smo
+        //creates a backup by iterating through all the tables in the database and generating scripts for them. This saves the backup to the server and also downloads a .sql file to your system
         [HttpPost]
         public IActionResult BackupDatabase()
         {
@@ -82,6 +83,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }           
         }
 
+        //backs up the application by zipping the directory and saving it in the server files. Also download the zip to your computer
         [HttpPost]
         public IActionResult BackupApplication()
         {

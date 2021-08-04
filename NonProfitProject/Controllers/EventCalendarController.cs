@@ -16,13 +16,15 @@ namespace NonProfitProject.Controllers
         {
             this.context = context;
         }
+
+        //displays events on event calendar. replaces any new line characters in the event description because JSON doesnt like them
         public IActionResult Index()
         {
             var events = context.Events.ToList();
             for(int i = 0; i < events.Count(); i++)
             {
-                var test = events[i].EventDescription.Replace(System.Environment.NewLine, " ");
-                events[i].EventDescription = test;
+                var replacedNewLine = events[i].EventDescription.Replace(System.Environment.NewLine, " ");
+                events[i].EventDescription = replacedNewLine;
             }
             return View(events);
         }

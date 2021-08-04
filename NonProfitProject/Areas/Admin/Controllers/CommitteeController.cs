@@ -23,7 +23,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             this.context = context;
         }
 
-
+        //displays all the committees in the database with members
         [Route("~/[area]/[controller]s")]
         public IActionResult Index()
         {
@@ -31,7 +31,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View(model);
         }
 
-
+        //gets committee details and sets it as a session object to be used to display the name and details if the committee is not null
         [Route("~/[area]/[controller]/{name}")]
         public IActionResult Details(string name)
         {
@@ -41,12 +41,12 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             //creates session model
-            var CommitteeMemberModel = new CommitteeMemberViewModel() { Committee = context.Committees?.Where(c => c.CommitteeName == name).AsNoTracking().FirstOrDefault(), Employees = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID) && e.ReleaseDate == null).AsNoTracking().ToList() };
+            var CommitteeMemberModel = new CommitteeMemberViewModel() { Committee = context.Committees?.Where(c => c.CommitteeName == name).AsNoTracking().FirstOrDefault(), Employees = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID)).AsNoTracking().ToList() };
             HttpContext.Session.SetObject("CommitteeMemberModel", CommitteeMemberModel);
             return View(committee);
         }
 
-
+        //displays current committee member details and resets the session object
         [Route("~/[area]/[controller]/{name}/[action]/{id}")]
         public IActionResult MemberDetails(string id)
         {
@@ -63,6 +63,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View("EmployeeDetails", employee);
         }
 
+        //reecives position in the route and gets the member through the route as well. Alows the admin to change the Committee position of the member
         [HttpPost]
         [Route("~/[area]/[controller]/[action]/{id}/{name}/{position}")]
         public IActionResult EditPosition(string id,string name, string position)
@@ -78,7 +79,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             TempData["CommitteeMemberChanges"] = String.Format("{0}'s position has been updated", member.employee.User.UserFirstName + " " + member.employee.User.UserLastName);
             return RedirectToAction("Details", new { name = name });
         }
-
+        //checks to see if member exists. if it doesn't, it removes it from the committee
         [HttpPost]
         public IActionResult RemoveMember(string id)
         {
@@ -95,17 +96,17 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return RedirectToAction("Details", new { name = context.Committees.Find(committeeID).CommitteeName });
         }
 
-
+        //displays the add members page by getting employees from the database that are not in other committtee and dont have a release date
         [Route("~/[area]/[controller]/{name}/[action]")]
         [HttpGet]
         public IActionResult AddMembers(string name)
         {
-            var CommitteeMemberModel = new CommitteeMemberViewModel() { Committee = context.Committees?.Where(c => c.CommitteeName == name).AsNoTracking().FirstOrDefault(), Employees = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID)).AsNoTracking().ToList() };
+            var CommitteeMemberModel = new CommitteeMemberViewModel() { Committee = context.Committees?.Where(c => c.CommitteeName == name).AsNoTracking().FirstOrDefault(), Employees = context.Employees.Include(e => e.User).Where(e => !context.CommitteeMembers.Any(cm => e.EmpID == cm.EmpID) && e.ReleaseDate != null).AsNoTracking().ToList() };
             HttpContext.Session.SetObject("CommitteeMemberModel", CommitteeMemberModel);
             return View();
         }
 
-
+        //adds member based on routed id and position name if model is valid
         [HttpPost]
         [Route("~/[area]/[controller]/{name}/[action]/{id}/{position}/")]
         public IActionResult AddMembers(string id, string position)
@@ -131,7 +132,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return RedirectToAction("AddMembers", new { name = sessionmodel.Committee.CommitteeName, id = "" });
         }
 
-
+        //displays details of employees (whether they are in a committee or not)
         [Route("~/[area]/[controller]/{name}/AddMembers/[action]/{id}")]
         public IActionResult EmployeeDetails(string id)
         {
@@ -146,12 +147,13 @@ namespace NonProfitProject.Areas.Admin.Controllers
             HttpContext.Session.SetObject("CommitteeMemberModel", sessionmodel);
             return View(employee);
         }
-
+        //displays add committee page
         public IActionResult AddCommittee()
         {
             ViewBag.Action = "Add";
             return View("EditCommittee", new Committees());
         }
+        //displays edit committee by using routed id
         [HttpGet]
         public IActionResult EditCommittee(int id)
         {
@@ -163,6 +165,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return View(Event);
         }
+        //submits the chnages to edit the committee if there is an id. if not it adds a committee(used to make adding and editing easier)
         [HttpPost]
         public IActionResult EditCommittee(Committees model)
         {
@@ -198,6 +201,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 return View(model);
             }
         }
+        //deletes committee based on id
         [HttpPost]
         public IActionResult Delete(int id)
         {

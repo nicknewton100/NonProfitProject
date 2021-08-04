@@ -8,6 +8,7 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
 {
     public class CommitteeMemberViewModel
     {
+        //used to display committee
         public Committees Committee { get; set; }
         public List<Employees> Employees { get; set; }
     }

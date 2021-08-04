@@ -24,12 +24,13 @@ namespace NonProfitProject.Areas.Admin.Controllers
             this.context = context;
             this.userManager = userManager;
         }
+        //displays membership dues based on newest first
         public IActionResult Index()
         {
             var receipts = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null).OrderByDescending(r => r.Date).ToList();
             return View(receipts);
         }
-
+        //shows details for the membership due based on the id
         public IActionResult Details(int id)
         {
             var membership = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null && r.ReceiptID == id).OrderBy(r => r.Date).FirstOrDefault();
@@ -67,7 +68,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             };
             return View(model);
         }
-
+        //allows the user to edit the membership due based on the id if the membership due exists
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -149,6 +150,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             return View();
         }
 
+        //deletes the membership due
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -163,7 +165,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             TempData["MembershipDueChanges"] = String.Format("The Membership Due with Receipt ID {0} has been deleted", id);
             return RedirectToAction("Index");
         }
-
+        //cancels the membership and adds cancel date and sets active to false.
         [HttpPost]
         public async Task<IActionResult> CancelMembership(int id)
         {

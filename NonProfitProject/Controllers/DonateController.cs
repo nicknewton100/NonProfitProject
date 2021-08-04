@@ -24,6 +24,8 @@ namespace NonProfitProject.Controllers
         {
             this.context = context;
         }
+
+        //displays donate page and fills in view is session object exists
         public IActionResult Index()
         {
             var DonationInformation = HttpContext.Session.GetObject<DonationViewModel>("DonationInformation");
@@ -34,6 +36,7 @@ namespace NonProfitProject.Controllers
             return View();
         }
 
+        //adds donation information to session. If user is authenticated, it uses the user iformation and removes the validation
         [HttpPost]
         public IActionResult Donate(DonationViewModel model)
         {
@@ -91,6 +94,8 @@ namespace NonProfitProject.Controllers
             }
             return View("Index");
         }
+
+        //shows the payment page 
         [HttpGet]
         public IActionResult Payment()
         {
@@ -101,6 +106,8 @@ namespace NonProfitProject.Controllers
             }
             return View();
         }
+
+        //sets the payment information in the session 
         [HttpPost]
         public IActionResult Payment(DonationPaymentViewModel model)
         {
@@ -130,6 +137,7 @@ namespace NonProfitProject.Controllers
             }
             return View();
         }
+        //displays all information on the checkout page that is in the session
         [HttpGet]
         public IActionResult CheckOut()
         {
@@ -140,6 +148,7 @@ namespace NonProfitProject.Controllers
             return View();
         }
 
+        //places the order which sends a confirmation email and adds the data to the database based on the session object
         [HttpPost]
         public IActionResult PlaceOrder()
         {
@@ -220,13 +229,14 @@ namespace NonProfitProject.Controllers
             return RedirectToAction("ThankYou");
         }
 
+        //cancels order and removes object from session
         [HttpPost]
         public IActionResult CancelOrder()
         {
             HttpContext.Session.Remove("DonationInformation");
             return RedirectToAction("Index", "Home");
         }
-
+        //displays thak you page if session object isnt null
         public IActionResult ThankYou()
         {
             var DonationInformation = HttpContext.Session.GetObject<DonationViewModel>("DonationInformation");

@@ -21,6 +21,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             this.context = context;
         }
+        //displays donation history page. orders them by most recent at the top. if my donations equals true it shows the admin their donations
         [HttpGet]
         public IActionResult Index(string MyDonations)
         {
@@ -32,6 +33,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return View(receipts);
         }
+        //shows details for the receipt they click on by using routed id
         public IActionResult Details(int id)
         {
             var donation = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Include(r => r.User).Where(r => r.ReceiptID == id && r.MembershipDue == null).FirstOrDefault();
@@ -41,6 +43,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return View(donation);
         }
+        //displays the edit donation page based on id if the receipt exists
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -66,6 +69,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
             };
             return View(editDonation);
         }
+
+        //makes the changes to the receipt that exists. if the user does not click change payment information, then it removes the validation for the payment information and chnages the rest of the information
         [HttpPost]
         public IActionResult Edit(EditDonationViewModel model)
         {
@@ -129,6 +134,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return View();
         }
+        //deletes the donation by routed id if it exists
         [HttpPost]
         public IActionResult Delete(int id)
         {

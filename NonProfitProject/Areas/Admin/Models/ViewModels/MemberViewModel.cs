@@ -8,6 +8,8 @@ namespace NonProfitProject.Areas.Admin.Models.ViewModels
 {
     public class MemberViewModel
     {
+        //used for holding Member information and validation messages
+
         //user information
         public string id { get; set; }
         [Required(ErrorMessage = "Please enter member's First Name")]

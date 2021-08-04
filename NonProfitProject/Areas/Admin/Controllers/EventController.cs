@@ -23,7 +23,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
         {
             this.context = context;
         }
-        //Shows Events
+        //Shows all events if the date hasnt already past
         [Route("~/[area]/[controller]s")]
         public IActionResult Index()
         {
@@ -31,11 +31,13 @@ namespace NonProfitProject.Areas.Admin.Controllers
             var events = context.Events.Where(e => e.EventEndDate > DateTime.Now).OrderBy(e => e.EventStartDate).ToList();
             return View(events);
         }
+        //shows add event page
         public IActionResult AddEvent()
         {
             ViewBag.Action = "Add";
             return View("EditEvent", new Event());
         }
+        //shows edit event page and gets event by id 
         [HttpGet]
         public IActionResult EditEvent(int id)
         {
@@ -47,6 +49,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
             }
             return View(Event);
         }
+        //edits or adds the event depending on if the event has a ID or not
         [HttpPost]
         public IActionResult EditEvent(Event model)
         {
@@ -81,7 +84,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 return View(model);
             }
         }
-
+        //deletes event  based on id 
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -99,6 +102,8 @@ namespace NonProfitProject.Areas.Admin.Controllers
             
             return RedirectToAction("Index");
         }
+
+        //allows the user to share the event via email based on what email is route to it
         [Route("~/[area]/[controller]s/{id}/{email}")]
         [HttpPost]
         public IActionResult Share(int id, string email)
@@ -131,6 +136,7 @@ namespace NonProfitProject.Areas.Admin.Controllers
                 {
                     address = evnt.EventAddr1 + " " + evnt.EventAddr2 + ", " + evnt.EventCity + ", " + evnt.EventState + " " + evnt.EventPostalCode;
                 }
+                //creates html email based on the event information and sends it to the email rpovided
                 string html = "<h1 style = \"text-align:center;\">" + evnt.EventName + "</h1><div style = \"font-size:medium;\"><h4 style = \"margin-bottom:10px;text-align:left;\"> Details </h4><p style = \"text-align:left;\" >" + datetime + "</p><p style = \"text-align:left;\" >" + address + "</p><br/><p style = \"text-align:left;\">" + evnt.EventDescription + "</p></div>";
                 emailManager.SendEmail(email, emailManager.CreateHTMLMessage(evnt.EventName, html));
             }

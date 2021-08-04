@@ -30,6 +30,13 @@ namespace NonProfitProject.Areas.Employee.Controllers
 {   //If admin, shows this page
     [Authorize(Roles = "Employee")]
     [Area("Employee")]
+
+
+
+    ///////////Same controller as reports controller in admin area//////////////
+    ///
+
+
     public class ResourcesController : DefaultEmployeeController
     {
 

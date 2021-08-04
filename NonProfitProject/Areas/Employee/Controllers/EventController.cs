@@ -26,6 +26,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         {
             this.context = context;
         }
+        //checks to see if user is in event committee
         public bool isEventCommittee()
         {
             var name = CommitteeStatus.GetName(context, User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -37,12 +38,14 @@ namespace NonProfitProject.Areas.Employee.Controllers
         }
         //Shows Events
         [Route("~/[area]/[controller]s")]
+        //shows events
         public IActionResult Index()
         {
             //queries event information 
             var events = context.Events.Where(e => e.EventEndDate > DateTime.Now).OrderBy(e => e.EventStartDate).ToList();
             return View(events);
         }
+        //shows add event if the employee is in event committee
         public IActionResult AddEvent()
         {
             if (!isEventCommittee())
@@ -52,6 +55,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             ViewBag.Action = "Add";
             return View("EditEvent", new Event());
         }
+        //displays edit event based on id if the employee is in the event committee
         [HttpGet]
         public IActionResult EditEvent(int id)
         {
@@ -67,6 +71,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             }
             return View(Event);
         }
+        //edits the event if the employee is in the event committee based on the model
         [HttpPost]
         public IActionResult EditEvent(Event model)
         {
@@ -105,7 +110,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
                 return View(model);
             }
         }
-
+        //delets the event based on the id
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -127,6 +132,8 @@ namespace NonProfitProject.Areas.Employee.Controllers
             
             return RedirectToAction("Index");
         }
+
+        //shares the event based on email and id of event
         [Route("~/[area]/[controller]s/{id}/{email}")]
         [HttpPost]
         public IActionResult Share(int id, string email)
@@ -159,6 +166,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
                 {
                     address = evnt.EventAddr1 + " " + evnt.EventAddr2 + ", " + evnt.EventCity + ", " + evnt.EventState + " " + evnt.EventPostalCode;
                 }
+                //creates html message and sends the email
                 string html = "<h1 style = \"text-align:center;\">" + evnt.EventName + "</h1><div style = \"font-size:medium;\"><h4 style = \"margin-bottom:10px;text-align:left;\"> Details </h4><p style = \"text-align:left;\" >" + datetime + "</p><p style = \"text-align:left;\" >" + address + "</p><br/><p style = \"text-align:left;\">" + evnt.EventDescription + "</p></div>";
                 emailManager.SendEmail(email, emailManager.CreateHTMLMessage(evnt.EventName, html));
             }

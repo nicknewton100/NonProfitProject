@@ -21,6 +21,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         {
             this.context = context;
         }
+        //checks if the employee is part of the news committee
         public bool isNewsCommittee()
         {
             var name = CommitteeStatus.GetName(context, User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -31,6 +32,11 @@ namespace NonProfitProject.Areas.Employee.Controllers
             return false;
         }
 
+
+        ////////////////Cant get to this contoller if not in news committee//////////
+
+
+        //displyas news if in news committee
         public IActionResult Index()
         {
             if (!isNewsCommittee())
@@ -40,6 +46,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             var news = context.News.OrderByDescending(n => n.NewsPublishDate).ToList();
             return View(news);
         }
+        //displays add news page 
         [HttpGet]
         public IActionResult AddNews()
         {
@@ -50,7 +57,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             ViewBag.Action = "Add";
             return View("EditNews", new News());
         }
-
+        //displays edit news page based on id
         [HttpGet]
         public IActionResult EditNews(int id)
         {
@@ -67,6 +74,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             return View(news);
         }
 
+        //edits the news based on the news model posted
         [HttpPost]
         public IActionResult EditNews(News model)
         {
@@ -99,7 +107,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
                 }
 
                 context.SaveChanges();
-                TempData["EventChanges"] = String.Format("The Event \"{0}\" has been {1}.", model.NewsTitle, addOrEdit);
+                TempData["NewsChanges"] = String.Format("The News Article \"{0}\" has been {1}.", model.NewsTitle, addOrEdit);
                 return RedirectToAction("Index");
             }
             else
@@ -109,6 +117,8 @@ namespace NonProfitProject.Areas.Employee.Controllers
                 return View(model);
             }
         }
+
+        //deletes the new article based on id if it exists
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -117,6 +127,10 @@ namespace NonProfitProject.Areas.Employee.Controllers
                 return RedirectToAction("Index", "Home");
             }
             var news = context.News.Find(id);
+            if(news == null)
+            {
+                return RedirectToAction("Index");
+            }
             context.News.Remove(news);
             context.SaveChanges();
             return RedirectToAction("Index");

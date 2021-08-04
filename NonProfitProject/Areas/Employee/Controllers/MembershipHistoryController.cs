@@ -27,6 +27,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             this.context = context;
             this.userManager = userManager;
         }
+        //checks if the employee is in fundraising committee
         public bool isFundraisingCommitee()
         {
             var name = CommitteeStatus.GetName(context, User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -36,6 +37,13 @@ namespace NonProfitProject.Areas.Employee.Controllers
             }
             return false;
         }
+
+
+        /////////////Not allowed in this controller unless in fundraising committee////////////
+        
+
+
+        //shows membership dues if in fundraising committee
         public IActionResult Index()
         {
             if (!isFundraisingCommitee())
@@ -45,7 +53,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             var receipts = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null).OrderByDescending(r => r.Date).ToList();
             return View(receipts);
         }
-
+        //shows deatils about membership due
         public IActionResult Details(int id)
         {
             if (!isFundraisingCommitee())
@@ -87,7 +95,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             };
             return View(model);
         }
-
+        //gets membership due by id and sends it to webpage to be edited
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -117,6 +125,8 @@ namespace NonProfitProject.Areas.Employee.Controllers
             return View(editMembership);
         }
 
+
+        //edits the membership due and gets rid of validation for card information if isChangingCardInformation is false
         [HttpPost]
         public IActionResult Edit(EditMembershipDueViewModel model)
         {
@@ -177,6 +187,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             return View();
         }
 
+        //deletes membership due based on id if it exists
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -196,6 +207,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             return RedirectToAction("Index");
         }
 
+        //cancels membership if the membership is active
         [HttpPost]
         public async Task<IActionResult> CancelMembership(int id)
         {

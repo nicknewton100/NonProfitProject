@@ -10,6 +10,7 @@ namespace NonProfitProject.Areas.Employee.Data
 {
     public class CommitteeStatus
     {
+        //gets the name of the committee fo the logged in employee
         public static string GetName(NonProfitContext context, string id)
         {
             var committeeMember = context.CommitteeMembers.Include(cm => cm.committee).Where(cm => cm.employee.UserID == id).FirstOrDefault();
@@ -22,6 +23,7 @@ namespace NonProfitProject.Areas.Employee.Data
                 return committeeMember.committee.CommitteeName;
             }
         }
+        //gets the psotion f the currently logged in employee
         public static string GetPosition(NonProfitContext context, string id)
         {
             var member = context.CommitteeMembers.Where(cm => cm.employee.UserID == id).FirstOrDefault();

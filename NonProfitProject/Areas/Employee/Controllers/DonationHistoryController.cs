@@ -24,6 +24,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
         {
             this.context = context;
         }
+        //checks to see if the committee is the Fundraising Committee
         public bool isFundraisingCommitee()
         {
             var name = CommitteeStatus.GetName(context, User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -33,6 +34,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             } 
             return false;
         }
+        //gets all the donations. If my donations is true or the user isnt apart of the fundraising committee it only shows their donations
         [HttpGet]
         public IActionResult Index(string MyDonations)
         {
@@ -45,6 +47,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             }
             return View(receipts);
         }
+        //displays details about the donations 
         public IActionResult Details(int id)
         {
             var donation = context.Receipts.Include(r => r.InvoicePayment).Include(r => r.InvoiceDonorInformation).Include(r => r.Donation).Include(r => r.User).Where(r => r.ReceiptID == id && r.MembershipDue == null).ToList();
@@ -59,6 +62,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             }
             return View(donation.FirstOrDefault());
         }
+        //shows edit page if the user is apart of the fundraising committee
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -88,6 +92,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
             };
             return View(editDonation);
         }
+        //allows edit if the employee is apart of the fundrasing committee and edits the changes
         [HttpPost]
         public IActionResult Edit(EditDonationViewModel model)
         {
@@ -155,6 +160,8 @@ namespace NonProfitProject.Areas.Employee.Controllers
             }
             return View();
         }
+
+        //deletes the donation if the employee is apart of the fundraising committee
         [HttpPost]
         public IActionResult Delete(int id)
         {

@@ -24,6 +24,8 @@ namespace NonProfitProject.Models
         public bool MemActive { get; set; }
         public DateTime? MemCancelDate { get; set; }
 
+        //calculates how long a user has been paying for a membership consecutivly
+
         public static DateTime? GetConsecutiveDate(List<MembershipDues> membershipDues)
         {
             if(membershipDues.Count == 0)

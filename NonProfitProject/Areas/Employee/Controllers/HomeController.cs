@@ -16,6 +16,7 @@ namespace NonProfitProject.Areas.Employee.Controllers
     public class HomeController : DefaultEmployeeController
     {
         public HomeController(NonProfitContext context) : base(context){}
+        //displays main dashboard
         public IActionResult Index()
         {
             return View();

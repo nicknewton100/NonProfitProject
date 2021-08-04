@@ -17,11 +17,13 @@ using System.Threading.Tasks;
 
 namespace NonProfitProject.Controllers.Shared.Users
 {
+    //used in every area so it is just inherited to all of them
     public class DefaultMembershipController : Controller
     {
         protected NonProfitContext context;
         protected UserManager<User> userManager;
 
+        //if the user hasnt signed up as a member, it send them to the sign up page. Ese, it shows all the membership information as well as all their membership dues and how long they have been a member for consecutively
         public async Task<IActionResult> Index() 
         {
             var currentUser = await userManager.GetUserAsync(User);
@@ -53,7 +55,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             return View("LifetimeMembership");
             
         }
-
+        //displays detais about membership due
         public IActionResult Details(int id)
         {
             var membership = context.Receipts.Include(r => r.MembershipDue).ThenInclude(md => md.MembershipType).Include(r => r.InvoicePayment).Include(r => r.User).Where(r => r.Donation == null && r.ReceiptID == id).OrderBy(r => r.Date).FirstOrDefault();
@@ -92,11 +94,13 @@ namespace NonProfitProject.Controllers.Shared.Users
             return View(model);
         }
 
+        //displays signup page
         [HttpGet]
         public IActionResult SignUp()
         {           
             return View();
         }
+        //if the user isnt already a member, it gets the membership type baed on name and sets it to a news membership due which is held in the session. if the user come back to this page, it will edit their information but not cancel out what they did.
         [HttpPost]
         public async Task<IActionResult> Signup(string name)
         {
@@ -133,7 +137,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             }
                       
         }
-
+        //if the user is not already a member and if the user doesnt have a session object, it will displays the payment page. If either one of those are false, it will send back to the main page.
         [HttpGet]
         public IActionResult Payment()
         {
@@ -148,7 +152,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             return View();
         }
 
-
+        //sets the payment in the session if the user is not a member and if the session object exists. Also can come back to this page without it editing other information
         [HttpPost]
         public IActionResult Payment(DonationPaymentViewModel model)
         {
@@ -183,6 +187,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             return View();
         }
 
+        //displays all checkout information beore checking out
         public IActionResult CheckOut()
         {
             if (User.IsInRole("Member"))
@@ -197,7 +202,7 @@ namespace NonProfitProject.Controllers.Shared.Users
             }
             return View();
         }
-
+        //places the order and adds all the data held in the session to the database and sets the user as a member
         [HttpPost]
         public async Task<IActionResult> PlaceOrder()
         {
@@ -277,13 +282,14 @@ namespace NonProfitProject.Controllers.Shared.Users
             email.SendEmail(new User() { UserFirstName = receipt.User.UserFirstName, Email = receipt.User.Email }, message);
             return RedirectToAction("Index");
         }
+        //cancel order removes the session object from the session and starts you at the beginning
         [HttpPost]
         public IActionResult CancelOrder()
         {
             HttpContext.Session.Remove("SignupMembershipModel");
             return RedirectToAction("Index");
         }
-
+        //cancel membership cancels the membership which sets the last membership due to inactive and sets canceled date. as well as removes the user from member
         public async Task<IActionResult> CancelMembership()
         {
             var membership = context.MembershipDues.Where(md => md.UserID == User.FindFirstValue(ClaimTypes.NameIdentifier) && md.MemActive == true).OrderBy(md => md.MemDuesID).LastOrDefault();
