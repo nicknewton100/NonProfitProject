@@ -9,6 +9,7 @@
 
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/dark-mode-switch.js"></script>
     <script src="https://kit.fontawesome.com/deab61ee00.js" crossorigin="anonymous"></script>
 }
 
@@ -21,12 +22,17 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/dashboard.css" />
+          <link rel="stylesheet" href="~/css/dark-mode.css" />
 
 </head>
 <body>
     <!--TOP NAV FOR USERE VIEW-->
     <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
         <div class="container">
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+                <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+            </div>
             <div></div>
             <div class="text-right">
                 <form method="post" asp-area="" asp-action="Logout" asp-controller="Account">

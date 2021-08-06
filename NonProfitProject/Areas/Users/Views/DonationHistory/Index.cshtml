@@ -4,6 +4,11 @@
     ViewData["Title2"] = "Admin";
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
 }
+<script src="~/js/dark-mode-switch.js"></script>
+<div class="custom-control custom-switch">
+    <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+    <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+</div>
 <div class="container">
     <div class="container">
         <div class="card-header-pills"><h1 class="fa fa-dollar-sign">  @ViewData["Title"]</h1></div>
@@ -25,7 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(Model.Count() == 0)
+                    @if (Model.Count() == 0)
                     {
                         <tr class="text-center">
                             <td colspan="9"><h4>You have not made any donations yet</h4></td>
