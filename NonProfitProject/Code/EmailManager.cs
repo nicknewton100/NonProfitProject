@@ -7,28 +7,28 @@ using NonProfitProject.Models;
 using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore;
+using NonProfitProject.Models.Settings;
+using Microsoft.Extensions.Options;
 
 namespace NonProfitProject.Code
 {
-    public class EmailManager
+    public class EmailManager : IEmailManager
     {
         private NonProfitContext context;
-        private readonly string FromEmail = "BankdTechSolutions@gmail.com";
-        private readonly string password = "987963Gizm0";
-        private readonly string FromName = "Bankd Tech Solutions Community Team";
-        private readonly string smtpServer = "smtp.gmail.com";
-        private readonly int smtpPort = 587;
-        public EmailManager(NonProfitContext context)
+        private readonly MailSettings _options;
+
+        public EmailManager(NonProfitContext context, IOptions<MailSettings> options)
         {
+            _options = options.Value;
             this.context = context;
         }
         //used to send weekly news letter to users however this was cut due to lack of time
-        public void SendNewsletter()
+        public async Task SendNewsletter()
         {
             List<User> users = new List<User>();
             try
             {
-                users = context.Users.Where(x => x.ReceiveWeeklyNewsletter == true).ToList();
+                users = await context.Users.Where(x => x.ReceiveWeeklyNewsletter == true).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -37,47 +37,47 @@ namespace NonProfitProject.Code
 
             MimeMessage message = CreateSimpleMessage("Weekly Newsletter", "This is the newsletter for the week!");
 
-            SendEmail(users, message);
+            await SendEmail(users, message);
         }
         //sends email to a user
-        public void SendEmail(User user, MimeMessage message)
+        public async Task SendEmail(User user, MimeMessage message)
         {
             message.To.Add(new MailboxAddress(user.UserFirstName, user.Email));
             using (var client = new SmtpClient())
             {
                 //connect to email server
-                client.Connect(smtpServer, smtpPort, false);
-                client.Authenticate(FromEmail, password);
-                client.Send(message);
+                client.Connect(_options.Host, _options.Port, false);
+                client.Authenticate(_options.Mail, _options.Password);
+                await client.SendAsync(message);
                 client.Disconnect(true);
             }
         }
         //sends a email to a email address
-        public void SendEmail(string email, MimeMessage message)
+        public async Task SendEmail(string email, MimeMessage message)
         {
             message.To.Add(new MailboxAddress(email));
             using (var client = new SmtpClient())
             {
                 //connect to email server
-                client.Connect(smtpServer, smtpPort, false);
-                client.Authenticate(FromEmail, password);
-                client.Send(message);
-                client.Disconnect(true);
+                await client.ConnectAsync(_options.Host, _options.Port, false);
+                await client.AuthenticateAsync(_options.Mail, _options.Password);
+                await client.SendAsync(message);
+                await client.DisconnectAsync(true);
             }
         }
         //sends email to multiple users
-        public void SendEmail(List<User> users, MimeMessage message)
+        public async Task SendEmail(List<User> users, MimeMessage message)
         {
             foreach(User u in users)
             {
-                SendEmail(u, message);
+                await SendEmail(u, message);
             }
         }
         //creates simple, plain text messages
         public MimeMessage CreateSimpleMessage(string subject, string bodyText)
         {
             MimeMessage message = new MimeMessage();
-            message.From.Add(new MailboxAddress(FromName, FromEmail));
+            message.From.Add(new MailboxAddress(_options.DisplayName, _options.Mail));
             message.Subject = subject;
             message.Body = new TextPart("plain")
             {
@@ -89,7 +89,7 @@ namespace NonProfitProject.Code
         public MimeMessage CreateHTMLMessage(string subject, string html)
         {
             MimeMessage message = new MimeMessage();
-            message.From.Add(new MailboxAddress(FromName, FromEmail));
+            message.From.Add(new MailboxAddress(_options.DisplayName, _options.Mail));
             message.Subject = subject;
             message.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {

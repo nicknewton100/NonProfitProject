@@ -12,6 +12,7 @@ using NonProfitProject.Areas.Employee.Data;
 using System.Security.Claims;
 using NonProfitProject.Code;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Options;
 
 namespace NonProfitProject.Areas.Employee.Controllers
 {
@@ -22,9 +23,11 @@ namespace NonProfitProject.Areas.Employee.Controllers
     public class EventController : DefaultEmployeeController
     {
         private NonProfitContext context;
-        public EventController(NonProfitContext context) : base(context)
+        private IEmailManager emailManager;
+        public EventController(NonProfitContext context, IEmailManager emailManager) : base(context)
         {
             this.context = context;
+            this.emailManager = emailManager;
         }
         //checks to see if user is in event committee
         public bool isEventCommittee()
@@ -147,7 +150,6 @@ namespace NonProfitProject.Areas.Employee.Controllers
                     TempData["Email"] = "Email Address Invalid";
                     RedirectToAction("Index");
                 }
-                EmailManager emailManager = new EmailManager(context);
                 string datetime;
                 string address;
                 if (evnt.EventStartDate.Date == evnt.EventEndDate.Date)

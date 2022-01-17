@@ -10,12 +10,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NonProfitProject.Models;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using NonProfitProject.Code;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NonProfitProject.Code.Security;
+using NonProfitProject.Models.Settings;
 
 namespace NonProfitProject
 {
@@ -33,7 +35,7 @@ namespace NonProfitProject
         { 
 
             services.AddTransient<BackgroundTasks>();
-            
+
             services.AddMemoryCache();
 
             services.AddSession();
@@ -54,6 +56,9 @@ namespace NonProfitProject
             services.AddDbContext<NonProfitContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("NonProfitContext"))
             );
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddTransient<IEmailManager, EmailManager>();
+            services.Configure<AdminAccountInformation>(Configuration.GetSection("AdminAccountInformation"));
             //sets the password requirements
             services.AddIdentity<User, IdentityRole>(options =>
             {

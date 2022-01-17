@@ -8,13 +8,16 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using NonProfitProject.Models.Settings;
+using Microsoft.Extensions.Options;
 
 namespace NonProfitProject.Models
 {
     //generates the database and is used to retreive items from the database
     public class NonProfitContext : IdentityDbContext<User>
     {
-        public NonProfitContext(DbContextOptions<NonProfitContext> options) : base(options) { }
+        private readonly AdminAccountInformation _settings;
+        public NonProfitContext(DbContextOptions<NonProfitContext> options, IOptions<AdminAccountInformation> settings) : base(options) { _settings = settings.Value; }
 
         public DbSet<Employees> Employees { get; set; }
         public DbSet<CommitteeMembers> CommitteeMembers { get; set; }
@@ -84,8 +87,7 @@ namespace NonProfitProject.Models
                     UserGender = "Male",
                     UserBirthDate = new DateTime(1987, 6, 13),
                     UserActive = true,
-                    ReceiveWeeklyNewsletter = false,
-                    PasswordHash = hasher.HashPassword(null, "JohnJones123")
+                    ReceiveWeeklyNewsletter = false
                 });
             builder.Entity<IdentityUserRole<string>>().HasData(
                 new IdentityUserRole<string>
@@ -212,18 +214,18 @@ namespace NonProfitProject.Models
         {
             UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
             RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
+            AdminAccountInformation _settings = _configuration.GetSection("AdminAccountInformation").Get<AdminAccountInformation>();
             // if role doesn't exist, create it
             if (await roleManager.FindByNameAsync("Admin") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole("Admin"));
             }
             // if username doesn't exist, create it and add to role -- Creates Beau's account --
-            if (await userManager.FindByNameAsync("BeauSanders") == null)
+            if (await userManager.FindByNameAsync(_settings.Teacher.Username) == null)
             {
                 User user = new User {
-                    UserName = "BeauSanders",
-                    Email = "admin@cpt275.beausanders.org",
+                    UserName = _settings.Teacher.Username,
+                    Email = _settings.Teacher.Email,
                     UserFirstName = "Beau",
                     UserLastName = "Sanders",
                     UserAddr1 = "506 S Pleasantburg Dr",
@@ -235,7 +237,7 @@ namespace NonProfitProject.Models
                     UserActive = true,
                     ReceiveWeeklyNewsletter = false
                 };
-                var result = await userManager.CreateAsync(user, "teamProjeck275");
+                var result = await userManager.CreateAsync(user, _settings.Teacher.Password);
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(user, "Admin");
@@ -249,12 +251,12 @@ namespace NonProfitProject.Models
                     }
                 }
             }
-            if(await userManager.FindByNameAsync("BankdTechSolutionsAdmin") == null)
+            if(await userManager.FindByNameAsync(_settings.Admin.Username) == null)
             {
                 User user = new User
                 {
-                    UserName = "BankdTechSolutionsAdmin",
-                    Email = "BankdTechSolutions@gmail.com",
+                    UserName = _settings.Admin.Username,
+                    Email = _settings.Admin.Email,
                     UserFirstName = "BankdTech",
                     UserLastName = "Solutions",
                     UserAddr1 = "506 S Pleasantburg Dr",
@@ -266,7 +268,7 @@ namespace NonProfitProject.Models
                     UserActive = true,
                     ReceiveWeeklyNewsletter = false
                 };
-                var result = await userManager.CreateAsync(user, "987963Gizm0");
+                var result = await userManager.CreateAsync(user, _settings.Admin.Password);
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(user, "Admin");
@@ -319,7 +321,7 @@ namespace NonProfitProject.Models
                     UserActive = true,
                     ReceiveWeeklyNewsletter = false
                 };
-                var result = await userManager.CreateAsync(user, "KarenSmith123");
+                var result = await userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(user, "Member");
@@ -341,7 +343,7 @@ namespace NonProfitProject.Models
                     ReceiveWeeklyNewsletter = false
                 };
                 //Never need access to this account because its used to store the One-Time Donations that are made from users that are not registered/signedin so I made the password as obscure as possible
-                await userManager.CreateAsync(user, "ckGoxk+&|5'#vM?(/Jo0keFGAds,HY%]Ujz4{6kFW8*a~~KWc~K{9x,lK2$kWJ");
+                await userManager.CreateAsync(user);
             }
         }
     }

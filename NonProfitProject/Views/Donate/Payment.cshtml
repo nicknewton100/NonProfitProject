@@ -191,6 +191,8 @@
         <button type="submit" class="btn btn-primary">Review Order</button>
         <a class="btn btn-danger" asp-action="Index">Cancel</a>
     </form>
+    <br />
+    <span class="text-danger">Please do not supply the text fields with real, sensitive information. This project is meant for test purposes and doesnt actually validate any sensitive creditials you may supply. If you would like, use fake credentials to test the functionality.</span>
     <script>
         function hideBillingInformation() {
             var firstname = JSON.stringify(@Html.Raw(Json.Serialize(DonationInformation.FirstName)));

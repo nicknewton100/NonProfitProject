@@ -15,9 +15,11 @@ namespace NonProfitProject.Areas.Users.Controllers
     public class EventController : Controller
     {
         private NonProfitContext context;
-        public EventController(NonProfitContext context)
+        private IEmailManager emailManager;
+        public EventController(NonProfitContext context, IEmailManager emailManager)
         {
             this.context = context;
+            this.emailManager = emailManager;
         }
         //Shows Events based on if the event hasnt already happened
         [Route("~/[area]/[controller]s")]
@@ -42,7 +44,6 @@ namespace NonProfitProject.Areas.Users.Controllers
                     TempData["Email"] = "Email Address Invalid";
                     RedirectToAction("Index");
                 }
-                EmailManager emailManager = new EmailManager(context);
                 string datetime;
                 string address;
                 if(evnt.EventStartDate.Date == evnt.EventEndDate.Date)

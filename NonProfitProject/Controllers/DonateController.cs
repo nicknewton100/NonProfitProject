@@ -20,9 +20,11 @@ namespace NonProfitProject.Controllers
     public class DonateController : Controller
     {
         protected NonProfitContext context;
-        public DonateController(NonProfitContext context)
+        protected IEmailManager emailManager;
+        public DonateController(NonProfitContext context, IEmailManager emailManager)
         {
             this.context = context;
+            this.emailManager = emailManager;
         }
 
         //displays donate page and fills in view is session object exists
@@ -222,10 +224,9 @@ namespace NonProfitProject.Controllers
                 });
             }
             context.SaveChanges();
-            EmailManager email = new EmailManager(context);
-            var message = email.CreateSimpleMessage("Donation to Non-Paw-Fit Animal Rescue", String.Format("Thank you, {0}, for donating to Non-Paw-Fit Animal rescue! You're Donation of {1:C} will not go unnoticed. \n\n    Receipt Information: \n        Receipt ID: {2} \n        Total: {1:C} \n        Date: {3} \n\n    Donor Information: \n        Name: {0} \n        Address 1: {4} \n        Address 2: {5} \n        City: {6} \n        State: {7} \n        Postal Code: {8} \n\n    Card Information: \n        CardHolder Name: {9} \n        Card Type: {10} \n        Card Number: xxxx-xxxx-xxxx-{11} \n        Expiration Date: {12} \n    Billing Information \n        Name: {13} \n        Address 1: {14} \n        Address 2: {15} \n        City: {16} \n        State: {17} \n        Postal Code: {18}", receipt.InvoiceDonorInformation.FirstName + " " + receipt.InvoiceDonorInformation.LastName, receipt.Total, receipt.ReceiptID, receipt.Date, receipt.InvoiceDonorInformation.Addr1, receipt.InvoiceDonorInformation.Addr2, receipt.InvoiceDonorInformation.City, receipt.InvoiceDonorInformation.State, receipt.InvoiceDonorInformation.PostalCode, receipt.InvoicePayment.CardholderName, receipt.InvoicePayment.CardType, receipt.InvoicePayment.Last4Digits, receipt.InvoicePayment.ExpDate, receipt.InvoicePayment.BillingFirstName + " " + receipt.InvoicePayment.BillingLastName, receipt.InvoicePayment.BillingAddr1, receipt.InvoicePayment.BillingAddr2, receipt.InvoicePayment.BillingCity, receipt.InvoicePayment.BillingState, receipt.InvoicePayment.BillingPostalCode));
+            var message = emailManager.CreateSimpleMessage("Donation to Non-Paw-Fit Animal Rescue", String.Format("Thank you, {0}, for donating to Non-Paw-Fit Animal rescue! You're Donation of {1:C} will not go unnoticed. \n\n    Receipt Information: \n        Receipt ID: {2} \n        Total: {1:C} \n        Date: {3} \n\n    Donor Information: \n        Name: {0} \n        Address 1: {4} \n        Address 2: {5} \n        City: {6} \n        State: {7} \n        Postal Code: {8} \n\n    Card Information: \n        CardHolder Name: {9} \n        Card Type: {10} \n        Card Number: xxxx-xxxx-xxxx-{11} \n        Expiration Date: {12} \n    Billing Information \n        Name: {13} \n        Address 1: {14} \n        Address 2: {15} \n        City: {16} \n        State: {17} \n        Postal Code: {18}", receipt.InvoiceDonorInformation.FirstName + " " + receipt.InvoiceDonorInformation.LastName, receipt.Total, receipt.ReceiptID, receipt.Date, receipt.InvoiceDonorInformation.Addr1, receipt.InvoiceDonorInformation.Addr2, receipt.InvoiceDonorInformation.City, receipt.InvoiceDonorInformation.State, receipt.InvoiceDonorInformation.PostalCode, receipt.InvoicePayment.CardholderName, receipt.InvoicePayment.CardType, receipt.InvoicePayment.Last4Digits, receipt.InvoicePayment.ExpDate, receipt.InvoicePayment.BillingFirstName + " " + receipt.InvoicePayment.BillingLastName, receipt.InvoicePayment.BillingAddr1, receipt.InvoicePayment.BillingAddr2, receipt.InvoicePayment.BillingCity, receipt.InvoicePayment.BillingState, receipt.InvoicePayment.BillingPostalCode));
 
-            email.SendEmail(new User() { UserFirstName = receipt.InvoiceDonorInformation.FirstName, Email = receipt.InvoiceDonorInformation.Email }, message);
+            emailManager.SendEmail(new User() { UserFirstName = receipt.InvoiceDonorInformation.FirstName, Email = receipt.InvoiceDonorInformation.Email }, message);
             return RedirectToAction("ThankYou");
         }
 

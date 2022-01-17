@@ -19,12 +19,14 @@ namespace NonProfitProject.Controllers
         private UserManager<User> userManager;
         private SignInManager<User> signInManager;
         private NonProfitContext context;
+        private IEmailManager emailManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, NonProfitContext context)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, NonProfitContext context, IEmailManager emailManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.context = context;
+            this.emailManager = emailManager;
         }
 
         //displays login page
@@ -124,9 +126,8 @@ namespace NonProfitProject.Controllers
                 {
                     await userManager.AddToRoleAsync(user, "User");
                     await signInManager.SignInAsync(user, isPersistent: false);
-                    EmailManager emailmanager = new EmailManager(context);
-                    var emailmessage = emailmanager.CreateSimpleMessage("BankdTechSolutions Sign-up Confirmation",String.Format("Hey {0}, \n \n Thank you for signing up at BankdTechSolutions.net! We are excited to have a new member that can contribute to our Non-Profit cause. You're one step closer to becoming a saint! Have a great day!",user.UserFirstName + " " + user.UserLastName));
-                    emailmanager.SendEmail(user,emailmessage);
+                    var emailmessage = emailManager.CreateSimpleMessage("BankdTechSolutions Sign-up Confirmation",String.Format("Hey {0}, \n \n Thank you for signing up at BankdTechSolutions.net! We are excited to have a new member that can contribute to our Non-Profit cause. You're one step closer to becoming a saint! Have a great day!",user.UserFirstName + " " + user.UserLastName));
+                    emailManager.SendEmail(user,emailmessage);
 
                     return RedirectToAction("Index", "Home");
                 }

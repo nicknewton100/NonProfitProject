@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NonProfitProject.Code;
 using NonProfitProject.Controllers.Shared.Users;
 using NonProfitProject.Models;
 using System;
@@ -15,10 +16,11 @@ namespace NonProfitProject.Areas.Users.Controllers
     //inherits DefaultMembershipController
     public class MembershipController : DefaultMembershipController
     {
-        public MembershipController(NonProfitContext context, UserManager<User> userManager)
+        public MembershipController(NonProfitContext context, UserManager<User> userManager, IEmailManager emailManager)
         {
             this.context = context;
             this.userManager = userManager;
+            this.emailManager = emailManager;
         }
     }
 }

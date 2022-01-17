@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using NonProfitProject.Areas.Employee.Data;
+using NonProfitProject.Code;
 using NonProfitProject.Controllers.Shared.Users;
 using NonProfitProject.Models;
 using System;
@@ -20,10 +21,11 @@ namespace NonProfitProject.Areas.Employee.Controllers
     public class MembershipController : DefaultMembershipController
     {
         
-        public MembershipController(NonProfitContext context, UserManager<User> userManager)
+        public MembershipController(NonProfitContext context, UserManager<User> userManager, IEmailManager emailManager)
         {
             this.context = context;
             this.userManager = userManager;
+            this.emailManager = emailManager;
         }
         //sets committee name on executing action
         public override void OnActionExecuting(ActionExecutingContext context)
