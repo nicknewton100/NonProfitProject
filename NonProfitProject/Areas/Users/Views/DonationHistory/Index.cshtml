@@ -5,6 +5,10 @@
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
 }
 <script src="~/js/dark-mode-switch.js"></script>
+<div class="custom-control custom-switch">
+    <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+    <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+</div>
 <div class="container">
     <div class="container">
         <div class="card-header-pills"><h1 class="fa fa-dollar-sign">  @ViewData["Title"]</h1></div>
