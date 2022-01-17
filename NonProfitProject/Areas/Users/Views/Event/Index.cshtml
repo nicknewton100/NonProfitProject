@@ -5,15 +5,14 @@
     Layout = "_UsersLayout";
 }
 
-<script src="~/js/dark-mode-switch.js"></script>
 
 <div class="container" style="margin-left: 3em;">
     <h1 class="fa fa-calendar" aria-hidden="true">  Events and Meetings</h1>
     <br />
     <br />
-    @foreach (var events in Model)
+    @foreach(var events in Model)
     {
-        @if (events.EventAddr2 != "")
+        @if(events.EventAddr2 != "")
         {
             events.EventAddr2 = " " + events.EventAddr2;
         }
@@ -27,7 +26,7 @@
                 </div>
             </div>
             <div class="row">
-
+                
             </div>
             <div class="card-body" style="font-size:medium;">
                 <h4 style="margin-bottom:10px;">Details</h4>
@@ -39,7 +38,7 @@
                 {
                     <p><i class="fas fa-clock" style="margin-right:1em;"></i>@events.EventStartDate.ToLocalTime().ToString("f") - @events.EventEndDate.ToLocalTime().ToString("f")</p>
                 }
-                <p><i class="fas fa-map-marker" style="margin-right:1em;"></i>@events.EventAddr1@events.EventAddr2, @events.EventCity, @events.EventState @events.EventPostalCode</p>
+                <p><i class="fas fa-map-marker" style="margin-right:1em;"></i>@events.EventAddr1@events.EventAddr2, @events.EventCity, @events.EventState @events.EventPostalCode</p>       
                 <br />
                 <p>@events.EventDescription</p>
             </div>
@@ -94,7 +93,7 @@
                     _form.setAttribute("action", substring + input.replace(' ', '%20') + '/');
                     e.form.submit();
                 }, 3000);
-
+                
             }
         })
     }

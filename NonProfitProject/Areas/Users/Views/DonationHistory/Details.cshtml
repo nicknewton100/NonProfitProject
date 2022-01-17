@@ -3,8 +3,6 @@
     ViewData["Title"] = "Donation Details";
     Layout = "_" + ViewContext.RouteData.Values["area"]?.ToString() + "Layout";
 }
-<script src="~/js/dark-mode-switch.js"></script>
-
 <div class="container">
     <div class="card-header-pills"><h1 class="fa fa-dollar-sign">  @ViewData["Title"]</h1></div>
     <div>
@@ -42,13 +40,13 @@
                         <div class="form-group">
                             <div class="col-auto"><label>First Name: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoiceDonorInformation.FirstName" class="form-control" disabled />
+                                <input asp-for="InvoiceDonorInformation.FirstName" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-auto"><label>Last Name: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoiceDonorInformation.LastName" class="form-control" disabled />
+                                <input asp-for="InvoiceDonorInformation.LastName" class="form-control" disabled/>
                             </div>
                         </div>
                     </div>
@@ -70,13 +68,13 @@
                         <div class="form-group w-50">
                             <div class="col-auto"><label>Address 1: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoiceDonorInformation.Addr1" class="form-control" disabled />
+                                <input asp-for="InvoiceDonorInformation.Addr1" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group w-50">
                             <div class="col-auto"><label>Address 2: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoiceDonorInformation.Addr2" class="form-control" disabled />
+                                <input asp-for="InvoiceDonorInformation.Addr2" class="form-control" disabled/>
                             </div>
                         </div>
                     </div>
@@ -84,7 +82,7 @@
                         <div class="form-group">
                             <div class="col-auto"><label>City: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoiceDonorInformation.City" class="form-control" disabled />
+                                <input asp-for="InvoiceDonorInformation.City" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -150,7 +148,7 @@
                         <div class="form-group">
                             <div class="col-auto"><label>Postal Code: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoiceDonorInformation.PostalCode" class="form-control" disabled />
+                                <input asp-for="InvoiceDonorInformation.PostalCode" class="form-control" disabled/>
                             </div>
                         </div>
                     </div>
@@ -163,19 +161,19 @@
                         <div class="form-group w-auto">
                             <div class="col-auto"><label>Carholder Name: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoicePayment.CardholderName" class="form-control" disabled />
+                                <input asp-for="InvoicePayment.CardholderName" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group w-auto">
                             <div class="col-auto"><label>Card Type: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoicePayment.CardType" class="form-control" disabled />
+                                <input asp-for="InvoicePayment.CardType" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group w-25">
                             <div class="col-auto"><label>Card Number: </label></div>
                             <div class="col-auto">
-                                <input class="form-control" value="xxxx-xxxx-xxxx-@Model.InvoicePayment.Last4Digits" disabled />
+                                <input class="form-control" value="xxxx-xxxx-xxxx-@Model.InvoicePayment.Last4Digits"disabled/>
                             </div>
                         </div>
                         <div class="form-group w-auto">
@@ -192,13 +190,13 @@
                         <div class="form-group">
                             <div class="col-auto"><label>First Name: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoicePayment.BillingFirstName" class="form-control" disabled />
+                                <input asp-for="InvoicePayment.BillingFirstName" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-auto"><label>Last Name: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoicePayment.BillingLastName" class="form-control" disabled />
+                                <input asp-for="InvoicePayment.BillingLastName" class="form-control" disabled/>
                             </div>
                         </div>
                     </div>
@@ -206,14 +204,14 @@
                         <div class="form-group w-50">
                             <div class="col-auto"><label>Address 1: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoicePayment.BillingAddr1" class="form-control" disabled />
+                                <input asp-for="InvoicePayment.BillingAddr1" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group w-50">
                             <!--ADDRESS 2-->
                             <div class="col-auto"><label>Address 2: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoicePayment.BillingAddr2" class="form-control" disabled />
+                                <input asp-for="InvoicePayment.BillingAddr2" class="form-control" disabled/>
                             </div>
                         </div>
                     </div>
@@ -221,13 +219,13 @@
                         <div class="form-group">
                             <div class="col-auto"><label>City: </label></div>
                             <div class="col-auto">
-                                <input asp-for="InvoicePayment.BillingCity" class="form-control" disabled />
+                                <input asp-for="InvoicePayment.BillingCity" class="form-control" disabled/>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-auto"><label>State: </label></div>
                             <div class="col-auto">
-                                <select asp-for="InvoicePayment.BillingState" class="form-control BillingInformation" disabled>
+                                <select asp-for="InvoicePayment.BillingState" class="form-control BillingInformation"disabled>
                                     <option></option>
                                     <option value="Alaska">Alaska</option>
                                     <option value="Alabama">Alabama</option>
